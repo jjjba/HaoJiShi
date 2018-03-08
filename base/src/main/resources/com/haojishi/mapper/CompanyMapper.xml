@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CompanyMapper">
+  <resultMap id="BaseResultMap" type="com.haojishi.model.Company">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_age" jdbcType="INTEGER" property="userAge" />
+    <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="register_type" jdbcType="INTEGER" property="registerType" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="company_scale" jdbcType="VARCHAR" property="companyScale" />
+    <result column="company_special" jdbcType="VARCHAR" property="companySpecial" />
+    <result column="company_city" jdbcType="VARCHAR" property="companyCity" />
+    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
+    <result column="city_id" jdbcType="INTEGER" property="cityId" />
+    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="company_addr" jdbcType="VARCHAR" property="companyAddr" />
+    <result column="company_type" jdbcType="VARCHAR" property="companyType" />
+    <result column="icon_path" jdbcType="VARCHAR" property="iconPath" />
+    <result column="zhi_wu" jdbcType="VARCHAR" property="zhiWu" />
+    <result column="sorts" jdbcType="INTEGER" property="sorts" />
+    <result column="see_count" jdbcType="INTEGER" property="seeCount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="position_count" jdbcType="INTEGER" property="positionCount" />
+    <result column="company_info" jdbcType="VARCHAR" property="companyInfo" />
+    <result column="company_photo" jdbcType="VARCHAR" property="companyPhoto" />
+    <result column="is_positions_reward" jdbcType="INTEGER" property="isPositionsReward" />
+    <result column="matState" jdbcType="INTEGER" property="matstate" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="license_path" jdbcType="VARCHAR" property="licensePath" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, user_age, user_sex, user_phone, user_name, register_type, longitude, 
+    latitude, company_name, company_scale, company_special, company_city, province_id, 
+    city_id, area_id, company_addr, company_type, icon_path, zhi_wu, sorts, see_count, 
+    update_time, position_count, company_info, company_photo, is_positions_reward, matState, 
+    create_time, modify_time, license_path, last_login_time
+  </sql>
+</mapper>

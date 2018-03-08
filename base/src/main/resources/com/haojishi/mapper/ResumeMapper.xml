@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.ResumeMapper">
+  <resultMap id="BaseResultMap" type="com.haojishi.model.Resume">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="position_id" jdbcType="INTEGER" property="positionId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="categoryId" jdbcType="VARCHAR" property="categoryid" />
+    <result column="companyLocation" jdbcType="VARCHAR" property="companylocation" />
+    <result column="resCompany" jdbcType="VARCHAR" property="rescompany" />
+    <result column="resDuty" jdbcType="VARCHAR" property="resduty" />
+    <result column="resEducation" jdbcType="VARCHAR" property="reseducation" />
+    <result column="resEntryTime" jdbcType="TIMESTAMP" property="resentrytime" />
+    <result column="resExperience" jdbcType="VARCHAR" property="resexperience" />
+    <result column="resFinishTime" jdbcType="TIMESTAMP" property="resfinishtime" />
+    <result column="resHopeAddress" jdbcType="VARCHAR" property="reshopeaddress" />
+    <result column="resHopeIndustry" jdbcType="VARCHAR" property="reshopeindustry" />
+    <result column="resHopeJob" jdbcType="VARCHAR" property="reshopejob" />
+    <result column="resHopeSalary" jdbcType="VARCHAR" property="reshopesalary" />
+    <result column="resInfoType" jdbcType="VARCHAR" property="resinfotype" />
+    <result column="resJobType" jdbcType="VARCHAR" property="resjobtype" />
+    <result column="resLeaveTime" jdbcType="TIMESTAMP" property="resleavetime" />
+    <result column="resPosition" jdbcType="VARCHAR" property="resposition" />
+    <result column="resSchool" jdbcType="VARCHAR" property="resschool" />
+    <result column="resSchoolTime" jdbcType="TIMESTAMP" property="resschooltime" />
+    <result column="resStatus" jdbcType="VARCHAR" property="resstatus" />
+    <result column="userId" jdbcType="VARCHAR" property="userid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, company_id, position_id, create_time, update_time, createDate, modifyDate, 
+    categoryId, companyLocation, resCompany, resDuty, resEducation, resEntryTime, resExperience, 
+    resFinishTime, resHopeAddress, resHopeIndustry, resHopeJob, resHopeSalary, resInfoType, 
+    resJobType, resLeaveTime, resPosition, resSchool, resSchoolTime, resStatus, userId
+  </sql>
+</mapper>

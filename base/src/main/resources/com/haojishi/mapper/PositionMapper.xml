@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.PositionMapper">
+  <resultMap id="BaseResultMap" type="com.haojishi.model.Position">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="company_id" jdbcType="INTEGER" property="companyId" />
+    <result column="position_name" jdbcType="VARCHAR" property="positionName" />
+    <result column="position_type" jdbcType="VARCHAR" property="positionType" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="age" jdbcType="VARCHAR" property="age" />
+    <result column="money" jdbcType="VARCHAR" property="money" />
+    <result column="experience" jdbcType="VARCHAR" property="experience" />
+    <result column="position_info" jdbcType="VARCHAR" property="positionInfo" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="is_reward" jdbcType="INTEGER" property="isReward" />
+    <result column="reward_money" jdbcType="INTEGER" property="rewardMoney" />
+    <result column="reward_detail" jdbcType="VARCHAR" property="rewardDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, company_id, position_name, position_type, sex, age, money, experience, 
+    position_info, create_time, update_time, is_reward, reward_money, reward_detail
+  </sql>
+</mapper>

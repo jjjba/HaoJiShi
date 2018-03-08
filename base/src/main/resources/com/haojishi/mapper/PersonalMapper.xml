@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.PersonalMapper">
+  <resultMap id="BaseResultMap" type="com.haojishi.model.Personal">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="special" jdbcType="VARCHAR" property="special" />
+    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
+    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="register_type" jdbcType="INTEGER" property="registerType" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="expect_money" jdbcType="VARCHAR" property="expectMoney" />
+    <result column="job_experience" jdbcType="VARCHAR" property="jobExperience" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="hope_job" jdbcType="VARCHAR" property="hopeJob" />
+    <result column="hope_city" jdbcType="VARCHAR" property="hopeCity" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="photos" jdbcType="VARCHAR" property="photos" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, user_id, name, phone, age, sex, address, special, longitude, latitude, register_type, 
+    avatar, expect_money, job_experience, state, info, create_time, update_time, hope_job, 
+    hope_city, last_login_time, photos
+  </sql>
+</mapper>

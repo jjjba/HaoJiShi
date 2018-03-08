@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CommonResumeMapper">
+    <select id="getMyResumeByUserId" resultType="java.util.Map">
+        SELECT p.*,c.`company_name`,c.company_photo,c.icon,c.id as companyId,c.company_city,DATE_FORMAT(r.create_time,'%Y-%m-%d') AS create_date FROM `resume` r  LEFT JOIN  `position` p ON r.`position_id`=p.id LEFT JOIN company c ON p.`company_id` = c.`id`
+        WHERE r.user_id=#{userId} ORDER BY  r.create_time DESC
+    </select>
+
+    <select id="getMyResumeByCompanyId" resultType="java.util.Map">
+       SELECT p.*,c.`company_name`,c.company_photo,c.icon,c.id as companyId,c.company_city,DATE_FORMAT(r.create_time,'%Y-%m-%d') AS create_date ,
+u.`avatar`,u.`name` AS user_name,pe.`sex` AS user_sex,pe.`age` AS user_age,pe.`expect_money`,pe.`job_experience`,pe.`state`,pe.`info`,u.phone
+FROM `resume` r  LEFT JOIN  `position` p ON r.`position_id`=p.id LEFT JOIN company c ON p.`company_id` = c.`id`
+       LEFT JOIN users u ON r.user_id=u.id LEFT JOIN personal pe ON u.id=pe.`user_id`
+        WHERE r.company_id=#{companyId} ORDER BY  r.create_time DESC
+    </select>
+</mapper>

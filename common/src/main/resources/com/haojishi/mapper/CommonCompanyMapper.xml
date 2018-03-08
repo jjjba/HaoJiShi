@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CommonCompanyMapper">
+    <update id="setSeeCount">
+        update company set see_count = see_count + 1 where id=#{companyId}
+    </update>
+
+    <select id="findCompanyByPars" resultType="java.util.Map">
+        SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
+        c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
+        c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.kuaizhao_money,date_format(c.kuaizhao_date,'%Y-%m-%d %H:%i:%s') as kuaizhao_date
+        FROM users u
+        LEFT JOIN company c ON u.id = c.user_id
+        <where>
+            u.type =2
+            <if test="name != '' and name != null">
+                AND u.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND u.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        u.create_time DESC
+    </select>
+
+    <select id="positionNumSort" resultType="java.util.Map">
+        SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
+        c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
+        c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.kuaizhao_money,date_format(c.kuaizhao_date,'%Y-%m-%d %H:%i:%s') as kuaizhao_date
+        FROM users u
+        LEFT JOIN company c ON u.id = c.user_id
+        <where>
+            u.type =2
+            <if test="name != '' and name != null">
+                AND u.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND u.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        c.position_count DESC
+    </select>
+
+    <select id="seeCountNumSort" resultType="java.util.Map">
+        SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
+        c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
+        c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.kuaizhao_money,date_format(c.kuaizhao_date,'%Y-%m-%d %H:%i:%s') as kuaizhao_date
+        FROM users u
+        LEFT JOIN company c ON u.id = c.user_id
+        <where>
+            u.type =2
+            <if test="name != '' and name != null">
+                AND u.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND u.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        c.see_count DESC
+    </select>
+
+    <select id="payTimeSort" resultType="java.util.Map">
+        SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
+        c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
+        c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.kuaizhao_money,date_format(c.kuaizhao_date,'%Y-%m-%d %H:%i:%s') as kuaizhao_date
+        FROM users u
+        LEFT JOIN company c ON u.id = c.user_id
+        <where>
+            u.type =2
+            <if test="name != '' and name != null">
+                AND u.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND u.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        kuaizhao_date DESC
+    </select>
+
+    <select id="queryCompanyInfo" resultType="java.util.Map">
+        SELECT  c.id,c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
+        c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.province_id,c.city_id,c.area_id
+        FROM company c
+        WHERE c.user_id = #{userId}
+    </select>
+</mapper>

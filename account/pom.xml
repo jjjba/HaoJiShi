@@ -1,0 +1,209 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
+	<!--xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">-->
+	<!--<modelVersion>4.0.0</modelVersion>-->
+
+
+
+	<!--<groupId>com.haojishi</groupId>-->
+	<!--<artifactId>account</artifactId>-->
+	<!--&lt;!&ndash;<version>0.0.1-SNAPSHOT</version>&ndash;&gt;-->
+	<!--<packaging>war</packaging>-->
+
+	<!--<name>account</name>-->
+	<!--<description>好技狮公众号</description>-->
+
+	<!--<dependencies>-->
+
+        <!--<dependency>-->
+            <!--<groupId>com.haojishi</groupId>-->
+            <!--<artifactId>common</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
+		    <!--<version>1.5.6.RELEASE</version>-->
+        <!--</dependency>-->
+
+
+
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-web</artifactId>-->
+		    <!--<version>1.5.6.RELEASE</version>-->
+        <!--</dependency>-->
+
+		<!--&lt;!&ndash;<dependency>&ndash;&gt;-->
+			<!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+			<!--&lt;!&ndash;<artifactId>spring-boot-starter-tomcat</artifactId>&ndash;&gt;-->
+			<!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
+		<!--&lt;!&ndash;</dependency>&ndash;&gt;-->
+
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-test</artifactId>-->
+			<!--<version>1.5.6.RELEASE</version>-->
+            <!--<scope>test</scope>-->
+		<!--</dependency>-->
+
+
+    <!--</dependencies>-->
+
+	<!--&lt;!&ndash;<build>&ndash;&gt;-->
+		<!--&lt;!&ndash;<plugins>&ndash;&gt;-->
+			<!--&lt;!&ndash;<plugin>&ndash;&gt;-->
+				<!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
+				<!--&lt;!&ndash;<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
+			<!--&lt;!&ndash;</plugin>&ndash;&gt;-->
+		<!--&lt;!&ndash;</plugins>&ndash;&gt;-->
+	<!--&lt;!&ndash;</build>&ndash;&gt;-->
+
+    <!--<build>-->
+        <!--<finalName>account</finalName>-->
+        <!--<plugins>-->
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-dependency-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>copy-dependencies</id>-->
+                        <!--<phase>compile</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>copy-dependencies</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib-->
+                            <!--</outputDirectory>-->
+                            <!--<includeScope>system</includeScope>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    <!--</build>-->
+
+
+<!--</project>-->
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<parent>
+    <groupId>com.haojishi</groupId>
+    <artifactId>HaoJiShi</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
+</parent>
+
+<modelVersion>4.0.0</modelVersion>
+<artifactId>account</artifactId>
+<packaging>war</packaging>
+
+<name>account</name>
+<url>http://maven.apache.org</url>
+
+
+<properties>
+    <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
+    <thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+    <thymeleaf-extras-springsecurity4.version>3.0.2.RELEASE</thymeleaf-extras-springsecurity4.version>
+</properties>
+
+
+
+<!-- 项目依赖 -->
+<dependencies>
+    <dependency>
+        <groupId>com.haojishi</groupId>
+        <artifactId>common</artifactId>
+        <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+    <!-- JSON 处理组件 -->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>fastjson</artifactId>
+        <version>${fastjson.version}</version>
+    </dependency>
+
+    <!-- JQuery -->
+    <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>jquery</artifactId>
+        <version>3.2.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>jquery-migrate</artifactId>
+        <version>3.0.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>bootstrap</artifactId>
+        <version>3.3.7</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>font-awesome</artifactId>
+        <version>4.7.0</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>eonasdan-bootstrap-datetimepicker</artifactId>
+        <version>4.17.45</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>bootstrap-fileinput</artifactId>
+        <version>4.4.5</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.webjars.bower</groupId>
+        <artifactId>momentjs</artifactId>
+        <version>2.18.1</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+    </dependency>
+
+</dependencies>
+<build>
+    <finalName>account</finalName>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <executions>
+                <execution>
+                    <id>copy-dependencies</id>
+                    <phase>compile</phase>
+                    <goals>
+                        <goal>copy-dependencies</goal>
+                    </goals>
+                    <configuration>
+                        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib
+                        </outputDirectory>
+                        <includeScope>system</includeScope>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>
+</project>
+

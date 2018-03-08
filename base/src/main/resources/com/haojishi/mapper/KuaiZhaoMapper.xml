@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.KuaiZhaoMapper">
+  <resultMap id="BaseResultMap" type="com.haojishi.model.KuaiZhao">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comId" jdbcType="INTEGER" property="comid" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="endDate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="modifyDate" jdbcType="TIMESTAMP" property="modifydate" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="comName" jdbcType="VARCHAR" property="comname" />
+    <result column="startDate" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, comId, money, endDate, number, order_id, createDate, modifyDate, address, comName, 
+    startDate, type
+  </sql>
+</mapper>

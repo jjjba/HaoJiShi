@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>好技狮·您的好助手</title>
+    <script src="/static/js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
+    <script src="/static/js/index/index.js" th:src="@{/js/index/index.js}"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/index/index.css" th:href="@{/css/index/index.css}" charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/index/animation.css" th:href="@{/css/index/animation.css}" charset="UTF-8"/>
+
+
+
+
+
+    <!--<script src="webjars/jquery/3.1.1/jquery.min.js"></script>-->
+    <script src="webjars/bootstrap/3.3.7/js/botstrap.min.js"></script>
+    <link rel="stylesheet" href="webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css" />
+</head>
+<body>
+
+<!--<div id="loading">-->
+    <!--<div id="loading-center">-->
+        <!--<div id="loading-center-absolute">-->
+            <!--<div class="object" id="first_object"></div>-->
+                <!--<div class="object" id="second_object"></div>-->
+                <!--<div class="object" id="third_object"></div>-->
+            <!--<h5 class="text">正在为您加载数据，请稍等~~~</h5>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+
+
+<div class="page">
+
+    <div id="ad">
+        <ul id="ad_img">
+            <li><img th:src="@{/image/pic.jpg}" width="100%" height="100%" /></li>
+            <li><img th:src="@{/image/pic.jpg}" width="100%" height="100%" /></li>
+            <li><img th:src="@{/image/pic.jpg}" width="100%" height="100%" /></li>
+            <li><img th:src="@{/image/pic.jpg}" width="100%" height="100%" /></li>
+            <li><img th:src="@{/image/pic.jpg}" width="100%" height="100%" /></li>
+        </ul>
+
+        <ul id="ad_num">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+
+    <div>
+    <!-- 主体-->
+    <section id="index">
+        <!-- 导航 -->
+        <div class="Dhang">
+            <ul>
+                <a class="index_kuaizhao" style="list-style:none">
+                    <li>
+                        <img alt="快招服务" src="static/image/Z.png">
+                        <em>快招服务</em>
+                    </li>
+                </a>
+                <a class="index_job" style="list-style:none">
+                    <li>
+                        <img alt="微享自助" src="css/img/Q.png">
+                        <em>微享自助</em>
+                    </li>
+                </a>
+
+                <li class="shop" style="list-style:none">
+                    <img alt="无忧招聘" src="css/img/S.png">
+                    <em>无忧招聘</em>
+                </li>
+
+                <li class="shop" style="list-style:none">
+                    <img alt="咨询预览" src="css/img/S.png">
+                    <em>咨询预览</em>
+                </li>
+
+            </ul>
+        </div>
+         推荐职位
+        <div style="margin-top:2%;">
+            <p class="title">
+                <span>推荐职位</span>
+                <span id="morezhiwei">更多职位></span>
+            </p>
+            <ul id="list2" class="indextuijianinfo" data-role="listview">
+
+            </ul>
+        </div>
+        <!-- 推荐人才-->
+        <div id="qiye">
+            <p class="title">
+                <span>推荐人才</span>
+                <span id="morerencai">更多人才></span>
+            </p>
+            <ul id="list1" class="indextuijianrencai" data-role="listview">
+            </ul>
+        </div>
+    </section>
+    <!--<div data-role="footer" data-position="fixed">-->
+        <!--<footer>-->
+            <!--<a class="index_job">-->
+                <!--<img src="./css/img/icon_apply.png"/>-->
+                <!--<p>找工作</p>-->
+            <!--</a>-->
+            <!--<a class="index_zhaopin">-->
+                <!--<img src="./css/img/icon_recruit.png"/>-->
+                <!--<p>招人才</p>-->
+            <!--</a>-->
+            <!--<a>-->
+                <!--<img src="./css/img/icon_home_activate.png"/>-->
+                <!--<p style="color:#ff7131">首页</p>-->
+            <!--</a>-->
+
+            <!--<a class="message">-->
+                <!--<img src="./css/img/icon_message.png"/>-->
+                <!--<p>消息-->
+                    <!--<span class="unread"></span>-->
+                <!--</p>-->
+
+            <!--</a>-->
+            <!--<a id="logins">-->
+                <!--<img src="./css/img/icon_me.png"/>-->
+                <!--<p>我的</p>-->
+            <!--</a>-->
+        <!--</footer>-->
+    <!--</div>-->
+
+    <!--<div id="indextomessage" style="display: none;">-->
+        <!--<div class="duihuan_model">-->
+            <!--<p class="index_duihuan_text">您需要登录才能使用此功能</p>-->
+            <!--<button class="indextoindex" data-role="none" style="border-right: 1px solid #f2f2f2;">稍后登录</button>-->
+            <!--<a data-role="none">-->
+                <!--<button data-role="none" style="color: #ff6118;" id="indextomessage1">马上登录</button>-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+    </div>
+</div>
+
+</body>
+</html>
+
+
