@@ -7,7 +7,7 @@
         FROM personal p
         <where>
             <if test="address != '' and address != null">
-                AND p.address like concat('%',#{name},'%')
+                AND p.address like concat('%',#{address},'%')
             </if>
         </where>
         ORDER BY

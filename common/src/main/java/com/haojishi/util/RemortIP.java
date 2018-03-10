@@ -48,7 +48,7 @@ public class RemortIP {
         try{
             String city =null;
             String Ip=RemortIP.getIpAddr(request);
-            if(Ip.equals( "127.0.0.1")){
+            if(!Ip.equals( "127.0.0.1")){
                 URL url = new URL( "http://ip.qq.com/cgi-bin/searchip?searchip1=" + Ip);
                 URLConnection conn = url.openConnection();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "GBK"));
@@ -63,7 +63,7 @@ public class RemortIP {
 //            String province = strIP.substring(6, strIP.indexOf("省"));
                 city = Ip.substring(Ip.indexOf("省") + 1, Ip.indexOf("市"));
             }else {
-                city="本地";
+                city="石家庄";
             }
             return city;
 

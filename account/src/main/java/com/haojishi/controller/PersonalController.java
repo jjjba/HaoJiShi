@@ -19,10 +19,21 @@ public class PersonalController {
      * 获取所有求职者信息
      *
      * @param request
-     * @return
+     * @return 所有求职者信息
      */
     @RequestMapping("/getAllPersonal")
-    public BusinessMessage getAllPersoanal(HttpServletRequest request){
-        return personalServicel.getAllPersonal(request);
+    public BusinessMessage getAllPersoanal(HttpServletRequest request,Integer page,Integer size){
+        return personalServicel.getAllPersonal(request,page,size);
+    }
+
+    /**
+     * 根据personalId查询求职者信息
+     *
+     * @param id
+     * @return 求职者信息
+     */
+    @RequestMapping("/getPersonalByPersonalId")
+    public BusinessMessage getPersonalByPersonalId(Integer id){
+        return personalServicel.getPersonalByPersonalId(id);
     }
 }
