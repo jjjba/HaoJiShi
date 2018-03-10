@@ -24,7 +24,6 @@ $(function () {
     //banner初始化设置时长
     $('#myCarousel').carousel({interval:3000});
 });
-
     // $(".main_visual").hover(function(){
     //     $("#btn_prev,#btn_next").fadeIn()
     // },function(){
