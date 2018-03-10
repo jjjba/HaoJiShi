@@ -12,4 +12,12 @@ public class PositionService {
         BusinessMessage businessMessage =new BusinessMessage();
         return businessMessage;
     }
+
+
+    public BusinessMessage getPositionByCompanyId(Integer companyId){
+        BusinessMessage businessMessage =new BusinessMessage();
+        return businessMessage;
+    }
+
+
 }

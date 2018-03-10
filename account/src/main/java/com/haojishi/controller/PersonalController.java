@@ -30,13 +30,20 @@ public class PersonalController {
      * 根据personalId查询求职者信息
      *
      * @param id
-     * @return 求职者信息
+     * @return BusinessMessage - 求职者信息
      */
     @RequestMapping("/getPersonalByPersonalId")
     public BusinessMessage getPersonalByPersonalId(Integer id){
         return personalServicel.getPersonalByPersonalId(id);
     }
 
+    /**
+     * 给用户手机发送验证码
+     *
+     * @param phone
+     * @param request
+     * @return BusinessMessage - 是否发送成功验证码
+     */
     @RequestMapping("/code")
     public BusinessMessage code(String phone, HttpServletRequest request){
         return personalServicel.sendPhoneCode(phone,request);

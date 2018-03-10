@@ -113,7 +113,7 @@ public class PersonalService {
     }
 
     /**
-     * 根据求职者id获取求职者信息
+     * 根据personalId获取求职者信息
      *
      * @param id
      * @return BusinessMessage - 求职者信息
