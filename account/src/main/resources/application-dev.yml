@@ -79,3 +79,14 @@ api:
   fileImagePath: C:/HJS/smail/hjs-smail-java/web/target/classes/static/upload
   ImageSrc: http://localhost:8075/web/upload
 
+  appid: wx3e2445e709ce5350
+  secret: 7493fbb97c3441ed803f2040b31fec37
+  #支付配置
+  mchUserId: 1417975802
+  mchUserKey: 230948roejdsieuoids9IO23QWS923kl
+  wechat-callback-url: https://www.haojishi.net/api/pay_callback/we-chat
+
+  #短信配置
+  smstplId: 26032
+  smsKey: dc322ebe4dc738c34b2f943e5b85de5e
+

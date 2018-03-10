@@ -7,13 +7,16 @@ import com.haojishi.mapper.CommonUserMapper;
 import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Personal;
+import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
+import com.haojishi.util.JuheSms;
+import com.haojishi.util.PhoneCheck;
 import com.haojishi.util.RemortIP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
@@ -27,11 +30,65 @@ public class PersonalService {
     private PersonalMapper personalMapper;
 
     @Autowired
+    private Environment environment;
+
+    @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private CommonPersonalMapper commonPersonalMapper;
 
+    /**
+     * 发送手机验证码
+     *
+     * @param phone
+     * @param request
+     * @return BusinessMessage - 是否发送成功验证码
+     */
+    public BusinessMessage sendPhoneCode(String phone, HttpServletRequest request) {
+        BusinessMessage businessMessage = new BusinessMessage();
+        try {
+            if (null == phone) {
+                businessMessage.setMsg("请填写手机号码");
+                return businessMessage;
+            }
+            //判断手机号是否是真的手机号
+            if (PhoneCheck.checkCellphone(phone)) {
+                String smstplId = environment.getProperty("api.smstplId");
+                String smsKey = environment.getProperty("api.smsKey");
+                int mobile_code = (int) ((Math.random() * 9.0D + 1.0D) * 100000.0D);
+                JuheSms.getRequest2(phone, smstplId, String.valueOf(mobile_code), smsKey);
+                request.getServletContext().setAttribute("code" + phone, mobile_code);
+                businessMessage.setMsg("发送成功");
+                businessMessage.setSuccess(true);
+                return businessMessage;
+            }
+            businessMessage.setMsg("请输入正确的手机号");
+        } catch (Exception e) {
+            log.debug("发送验证码失败：", e);
+            businessMessage.setMsg("发送失败");
+        }
+        return businessMessage;
+
+    }
+
+    public BusinessMessage registerPersonal(String phone,String password,String openid){
+        BusinessMessage businessMessage =new BusinessMessage();
+//        Example personalExample =new Example(Personal.class);
+
+
+
+        return businessMessage;
+    }
+
+    /**
+     * 获取所有求职者信息
+     *
+     * @param request
+     * @param page
+     * @param size
+     * @return BusinessMessage - 所有求职者信息
+     */
     public BusinessMessage getAllPersonal(HttpServletRequest request,Integer page,Integer size){
         BusinessMessage businessMessage =new BusinessMessage();
         if (null == page || page < 1) {
@@ -55,6 +112,12 @@ public class PersonalService {
         return businessMessage;
     }
 
+    /**
+     * 根据求职者id获取求职者信息
+     *
+     * @param id
+     * @return BusinessMessage - 求职者信息
+     */
     public BusinessMessage getPersonalByPersonalId(Integer id){
         BusinessMessage businessMessage =new BusinessMessage();
         if(id == null){
@@ -78,6 +141,19 @@ public class PersonalService {
             }
             businessMessage.setSuccess(true);
         }
+        return businessMessage;
+    }
+
+    /**
+     * 根据求职者id修改信息
+     *
+     * @param id
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalByPersonalId(Integer id){
+        BusinessMessage businessMessage =new BusinessMessage();
+        Personal personal =personalMapper.selectByPrimaryKey(id);
+//        personal.setAvatar();
         return businessMessage;
     }
 }

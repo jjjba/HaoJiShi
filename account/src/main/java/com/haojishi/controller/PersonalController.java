@@ -36,4 +36,9 @@ public class PersonalController {
     public BusinessMessage getPersonalByPersonalId(Integer id){
         return personalServicel.getPersonalByPersonalId(id);
     }
+
+    @RequestMapping("/code")
+    public BusinessMessage code(String phone, HttpServletRequest request){
+        return personalServicel.sendPhoneCode(phone,request);
+    }
 }

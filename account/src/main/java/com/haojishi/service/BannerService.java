@@ -42,7 +42,7 @@ public class BannerService {
                 businessMessage.setSuccess(true);
             }
         }catch(Exception e){
-            log.error("获取分页查询信息失败", e);
+            log.error("获取banner查询信息失败", e);
             businessMessage.setMsg("获取banner列表不存在，请重试");
         }
         return businessMessage;

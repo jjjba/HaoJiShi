@@ -34,7 +34,6 @@ public class IndexController {
 
     @RequestMapping("/account")
     public String index(HttpServletRequest request){
-
         return "/index";
     }
 }
