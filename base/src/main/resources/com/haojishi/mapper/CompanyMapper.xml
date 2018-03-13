@@ -7,14 +7,14 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="user_age" jdbcType="INTEGER" property="userAge" />
-    <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
-    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+    <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="register_type" jdbcType="INTEGER" property="registerType" />
     <result column="longitude" jdbcType="DOUBLE" property="longitude" />
     <result column="latitude" jdbcType="DOUBLE" property="latitude" />
-    <result column="company_name" jdbcType="VARCHAR" property="companyName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="company_scale" jdbcType="VARCHAR" property="companyScale" />
     <result column="company_special" jdbcType="VARCHAR" property="companySpecial" />
     <result column="company_city" jdbcType="VARCHAR" property="companyCity" />
@@ -37,15 +37,23 @@
     <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="license_path" jdbcType="VARCHAR" property="licensePath" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="month_visits" jdbcType="INTEGER" property="monthVisits" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="share_number" jdbcType="INTEGER" property="shareNumber" />
+    <result column="position_number" jdbcType="INTEGER" property="positionNumber" />
+    <result column="position_see_number" jdbcType="INTEGER" property="positionSeeNumber" />
+    <result column="position_exposure_number" jdbcType="INTEGER" property="positionExposureNumber" />
+    <result column="account_state" jdbcType="INTEGER" property="accountState" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, user_id, user_age, user_sex, user_phone, user_name, register_type, longitude, 
-    latitude, company_name, company_scale, company_special, company_city, province_id, 
-    city_id, area_id, company_addr, company_type, icon_path, zhi_wu, sorts, see_count, 
-    update_time, position_count, company_info, company_photo, is_positions_reward, matState, 
-    create_time, modify_time, license_path, last_login_time
+    id, user_id, age, sex, phone, user_name, register_type, longitude, latitude, name, 
+    company_scale, company_special, company_city, province_id, city_id, area_id, company_addr, 
+    company_type, icon_path, zhi_wu, sorts, see_count, update_time, position_count, company_info, 
+    company_photo, is_positions_reward, matState, create_time, modify_time, license_path, 
+    last_login_time, month_visits, openid, share_number, position_number, position_see_number, 
+    position_exposure_number, account_state
   </sql>
 </mapper>

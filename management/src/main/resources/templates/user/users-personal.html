@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/layout-switch}">
+<head>
+    <title>个人用户管理</title>
+
+    <!-- 当前页面自定义JS -->
+    <script src="/static/js/user/personal.js" th:src="@{/js/user/personal.js}"></script>
+    <script src="/static/js/Excel/table-export.js" th:src="@{/js/Excel/table-export.js}"></script>
+    <script src="/static/js/Excel/tableExport.js" th:src="@{/js/Excel/tableExport.js}"></script>
+    <script src="/static/js/Excel/main.js" th:src="@{/js/Excel/main.js}"></script>
+    <script src="/static/js/Excel/jquery.base64.js" th:src="@{/js/Excel/jquery.base64.js}"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="navbar-form navbar-left" role="search">
+            <button class="btn btn-default" onclick="frozenAccountExport()">冻结账号</button>
+            <button class="btn btn-default" onclick="deleteAccountExport()">删除账号</button>
+            <button class="btn btn-default" data-toggle="modal" data-target="#editModal">修改信息</button>
+            <button class="btn btn-default" onclick="lookPhotoExport()">查看照片</button>
+            <div class="form-group">
+                <label>手机号：</label>
+                <input class="form-control" name="phone"/>
+            </div>
+            <div class="form-group">
+                <label>姓名：</label>
+                <input class="form-control" name="name"/>
+            </div>
+            <button class="btn btn-default" onclick="search()"><span class="fa fa-search"></span>查询</button>
+            <button class="btn btn-default" onclick="btnExport()">导出到Excel</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+
+            <div class="panel-body">
+                <table class="table" id="sorter">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" id="checkAll"/></th>
+                        <th>id</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>手机号</th>
+                        <th>注册时间</th>
+                        <th>最近30天访问时间</th>
+                        <th>openid</th>
+                        <th>期望工作</th>
+                        <th>工作经验</th>
+                        <th>意向工作城市</th>
+                        <th>当前所在地</th>
+                        <th>期望薪资</th>
+                        <th>当前工作状态</th>
+                        <th>简历状态</th>
+                        <th>账号状态</th>
+                        <th>最高学历</th>
+                        <th>曾经做过</th>
+                        <th>自我介绍</th>
+                        <th>我的家乡</th>
+                        <th>投递简历数</th>
+                        <th>个人照片</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div id="pagination"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [配置]修改模态框 -->
+    <div layout:replace="~{user/personal-edit}"/>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

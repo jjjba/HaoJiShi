@@ -22,5 +22,7 @@ public interface CommonCompanyMapper {
 
     List<Map<String,Object>> payTimeSort(@Param("name") String name, @Param("phone") String phone);
 
+    List<Map<String,Object>> getAllCompanyState(@Param("name") String name, @Param("phone") String phone);
+
     Map<String, Object> queryCompanyInfo(@Param("userId") Long userId);
 }

@@ -3,7 +3,7 @@ debug: true
 
 # 服务器配置
 server:
-  port: 8075
+  port: 8080
   servlet:
     context-path: /account
 

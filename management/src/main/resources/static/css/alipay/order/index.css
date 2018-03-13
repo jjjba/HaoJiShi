@@ -1,0 +1,238 @@
+@charset "UTF-8";
+/* CSS Document */
+body {
+    background: #f8f8f8;
+    padding-bottom: 60px;
+}
+
+.backwighs {
+    background: #fff;
+}
+/*头部开始*/
+.headtites {
+    background: #f8f8f8;
+    color: #7c7c7c;
+}
+
+.headtites a {
+    display: block;
+    color: #7c7c7c;
+}
+
+/*左侧开始*/
+.imgfls {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    overflow: hidden;
+}
+
+.imgfls img {
+    width: 6rem;
+    min-height: 6rem;
+}
+
+.txtiefl {
+    font-size: 1.3rem;
+    line-height: 5rem;
+    padding-left: 1rem;
+}
+
+/*左侧结束*/
+
+/*右侧开始*/
+.headtites a h1, .headtites a h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+}
+
+.headtites a h1 {
+    padding-top: 0.8rem;
+}
+
+/*右侧结束*/
+  
+/*头部结束*/
+
+
+/*输入支付金额开始*/
+.paymounts {
+}
+
+.paymounts h2 {
+    font-weight: normal;
+    font-size: 1.3rem;
+    color: #000;
+    padding-bottom: 0.8rem;
+}
+
+.paymnisbom {
+    border: 1px solid #abc73e;
+    display: box;
+    display: -webkit-box;
+    display: -moz-box;
+    color: #7f7f7f;
+    padding: 1rem;
+}
+
+.icoins {
+    font-size: 1.8rem;
+    font-weight: bold;
+    width: 2.3rem;
+}
+
+.moneies {
+    box-flex: 1;
+    -moz-box-flex: 1;
+    -webkit-box-flex: 1;
+}
+
+.shurksmo {
+    width: 100%;
+    font-size: 5.9rem;
+    font-weight: bold;
+    color: #808080;
+    border: 0;
+    padding: 3px 0 3px 0;
+    font-family: "微软雅黑";
+}
+
+input.shurksmo::-webkit-input-placeholder {
+    color: #808080;
+}
+
+input.shurksmo::-moz-placeholder {
+    color: #808080;
+}
+
+input.shurksmo:-moz-placeholder {
+    color: #808080;
+}
+
+.phones {
+    width: 100%;
+    font-size: 1.4rem;
+    color: #333;
+    background: none;
+    border: 0;
+    font-family: "微软雅黑";
+}
+
+.margtops {
+    margin-top: 12px;
+}
+
+/*输入支付金额结束*/
+
+
+/*确认支付按钮开始*/
+.queranius {
+    display: block;
+    width: 100%;
+    color: #fff;
+    border: 0;
+    background: #008000;
+    font-size: 1.6rem;
+    padding: 1rem 0 1rem 0;
+    border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    text-align: center;
+    cursor: pointer;
+}
+/*确认支付按钮结束*/
+
+
+/*奖励金额总计开始*/
+.awardis {
+    color: #2f2f2f;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-top: 1px solid #f8f8f7;
+    border-bottom: 2px solid #f8f8f7;
+}
+/*奖励金额总计结束*/
+
+/*获取名单开始*/
+.gainis {
+}
+
+.gainis h3 {
+    color: #2f2f2f;
+    font-size: 1.8rem;
+    font-weight: bold;
+    border-bottom: 2px solid #f8f8f7;
+}
+
+.gaintables {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.gaintables tr th, .gaintables tr td {
+    border-bottom: 2px solid #f8f8f7;
+    padding: 1rem 0 1rem 0.5rem;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #3f3f3f;
+}
+/*获取名单结束*/
+
+.textcenters {
+    text-align: center;
+    border-bottom: 2px solid #f8f8f7;
+}
+
+.lebhjas a {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #4e4e4e;
+}
+
+.hdoguzes {
+    border-bottom: 1px solid #f8f8f7;
+}
+
+.hdoguzes .fl {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2f2f2f;
+}
+
+.hdoguzes .fr a {
+    color: #989898;
+    font-size: 1.4rem;
+}
+
+.margbotms {
+    margin-bottom: 25px;
+}
+
+.xinagqi {
+    font-size: 1.4rem;
+    color: #3f3f3f;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

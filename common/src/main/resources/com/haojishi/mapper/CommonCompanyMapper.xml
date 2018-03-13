@@ -6,29 +6,30 @@
     </update>
 
     <select id="findCompanyByPars" resultType="java.util.Map">
-        SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
-        c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
-        c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.kuaizhao_money,date_format(c.kuaizhao_date,'%Y-%m-%d %H:%i:%s') as kuaizhao_date
-        FROM users u
-        LEFT JOIN company c ON u.id = c.user_id
+        SELECT c.id as cid, u.openid, c.name, c.user_id as id, date_format(c.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
+        c.phone, c.month_visits, c.user_name, c.zhi_wu, c.company_type, c.company_scale,
+        c.company_city, c.position_count, c.share_number, c.position_number, c.position_see_number, c.position_exposure_number,
+        c.company_photo, c.matState, c.company_info, u.account_state, c.company_addr, c.company_special
+        FROM company c
+        LEFT JOIN user u ON u.id = c.user_id
         <where>
-            u.type =2
+            u.account_state = 1 OR u.account_state = 2
             <if test="name != '' and name != null">
-                AND u.name like concat('%',#{name},'%')
+                AND c.name like concat('%',#{name},'%')
             </if>
             <if test="phone != '' and phone != null">
-                AND u.phone like concat('%',#{phone},'%')
+                AND c.phone like concat('%',#{phone},'%')
             </if>
         </where>
         ORDER BY
-        u.create_time DESC
+        c.create_time DESC
     </select>
 
     <select id="positionNumSort" resultType="java.util.Map">
         SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
         c.company_name,c.company_scale,c.company_special,c.company_city,c.company_info,c.company_photo,c.company_addrx,c.company_addry,
         c.company_addr,c.company_type,c.hot,c.icon,c.company_fu_ze_ren,c.zhi_wu,c.see_count,c.position_count,c.kuaizhao_money,date_format(c.kuaizhao_date,'%Y-%m-%d %H:%i:%s') as kuaizhao_date
-        FROM users u
+        FROM user u
         LEFT JOIN company c ON u.id = c.user_id
         <where>
             u.type =2
@@ -79,6 +80,26 @@
         </where>
         ORDER BY
         kuaizhao_date DESC
+    </select>
+
+
+    <select id="getAllCompanyState" resultType="java.util.Map">
+        SELECT c.id,c.name,c.phone,date_format(c.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
+        date_format(c.modify_time,'%Y-%m-%d %H:%i:%s') as modify_time,c.user_name,c.license_path,
+        c.matState
+        FROM company c
+        LEFT JOIN user u ON u.id = c.user_id
+        <where>
+            u.account_state = 1 or u.account_state = 2
+            <if test="name != '' and name != null">
+                AND c.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND c.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        c.modify_time DESC
     </select>
 
     <select id="queryCompanyInfo" resultType="java.util.Map">

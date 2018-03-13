@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>用户登录</title>
+    <meta charset="utf-8">
+    <!-- Bootstrap core CSS -->
+    <link href="/webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.7/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <link href="/static/css/login.css" th:href="@{/css/login.css}" rel="stylesheet">
+</head>
+<body>
+<!--<div>-->
+    <!--<img style="height: 300px;width: 300px" th:src="@{/image/logo.jpg}">-->
+<!--</div>-->
+<div class="container">
+    <form class="form-signin" th:action="@{/login}" method="post">
+        <h2 class="form-signin-heading" style="font-family: '宋体';align-content: center">好技狮管理后台欢迎您</h2>
+        <label for="username" class="sr-only">帐号</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="请输入您的帐号" required autofocus>
+        <label for="password" class="sr-only">密码</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="请输入您的密码" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>
+</body>
+</html>

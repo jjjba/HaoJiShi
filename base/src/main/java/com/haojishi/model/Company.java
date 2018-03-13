@@ -21,20 +21,17 @@ public class Company implements Serializable {
     /**
      * 企业用户年龄
      */
-    @Column(name = "user_age")
-    private Integer userAge;
+    private Integer age;
 
     /**
      * 企业用户性别
      */
-    @Column(name = "user_sex")
-    private String userSex;
+    private String sex;
 
     /**
      * 企业用户手机号
      */
-    @Column(name = "user_phone")
-    private String userPhone;
+    private String phone;
 
     /**
      * 企业用户名字
@@ -61,8 +58,7 @@ public class Company implements Serializable {
     /**
      * 企业名称
      */
-    @Column(name = "company_name")
-    private String companyName;
+    private String name;
 
     /**
      * 企业规模
@@ -166,7 +162,7 @@ public class Company implements Serializable {
     private Integer isPositionsReward;
 
     /**
-     * 公司是否通过审核1是2否
+     * 公司是否通过审核 1是 2否
      */
     @Column(name = "matState")
     private Integer matstate;
@@ -194,6 +190,47 @@ public class Company implements Serializable {
      */
     @Column(name = "last_login_time")
     private Date lastLoginTime;
+
+    /**
+     * 最近30天登录次数
+     */
+    @Column(name = "month_visits")
+    private Integer monthVisits;
+
+    /**
+     * 企业负责人openid 数据库不用维护
+     */
+    private String openid;
+
+    /**
+     * 分享报名数
+     */
+    @Column(name = "share_number")
+    private Integer shareNumber;
+
+    /**
+     * 发布职位数量
+     */
+    @Column(name = "position_number")
+    private Integer positionNumber;
+
+    /**
+     * 职位浏览总量
+     */
+    @Column(name = "position_see_number")
+    private Integer positionSeeNumber;
+
+    /**
+     * 职位曝光量
+     */
+    @Column(name = "position_exposure_number")
+    private Integer positionExposureNumber;
+
+    /**
+     * 账号状态 1正常 2冻结 3删除 数据库不用维护
+     */
+    @Column(name = "account_state")
+    private Integer accountState;
 
     private static final long serialVersionUID = 1L;
 
@@ -236,55 +273,55 @@ public class Company implements Serializable {
     /**
      * 获取企业用户年龄
      *
-     * @return user_age - 企业用户年龄
+     * @return age - 企业用户年龄
      */
-    public Integer getUserAge() {
-        return userAge;
+    public Integer getAge() {
+        return age;
     }
 
     /**
      * 设置企业用户年龄
      *
-     * @param userAge 企业用户年龄
+     * @param age 企业用户年龄
      */
-    public void setUserAge(Integer userAge) {
-        this.userAge = userAge;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     /**
      * 获取企业用户性别
      *
-     * @return user_sex - 企业用户性别
+     * @return sex - 企业用户性别
      */
-    public String getUserSex() {
-        return userSex;
+    public String getSex() {
+        return sex;
     }
 
     /**
      * 设置企业用户性别
      *
-     * @param userSex 企业用户性别
+     * @param sex 企业用户性别
      */
-    public void setUserSex(String userSex) {
-        this.userSex = userSex == null ? null : userSex.trim();
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();
     }
 
     /**
      * 获取企业用户手机号
      *
-     * @return user_phone - 企业用户手机号
+     * @return phone - 企业用户手机号
      */
-    public String getUserPhone() {
-        return userPhone;
+    public String getPhone() {
+        return phone;
     }
 
     /**
      * 设置企业用户手机号
      *
-     * @param userPhone 企业用户手机号
+     * @param phone 企业用户手机号
      */
-    public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone == null ? null : userPhone.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     /**
@@ -362,19 +399,19 @@ public class Company implements Serializable {
     /**
      * 获取企业名称
      *
-     * @return company_name - 企业名称
+     * @return name - 企业名称
      */
-    public String getCompanyName() {
-        return companyName;
+    public String getName() {
+        return name;
     }
 
     /**
      * 设置企业名称
      *
-     * @param companyName 企业名称
+     * @param name 企业名称
      */
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName == null ? null : companyName.trim();
+    public void setName(String name) {
+        this.name = name == null ? null : name.trim();
     }
 
     /**
@@ -684,18 +721,18 @@ public class Company implements Serializable {
     }
 
     /**
-     * 获取公司是否通过审核1是2否
+     * 获取公司是否通过审核 1是 2否
      *
-     * @return matState - 公司是否通过审核1是2否
+     * @return matState - 公司是否通过审核 1是 2否
      */
     public Integer getMatstate() {
         return matstate;
     }
 
     /**
-     * 设置公司是否通过审核1是2否
+     * 设置公司是否通过审核 1是 2否
      *
-     * @param matstate 公司是否通过审核1是2否
+     * @param matstate 公司是否通过审核 1是 2否
      */
     public void setMatstate(Integer matstate) {
         this.matstate = matstate;
@@ -773,6 +810,132 @@ public class Company implements Serializable {
         this.lastLoginTime = lastLoginTime;
     }
 
+    /**
+     * 获取最近30天登录次数
+     *
+     * @return month_visits - 最近30天登录次数
+     */
+    public Integer getMonthVisits() {
+        return monthVisits;
+    }
+
+    /**
+     * 设置最近30天登录次数
+     *
+     * @param monthVisits 最近30天登录次数
+     */
+    public void setMonthVisits(Integer monthVisits) {
+        this.monthVisits = monthVisits;
+    }
+
+    /**
+     * 获取企业负责人openid 数据库不用维护
+     *
+     * @return openid - 企业负责人openid 数据库不用维护
+     */
+    public String getOpenid() {
+        return openid;
+    }
+
+    /**
+     * 设置企业负责人openid 数据库不用维护
+     *
+     * @param openid 企业负责人openid 数据库不用维护
+     */
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
+    }
+
+    /**
+     * 获取分享报名数
+     *
+     * @return share_number - 分享报名数
+     */
+    public Integer getShareNumber() {
+        return shareNumber;
+    }
+
+    /**
+     * 设置分享报名数
+     *
+     * @param shareNumber 分享报名数
+     */
+    public void setShareNumber(Integer shareNumber) {
+        this.shareNumber = shareNumber;
+    }
+
+    /**
+     * 获取发布职位数量
+     *
+     * @return position_number - 发布职位数量
+     */
+    public Integer getPositionNumber() {
+        return positionNumber;
+    }
+
+    /**
+     * 设置发布职位数量
+     *
+     * @param positionNumber 发布职位数量
+     */
+    public void setPositionNumber(Integer positionNumber) {
+        this.positionNumber = positionNumber;
+    }
+
+    /**
+     * 获取职位浏览总量
+     *
+     * @return position_see_number - 职位浏览总量
+     */
+    public Integer getPositionSeeNumber() {
+        return positionSeeNumber;
+    }
+
+    /**
+     * 设置职位浏览总量
+     *
+     * @param positionSeeNumber 职位浏览总量
+     */
+    public void setPositionSeeNumber(Integer positionSeeNumber) {
+        this.positionSeeNumber = positionSeeNumber;
+    }
+
+    /**
+     * 获取职位曝光量
+     *
+     * @return position_exposure_number - 职位曝光量
+     */
+    public Integer getPositionExposureNumber() {
+        return positionExposureNumber;
+    }
+
+    /**
+     * 设置职位曝光量
+     *
+     * @param positionExposureNumber 职位曝光量
+     */
+    public void setPositionExposureNumber(Integer positionExposureNumber) {
+        this.positionExposureNumber = positionExposureNumber;
+    }
+
+    /**
+     * 获取账号状态 1正常 2冻结 3删除 数据库不用维护
+     *
+     * @return account_state - 账号状态 1正常 2冻结 3删除 数据库不用维护
+     */
+    public Integer getAccountState() {
+        return accountState;
+    }
+
+    /**
+     * 设置账号状态 1正常 2冻结 3删除 数据库不用维护
+     *
+     * @param accountState 账号状态 1正常 2冻结 3删除 数据库不用维护
+     */
+    public void setAccountState(Integer accountState) {
+        this.accountState = accountState;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -781,14 +944,14 @@ public class Company implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
-        sb.append(", userAge=").append(userAge);
-        sb.append(", userSex=").append(userSex);
-        sb.append(", userPhone=").append(userPhone);
+        sb.append(", age=").append(age);
+        sb.append(", sex=").append(sex);
+        sb.append(", phone=").append(phone);
         sb.append(", userName=").append(userName);
         sb.append(", registerType=").append(registerType);
         sb.append(", longitude=").append(longitude);
         sb.append(", latitude=").append(latitude);
-        sb.append(", companyName=").append(companyName);
+        sb.append(", name=").append(name);
         sb.append(", companyScale=").append(companyScale);
         sb.append(", companySpecial=").append(companySpecial);
         sb.append(", companyCity=").append(companyCity);
@@ -811,6 +974,13 @@ public class Company implements Serializable {
         sb.append(", modifyTime=").append(modifyTime);
         sb.append(", licensePath=").append(licensePath);
         sb.append(", lastLoginTime=").append(lastLoginTime);
+        sb.append(", monthVisits=").append(monthVisits);
+        sb.append(", openid=").append(openid);
+        sb.append(", shareNumber=").append(shareNumber);
+        sb.append(", positionNumber=").append(positionNumber);
+        sb.append(", positionSeeNumber=").append(positionSeeNumber);
+        sb.append(", positionExposureNumber=").append(positionExposureNumber);
+        sb.append(", accountState=").append(accountState);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

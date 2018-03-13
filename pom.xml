@@ -122,7 +122,7 @@
     <module>base</module>
     <module>common</module>
     <module>account</module>
-    <!--<module>web</module>-->
+    <module>management</module>
 </modules>
 
 <name>HaoJiShi</name>

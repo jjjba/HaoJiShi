@@ -1,23 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haojishi.mapper.CommonUserMapper">
-    <select id="findUserByPars" resultType="java.util.Map">
-        SELECT u.id,u.nick_name,u.avatar,u.openid,u.name,u.phone,u.register_type,date_format(u.create_time,'%Y-%m-%d %H:%i:%s') as create_time,u.type,
-        p.sex,p.age,p.expect_money,p.job_experience,p.state,p.info
-        FROM users u
-        LEFT JOIN personal p ON u.id = p.user_id
+
+    <select id="findPersonalByAddress" resultType="java.util.Map">
+        SELECT p.id,p.name,p.phone,p.age,p.sex,p.address,p.special,p.avatar,date_format(p.create_time,'%Y-%m-%d %H:%i:%s') as create_time,p.hope_job,
+        p.hope_city,p.last_login_time,p.expect_money,p.job_experience,p.state,p.info,p.photos
+        FROM personal p
+
         <where>
-            u.type =1
-            <if test="name != '' and name != null">
-                AND u.name like concat('%',#{name},'%')
-            </if>
-            <if test="phone != '' and phone != null">
-                AND u.phone like concat('%',#{phone},'%')
+            <if test="address != '' and address != null">
+                AND p.address like concat('%',#{address},'%')
             </if>
         </where>
         ORDER BY
-          u.create_time DESC
+        p.last_login_time DESC
     </select>
+
+    <select id="findPersonalByPars" resultType="java.util.Map">
+        SELECT p.id,p.user_id,p.name,p.sex,p.age,p.phone,date_format(p.create_time,'%Y-%m-%d %H:%i:%s') as create_time,month_visits,
+        p.openid,p.hope_job,p.hope_city,p.job_experience,p.address,p.expect_money,p.state,p.resume_state,
+        p.record_school,p.once_do,p.my_hometown,p.myself_info,p.resume_number,p.photos
+        FROM personal p
+        LEFT JOIN user u ON u.id = p.user_id
+        <where>
+            u.account_state = 1 OR u.account_state = 2
+            <if test="name != '' and name != null">
+                AND p.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND p.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        p.create_time DESC
+    </select>
+
 
     <select id="queryPersonalInfo" resultType="java.util.Map">
         SELECT  p.id,p.sex,p.age,p.expect_money,p.job_experience,p.state,p.info

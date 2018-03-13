@@ -4,6 +4,8 @@
     <file type="web" url="file://$PROJECT_DIR$/account" />
     <file type="web" url="file://$PROJECT_DIR$/base" />
     <file type="web" url="file://$PROJECT_DIR$/common" />
+    <file type="web" url="file://$PROJECT_DIR$/management" />
+    <file type="web" url="file://$PROJECT_DIR$/web" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
@@ -12,7 +14,14 @@
         <option value="$PROJECT_DIR$/account/pom.xml" />
         <option value="$PROJECT_DIR$/base/pom.xml" />
         <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/web/pom.xml" />
+        <option value="$PROJECT_DIR$/management/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/web/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">

@@ -39,6 +39,12 @@ public class Personal implements Serializable {
     private String sex;
 
     /**
+     * 最近30天访问次数
+     */
+    @Column(name = "month_visits")
+    private Integer monthVisits;
+
+    /**
      * 求职者地址
      */
     private String address;
@@ -87,11 +93,6 @@ public class Personal implements Serializable {
     private String state;
 
     /**
-     * 自我介绍
-     */
-    private String info;
-
-    /**
      * 创建时间
      */
     @Column(name = "create_time")
@@ -125,6 +126,53 @@ public class Personal implements Serializable {
      * 求职者照片
      */
     private String photos;
+
+    /**
+     * 简历状态 1可见 2隐藏
+     */
+    @Column(name = "resume_state")
+    private Integer resumeState;
+
+    /**
+     * 账号状态 1正常 2冻结 3删除 数据库不用维护
+     */
+    @Column(name = "account_state")
+    private Integer accountState;
+
+    /**
+     * 最高学历
+     */
+    @Column(name = "record_school")
+    private String recordSchool;
+
+    /**
+     * 曾经做过
+     */
+    @Column(name = "once_do")
+    private String onceDo;
+
+    /**
+     * 我的家乡
+     */
+    @Column(name = "my_hometown")
+    private String myHometown;
+
+    /**
+     * 自我介绍
+     */
+    @Column(name = "myself_info")
+    private String myselfInfo;
+
+    /**
+     * 投递简历数
+     */
+    @Column(name = "resume_number")
+    private Integer resumeNumber;
+
+    /**
+     * 求职者openid 数据库不用维护
+     */
+    private String openid;
 
     private static final long serialVersionUID = 1L;
 
@@ -234,6 +282,24 @@ public class Personal implements Serializable {
      */
     public void setSex(String sex) {
         this.sex = sex == null ? null : sex.trim();
+    }
+
+    /**
+     * 获取最近30天访问次数
+     *
+     * @return month_visits - 最近30天访问次数
+     */
+    public Integer getMonthVisits() {
+        return monthVisits;
+    }
+
+    /**
+     * 设置最近30天访问次数
+     *
+     * @param monthVisits 最近30天访问次数
+     */
+    public void setMonthVisits(Integer monthVisits) {
+        this.monthVisits = monthVisits;
     }
 
     /**
@@ -399,24 +465,6 @@ public class Personal implements Serializable {
     }
 
     /**
-     * 获取自我介绍
-     *
-     * @return info - 自我介绍
-     */
-    public String getInfo() {
-        return info;
-    }
-
-    /**
-     * 设置自我介绍
-     *
-     * @param info 自我介绍
-     */
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
-    }
-
-    /**
      * 获取创建时间
      *
      * @return create_time - 创建时间
@@ -524,6 +572,150 @@ public class Personal implements Serializable {
         this.photos = photos == null ? null : photos.trim();
     }
 
+    /**
+     * 获取简历状态 1可见 2隐藏
+     *
+     * @return resume_state - 简历状态 1可见 2隐藏
+     */
+    public Integer getResumeState() {
+        return resumeState;
+    }
+
+    /**
+     * 设置简历状态 1可见 2隐藏
+     *
+     * @param resumeState 简历状态 1可见 2隐藏
+     */
+    public void setResumeState(Integer resumeState) {
+        this.resumeState = resumeState;
+    }
+
+    /**
+     * 获取账号状态 1正常 2冻结 3删除 数据库不用维护
+     *
+     * @return account_state - 账号状态 1正常 2冻结 3删除 数据库不用维护
+     */
+    public Integer getAccountState() {
+        return accountState;
+    }
+
+    /**
+     * 设置账号状态 1正常 2冻结 3删除 数据库不用维护
+     *
+     * @param accountState 账号状态 1正常 2冻结 3删除 数据库不用维护
+     */
+    public void setAccountState(Integer accountState) {
+        this.accountState = accountState;
+    }
+
+    /**
+     * 获取最高学历
+     *
+     * @return record_school - 最高学历
+     */
+    public String getRecordSchool() {
+        return recordSchool;
+    }
+
+    /**
+     * 设置最高学历
+     *
+     * @param recordSchool 最高学历
+     */
+    public void setRecordSchool(String recordSchool) {
+        this.recordSchool = recordSchool == null ? null : recordSchool.trim();
+    }
+
+    /**
+     * 获取曾经做过
+     *
+     * @return once_do - 曾经做过
+     */
+    public String getOnceDo() {
+        return onceDo;
+    }
+
+    /**
+     * 设置曾经做过
+     *
+     * @param onceDo 曾经做过
+     */
+    public void setOnceDo(String onceDo) {
+        this.onceDo = onceDo == null ? null : onceDo.trim();
+    }
+
+    /**
+     * 获取我的家乡
+     *
+     * @return my_hometown - 我的家乡
+     */
+    public String getMyHometown() {
+        return myHometown;
+    }
+
+    /**
+     * 设置我的家乡
+     *
+     * @param myHometown 我的家乡
+     */
+    public void setMyHometown(String myHometown) {
+        this.myHometown = myHometown == null ? null : myHometown.trim();
+    }
+
+    /**
+     * 获取自我介绍
+     *
+     * @return myself_info - 自我介绍
+     */
+    public String getMyselfInfo() {
+        return myselfInfo;
+    }
+
+    /**
+     * 设置自我介绍
+     *
+     * @param myselfInfo 自我介绍
+     */
+    public void setMyselfInfo(String myselfInfo) {
+        this.myselfInfo = myselfInfo == null ? null : myselfInfo.trim();
+    }
+
+    /**
+     * 获取投递简历数
+     *
+     * @return resume_number - 投递简历数
+     */
+    public Integer getResumeNumber() {
+        return resumeNumber;
+    }
+
+    /**
+     * 设置投递简历数
+     *
+     * @param resumeNumber 投递简历数
+     */
+    public void setResumeNumber(Integer resumeNumber) {
+        this.resumeNumber = resumeNumber;
+    }
+
+    /**
+     * 获取求职者openid 数据库不用维护
+     *
+     * @return openid - 求职者openid 数据库不用维护
+     */
+    public String getOpenid() {
+        return openid;
+    }
+
+    /**
+     * 设置求职者openid 数据库不用维护
+     *
+     * @param openid 求职者openid 数据库不用维护
+     */
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -536,6 +728,7 @@ public class Personal implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", age=").append(age);
         sb.append(", sex=").append(sex);
+        sb.append(", monthVisits=").append(monthVisits);
         sb.append(", address=").append(address);
         sb.append(", special=").append(special);
         sb.append(", longitude=").append(longitude);
@@ -545,13 +738,20 @@ public class Personal implements Serializable {
         sb.append(", expectMoney=").append(expectMoney);
         sb.append(", jobExperience=").append(jobExperience);
         sb.append(", state=").append(state);
-        sb.append(", info=").append(info);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", hopeJob=").append(hopeJob);
         sb.append(", hopeCity=").append(hopeCity);
         sb.append(", lastLoginTime=").append(lastLoginTime);
         sb.append(", photos=").append(photos);
+        sb.append(", resumeState=").append(resumeState);
+        sb.append(", accountState=").append(accountState);
+        sb.append(", recordSchool=").append(recordSchool);
+        sb.append(", onceDo=").append(onceDo);
+        sb.append(", myHometown=").append(myHometown);
+        sb.append(", myselfInfo=").append(myselfInfo);
+        sb.append(", resumeNumber=").append(resumeNumber);
+        sb.append(", openid=").append(openid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

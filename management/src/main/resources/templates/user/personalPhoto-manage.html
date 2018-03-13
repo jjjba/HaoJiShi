@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/layout-switch}">
+<head>
+    <title>求职者照片管理</title>
+
+    <!-- 当前页面自定义JS -->
+    <script src="/static/js/banner/banner.js" th:src="@{/js/company/photo.js}"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="panel panel-default">
+            <div  class="panel-heading">
+                <div  class="btn btn-group">
+                    <button class="btn btn-info" onclick="javascript:window.history.go(-1);">返回企业列表</button>
+                    <button id="btnAdd" class="btn btn-default" data-toggle="modal" data-act="1" data-target="#addModal">
+                        添加
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>图片</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div id="pagination"></div>
+            </div>
+        </div>
+    </div>
+    <!-- [配置]添加模态框 -->
+    <div layout:replace="~{user/photo-add}"/>
+    <!-- [配置]修改模态框 -->
+    <div layout:replace="~{user/photo-edit}"/>
+</div>
+</body>
+</html>

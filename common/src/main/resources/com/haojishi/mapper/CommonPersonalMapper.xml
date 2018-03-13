@@ -5,6 +5,7 @@
         SELECT p.id,p.name,p.phone,p.age,p.sex,p.address,p.special,p.avatar,date_format(p.create_time,'%Y-%m-%d %H:%i:%s') as create_time,p.hope_job,
         p.hope_city,p.last_login_time,p.expect_money,p.job_experience,p.state,p.info,p.photos
         FROM personal p
+
         <where>
             <if test="address != '' and address != null">
                 AND p.address like concat('%',#{address},'%')
@@ -12,6 +13,25 @@
         </where>
         ORDER BY
           p.last_login_time DESC
+    </select>
+
+    <select id="getPersonalByPars" resultType="java.util.Map">
+        SELECT p.id,p.user_id,p.name,p.sex,p.age,p.phone,date_format(p.create_time,'%Y-%m-%d %H:%i:%s') as create_time,month_visits,
+        p.openid,p.hope_job,p.hope_city,p.job_experience,p.address,p.expect_money,p.state,p.resume_state,
+        p.record_school,p.once_do,p.my_hometown,p.myself_info,p.resume_number,p.photos
+        FROM personal p
+        LEFT JOIN user u ON u.id = p.user_id
+        <where>
+            u.account_state = 1 OR u.account_state = 2
+            <if test="name != '' and name != null">
+                AND p.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND p.phone like concat('%',#{phone},'%')
+            </if>
+        </where>
+        ORDER BY
+        p.create_time DESC
     </select>
 
     <select id="queryPersonalInfo" resultType="java.util.Map">

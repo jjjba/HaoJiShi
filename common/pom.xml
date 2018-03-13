@@ -219,13 +219,13 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-<modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>common</artifactId>
+    <!--<version>${project.version}</version>-->
+    <packaging>jar</packaging>
 
-<artifactId>common</artifactId>
-<packaging>jar</packaging>
-
-<name>common</name>
-<url>http://maven.apache.org</url>
+    <name>common</name>
+    <url>http://maven.apache.org</url>
 
 <!-- 依赖仓库配置 -->
 <repositories>

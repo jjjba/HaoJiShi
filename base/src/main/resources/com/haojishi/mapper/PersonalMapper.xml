@@ -11,6 +11,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="age" jdbcType="INTEGER" property="age" />
     <result column="sex" jdbcType="VARCHAR" property="sex" />
+    <result column="month_visits" jdbcType="INTEGER" property="monthVisits" />
     <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="special" jdbcType="VARCHAR" property="special" />
     <result column="longitude" jdbcType="DOUBLE" property="longitude" />
@@ -20,20 +21,28 @@
     <result column="expect_money" jdbcType="VARCHAR" property="expectMoney" />
     <result column="job_experience" jdbcType="VARCHAR" property="jobExperience" />
     <result column="state" jdbcType="VARCHAR" property="state" />
-    <result column="info" jdbcType="VARCHAR" property="info" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="hope_job" jdbcType="VARCHAR" property="hopeJob" />
     <result column="hope_city" jdbcType="VARCHAR" property="hopeCity" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="photos" jdbcType="VARCHAR" property="photos" />
+    <result column="resume_state" jdbcType="INTEGER" property="resumeState" />
+    <result column="account_state" jdbcType="INTEGER" property="accountState" />
+    <result column="record_school" jdbcType="VARCHAR" property="recordSchool" />
+    <result column="once_do" jdbcType="VARCHAR" property="onceDo" />
+    <result column="my_hometown" jdbcType="VARCHAR" property="myHometown" />
+    <result column="myself_info" jdbcType="VARCHAR" property="myselfInfo" />
+    <result column="resume_number" jdbcType="INTEGER" property="resumeNumber" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, user_id, name, phone, age, sex, address, special, longitude, latitude, register_type, 
-    avatar, expect_money, job_experience, state, info, create_time, update_time, hope_job, 
-    hope_city, last_login_time, photos
+    id, user_id, name, phone, age, sex, month_visits, address, special, longitude, latitude, 
+    register_type, avatar, expect_money, job_experience, state, create_time, update_time, 
+    hope_job, hope_city, last_login_time, photos, resume_state, account_state, record_school, 
+    once_do, my_hometown, myself_info, resume_number, openid
   </sql>
 </mapper>

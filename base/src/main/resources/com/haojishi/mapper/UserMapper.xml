@@ -10,11 +10,12 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="account_state" jdbcType="INTEGER" property="accountState" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, phone, password, type, openid
+    id, phone, password, type, openid, account_state
   </sql>
 </mapper>

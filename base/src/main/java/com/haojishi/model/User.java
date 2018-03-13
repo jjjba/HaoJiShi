@@ -31,6 +31,12 @@ public class User implements Serializable {
      */
     private String openid;
 
+    /**
+     * 账号状态 1正常 2冻结 3删除
+     */
+    @Column(name = "account_state")
+    private Integer accountState;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -123,6 +129,24 @@ public class User implements Serializable {
         this.openid = openid == null ? null : openid.trim();
     }
 
+    /**
+     * 获取账号状态 1正常 2冻结 3删除
+     *
+     * @return account_state - 账号状态 1正常 2冻结 3删除
+     */
+    public Integer getAccountState() {
+        return accountState;
+    }
+
+    /**
+     * 设置账号状态 1正常 2冻结 3删除
+     *
+     * @param accountState 账号状态 1正常 2冻结 3删除
+     */
+    public void setAccountState(Integer accountState) {
+        this.accountState = accountState;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -134,6 +158,7 @@ public class User implements Serializable {
         sb.append(", password=").append(password);
         sb.append(", type=").append(type);
         sb.append(", openid=").append(openid);
+        sb.append(", accountState=").append(accountState);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/layout-switch}">
+<head>
+    <title>职位管理</title>
+
+    <!-- 当前页面自定义JS -->
+    <script src="/static/js/position/position.js" th:src="@{/js/position/position.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <label>职位名称：</label>
+                <input class="form-control" name="position_name"/>
+                <input type="hidden" name="user_id" id="user_id"/>
+            </div>
+            <button class="btn btn-default" onclick="search()"><span class="fa fa-search"></span>查询</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>职位名称</th>
+                        <th>职位类型</th>
+                        <th>性别要求</th>
+                        <th>年龄要求</th>
+                        <th>薪资待遇</th>
+                        <th>经验要求</th>
+                        <th>职位详情</th>
+                        <th>发布时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div id="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
