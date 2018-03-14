@@ -149,20 +149,20 @@
                                     <strong>首页管理</strong>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">个人端banner</a>
+                                    <a th:href="@{/banner-personal}">个人端banner</a>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">企业端banner</a>
+                                    <a th:href="@{/banner-company}">企业端banner</a>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">企业端首页栏目管理</a>
+                                    <a th:href="@{/index-module}">企业端首页栏目管理</a>
                                 </li>
 
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" >
                                     <strong>财务管理</strong>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">快招付费流水</a>
+                                    <a th:href="@{/kuaizhao}">快招付费流水</a>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
                                     <a th:href="@{/banner-manage}">委托招聘付费流水</a>

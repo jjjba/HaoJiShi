@@ -82,9 +82,9 @@ public class CompanyController {
      * @return
      */
     @GetMapping("findCompanyInfoById")
-    public BusinessMessage findById(Integer id) {
-        return companyService.findOneByid(id);
-    }
+//    public BusinessMessage findById(Integer id) {
+////        return companyService.findOneByid(id);
+//    }
 
     /**
      * 跟新企业信息
@@ -157,5 +157,49 @@ public class CompanyController {
     @RequestMapping("/getAllCompanyState")
     public BusinessMessage getAllCompanyState(String name,String phone,Integer page,Integer size){
         return companyService.getAllCompanyState(name,phone,page,size);
+    }
+
+    /**
+     * 企业营业执照审核通过
+     *
+     * @param id
+     * @return BusinessMessage - 企业营业执照审核通过信息
+     */
+    @RequestMapping("/approve")
+    public BusinessMessage approve(Integer id){
+        return companyService.approve(id);
+    }
+
+    /**
+     * 企业营业执照审核未通过
+     *
+     * @param id
+     * @return BusinessMessage - 企业营业执照审核通过信息
+     */
+    @RequestMapping("/auditFailed")
+    public BusinessMessage auditFailed(Integer id){
+        return companyService.auditFailed(id);
+    }
+
+    /**
+     * 冻结企业账户
+     *
+     * @param companyCheck
+     * @return BusinessMessage - 是否冻结成功信息
+     */
+    @RequestMapping("/frozenAccount")
+    public BusinessMessage frozenAccount(String companyCheck){
+        return companyService.frozenAccount(companyCheck);
+    }
+
+    /**
+     * 删除企业账户
+     *
+     * @param companyCheck
+     * @return BusinessMessage - 是否删除成功信息
+     */
+    @RequestMapping("/deleteAccount")
+    public BusinessMessage deleteAccount(String companyCheck){
+        return companyService.deleteAccount(companyCheck);
     }
 }

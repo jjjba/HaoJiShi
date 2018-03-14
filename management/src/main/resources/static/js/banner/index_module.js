@@ -1,21 +1,7 @@
 /**
- * Created by xzcy-01 on 2017/12/8.
+ * @author 梁闯
+ * @date 2018/03/14 17.41
  */
-
-/**
- * 定义下类型排序规则变量
- */
-var typeSort;
-/**
- * 定义总销售额排序规则变量
- */
-var totalSalesAmountSort;
-
-/**
- * 定义今日订单数排序规则变量
- */
-var orderCountSort;
-
 
 // 默认页码
 var page = 1;
@@ -41,22 +27,21 @@ $(function () {
     loadData(page, size);
 
     //编辑
-    $('#editModal').on('hidden.bs.modal', function () {
+    $('#editModuleModal').on('hidden.bs.modal', function () {
         $(this).find(":file").each(function (i, el) {
             $(el).fileinput("clear");
         })
     }).on('show.bs.modal', function (event) {
-        initFileInput("#editModal input[name=image_url][type=file]");
-        var button = $(event.relatedTarget);
-        var id = button.data('id');
-        ids = id;
+        initFileInput("#editModuleModal input[name=image_url][type=file]");
+        var id =$("input:checkbox[name='checkPersonal']:checked").val();
         var $modal = $(this);
         $modal.find('[name=id]').val(id);
-        $.getJSON($('#baseUrl').attr('href') + 'banner/findBannerById?id=' + id, function (res) {
+        $.getJSON($('#baseUrl').attr('href') + 'banner/getIndexModuleById?id=' + id, function (res) {
             if (res.success) {
                 var item = res.data;
-                $modal.find('[name=sorts]').val(item.sorts);
+                $modal.find('[name=sorts]').val(item.sort);
                 $modal.find('[name=url]').val(item.url);
+                $modal.find('[name=note]').val(item.note);
                 if (item.imageUrl != null && item.imageUrl !="") {
                     $modal.find('[name=photoN]').attr("src",item.imageUrl);
                 }else{
@@ -72,7 +57,7 @@ $(function () {
             $modal = $form.parent().parent().parent().parent();
         var formData = new FormData($form[0]);
         $.ajax({
-            url: $('#baseUrl').attr('href') + 'banner/updateBannerById',
+            url: $('#baseUrl').attr('href') + 'banner/updateIndexModuleById',
             type: 'POST',
             data: formData,
             processData: false,
@@ -97,49 +82,11 @@ $(function () {
         $(this).parent().prev().find('form').data('formValidation').validate();
     }).find('form').formValidation();
 
-    //添加
-    $('#addModal').on('hidden.bs.modal', function () {
-        $(this).find(":file").each(function (i, el) {
-            $(el).fileinput("clear");
-        })
-    }).on('show.bs.modal', function (event) {
-        initFileInput("#editModal input[name=image_url][type=file]");
-        var button = $(event.relatedTarget);
-        var id = button.data('id');
-        ids = id;
-        var $modal = $(this);
-    }).on('success.form.fv', function (e) {
-        e.preventDefault();
 
-        var $form = $(e.target),
-            fv = $form.data('formValidation'),
-            $modal = $form.parent().parent().parent().parent();
-        var formData = new FormData($form[0]);
-        $.ajax({
-            url: $('#baseUrl').attr('href') + 'banner/insertBanner',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false
-        }).then(function (res) {
-            if (res.success) {
-                // 隐藏模态框
-                $modal.modal('hide');
-                // 重新加载数据
-                loadData();
-            } else {
-                $modal.find('.alert').find('span').text(res.msg);
-                $modal.find('.alert').show();
-            }
-        }, function (res) {
-            $modal.find('.alert').find('span').text('请求网络失败，请重试');
-            $modal.find('.alert').show();
-        });
 
-    }).on('click', '.btn-primary2', function () {
-        // 提交表单
-        $(this).parent().prev().find('form').data('formValidation').validate();
-    }).find('form').formValidation();
+    $("#checkAll").click(function () {
+        $("input[name='checkPersonal']:checkbox").prop("checked", this.checked);
+    });
 
 });//初始化
 
@@ -151,7 +98,6 @@ $(function () {
  */
 function loadData(page, size) {
     // 显示动画
-    //   alert($('.navbar-form').find('[name=start_time]').val());
     $.LoadingOverlay("show");
     var data = {
         page: page,
@@ -159,7 +105,7 @@ function loadData(page, size) {
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "banner/list",
+        url: $('#baseUrl').attr('href') + "banner/getIndexModule",
         data: data,
         success: function (res) {
             // 关闭动画
@@ -172,18 +118,21 @@ function loadData(page, size) {
                 if (res.data != null) {
                     var list = res.data.list;
                     console.log(list);
-                    var id, name, sex, age, phone, job_experience, state, info, create_time;
+                    var id, sort,imageUrl,url,note;
                     $.each(list, function (index, item) {
                         id = item.id;
-
+                        sort =item.sort;
+                        imageUrl =item.imageUrl;
+                        url =item.url;
+                        note =item.note;
                         var tableHtml = "";
                         tableHtml += '<tr>' +
-                            '<td>' + item.sorts + '</td>' +
-                            '<td><img src="' + item.imageUrl + '" width="50px" height="30px" /> </td>' +
-                            '<td>' + item.url + '</td>';
-                        tableHtml += '<td> <div class="btn-group">';
-                        tableHtml += '<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal" data-id="' + item.id + '" >修改</button>';
-                        tableHtml += '</div></td></tr>';
+                            '<td><input type="checkbox" name="checkPersonal" value="'+id+'"/></td>'+
+                            '<td>' + sort + '</td>' +
+                            '<td><img src="' + imageUrl + '" style="width: 200px;height: 150px" /> </td>' +
+                            '<td>' + url + '</td>' +
+                            '<td>' + note + '</td>';
+                        tableHtml += '</tr>';
                         $('tbody').append(tableHtml);
                     });
                     // 初始化分页控件
@@ -209,9 +158,6 @@ function loadData(page, size) {
         }
     });
 }
-function search() {
-    loadData(page, size);
-}
 
 function initFileInput(id) {
 //初始化
@@ -226,7 +172,7 @@ function initFileInput(id) {
         }
     })
         .on('filecleared', function (e) {
-            $('#editModal').find('form')
+            $('#editModuleModal').find('form')
                 .data('formValidation')         // Get the validator instance
                 .revalidateField($(e.target));
         });

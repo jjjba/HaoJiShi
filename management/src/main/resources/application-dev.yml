@@ -1,6 +1,7 @@
 # 开启调试模式
 debug: true
 
+
 # 服务器配置
 server:
   port: 8075
@@ -70,7 +71,7 @@ pagehelper:
 # 日志配置
 logging:
   level:
-    com.xzcysoft: debug
+    com.haojishi: debug
     org.springframework: error
 
 api:

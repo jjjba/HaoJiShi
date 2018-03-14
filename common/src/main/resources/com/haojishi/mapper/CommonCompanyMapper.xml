@@ -6,20 +6,21 @@
     </update>
 
     <select id="findCompanyByPars" resultType="java.util.Map">
-        SELECT c.id as cid, u.openid, c.name, c.user_id as id, date_format(c.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
+        SELECT c.id, u.openid, u.account_state, c.name, c.user_id, date_format(c.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
         c.phone, c.month_visits, c.user_name, c.zhi_wu, c.company_type, c.company_scale,
-        c.company_city, c.position_count, c.share_number, c.position_number, c.position_see_number, c.position_exposure_number,
-        c.company_photo, c.matState, c.company_info, u.account_state, c.company_addr, c.company_special
+        c.company_city, c.position_count, c.share_number, c.position_number, c.position_see_number,
+        c.position_exposure_number, c.company_photo, c.matState, c.company_info, c.company_addr,
+        c.company_special
         FROM company c
         LEFT JOIN user u ON u.id = c.user_id
         <where>
-            u.account_state = 1 OR u.account_state = 2
-            <if test="name != '' and name != null">
-                AND c.name like concat('%',#{name},'%')
+            <if test=" name != '' and name != null ">
+                c.name like CONCAT('%','${name}','%' )
             </if>
-            <if test="phone != '' and phone != null">
-                AND c.phone like concat('%',#{phone},'%')
+            <if test=" phone != '' and phone != null ">
+                c.phone like CONCAT('%','${phone}','%' )
             </if>
+            AND (u.account_state = 1 OR u.account_state = 2)
         </where>
         ORDER BY
         c.create_time DESC
@@ -84,19 +85,20 @@
 
 
     <select id="getAllCompanyState" resultType="java.util.Map">
-        SELECT c.id,c.name,c.phone,date_format(c.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
-        date_format(c.modify_time,'%Y-%m-%d %H:%i:%s') as modify_time,c.user_name,c.license_path,
-        c.matState
+        SELECT c.id, c.name, date_format(c.create_time,'%Y-%m-%d %H:%i:%s') as create_time,
+        c.phone, date_format(c.modify_time,'%Y-%m-%d %H:%i:%s') as modify_time, c.user_name,
+        c.license_path, c.matState
         FROM company c
         LEFT JOIN user u ON u.id = c.user_id
         <where>
-            u.account_state = 1 or u.account_state = 2
+
             <if test="name != '' and name != null">
-                AND c.name like concat('%',#{name},'%')
+                c.name like concat('%',#{name},'%')
             </if>
             <if test="phone != '' and phone != null">
-                AND c.phone like concat('%',#{phone},'%')
+                c.phone like concat('%',#{phone},'%')
             </if>
+            AND (u.account_state = 1 OR u.account_state = 2)
         </where>
         ORDER BY
         c.modify_time DESC

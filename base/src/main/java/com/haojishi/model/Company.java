@@ -121,17 +121,6 @@ public class Company implements Serializable {
     private String zhiWu;
 
     /**
-     * 排序
-     */
-    private Integer sorts;
-
-    /**
-     * 访客数量
-     */
-    @Column(name = "see_count")
-    private Integer seeCount;
-
-    /**
      * 修改时间
      */
     @Column(name = "update_time")
@@ -154,12 +143,6 @@ public class Company implements Serializable {
      */
     @Column(name = "company_photo")
     private String companyPhoto;
-
-    /**
-     * 公司下面是否有悬赏职位 1是2否 数据库不用维护
-     */
-    @Column(name = "is_positions_reward")
-    private Integer isPositionsReward;
 
     /**
      * 公司是否通过审核 1是 2否
@@ -595,42 +578,6 @@ public class Company implements Serializable {
     }
 
     /**
-     * 获取排序
-     *
-     * @return sorts - 排序
-     */
-    public Integer getSorts() {
-        return sorts;
-    }
-
-    /**
-     * 设置排序
-     *
-     * @param sorts 排序
-     */
-    public void setSorts(Integer sorts) {
-        this.sorts = sorts;
-    }
-
-    /**
-     * 获取访客数量
-     *
-     * @return see_count - 访客数量
-     */
-    public Integer getSeeCount() {
-        return seeCount;
-    }
-
-    /**
-     * 设置访客数量
-     *
-     * @param seeCount 访客数量
-     */
-    public void setSeeCount(Integer seeCount) {
-        this.seeCount = seeCount;
-    }
-
-    /**
      * 获取修改时间
      *
      * @return update_time - 修改时间
@@ -700,24 +647,6 @@ public class Company implements Serializable {
      */
     public void setCompanyPhoto(String companyPhoto) {
         this.companyPhoto = companyPhoto == null ? null : companyPhoto.trim();
-    }
-
-    /**
-     * 获取公司下面是否有悬赏职位 1是2否 数据库不用维护
-     *
-     * @return is_positions_reward - 公司下面是否有悬赏职位 1是2否 数据库不用维护
-     */
-    public Integer getIsPositionsReward() {
-        return isPositionsReward;
-    }
-
-    /**
-     * 设置公司下面是否有悬赏职位 1是2否 数据库不用维护
-     *
-     * @param isPositionsReward 公司下面是否有悬赏职位 1是2否 数据库不用维护
-     */
-    public void setIsPositionsReward(Integer isPositionsReward) {
-        this.isPositionsReward = isPositionsReward;
     }
 
     /**
@@ -962,13 +891,10 @@ public class Company implements Serializable {
         sb.append(", companyType=").append(companyType);
         sb.append(", iconPath=").append(iconPath);
         sb.append(", zhiWu=").append(zhiWu);
-        sb.append(", sorts=").append(sorts);
-        sb.append(", seeCount=").append(seeCount);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", positionCount=").append(positionCount);
         sb.append(", companyInfo=").append(companyInfo);
         sb.append(", companyPhoto=").append(companyPhoto);
-        sb.append(", isPositionsReward=").append(isPositionsReward);
         sb.append(", matstate=").append(matstate);
         sb.append(", createTime=").append(createTime);
         sb.append(", modifyTime=").append(modifyTime);

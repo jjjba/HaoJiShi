@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CommonFinanceMapper">
+
+    <select id="getAllKuaiZhao" resultType="java.util.Map">
+        SELECT
+            s.comId, s.money, date_format(s.endTime,'%Y-%m-%d %H:%i:%s') as endDate, s.phoneNumber, s.name, s.type,
+            date_format(s.startDate,'%Y-%m-%d %H:%i:%s') as startDate, date_format(s.createDate,'%Y-%m-%d %H:%i:%s') as createDate,
+            s.surplusNumber, c.name as comName, c.phone
+        FROM service s
+        LEFT JOIN company c ON c.id = s.comId
+        ORDER BY
+            createDate DESC
+    </select>
+</mapper>

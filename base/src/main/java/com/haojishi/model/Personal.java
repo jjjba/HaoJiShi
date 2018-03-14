@@ -134,7 +134,7 @@ public class Personal implements Serializable {
     private Integer resumeState;
 
     /**
-     * 账号状态 1正常 2冻结 3删除 数据库不用维护
+     * 账号状态 1正常 2冻结 3删除
      */
     @Column(name = "account_state")
     private Integer accountState;
@@ -591,18 +591,18 @@ public class Personal implements Serializable {
     }
 
     /**
-     * 获取账号状态 1正常 2冻结 3删除 数据库不用维护
+     * 获取账号状态 1正常 2冻结 3删除
      *
-     * @return account_state - 账号状态 1正常 2冻结 3删除 数据库不用维护
+     * @return account_state - 账号状态 1正常 2冻结 3删除
      */
     public Integer getAccountState() {
         return accountState;
     }
 
     /**
-     * 设置账号状态 1正常 2冻结 3删除 数据库不用维护
+     * 设置账号状态 1正常 2冻结 3删除
      *
-     * @param accountState 账号状态 1正常 2冻结 3删除 数据库不用维护
+     * @param accountState 账号状态 1正常 2冻结 3删除
      */
     public void setAccountState(Integer accountState) {
         this.accountState = accountState;

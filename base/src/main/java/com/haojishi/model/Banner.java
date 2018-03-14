@@ -19,7 +19,7 @@ public class Banner implements Serializable {
     private String imageUrl;
 
     /**
-     * 排序
+     * banner序号
      */
     private Integer sort;
 
@@ -33,6 +33,16 @@ public class Banner implements Serializable {
      */
     @Column(name = "create_time")
     private Date createTime;
+
+    /**
+     * 备注
+     */
+    private String note;
+
+    /**
+     * banner分类 1求职者端 2企业端
+     */
+    private Integer classification;
 
     private static final long serialVersionUID = 1L;
 
@@ -73,18 +83,18 @@ public class Banner implements Serializable {
     }
 
     /**
-     * 获取排序
+     * 获取banner序号
      *
-     * @return sort - 排序
+     * @return sort - banner序号
      */
     public Integer getSort() {
         return sort;
     }
 
     /**
-     * 设置排序
+     * 设置banner序号
      *
-     * @param sort 排序
+     * @param sort banner序号
      */
     public void setSort(Integer sort) {
         this.sort = sort;
@@ -126,6 +136,42 @@ public class Banner implements Serializable {
         this.createTime = createTime;
     }
 
+    /**
+     * 获取备注
+     *
+     * @return note - 备注
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * 设置备注
+     *
+     * @param note 备注
+     */
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    /**
+     * 获取banner分类 1求职者端 2企业端
+     *
+     * @return classification - banner分类 1求职者端 2企业端
+     */
+    public Integer getClassification() {
+        return classification;
+    }
+
+    /**
+     * 设置banner分类 1求职者端 2企业端
+     *
+     * @param classification banner分类 1求职者端 2企业端
+     */
+    public void setClassification(Integer classification) {
+        this.classification = classification;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -137,6 +183,8 @@ public class Banner implements Serializable {
         sb.append(", sort=").append(sort);
         sb.append(", url=").append(url);
         sb.append(", createTime=").append(createTime);
+        sb.append(", note=").append(note);
+        sb.append(", classification=").append(classification);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

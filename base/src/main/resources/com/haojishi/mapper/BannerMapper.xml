@@ -10,11 +10,13 @@
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="url" jdbcType="VARCHAR" property="url" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="note" jdbcType="VARCHAR" property="note" />
+    <result column="classification" jdbcType="INTEGER" property="classification" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, image_url, sort, url, create_time
+    id, image_url, sort, url, create_time, note, classification
   </sql>
 </mapper>

@@ -147,6 +147,9 @@ function search() {
     loadData(page, size);
 }
 
+/**
+ * 设置企业营业执照审核通过
+ */
 function approvedExport() {
     // 显示动画
     $.LoadingOverlay("show");
@@ -155,7 +158,33 @@ function approvedExport() {
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "company/audit",
+        url: $('#baseUrl').attr('href') + "company/approve",
+        data: data,
+        success: function (res) {
+            // 关闭动画
+            $.LoadingOverlay("hide");
+            alert(res.msg)
+        },
+        error: function (res) {
+            // 关闭动画
+            $.LoadingOverlay("hide");
+            alert(res.msg)
+        }
+    });
+}
+
+/**
+ * 设置企业营业执照审核未通过
+ */
+function auditFailedExport() {
+    // 显示动画
+    $.LoadingOverlay("show");
+    var data = {
+        id : $("input:checkbox[name='checkPersonal']:checked").val(),
+    };
+    $.ajax({
+        type: "GET",
+        url: $('#baseUrl').attr('href') + "company/auditFailed",
         data: data,
         success: function (res) {
             // 关闭动画

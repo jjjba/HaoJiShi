@@ -208,14 +208,14 @@ function loadData(page, size) {
                 // 添加数据到表格
                 var list = res.data.list;
                 console.log(list);
-                var cid, id, company_special, name, phone, job_experience, create_time, month_visits, user_name,
+                var  id, company_special, name, phone, job_experience, create_time, month_visits, user_name,
                 zhi_wu, openid, matState, company_addr, account_state, company_info, company_photo, position_exposure_number,
                     position_see_number, position_number, share_number, position_count, company_city, company_scale, company_type
                 ;
                 $.each(list, function (index, item) {
                     console.log("得到的数据：" + item);
                     id = item.id;
-                    cid = item.cid;
+
                     user_name = item.user_name;
                     if(user_name==null || user_name==""){
                         user_name="未填写";
@@ -233,21 +233,17 @@ function loadData(page, size) {
                     if(name==null || name==""){
                         name="未填写";
                     }
-                    job_experience = item.job_experience;
-                    if(job_experience==null || job_experience==""){
-                        job_experience="未填写";
-                    }
                     company_scale = item.company_scale;
                     if(company_scale==null || company_scale==""){
-                        company_scale="";
+                        company_scale="未填写";
                     }
                     company_type = item.company_type;
                     if(company_type==null || company_type==""){
-                        company_type="";
+                        company_type="未填写";
                     }
                     company_city = item.company_city;
                     if(company_city==null || company_city==""){
-                        company_city="";
+                        company_city="未填写";
                     }
                     position_count = item.position_count;
                     if(position_count==null || position_count==""){
@@ -321,7 +317,7 @@ function loadData(page, size) {
                     var tableHtml = "";
                     tableHtml += '<tr>' +
                         '<td><input type="checkbox" name="checkPersonal" value="'+id+'"/></td>'+
-                        '<td>' + cid + '</td>' +
+                        '<td>' + id + '</td>' +
                         '<td>' + name + '</td>' +
                         '<td>' + create_time + '</td>' +
                         '<td>' + month_visits + '</td>' +
@@ -373,383 +369,69 @@ function search() {
     loadData(page, size);
 }
 
-function addTimeSort() {
-    loadData(page, size);
-}
 
-function positionNumSort(page, size) {
+
+
+/**
+ * 冻结企业账户操作
+ */
+function frozenAccountExport() {
     // 显示动画
-    // alert($('.table').find('[name=position]').val());
+    var companyCheck = $("input:checkbox[name='checkPersonal']:checked").map(function(index,elem) {
+        return $(elem).val();
+    }).get().join(',');
+    alert("选中的checkbox的值为："+companyCheck);
 
     $.LoadingOverlay("show");
-    TableExport.init();
     var data = {
-        page: page,
-        size: size,
-        name: $('.navbar-form').find('[name=name]').val(),
-        phone: $('.navbar-form').find('[name=phone]').val(),
+        companyCheck : companyCheck
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "company/positionNumSort",
+        url: $('#baseUrl').attr('href') + "company/frozenAccount",
         data: data,
         success: function (res) {
             // 关闭动画
             $.LoadingOverlay("hide");
+            alert(res.msg)
 
-            if (res.success) {
-                // 清空表格
-                $('tbody').empty();
-                // 添加数据到表格
-                var list = res.data.list;
-                console.log(list);
-                var cid,id, name, sex, age, phone, job_experience, state, info, create_time;
-                $.each(list, function (index, item) {
-                    console.log("得到的数据：" + item);
-                    id = item.id;
-                    cid = item.cid;
-                    company_fu_ze_ren = item.company_fu_ze_ren;
-                    if(company_fu_ze_ren==null || company_fu_ze_ren==""){
-                        company_fu_ze_ren="";
-                    }
-
-                    zhi_wu = item.zhi_wu;
-                    if(zhi_wu==null || zhi_wu==""){
-                        zhi_wu="";
-                    }
-                    phone = item.phone;
-                    if(phone==null || phone==""){
-                        phone="";
-                    }
-                    see_count = item.see_count;
-                    if(see_count==null || see_count==""){
-                        see_count="0";
-                    }
-                    company_name = item.company_name;
-                    if(company_name==null || company_name==""){
-                        company_name="";
-                    }
-                    company_scale = item.company_scale;
-                    if(company_scale==null || company_scale==""){
-                        company_scale="";
-                    }
-                    company_type = item.company_type;
-                    if(company_type==null || company_type==""){
-                        company_type="";
-                    }
-                    company_city = item.company_city;
-                    if(company_city==null || company_city==""){
-                        company_city="";
-                    }
-                    position_count = item.position_count;
-                    if(position_count==null || position_count==""){
-                        position_count="0";
-                    }
-
-                    kuaizhao_money = item.kuaizhao_money;
-                    if(kuaizhao_money==null || kuaizhao_money==""){
-                        kuaizhao_money="0";
-                    }
-
-                    kuaizhao_date = item.kuaizhao_date;
-                    if(kuaizhao_date==null || kuaizhao_date==""){
-                        kuaizhao_date="0";
-                    }
-                    create_time = item.create_time;
-
-                    var tableHtml = "";
-                    tableHtml += '<tr>' +
-                        '<td>' + cid + '</td>' +
-                        '<td>' + phone + '</td>' +
-                        '<td>' + company_fu_ze_ren + '</td>' +
-                        '<td>' + zhi_wu + '</td>' +
-                        '<td>' + create_time + '</td>' +
-                        '<td>'+position_count+'</td>' +
-                        '<td>' + see_count + '</td>' +
-                        '<td>' + company_name + '</td>' +
-                        '<td>' + kuaizhao_money + '</td>' +
-                        '<td>' + kuaizhao_date + '</td>' +
-                        '<td>' + company_scale + '</td>' +
-                        '<td>' + company_type + '</td>' +
-                        '<td>' + company_city + '</td>';
-                    tableHtml += '<td> <div class="btn-group">';
-                    tableHtml +='<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal" data-id="' + item.id + '" >修改</button>';
-                    tableHtml +='<button class="btn btn-sm btn-primary" onclick="trunUrl(\''+$('#baseUrl').attr('href') +'companyPhoto-manage?id='+item.id+'\')">照片管理</button>';
-                    tableHtml +='<button class="btn btn-sm btn-primary" onclick="trunUrl(\''+$('#baseUrl').attr('href') +'position-company?user_id='+item.id+'\')">职位管理</button>';
-                    tableHtml += '</div></td></tr>';
-                    $('tbody').append(tableHtml);
-                });
-
-                // 初始化分页控件
-                $("#pagination").bs_pagination({
-                    currentPage: res.data.pageNum,
-                    totalRows: res.data.total,
-                    rowsPerPage: res.data.pageSize,
-                    totalPages: res.data.pages,
-                    onChangePage: function (event, data) {
-                        page = data.currentPage;
-                        size = data.rowsPerPage;
-
-                        positionNumSort(data.currentPage, data.rowsPerPage);
-                    }
-                });
-
-            } else {
-                $('tbody').empty();
-                $("#pagination").empty();
-                $("#pagination").removeClass("well");
-            }
+        },
+        error: function (res) {
+            // 关闭动画
+            $.LoadingOverlay("hide");
+            alert(res.msg)
         }
     });
 }
 
-function trafficSort(page, size) {
+/**
+ * 删除企业账户操作
+ */
+function deleteAccountExport() {
     // 显示动画
-    alert(1);
+    var companyCheck = $("input:checkbox[name='checkPersonal']:checked").map(function(index,elem) {
+        return $(elem).val();
+    }).get().join(',');
     $.LoadingOverlay("show");
-    TableExport.init();
     var data = {
-        page: page,
-        size: size,
-        name: $('.navbar-form').find('[name=name]').val(),
-        phone: $('.navbar-form').find('[name=phone]').val(),
+        companyCheck : companyCheck
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "company/seeCountNumSort",
+        url: $('#baseUrl').attr('href') + "company/deleteAccount",
         data: data,
         success: function (res) {
             // 关闭动画
             $.LoadingOverlay("hide");
+            alert(res.msg)
 
-            if (res.success) {
-                // 清空表格
-                $('tbody').empty();
-                // 添加数据到表格
-                var list = res.data.list;
-                console.log(list);
-                var cid,id, name, sex, age, phone, job_experience, state, info, create_time;
-                $.each(list, function (index, item) {
-                    console.log("得到的数据：" + item);
-                    id = item.id;
-                    cid = item.cid;
-                    company_fu_ze_ren = item.company_fu_ze_ren;
-                    if(company_fu_ze_ren==null || company_fu_ze_ren==""){
-                        company_fu_ze_ren="";
-                    }
-
-                    zhi_wu = item.zhi_wu;
-                    if(zhi_wu==null || zhi_wu==""){
-                        zhi_wu="";
-                    }
-                    phone = item.phone;
-                    if(phone==null || phone==""){
-                        phone="";
-                    }
-                    see_count = item.see_count;
-                    if(see_count==null || see_count==""){
-                        see_count="0";
-                    }
-                    company_name = item.company_name;
-                    if(company_name==null || company_name==""){
-                        company_name="";
-                    }
-                    company_scale = item.company_scale;
-                    if(company_scale==null || company_scale==""){
-                        company_scale="";
-                    }
-                    company_type = item.company_type;
-                    if(company_type==null || company_type==""){
-                        company_type="";
-                    }
-                    company_city = item.company_city;
-                    if(company_city==null || company_city==""){
-                        company_city="";
-                    }
-                    position_count = item.position_count;
-                    if(position_count==null || position_count==""){
-                        position_count="0";
-                    }
-
-                    kuaizhao_money = item.kuaizhao_money;
-                    if(kuaizhao_money==null || kuaizhao_money==""){
-                        kuaizhao_money="0";
-                    }
-
-                    kuaizhao_date = item.kuaizhao_date;
-                    if(kuaizhao_date==null || kuaizhao_date==""){
-                        kuaizhao_date="0";
-                    }
-                    create_time = item.create_time;
-
-                    var tableHtml = "";
-                    tableHtml += '<tr>' +
-                        '<td>' + cid + '</td>' +
-                        '<td>' + phone + '</td>' +
-                        '<td>' + company_fu_ze_ren + '</td>' +
-                        '<td>' + zhi_wu + '</td>' +
-                        '<td>' + create_time + '</td>' +
-                        '<td>'+position_count+'</td>' +
-                        '<td>' + see_count + '</td>' +
-                        '<td>' + company_name + '</td>' +
-                        '<td>' + kuaizhao_money + '</td>' +
-                        '<td>' + kuaizhao_date + '</td>' +
-                        '<td>' + company_scale + '</td>' +
-                        '<td>' + company_type + '</td>' +
-                        '<td>' + company_city + '</td>';
-                    tableHtml += '<td> <div class="btn-group">';
-                    tableHtml +='<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal" data-id="' + item.id + '" >修改</button>';
-                    tableHtml +='<button class="btn btn-sm btn-primary" onclick="trunUrl(\''+$('#baseUrl').attr('href') +'companyPhoto-manage?id='+item.id+'\')">照片管理</button>';
-                    tableHtml +='<button class="btn btn-sm btn-primary" onclick="trunUrl(\''+$('#baseUrl').attr('href') +'position-company?user_id='+item.id+'\')">职位管理</button>';
-                    tableHtml += '</div></td></tr>';
-                    $('tbody').append(tableHtml);
-                });
-
-                // 初始化分页控件
-                $("#pagination").bs_pagination({
-                    currentPage: res.data.pageNum,
-                    totalRows: res.data.total,
-                    rowsPerPage: res.data.pageSize,
-                    totalPages: res.data.pages,
-                    onChangePage: function (event, data) {
-                        page = data.currentPage;
-                        size = data.rowsPerPage;
-
-                        trafficSort(data.currentPage, data.rowsPerPage);
-                    }
-                });
-
-            } else {
-                $('tbody').empty();
-                $("#pagination").empty();
-                $("#pagination").removeClass("well");
-            }
-        }
-    });
-}
-
-function payTimeSort(page, size) {
-    // 显示动画
-    //   alert($('.navbar-form').find('[name=start_time]').val());
-    $.LoadingOverlay("show");
-    TableExport.init();
-    var data = {
-        page: page,
-        size: size,
-        name: $('.navbar-form').find('[name=name]').val(),
-        phone: $('.navbar-form').find('[name=phone]').val(),
-    };
-    $.ajax({
-        type: "GET",
-        url: $('#baseUrl').attr('href') + "company/payTimeSort",
-        data: data,
-        success: function (res) {
+        },
+        error: function (res) {
             // 关闭动画
             $.LoadingOverlay("hide");
-
-            if (res.success) {
-                // 清空表格
-                $('tbody').empty();
-                // 添加数据到表格
-                var list = res.data.list;
-                console.log(list);
-                var cid,id, name, sex, age, phone, job_experience, state, info, create_time;
-                $.each(list, function (index, item) {
-                    console.log("得到的数据：" + item);
-                    id = item.id;
-                    cid = item.cid;
-                    company_fu_ze_ren = item.company_fu_ze_ren;
-                    if(company_fu_ze_ren==null || company_fu_ze_ren==""){
-                        company_fu_ze_ren="";
-                    }
-
-                    zhi_wu = item.zhi_wu;
-                    if(zhi_wu==null || zhi_wu==""){
-                        zhi_wu="";
-                    }
-                    phone = item.phone;
-                    if(phone==null || phone==""){
-                        phone="";
-                    }
-                    see_count = item.see_count;
-                    if(see_count==null || see_count==""){
-                        see_count="0";
-                    }
-                    company_name = item.company_name;
-                    if(company_name==null || company_name==""){
-                        company_name="";
-                    }
-                    company_scale = item.company_scale;
-                    if(company_scale==null || company_scale==""){
-                        company_scale="";
-                    }
-                    company_type = item.company_type;
-                    if(company_type==null || company_type==""){
-                        company_type="";
-                    }
-                    company_city = item.company_city;
-                    if(company_city==null || company_city==""){
-                        company_city="";
-                    }
-                    position_count = item.position_count;
-                    if(position_count==null || position_count==""){
-                        position_count="0";
-                    }
-
-                    kuaizhao_money = item.kuaizhao_money;
-                    if(kuaizhao_money==null || kuaizhao_money==""){
-                        kuaizhao_money="0";
-                    }
-
-                    kuaizhao_date = item.kuaizhao_date;
-                    if(kuaizhao_date==null || kuaizhao_date==""){
-                        kuaizhao_date="0";
-                    }
-                    create_time = item.create_time;
-
-                    var tableHtml = "";
-                    tableHtml += '<tr>' +
-                        '<td>' + cid + '</td>' +
-                        '<td>' + phone + '</td>' +
-                        '<td>' + company_fu_ze_ren + '</td>' +
-                        '<td>' + zhi_wu + '</td>' +
-                        '<td>' + create_time + '</td>' +
-                        '<td>'+position_count+'</td>' +
-                        '<td>' + see_count + '</td>' +
-                        '<td>' + company_name + '</td>' +
-                        '<td>' + kuaizhao_money + '</td>' +
-                        '<td>' + kuaizhao_date + '</td>' +
-                        '<td>' + company_scale + '</td>' +
-                        '<td>' + company_type + '</td>' +
-                        '<td>' + company_city + '</td>';
-                    tableHtml += '<td> <div class="btn-group">';
-                    tableHtml +='<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal" data-id="' + item.id + '" >修改</button>';
-                    tableHtml +='<button class="btn btn-sm btn-primary" onclick="trunUrl(\''+$('#baseUrl').attr('href') +'companyPhoto-manage?id='+item.id+'\')">照片管理</button>';
-                    tableHtml +='<button class="btn btn-sm btn-primary" onclick="trunUrl(\''+$('#baseUrl').attr('href') +'position-company?user_id='+item.id+'\')">职位管理</button>';
-                    tableHtml += '</div></td></tr>';
-                    $('tbody').append(tableHtml);
-                });
-
-                // 初始化分页控件
-                $("#pagination").bs_pagination({
-                    currentPage: res.data.pageNum,
-                    totalRows: res.data.total,
-                    rowsPerPage: res.data.pageSize,
-                    totalPages: res.data.pages,
-                    onChangePage: function (event, data) {
-                        page = data.currentPage;
-                        size = data.rowsPerPage;
-
-                        payTimeSort(data.currentPage, data.rowsPerPage);
-                    }
-                });
-
-            } else {
-                $('tbody').empty();
-                $("#pagination").empty();
-                $("#pagination").removeClass("well");
-            }
+            alert(res.msg)
         }
+
     });
 }
 
