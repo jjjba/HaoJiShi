@@ -1,21 +1,7 @@
 /**
- * Created by xzcy-01 on 2017/12/8.
+ * @author 梁闯
+ * @date 2018/03/15 19.43
  */
-
-/**
- * 定义下类型排序规则变量
- */
-var typeSort;
-/**
- * 定义总销售额排序规则变量
- */
-var totalSalesAmountSort;
-
-/**
- * 定义今日订单数排序规则变量
- */
-var orderCountSort;
-
 
 // 默认页码
 var page = 1;
@@ -53,27 +39,19 @@ $(function () {
  * @param size 大小
  */
 function loadData(page, size) {
-    // 显示动画
-    //   alert($('.navbar-form').find('[name=start_time]').val());
     $.LoadingOverlay("show");
     var data = {
         page: page,
         size: size,
-        name: $('.navbar-form').find('[name=position_name]').val(),
-        user_id: $('#user_id').val(),
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "position/list",
+        url: $('#baseUrl').attr('href') + "position/getAllPosition",
         data: data,
         success: function (res) {
-            // 关闭动画
             $.LoadingOverlay("hide");
-
             if (res.success) {
-                // 清空表格
                 $('tbody').empty();
-                // 添加数据到表格
                 if (res.data != null) {
                     var list = res.data.list;
                     console.log(list);

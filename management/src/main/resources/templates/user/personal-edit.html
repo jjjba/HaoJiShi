@@ -14,10 +14,17 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" >
-                    <input  type="hidden" name="id">
                     <input  type="hidden" name="pid">
+                    <input  type="hidden" name="id">
                     <div class="tab-content">
                         <div class="tab-pane active" id="shop-tab-view" style="margin-top:15px;">
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">id</label>
+                                <div class="col-xs-8">
+                                    <input  type="text" name="id" disabled="disabled">
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-xs-4 control-label">姓名</label>
@@ -52,83 +59,144 @@
                             <div class="form-group">
                                 <label class="col-xs-4 control-label">注册时间</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="create_time" class="form-control" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">最近30天访问次数</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="month_visits" class="form-control" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">openid</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="openid" class="form-control" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">期望工作</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="hope_job" class="form-control" >
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">工作经验</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="job_experience" class="form-control" >
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">意向工作城市</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="hope_city" class="form-control" >
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">当前所在地</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="address" class="form-control" >
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">期望薪资</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <input type="text" name="expect_money" class="form-control" >
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-xs-4 control-label">注册时间</label>
+                                <label class="col-xs-4 control-label">当前工作状态</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
+                                    <select class="form-control" name="state" id="state">
+                                        <option value="">请选择</option>
+                                        <option value="在职-暂不考虑">在职-暂不考虑</option>
+                                        <option value="在职-考虑机会">在职-考虑机会</option>
+                                        <option value="离职-随时到岗">离职-随时到岗</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">简历状态</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="resume_state" id="resume_state">
+                                        <option value="">请选择</option>
+                                        <option value="1">可见简历</option>
+                                        <option value="2">隐藏简历</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">账号状态</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="account_state" id="account_state">
+                                        <option value="">请选择</option>
+                                        <option value="1">正常账号</option>
+                                        <option value="2">冻结账号</option>
+                                        <option value="3">删除账号</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">最高学历</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="record_school" id="record_school">
+                                        <option value="">请选择</option>
+                                        <option value="幼儿园">幼儿园</option>
+                                        <option value="小学">小学</option>
+                                        <option value="初中">初中</option>
+                                        <option value="中专">中专</option>
+                                        <option value="高中">高中</option>
+                                        <option value="大专">大专</option>
+                                        <option value="本科">本科</option>
+                                        <option value="硕士研究生">硕士研究生</option>
+                                        <option value="博士研究生">博士研究生</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">曾经做过</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="once_do" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">我的家乡</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="my_hometown" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">自我介绍</label>
+                                <div class="col-xs-8">
+                                    <textarea name="myself_info" class="form-control" ></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">投递简历数</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="resume_number" class="form-control" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label class="col-xs-4 control-label">个人照片</label>
                                 <div class="col-xs-8">
-                                    <input type="text" name="createTime" class="form-control" >
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">当前状态</label>
-                                <div class="col-xs-8">
-                                    <input type="text" name="state" class="form-control" >
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">自我介绍</label>
-                                <div class="col-xs-8">
-                                    <textarea name="info" class="form-control" ></textarea>
+                                    <input type="text" name="photos" class="form-control" disabled="disabled"></input>
                                 </div>
                             </div>
                         </div>

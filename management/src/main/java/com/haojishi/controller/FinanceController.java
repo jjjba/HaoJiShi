@@ -24,8 +24,20 @@ public class FinanceController {
      * @param size
      * @return BusinessMessage - 所有快招数据
      */
-    @RequestMapping("getAllKuaiZhao")
-    public BusinessMessage getAllKuaiZhao(Integer page, Integer size){
-        return financeService.getAllKuaiZhao(page,size);
+    @RequestMapping("getAllServices")
+    public BusinessMessage getAllServices(Integer page, Integer size){
+        return financeService.getAllServices(page,size);
+    }
+
+    /**
+     * 获取所有委托招聘数据
+     *
+     * @param page
+     * @param size
+     * @return BusinessMessage - 所有委托招聘数据
+     */
+    @RequestMapping("getAllEntrust")
+    public BusinessMessage getAllEntrust(Integer page,Integer size){
+        return financeService.getAllEntrust(page, size);
     }
 }

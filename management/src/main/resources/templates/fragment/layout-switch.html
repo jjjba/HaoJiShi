@@ -139,10 +139,10 @@
                                     <strong>职位管理</strong>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">已上线的职位</a>
+                                    <a th:href="@{/normal-position}">已上线的职位</a>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">被冻结的职位</a>
+                                    <a th:href="@{/freeze-position}">被冻结的职位</a>
                                 </li>
 
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" >
@@ -165,7 +165,7 @@
                                     <a th:href="@{/kuaizhao}">快招付费流水</a>
                                 </li>
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')">
-                                    <a th:href="@{/banner-manage}">委托招聘付费流水</a>
+                                    <a th:href="@{/entrust}">委托招聘付费流水</a>
                                 </li>
 
                                 <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USER')" >

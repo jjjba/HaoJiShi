@@ -6,7 +6,7 @@
     <title>求职者照片管理</title>
 
     <!-- 当前页面自定义JS -->
-    <script src="/static/js/banner/index_module.js" th:src="@{/js/company/photo.js}"></script>
+    <script src="/static/js/user/photo.js" th:src="@{/js/user/photo.js}"></script>
 
 </head>
 <body>
@@ -19,14 +19,17 @@
                     <button id="btnAdd" class="btn btn-default" data-toggle="modal" data-act="1" data-target="#addModal">
                         添加
                     </button>
+                    <button id="btnDelete" class="btn btn-default" onclick="deletePhoto()">
+                        删除
+                    </button>
                 </div>
             </div>
             <div class="panel-body">
                 <table class="table">
                     <thead>
                     <tr>
+                        <th><input type="checkbox" id="checkAll"/></th>
                         <th>图片</th>
-                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -38,8 +41,6 @@
     </div>
     <!-- [配置]添加模态框 -->
     <div layout:replace="~{user/photo-add}"/>
-    <!-- [配置]修改模态框 -->
-    <div layout:replace="~{user/photo-edit}"/>
 </div>
 </body>
 </html>

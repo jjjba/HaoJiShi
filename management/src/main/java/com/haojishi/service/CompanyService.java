@@ -154,58 +154,28 @@ public class CompanyService {
     }
 
     /**
-     * 读取企业数据
+     * 获取企业照片
      * @param id
-     * @return
+     * @return BusinessMessage - 企业照片
      */
-//    public BusinessMessage findOneByid(Integer id) {
-//        BusinessMessage message = new BusinessMessage(false);
-//        try {
-//            // 校验用户名是否为空
-//            if (null == id) {
-//                message.setMsg("主键为空");
-//            } else {
-//                User users = this.userMapper.selectByPrimaryKey(id);
-//                if(null!=users){
-//                    HashMap<String, Object> stringObjectHashMap = new HashMap<>();
-//                    Example example = new Example(Company.class);
-//                    example.createCriteria().andEqualTo("userId", id);
-//                    List<Company> companyList = this.companyMapper.selectByExample(example);
-//                    if (companyList.size()>0) {
-////                        stringObjectHashMap.put("company_name",companyList.get(0).getCompanyName());
-//                        stringObjectHashMap.put("company_scale",companyList.get(0).getCompanyScale());
-//                        stringObjectHashMap.put("company_special",companyList.get(0).getCompanyScale());
-//                        stringObjectHashMap.put("company_city",companyList.get(0).getCompanyCity());
-//                        stringObjectHashMap.put("company_info",companyList.get(0).getCompanyInfo());
-//                        stringObjectHashMap.put("company_photo",companyList.get(0).getCompanyPhoto());
-////                        stringObjectHashMap.put("company_addrx",companyList.get(0).getCompanyAddrx());
-////                        stringObjectHashMap.put("company_addry",companyList.get(0).getCompanyAddry());
-//                        stringObjectHashMap.put("company_addr",companyList.get(0).getCompanyAddr());
-//                        stringObjectHashMap.put("company_type",companyList.get(0).getCompanyType());
-////                        stringObjectHashMap.put("hot",companyList.get(0).getHot());
-////                        stringObjectHashMap.put("icon",companyList.get(0).getIcon());
-////                        stringObjectHashMap.put("company_fu_ze_ren",companyList.get(0).getCompanyFuZeRen());
-//                        stringObjectHashMap.put("zhi_wu",companyList.get(0).getZhiWu());
-//                        stringObjectHashMap.put("see_count",companyList.get(0).getSeeCount());
-//                        stringObjectHashMap.put("province_id",companyList.get(0).getProvinceId());
-//                        stringObjectHashMap.put("city_id",companyList.get(0).getCityId());
-//                        stringObjectHashMap.put("area_id",companyList.get(0).getAreaId());
-////                        stringObjectHashMap.put("icon",companyList.get(0).getIcon());
-//                        stringObjectHashMap.put("company_id",companyList.get(0).getId());
-//                    }
-////                    stringObjectHashMap.put("name",users.getName());
-//                    stringObjectHashMap.put("phone",users.getPhone());
-//                    // 设置业务数据
-//                    message.setData(stringObjectHashMap);
-//                }
-//                // 设置业务处理结果
-//                message.setSuccess(true);
-//            }
-//        } catch (Exception e) {
-//            log.error("查询信息失败", e);
-//        }
-//        return message;
-//    }
+    public BusinessMessage getCompanyPhotoById(Integer id) {
+        BusinessMessage message = new BusinessMessage(false);
+        try {
+            // 校验用户名是否为空
+            if (null == id) {
+                message.setMsg("企业id为空");
+            } else {
+                Company company =companyMapper.selectByPrimaryKey(id);
+                message.setData(company);
+                message.setSuccess(true);
+                message.setMsg("获取企业照片成功");
+            }
+        } catch (Exception e) {
+            log.error("获取企业照片失败", e);
+            message.setMsg("获取企业照片失败");
+        }
+        return message;
+    }
 
     /**
      * 更新企业信息
@@ -337,47 +307,12 @@ public class CompanyService {
         }
         return message;
     }
-    /**
-     * 更新照片
-     * @param id
-     * @param image_url
-     * @return
-     */
-    public BusinessMessage updatePhoto(Integer id, MultipartFile image_url, String photo) {
-        BusinessMessage message = new BusinessMessage(false);
-        try {
-            if (image_url != null) {
-                Company company =companyMapper.selectByPrimaryKey(id);
-                String photoName = "";
-                String pathCheckPath = environment.getProperty("api.fileImagePath");
-                File hashFile = new File(pathCheckPath);
-                //没有就创建
-                if (!hashFile.exists()) {
-                    hashFile.mkdirs();
-                }
-                photoName = reamNameFile(image_url, pathCheckPath);
-                if(!StringUtils.isEmpty(photoName)) {
-                    photoName=environment.getProperty("api.ImageSrc")+"/"+photoName;
-                    String midPhoto = "," + company.getCompanyPhoto() + ",";
-                    midPhoto = midPhoto.replace("," + photo + ",", "," + photoName + ",");
-                    company.setCompanyPhoto(midPhoto.substring(1, midPhoto.length() - 1));
-
-                    this.companyMapper.updateByPrimaryKeySelective(company);
-                }
-            }
-            // 设置业务处理结果
-            message.setSuccess(true);
-
-        } catch (Exception e) {
-            log.error("更新广告信息失败", e);
-        }
-        return message;
-    }
 
     /**
-     * 添加照片
+     * 添加企业照片
+     *
      * @param image_url
-     * @return
+     * @return BusinessMessage - 增加企业照片是否成功信息
      */
     public BusinessMessage insertPhoto(Integer id,MultipartFile image_url) {
         BusinessMessage message = new BusinessMessage(false);
@@ -405,12 +340,14 @@ public class CompanyService {
             }
             // 设置业务处理结果
             message.setSuccess(true);
-
+            message.setMsg("添加企业照片成功");
         } catch (Exception e) {
-            log.error("添加广告信息失败", e);
+            log.error("添加企业照片失败", e);
+            message.setMsg("添加企业照片失败");
         }
         return message;
     }
+
     public String reamNameFile(MultipartFile file, String hashFile) throws IOException {
         //获取后缀
         String filename = file.getOriginalFilename();
@@ -452,40 +389,7 @@ public class CompanyService {
             }else{
                 businessMessage.setMsg("获取企业列表不存在，请重试");
             }
-//            Example userExample =new Example(User.class);
-//            userExample.createCriteria().andEqualTo("accountState",1).orEqualTo("accountState",2);
-//            Example companyExample =new Example(Company.class);
-//            if (!StringUtils.isEmpty(name)) {
-//                companyExample.createCriteria().andEqualTo("name",name);
-//            }
-//            if (!StringUtils.isEmpty(phone)) {
-//                companyExample.createCriteria().andEqualTo("phone",phone);
-//            }
-//            companyExample.setOrderByClause("modify_time desc");
-//            List<Company> companyList =companyMapper.selectByExample(companyExample);
-//            List<Map<String,Object>> findAll =new ArrayList<>();
-//            for(int i = 0;i < companyList.size();i++){
-//                Map<String,Object> map =new HashMap<>();
-//                map.put("id",companyList.get(i).getId());
-//                map.put("license_path",companyList.get(i).getLicensePath());
-//                map.put("matState",companyList.get(i).getMatstate());
-//                map.put("create_time",companyList.get(i).getCreateTime());
-//                map.put("user_name",companyList.get(i).getUserName());
-//                map.put("modify_time",companyList.get(i).getModifyTime());
-//                map.put("name",companyList.get(i).getName());
-//                map.put("phone",companyList.get(i).getPhone());
-//                findAll.add(map);
-//            }
-//            PageInfo<Company> companyPageInfo =new PageInfo<>(companyList);
-//            PageInfo<Map<String,Object>> mapPageInfo =new PageInfo<>(findAll);
-//            mapPageInfo.setTotal(companyPageInfo.getTotal());
-//            mapPageInfo.setEndRow(companyPageInfo.getEndRow());
-//            mapPageInfo.setPageNum(companyPageInfo.getPageNum());
-//            mapPageInfo.setPageSize(companyPageInfo.getPageSize());
-//            mapPageInfo.setPages(companyPageInfo.getPages());
-//            businessMessage.setData(mapPageInfo);
-//            businessMessage.setSuccess(true);
-//            businessMessage.setMsg("获取所有公司信息成功");
+
         }catch(Exception e){
             log.error("获取分页查询信息失败", e);
             businessMessage.setMsg("获取企业列表不存在，请重试");
@@ -585,6 +489,30 @@ public class CompanyService {
         } catch (Exception e) {
             log.error("删除求职者账户失败", e);
             businessMessage.setMsg("删除企业账户失败");
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 删除企业照片
+     *
+     * @param photoUrl
+     * @return BusinessMessage - 是否成功删除企业照片信息
+     */
+    public BusinessMessage deleteCompanyPhoto(String photoUrl,Integer id){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            System.out.println(photoUrl);
+            Company company =companyMapper.selectByPrimaryKey(id);
+            String photo =company.getCompanyPhoto();
+            String photos = org.apache.commons.lang3.StringUtils.remove(photo, ","+photoUrl);
+            company.setCompanyPhoto(photos);
+            companyMapper.updateByPrimaryKeySelective(company);
+            businessMessage.setMsg("删除企业照片成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("删除企业照片失败");
+            businessMessage.setMsg("删除企业照片失败");
         }
         return businessMessage;
     }

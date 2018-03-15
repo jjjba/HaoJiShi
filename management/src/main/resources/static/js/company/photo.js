@@ -1,21 +1,7 @@
 /**
- * Created by xzcy-01 on 2017/12/8.
+ * @author 梁闯
+ * @date 2018/03/15 15.47
  */
-
-/**
- * 定义下类型排序规则变量
- */
-var typeSort;
-/**
- * 定义总销售额排序规则变量
- */
-var totalSalesAmountSort;
-
-/**
- * 定义今日订单数排序规则变量
- */
-var orderCountSort;
-
 
 // 默认页码
 var page = 1;
@@ -26,13 +12,7 @@ var size = 10;
 var id=0;
 
 $(function () {
-    id = GetQueryString("id");
-    $.getJSON($('#baseUrl').attr('href') + 'company/findCompanyInfoById?id=' + id  , function (res) {
-        if (res.success) {
-            var item = res.data;
-            id=item.company_id;
-        }
-    });
+
 //初始化日期插件
     $('#start_time').datetimepicker({
         locale: 'zh-cn',
@@ -140,6 +120,10 @@ $(function () {
         $(this).parent().prev().find('form').data('formValidation').validate();
     }).find('form').formValidation();
 
+    $("#checkAll").click(function () {
+        $("input[name='checkPersonal']:checkbox").prop("checked", this.checked);
+    });
+
 });//初始化
 
 
@@ -150,34 +134,56 @@ $(function () {
  */
 function loadData(page, size) {
     // 显示动画
-    //   alert($('.navbar-form').find('[name=start_time]').val());
+    id = GetQueryString("id");
     $.LoadingOverlay("show");
-    var data = {
-        page: page,
-        size: size,
-    };
-    $.getJSON($('#baseUrl').attr('href') + 'company/findCompanyInfoById?id=' + id  , function (res) {
+    $.getJSON($('#baseUrl').attr('href') + 'company/getCompanyPhotoById?id=' + id  , function (res) {
         if (res.success) {
             $.LoadingOverlay("hide");
             var item = res.data;
-            var photoArr=item.company_photo.split(',');
+            var photoArr=item.companyPhoto.split(',');
             if(photoArr.length>=5){
                 $("#btnAdd").css("display","none");
             }
             for(var i=0;i<photoArr.length;i++){
                 var tableHtml = "";
                 tableHtml += '<tr>' +
-                    '<td><img src="' + photoArr[i] + '" width="80px" height="50px" /> </td>';
-                tableHtml += '<td> <div class="btn-group">';
-                tableHtml +='<button class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal" data-photo="' + photoArr[i] + '" data-id="' + id + '" >修改</button>';
-                tableHtml += '</div></td></tr>';
+                    '<td><input type="checkbox" name="checkPersonal" value="'+photoArr[i]+'&&id='+id+'"/></td>'+
+                    '<td><img src="' + photoArr[i] + '" style="width:200px;height:150px" /> </td>';
+                tableHtml += '</tr>';
                 $('tbody').append(tableHtml);
             }
         }
     });
 }
-function search() {
-    loadData(page, size);
+
+function deletePhoto() {
+    var photoCheck = $("input:checkbox[name='checkPersonal']:checked").map(function(index,elem) {
+        return $(elem).val();
+    }).get().join(',');
+    var id =photoCheck.substring(photoCheck.indexOf("=")+1);
+    var photoUrl =photoCheck.substring(0, photoCheck.indexOf("&"));
+    $.LoadingOverlay("show");
+    var data = {
+        photoUrl : photoUrl,
+        id : id
+    };
+    $.ajax({
+        type: "GET",
+        url: $('#baseUrl').attr('href') + "company/deleteCompanyPhoto",
+        data: data,
+        success: function (res) {
+            // 关闭动画
+            $.LoadingOverlay("hide");
+            alert(res.msg)
+
+        },
+        error: function (res) {
+            // 关闭动画
+            $.LoadingOverlay("hide");
+            alert(res.msg)
+        }
+
+    });
 }
 
 function initFileInput(id) {

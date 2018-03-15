@@ -36,7 +36,7 @@ public class FinanceService {
      * @param size
      * @return BusinessMessage - 所有快招数据
      */
-    public BusinessMessage getAllKuaiZhao(Integer page,Integer size){
+    public BusinessMessage getAllServices(Integer page,Integer size){
         BusinessMessage businessMessage =new BusinessMessage();
         try{
             if(null==page|| page <1){
@@ -48,13 +48,43 @@ public class FinanceService {
 
             // 设置分页信息
             PageHelper.startPage(page, size);
-            List<Map<String, Object>> kuaiZhaoList =commonFinanceMapper.getAllKuaiZhao();
+            List<Map<String, Object>> servicesList =commonFinanceMapper.getAllServices();
             businessMessage.setMsg("获取快招信息成功");
-            businessMessage.setData(new PageInfo<>(kuaiZhaoList));
+            businessMessage.setData(new PageInfo<>(servicesList));
             businessMessage.setSuccess(true);
         }catch (Exception e){
             log.error("获取快招信息失败",e);
             businessMessage.setMsg("获取快招信息失败");
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 获取所有委托招聘数据
+     *
+     * @param page
+     * @param size
+     * @return BusinessMessage - 所有委托招聘数据
+     */
+    public BusinessMessage getAllEntrust(Integer page,Integer size){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try{
+            if(null==page|| page <1){
+                page=1;
+            }
+            if(null==size || size <1){
+                size=10;
+            }
+
+            // 设置分页信息
+            PageHelper.startPage(page, size);
+            List<Map<String, Object>> entrustList =commonFinanceMapper.getAllEntrust();
+            businessMessage.setMsg("获取委托招聘信息成功");
+            businessMessage.setData(new PageInfo<>(entrustList));
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("获取委托招聘信息失败",e);
+            businessMessage.setMsg("获取委托招聘信息失败");
         }
         return businessMessage;
     }

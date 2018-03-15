@@ -218,32 +218,32 @@ function loadData(page, size) {
 
                     user_name = item.user_name;
                     if(user_name==null || user_name==""){
-                        user_name="未填写";
+                        user_name="---";
                     }
 
                     zhi_wu = item.zhi_wu;
                     if(zhi_wu==null || zhi_wu==""){
-                        zhi_wu="未填写";
+                        zhi_wu="---";
                     }
                     phone = item.phone;
                     if(phone==null || phone==""){
-                        phone="未填写";
+                        phone="---";
                     }
                     name = item.name;
                     if(name==null || name==""){
-                        name="未填写";
+                        name="---";
                     }
                     company_scale = item.company_scale;
                     if(company_scale==null || company_scale==""){
-                        company_scale="未填写";
+                        company_scale="---";
                     }
                     company_type = item.company_type;
                     if(company_type==null || company_type==""){
-                        company_type="未填写";
+                        company_type="---";
                     }
                     company_city = item.company_city;
                     if(company_city==null || company_city==""){
-                        company_city="未填写";
+                        company_city="---";
                     }
                     position_count = item.position_count;
                     if(position_count==null || position_count==""){
@@ -252,7 +252,7 @@ function loadData(page, size) {
 
                     openid = item.openid;
                     if(openid==null || openid==""){
-                        openid="未获取到";
+                        openid="---";
                     }
                     matState = item.matState;
                     if(matState=="1"){
@@ -260,11 +260,11 @@ function loadData(page, size) {
                     }else if(matState == "2"){
                         matState="审核未通过";
                     }else {
-                        matState="未知";
+                        matState="审核中";
                     }
                     company_addr = item.company_addr;
                     if(company_addr==null || company_addr==""){
-                        state="未填写";
+                        state="---";
                     }
                     account_state = item.account_state;
                     if(account_state== "1"){
@@ -278,7 +278,7 @@ function loadData(page, size) {
                     }
                     company_info = item.company_info;
                     if(company_info==null || company_info==""){
-                        company_info="未填写";
+                        company_info="---";
                     }
                     company_photo = item.company_photo;
                     if(company_photo==null || company_photo==""){
@@ -557,6 +557,7 @@ function loadRegion(e,rtype) {
     });
 }
 
-function trunUrl(url) {
-    window.location.href=url;
+
+function lookPhotoExport() {
+    window.location.href=$('#baseUrl').attr('href') +"companyPhoto-manage?id="+$("input:checkbox[name='checkPersonal']:checked").val();
 }

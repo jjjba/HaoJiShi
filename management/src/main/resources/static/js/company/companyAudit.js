@@ -73,17 +73,17 @@ function loadData(page, size) {
                     id = item.id;
                     user_name = item.user_name;
                     if(user_name==null || user_name==""){
-                        user_name="未填写";
+                        user_name="---";
                     }
 
                     phone = item.phone;
                     if(phone==null || phone==""){
-                        phone="未填写";
+                        phone="---";
                     }
 
                     name = item.name;
                     if(name==null || name==""){
-                        name="未填写";
+                        name="---";
                     }
 
                     matState = item.matState;
@@ -92,12 +92,12 @@ function loadData(page, size) {
                     }else if(matState == "2"){
                         matState="审核未通过";
                     }else {
-                        matState="未知";
+                        matState="审核中";
                     }
 
                     license_path = item.license_path;
                     if(license_path==null || license_path==""){
-                        license_path="暂无营业执照";
+                        license_path="未上传营业执照";
                     }else {
                         license_path ='<img src="'+license_path+'" style="width: 200px;height: 200px">';
                     }

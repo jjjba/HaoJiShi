@@ -88,6 +88,14 @@
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
+        <table tableName="entrust" domainObjectName="Entrust"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false">
+            <property name="useActualColumnNames" value="false"/>
+            <property name="selectAllOrderByClause" value="true"/>
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+
         <table tableName="index_module" domainObjectName="IndexModule"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false">

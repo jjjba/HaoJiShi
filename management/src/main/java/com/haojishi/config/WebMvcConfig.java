@@ -29,10 +29,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
          */
         //个人用户管理
         registry.addViewController("/users-personal").setViewName("/user/users-personal");
+        //个人用户查看图片
+        registry.addViewController("/personalPhoto-manage").setViewName("/user/personalPhoto-manage");
         //企业用户管理
         registry.addViewController("/company-manage").setViewName("/company/company-manage");
-        //
-        registry.addViewController("/users-manage").setViewName("/user/users-manage");
+        //企业用户查看照片
+        registry.addViewController("/companyPhoto-manage").setViewName("/company/companyPhoto-manage");
 
 
         /**
@@ -40,9 +42,13 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
          */
         //营业执照审核
         registry.addViewController("/company-audit").setViewName("/company/company-audit");
-        //职位管理
-        registry.addViewController("/position-manage").setViewName("/position/position-manage");
-        registry.addViewController("/position-company").setViewName("/position/position-company");
+        /**
+         * 职位管理
+         */
+        //已上线的职位
+        registry.addViewController("/normal-position").setViewName("/position/normal-position");
+        //被冻结的职位
+        registry.addViewController("/freeze-position").setViewName("/position/freeze-position");
 
         /**
          * 首页管理
@@ -59,5 +65,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
          */
         //快招付费流水
         registry.addViewController("/kuaizhao").setViewName("/finance/kuaizhao");
+        registry.addViewController("/entrust").setViewName("/finance/entrust");
     }
 }

@@ -1,6 +1,6 @@
 /**
  * @author 梁闯
- * @date 2018/03/14 20.09
+ * @date 2018/03/15 20.09
  */
 
 
@@ -30,8 +30,6 @@ $(function () {
     // 加载数据
     loadData(page, size);
 
-
-
     $("#checkAll").click(function () {
         $("input[name='checkPersonal']:checkbox").prop("checked", this.checked);
     });
@@ -54,7 +52,7 @@ function loadData(page, size) {
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "finance/getAllServices",
+        url: $('#baseUrl').attr('href') + "finance/getAllEntrust",
         data: data,
         success: function (res) {
             // 关闭动画
@@ -65,10 +63,10 @@ function loadData(page, size) {
                 // 添加数据到表格
                 var list = res.data.list;
                 console.log(list);
-                var  comId, comName,phone,startDate,money,type,name,endDate,surplusNumber,phoneNumber,createDate;
+                var  company_id, comName,phone,money,type,end_date,create_date;
                 $.each(list, function (index, item) {
                     console.log("得到的数据：" + item);
-                    comId = item.comId;
+                    company_id = item.company_id;
                     comName = item.comName;
                     if(comName==null || comName==""){
                         comName="---";
@@ -77,32 +75,16 @@ function loadData(page, size) {
                     if(phone==null || phone==""){
                         phone="---";
                     }
-                    name = item.name;
-                    if(name==null || name==""){
-                        name="---";
+                    end_date = item.end_date;
+                    if(end_date == null || end_date == ""){
+                        end_date ="---";
                     }
-                    startDate = item.startDate;
-                    if(startDate == null || startDate == ""){
-                        startDate ="---";
-                    }
-                    endDate = item.endDate;
-                    if(endDate == null || endDate == ""){
-                        endDate ="---";
-                    }
-                    surplusNumber = item.surplusNumber;
-                    if(surplusNumber == null || surplusNumber == ""){
-                        surplusNumber="---";
-                    }
-                    phoneNumber =item.phoneNumber;
-                    if(phoneNumber == null || phoneNumber == ""){
-                        phoneNumber ="---";
-                    }
-                    createDate =item.createDate;
+                    create_date =item.create_date;
                     type = item.type;
                     if(type == "1"){
-                        type ="按次数计算";
+                        type ="半年版";
                     }else if(type == "2"){
-                        type ="按时间计算";
+                        type ="一年版";
                     }else {
                         type ="未知";
                     }
@@ -113,18 +95,14 @@ function loadData(page, size) {
 
                     var tableHtml = "";
                     tableHtml += '<tr>' +
-                        '<td><input type="checkbox" name="checkPersonal" value="'+comId+'"/></td>'+
-                        '<td>' + comId + '</td>' +
+                        '<td><input type="checkbox" name="checkPersonal" value="'+company_id+'"/></td>'+
+                        '<td>' + company_id + '</td>' +
                         '<td>' + comName + '</td>' +
                         '<td>' + phone + '</td>' +
-                        '<td>' + createDate + '</td>' +
+                        '<td>' + create_date + '</td>' +
                         '<td>' + money + '</td>' +
                         '<td>' + type + '</td>' +
-                        '<td>' + name + '</td>' +
-                        '<td>' + startDate + '</td>' +
-                        '<td>' + endDate + '</td>' +
-                        '<td>' + phoneNumber + '</td>' +
-                        '<td>' + surplusNumber + '</td>';
+                        '<td>' + end_date + '</td>' ;
                     tableHtml += '</tr>';
                     $('tbody').append(tableHtml);
                 });
@@ -164,7 +142,7 @@ function btnExport() {
 
         escape:'false',
 
-        fileName: '导出快招付费列表',
+        fileName: '导出委托招聘付费列表',
 
         exportDataType: 'all'
 

@@ -77,14 +77,15 @@ public class CompanyController {
 
 
     /**
-     * 根据企业ID获取企业信息
+     * 获取企业照片
+     *
      * @param id
-     * @return
+     * @return BusinessMessage - 企业照片
      */
-    @GetMapping("findCompanyInfoById")
-//    public BusinessMessage findById(Integer id) {
-////        return companyService.findOneByid(id);
-//    }
+    @RequestMapping("getCompanyPhotoById")
+    public BusinessMessage getCompanyPhotoById(Integer id) {
+        return companyService.getCompanyPhotoById(id);
+    }
 
     /**
      * 跟新企业信息
@@ -119,19 +120,6 @@ public class CompanyController {
 //    public BusinessMessage findRegionListByPid(Integer pid){
 //        return commonService.findRegionListByPid(pid);
 //    }
-
-    /**
-     * 编辑图片
-     * @param request
-     * @param id
-     * @param image_url
-     * @param photo
-     * @return
-     */
-    @PostMapping("updatePhoto")
-    public BusinessMessage updatePhoto(HttpServletRequest request, Integer id, MultipartFile image_url, String photo) {
-        return companyService.updatePhoto(id,image_url,photo);
-    }
 
     /**
      * 添加照片
@@ -201,5 +189,16 @@ public class CompanyController {
     @RequestMapping("/deleteAccount")
     public BusinessMessage deleteAccount(String companyCheck){
         return companyService.deleteAccount(companyCheck);
+    }
+
+    /**
+     * 删除企业照片
+     *
+     * @param photoUrl
+     * @return BusinessMessage - 是否成功删除企业照片信息
+     */
+    @RequestMapping("deleteCompanyPhoto")
+    public BusinessMessage deleteCompanyPhoto(String photoUrl,Integer id){
+        return companyService.deleteCompanyPhoto(photoUrl, id);
     }
 }

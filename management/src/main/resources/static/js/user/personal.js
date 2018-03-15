@@ -34,24 +34,131 @@ $(function () {
     }).on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
         var id = $("input:checkbox[name='checkPersonal']:checked").val();
-        alert($("input:checkbox[name='checkPersonal']:checked").val());
-
         var $modal = $(this);
         $modal.find('[name=id]').val(id);
         $.getJSON($('#baseUrl').attr('href') + 'personal/getPersonalByPersonalId?id=' + id  , function (res) {
             if (res.success) {
                 var item = res.data;
-                $modal.find('[name=id]').val(item.id);
-                //姓名
-                $modal.find('[name=name]').val(item.name);
-                //性别
-                var sex=item.sex;
+                var id, name, sex, age, telephone, monthVisits, openid, hopeJob, hopeCity,
+                    address, expectMoney, resumeState, accountState, recordSchool, onceDo,special,
+                    myHometown, jobExperience, state, myselfInfo, resumeNumber, createTime, photos;
+                id = item.id;
+                name = item.name;
+                if(name==null || name==""){
+                    name="---";
+                }
+                sex = item.sex;
+                if(sex==null || sex==""){
+                    sex="---";
+                }
+                age = item.age;
+                if(age==null || age==""){
+                    age="---";
+                }
+                telephone = item.phone;
+                if(telephone==null || telephone==""){
+                    telephone="---";
+                }
+                monthVisits =item.monthVisits;
+                if(monthVisits==null || monthVisits==""){
+                    monthVisits="0";
+                }
+                openid =item.openid;
+                if(openid==null || openid==""){
+                    openid="---";
+                }
+                hopeJob =item.hopeJob;
+                if(hopeJob==null || hopeJob==""){
+                    hopeJob="---";
+                }
+                hopeCity =item.hopeCity;
+                if(hopeCity==null || hopeCity==""){
+                    hopeCity="---";
+                }
+                address =item.address;
+                if(address==null || address==""){
+                    address="---";
+                }
+                expectMoney =item.expectMoney;
+                if(expectMoney==null || expectMoney==""){
+                    expectMoney="---";
+                }
+                resumeState =item.resumeState;
+                if(resumeState== "1"){
+                    resumeState="可见简历";
+                }else if(resumeState == "2"){
+                    resumeState="隐藏简历";
+                }else {
+                    resumeState="未知";
+                }
+                accountState =item.accountState;
+                if(accountState== "1"){
+                    accountState="账号正常";
+                }else if(accountState == "2"){
+                    accountState ="账号冻结";
+                }else if(accountState == "3"){
+                    accountState ="账号删除";
+                }else {
+                    accountState ="未知";
+                }
+                recordSchool =item.recordSchool;
+                if(recordSchool==null || recordSchool==""){
+                    recordSchool="---";
+                }
+                onceDo =item.onceDo;
+                if(onceDo==null || onceDo==""){
+                    onceDo="---";
+                }
+                myHometown =item.myHometown;
+                if(myHometown==null || myHometown==""){
+                    myHometown="---";
+                }
+                resumeNumber =item.resumeNumber;
+                if(resumeNumber==null || resumeNumber==""){
+                    resumeNumber="未投简历";
+                }
+                jobExperience = item.jobExperience;
+                if(jobExperience==null || jobExperience==""){
+                    jobExperience="---";
+                }
+                state = item.state;
+                if(state==null || state==""){
+                    state="---";
+                }
+                myselfInfo = item.myselfInfo;
+                if(myselfInfo==null || myselfInfo==""){
+                    myselfInfo="---";
+                }
+                createTime = item.createTime;
+                photos = item.photos;
+                if(photos==null || photos==""){
+                    photos="无";
+                }else{
+                    photos="有";
+                }
+                $modal.find('[name=id]').val(id);
+                $modal.find('[name=name]').val(name);
                 $modal.find('[name=sex]').val(sex);
-                $modal.find('[name=age]').val(item.age);
-                $modal.find('[name=phone]').val(item.phone);
-                $modal.find('[name=state]').val(item.state);
-                $modal.find('[name=info]').val(item.myselfInfo);
-                $modal.find('[name=pid]').val(item.pid);
+                $modal.find('[name=age]').val(age);
+                $modal.find('[name=phone]').val(telephone);
+                $modal.find('[name=create_time]').val(createTime);
+                $modal.find('[name=month_visits]').val(monthVisits);
+                $modal.find('[name=openid]').val(openid);
+                $modal.find('[name=hope_job]').val(hopeJob);
+                $modal.find('[name=job_experience]').val(jobExperience);
+                $modal.find('[name=hope_city]').val(hopeCity);
+                $modal.find('[name=address]').val(address);
+                $modal.find('[name=expect_money]').val(expectMoney);
+                $modal.find('[name=state]').val(state);
+                $modal.find('[name=resume_state]').val(resumeState);
+                $modal.find('[name=account_state]').val(accountState);
+                $modal.find('[name=record_school]').val(recordSchool);
+                $modal.find('[name=once_do]').val(onceDo);
+                $modal.find('[name=my_hometown]').val(myHometown);
+                $modal.find('[name=myself_info]').val(myselfInfo);
+                $modal.find('[name=resume_number]').val(resumeNumber);
+                $modal.find('[name=photos]').val(photos);
+
             }
         });
     }).on('success.form.fv', function (e) {
@@ -60,18 +167,9 @@ $(function () {
         var $form = $(e.target),
             fv = $form.data('formValidation'),
             $modal = $form.parent().parent().parent().parent();
-        // var name = $modal.find('[name=name]').val();
-        // var sex = $modal.find('[name=sex]').val();
-        // var state = $modal.find('[name=state]').val();
-        // var age = $modal.find('[name=age]').val();
-        // var phone = $modal.find('[name=phone]').val();
-        // var info = $modal.find('[name=info]').val();
-        // var pid = $modal.find('[name=pid]').val();
-        // var id = $modal.find('[name=id]').val();
-        // alert(name);
         var formData = new FormData($form[0]);
         $.ajax({
-            url: $('#baseUrl').attr('href') + 'users/updateUserById',
+            url: $('#baseUrl').attr('href') + 'personal/updatePersoanlById',
             type: 'POST',
             data:formData,
             // data: {id: id,name:name,sex:sex,state:state,age:age,phone:phone,info:info,pid:pid},
@@ -162,43 +260,43 @@ function loadData(page, size) {
                     id = item.id;
                     name = item.name;
                     if(name==null || name==""){
-                        name="未填写";
+                        name="---";
                     }
                     sex = item.sex;
                     if(sex==null || sex==""){
-                        sex="未填写";
+                        sex="---";
                     }
                     age = item.age;
                     if(age==null || age==""){
-                        age="未填写";
+                        age="---";
                     }
                     phone = item.phone;
                     if(phone==null || phone==""){
-                        phone="未填写";
+                        phone="---";
                     }
                     month_visits =item.month_visits;
                     if(month_visits==null || month_visits==""){
-                        month_visits="最近30天未访问";
+                        month_visits="0";
                     }
                     openid =item.openid;
                     if(openid==null || openid==""){
-                        openid="未获取到";
+                        openid="---";
                     }
                     hope_job =item.hope_job;
                     if(hope_job==null || hope_job==""){
-                        hope_job="未填写";
+                        hope_job="---";
                     }
                     hope_city =item.hope_city;
                     if(hope_city==null || hope_city==""){
-                        hope_city="未填写";
+                        hope_city="---";
                     }
                     address =item.address;
                     if(address==null || address==""){
-                        address="未填写";
+                        address="---";
                     }
                     expect_money =item.expect_money;
                     if(expect_money==null || expect_money==""){
-                        expect_money="未填写";
+                        expect_money="---";
                     }
                     resume_state =item.resume_state;
                     if(resume_state== "1"){
@@ -220,15 +318,15 @@ function loadData(page, size) {
                     }
                     record_school =item.record_school;
                     if(record_school==null || record_school==""){
-                        record_school="未填写";
+                        record_school="---";
                     }
                     once_do =item.once_do;
                     if(once_do==null || once_do==""){
-                        once_do="未填写";
+                        once_do="---";
                     }
                     my_hometown =item.my_hometown;
                     if(my_hometown==null || my_hometown==""){
-                        my_hometown="未填写";
+                        my_hometown="---";
                     }
 
                     resume_number =item.resume_number;
@@ -238,15 +336,15 @@ function loadData(page, size) {
 
                     job_experience = item.job_experience;
                     if(job_experience==null || job_experience==""){
-                        job_experience="未填写";
+                        job_experience="---";
                     }
                     state = item.state;
                     if(state==null || state==""){
-                        state="未填写";
+                        state="---";
                     }
                     myself_info = item.myself_info;
                     if(myself_info==null || myself_info==""){
-                        myself_info="未填写";
+                        myself_info="---";
                     }
                     create_time = item.create_time;
 
@@ -307,10 +405,6 @@ function loadData(page, size) {
             }
         }
     });
-}
-
-function search() {
-    loadData(page, size);
 }
 
 /**

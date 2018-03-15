@@ -39,8 +39,13 @@ $(function () {
         $.getJSON($('#baseUrl').attr('href') + 'banner/getBannerById?id=' + id, function (res) {
             if (res.success) {
                 var item = res.data;
+                var url =item.url;
+                if(url == null || url ==""){
+                    url ="未设置";
+                }
                 $modal.find('[name=sorts]').val(item.sort);
-                $modal.find('[name=url]').val(item.url);
+                $modal.find('[name=url]').val(url);
+                $modal.find('[name=note]').val(item.note);
                 if (item.imageUrl != null && item.imageUrl !="") {
                     $modal.find('[name=photoN]').attr("src",item.imageUrl);
                 }else{

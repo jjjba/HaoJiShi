@@ -6,7 +6,6 @@
       WARNING - @mbg.generated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="company_id" jdbcType="INTEGER" property="companyId" />
     <result column="position_name" jdbcType="VARCHAR" property="positionName" />
     <result column="position_type" jdbcType="VARCHAR" property="positionType" />
@@ -20,12 +19,20 @@
     <result column="is_reward" jdbcType="INTEGER" property="isReward" />
     <result column="reward_money" jdbcType="INTEGER" property="rewardMoney" />
     <result column="reward_detail" jdbcType="VARCHAR" property="rewardDetail" />
+    <result column="hot" jdbcType="INTEGER" property="hot" />
+    <result column="exposure_number" jdbcType="INTEGER" property="exposureNumber" />
+    <result column="see_number" jdbcType="INTEGER" property="seeNumber" />
+    <result column="share_number" jdbcType="INTEGER" property="shareNumber" />
+    <result column="resume_number" jdbcType="INTEGER" property="resumeNumber" />
+    <result column="welfare" jdbcType="VARCHAR" property="welfare" />
+    <result column="state" jdbcType="INTEGER" property="state" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, user_id, company_id, position_name, position_type, sex, age, money, experience, 
-    position_info, create_time, update_time, is_reward, reward_money, reward_detail
+    id, company_id, position_name, position_type, sex, age, money, experience, position_info, 
+    create_time, update_time, is_reward, reward_money, reward_detail, hot, exposure_number, 
+    see_number, share_number, resume_number, welfare, state
   </sql>
 </mapper>

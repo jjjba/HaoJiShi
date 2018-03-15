@@ -114,34 +114,34 @@ $(function () {
                         expect_money =item.expect_money;
                         avatar =item.avatar;
                         if (phone == null || phone == "") {
-                            phone = "未填写";
+                            phone = "---";
                         }
                         if (name == null || name == "") {
-                            name = "未填写";
+                            name = "---";
                         }
                         if (sex == null || sex == "") {
-                            sex = "未填写";
+                            sex = "---";
                         }
                         if (age == null || age == "") {
-                            age = "未填写";
+                            age = "---";
                         }
                         if (job_experience == null || job_experience == "") {
-                            job_experience = "未填写";
+                            job_experience = "---";
                         }
                         if (state == null || state == "") {
-                            state = "未填写";
+                            state = "---";
                         }
                         if (address == null || address == "") {
-                            address = "未填写";
+                            address = "---";
                         }
                         if (hope_job == null || hope_job == "") {
-                            hope_job = "未填写";
+                            hope_job = "---";
                         }
                         if (expect_money == null || expect_money == "") {
-                            expect_money = "未填写";
+                            expect_money = "---";
                         }
                         if (avatar == null || avatar == "") {
-                            avatar = "未上传";
+                            avatar = "---";
                         }
 
                         var tableHtml = "";
