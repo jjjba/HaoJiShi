@@ -20,46 +20,47 @@
                 <input class="form-control" name="phone"/>
             </div>
             <div class="form-group">
-                <label>姓名：</label>
+                <label>企业名称：</label>
                 <input class="form-control" name="name"/>
             </div>
             <button class="btn btn-default" onclick="search()"><span class="fa fa-search"></span>查询</button>
         </div>
     </div>
 
-    <div class="table-responsive">
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body" id="wrapper">
-                    <table class="table text-nowrap" id="sorter">
-                        <thead>
-                        <tr>
-                            <th><input type="checkbox" id="checkAll"/></th>
-                            <th>id</th>
-                            <th>企业名称</th>
-                            <th>手机号</th>
-                            <th>职位类型</th>
-                            <th>职位名称</th>
-                            <th>发布时间</th>
-                            <th>最后修改时间</th>
-                            <th>热度</th>
-                            <th>曝光量</th>
-                            <th>访问量</th>
-                            <th>分享访问量</th>
-                            <th>收到的简历数</th>
-                            <th>薪资待遇</th>
-                            <th>年龄要求</th>
-                            <th>性别要求</th>
-                            <th>经验要求</th>
-                            <th>职位福利</th>
-                            <th>职位描述</th>
-                            <th>店铺所在城市</th>
-                        </tr>
+                    <div class="table-responsive">
+                        <table class="table text-nowrap" id="sorter">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" id="checkAll"/></th>
+                                <th>id</th>
+                                <th>企业名称</th>
+                                <th>手机号</th>
+                                <th>职位类型</th>
+                                <th>职位名称</th>
+                                <th>发布时间</th>
+                                <th>最后修改时间</th>
+                                <th>热度</th>
+                                <th>曝光量</th>
+                                <th>访问量</th>
+                                <th>分享访问量</th>
+                                <th>收到的简历数</th>
+                                <th>薪资待遇</th>
+                                <th>年龄要求</th>
+                                <th>性别要求</th>
+                                <th>经验要求</th>
+                                <th>职位福利</th>
+                                <th>店铺所在城市</th>
+                                <th>职位描述</th>
+                            </tr>
 
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                     <div id="pagination"></div>
                 </div>
             </div>
@@ -68,7 +69,7 @@
 
     <!-- [配置]修改模态框 -->
     <!--<div layout:replace="~{company/company-edit}"/>-->
-</div>
+
 </body>
 </html>
 

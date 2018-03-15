@@ -41,6 +41,7 @@
     <result column="position_see_number" jdbcType="INTEGER" property="positionSeeNumber" />
     <result column="position_exposure_number" jdbcType="INTEGER" property="positionExposureNumber" />
     <result column="account_state" jdbcType="INTEGER" property="accountState" />
+    <result column="why" jdbcType="VARCHAR" property="why" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
@@ -51,6 +52,6 @@
     company_type, icon_path, zhi_wu, update_time, position_count, company_info, company_photo, 
     matState, create_time, modify_time, license_path, last_login_time, month_visits, 
     openid, share_number, position_number, position_see_number, position_exposure_number, 
-    account_state
+    account_state, why
   </sql>
 </mapper>

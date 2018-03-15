@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CommonPositionMapper">
+
+    <!-- 查询所有职位信息或者根据公司姓名或者手机号查询职位信息 -->
+    <select id="getAllPosition" resultType="java.util.Map">
+        SELECT p.id,p.position_name,p.position_type,p.sex,p.age,p.money,p.experience,p.position_info,p.hot,
+        date_format(p.create_time,'%Y-%m-%d %H:%i:%s') as create_time,p.exposure_number,p.see_number,
+        date_format(p.update_time,'%Y-%m-%d %H:%i:%s') as update_time,p.share_number,p.resume_number,
+        p.welfare,p.state,c.name,c.phone,c.company_addr
+        FROM position p,company c,user u
+        <where>
+            p.company_id =c.id AND c.user_id =u.id and p.state = 1
+            <if test="name != '' and name != null">
+                AND c.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND c.phone like concat('%',#{phone},'%')
+            </if>
+            AND (u.account_state = 1 OR u.account_state = 2)
+        </where>
+        ORDER BY
+        update_time DESC
+    </select>
+
+    <select id="getAllPositionNotonline" resultType="java.util.Map">
+        SELECT p.id,p.position_name,p.position_type,p.sex,p.age,p.money,p.experience,p.position_info,p.hot,
+        date_format(p.create_time,'%Y-%m-%d %H:%i:%s') as create_time,p.exposure_number,p.see_number,
+        date_format(p.update_time,'%Y-%m-%d %H:%i:%s') as update_time,p.share_number,p.resume_number,
+        p.welfare,p.state,c.name,c.phone,c.company_addr
+        FROM position p,company c,user u
+        <where>
+            p.company_id =c.id AND c.user_id =u.id and ( p.state = 2 or p.state = 3)
+            <if test="name != '' and name != null">
+                AND c.name like concat('%',#{name},'%')
+            </if>
+            <if test="phone != '' and phone != null">
+                AND c.phone like concat('%',#{phone},'%')
+            </if>
+            AND (u.account_state = 1 OR u.account_state = 2)
+        </where>
+        ORDER BY
+        update_time DESC
+    </select>
+
+    <select id="queryPersonalInfo" resultType="java.util.Map">
+        SELECT  p.id,p.sex,p.age,p.expect_money,p.job_experience,p.state,p.info
+        FROM personal p
+        WHERE p.user_id = #{userId}
+    </select>
+</mapper>

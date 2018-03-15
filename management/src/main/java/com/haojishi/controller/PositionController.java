@@ -31,26 +31,62 @@ public class PositionController {
     }
 
     /**
-     * 读取职位列表
+     * 获取所有上线职位列表
      * @param name
-     * @param user_id
+     * @param phone
      * @param page
      * @param size
      * @return
      */
-    @RequestMapping("list")
-    public BusinessMessage listFindPage(String name, Integer user_id, Integer page, Integer size){
-        return positionService.listFindPage(name,user_id,page,size);
+    @RequestMapping("getAllPosition")
+    public BusinessMessage getAllPosition(String name,String phone,Integer page, Integer size){
+        return positionService.getAllPosition(name,phone,page,size);
     }
 
     /**
-     * 根据ID读取职位信息
-     * @param id
+     * 获取所有未上线职位列表
+     * @param name
+     * @param phone
+     * @param page
+     * @param size
      * @return
      */
-    @GetMapping("findPositionById")
-    public BusinessMessage findById(Integer id) {
-        return positionService.findOneByid(id);
+    @RequestMapping("getAllPositionNotonline")
+    public BusinessMessage getAllPositionNotonline(String name,String phone,Integer page, Integer size){
+        return positionService.getAllPositionNotonline(name,phone,page,size);
+    }
+
+    /**
+     * 冻结职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 冻结职位是否成功信息
+     */
+    @RequestMapping("frozenPosition")
+    public BusinessMessage frozenPosition(String positionCheck){
+        return positionService.frozenPosition(positionCheck);
+    }
+
+    /**
+     * 关闭职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 关闭职位是否成功信息
+     */
+    @RequestMapping("shutDownPosition")
+    public BusinessMessage shutDownPosition(String positionCheck){
+        return positionService.shutDownPosition(positionCheck);
+    }
+
+    /**
+     * 解冻职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 关闭职位是否成功信息
+     */
+    @RequestMapping("thawPosition")
+    public BusinessMessage thawPosition(String positionCheck){
+        return positionService.thawPosition(positionCheck);
     }
 
     /**

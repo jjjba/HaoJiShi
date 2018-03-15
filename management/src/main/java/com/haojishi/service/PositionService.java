@@ -2,10 +2,7 @@ package com.haojishi.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.haojishi.mapper.CommonCompanyMapper;
-import com.haojishi.mapper.CompanyMapper;
-import com.haojishi.mapper.PositionMapper;
-import com.haojishi.mapper.UserMapper;
+import com.haojishi.mapper.*;
 import com.haojishi.model.Company;
 import com.haojishi.model.Position;
 import com.haojishi.util.BusinessMessage;
@@ -16,9 +13,11 @@ import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
- * Created by xzcy-01 on 2017/11/27.
+ * @author 梁闯
+ * @date 2018/03/15 20.12
  */
 @Slf4j
 @Service
@@ -34,6 +33,9 @@ public class PositionService {
 
     @Autowired
     private CompanyMapper companyMapper;
+
+    @Autowired
+    private CommonPositionMapper commonPositionMapper;
 
     /**
      * 读取职位列表
@@ -74,15 +76,15 @@ public class PositionService {
         }
         return businessMessage;
     }
+
     /**
-     * 读取职位列表
-     * @param name
-     * @param user_id
+     * 获取所有上线职位列表
+     *
      * @param page
      * @param size
-     * @return
+     * @return BusinessMessage - 所有上线职位数据
      */
-    public BusinessMessage listFindPage(String name, Integer user_id, Integer page, Integer size) {
+    public BusinessMessage getAllPosition(String name,String phone,Integer page, Integer size) {
         BusinessMessage businessMessage = new BusinessMessage(false);
         try{
             if(null==page|| page <1){
@@ -94,20 +96,10 @@ public class PositionService {
 
             // 设置分页信息
             PageHelper.startPage(page, size);
-            Example example = new Example(Position.class);
-            if (!StringUtils.isEmpty(name)) {
-                example.createCriteria().andEqualTo("positionName", name);
-            }
-            try {
-                if(user_id>0) {
-                    example.createCriteria().andEqualTo("userId", user_id);
-                }
-            }catch(Exception e){
-            }
-
-            List<Position> positionList = this.positionMapper.selectByExample(example);
+            List<Map<String,Object>> positionList =commonPositionMapper.getAllPosition(name, phone);
             if (positionList != null && positionList.size() > 0) {
                 businessMessage.setData(new PageInfo<>(positionList));
+                businessMessage.setMsg("获取职位成功");
                 businessMessage.setSuccess(true);
             } else {
                 businessMessage.setMsg("暂无数据");
@@ -115,35 +107,144 @@ public class PositionService {
             }
         }catch(Exception e){
             log.error("获取分页查询信息失败", e);
-            businessMessage.setMsg("获取求职者列表不存在，请重试");
+            businessMessage.setMsg("获取职位列表不存在，请重试");
         }
         return businessMessage;
     }
 
     /**
-     * 读取职位数据
-     * @param id
-     * @return
+     * 获取所有未上线职位列表
+     *
+     * @param page
+     * @param size
+     * @return BusinessMessage - 所有未上线职位数据
      */
-    public BusinessMessage findOneByid(Integer id) {
-        BusinessMessage message = new BusinessMessage(false);
-        try {
-            // 校验用户名是否为空
-            if (null == id) {
-                message.setMsg("主键为空");
+    public BusinessMessage getAllPositionNotonline(String name,String phone,Integer page, Integer size) {
+        BusinessMessage businessMessage = new BusinessMessage(false);
+        try{
+            if(null==page|| page <1){
+                page=1;
+            }
+            if(null==size || size <1){
+                size=10;
+            }
+
+            // 设置分页信息
+            PageHelper.startPage(page, size);
+            List<Map<String,Object>> positionList =commonPositionMapper.getAllPositionNotonline(name, phone);
+            if (positionList != null && positionList.size() > 0) {
+                businessMessage.setData(new PageInfo<>(positionList));
+                businessMessage.setMsg("获取职位成功");
+                businessMessage.setSuccess(true);
             } else {
-                Position position = this.positionMapper.selectByPrimaryKey(id);
-                if(null!=position) {
-                    // 设置业务数据
-                    message.setData(position);
-                }
-                // 设置业务处理结果
-                message.setSuccess(true);
+                businessMessage.setMsg("暂无数据");
+                businessMessage.setSuccess(true);
+            }
+        }catch(Exception e){
+            log.error("获取分页查询信息失败", e);
+            businessMessage.setMsg("获取职位列表不存在，请重试");
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 冻结职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 冻结职位是否成功信息
+     */
+    public BusinessMessage frozenPosition(String positionCheck){
+        BusinessMessage businessMessage = new BusinessMessage();
+        try {
+            String[] positionlId = positionCheck.split(",");//分割出来的字符数组
+            for (int i = 0; i < positionlId.length; i++) {
+                int id = Integer.parseInt(positionlId[i]);
+                Position position =positionMapper.selectByPrimaryKey(id);
+                position.setState(3);
+                position.setUpdateTime(new Date());
+                positionMapper.updateByPrimaryKeySelective(position);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("冻结职位成功");
             }
         } catch (Exception e) {
-            log.error("查询信息失败", e);
+            log.error("冻结职位失败", e);
         }
-        return message;
+        return businessMessage;
+    }
+
+    /**
+     * 关闭职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 关闭职位是否成功信息
+     */
+    public BusinessMessage shutDownPosition(String positionCheck){
+        BusinessMessage businessMessage = new BusinessMessage();
+        try {
+            String[] positionId = positionCheck.split(",");//分割出来的字符数组
+            for (int i = 0; i < positionId.length; i++) {
+                int id = Integer.parseInt(positionId[i]);
+                Position position =positionMapper.selectByPrimaryKey(id);
+                position.setState(2);
+                position.setUpdateTime(new Date());
+                positionMapper.updateByPrimaryKeySelective(position);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("关闭职位成功");
+            }
+        } catch (Exception e) {
+            log.error("关闭职位失败", e);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 解冻职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 关闭职位是否成功信息
+     */
+    public BusinessMessage thawPosition(String positionCheck){
+        BusinessMessage businessMessage = new BusinessMessage();
+        try {
+            String[] positionId = positionCheck.split(",");//分割出来的字符数组
+            for (int i = 0; i < positionId.length; i++) {
+                int id = Integer.parseInt(positionId[i]);
+                Position position =positionMapper.selectByPrimaryKey(id);
+                position.setState(2);
+                position.setUpdateTime(new Date());
+                positionMapper.updateByPrimaryKeySelective(position);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("解冻职位成功");
+            }
+        } catch (Exception e) {
+            log.error("解冻职位失败", e);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 上线职位
+     *
+     * @param positionCheck
+     * @return BusinessMessage - 上线职位是否成功信息
+     */
+    public BusinessMessage onlineExport(String positionCheck){
+        BusinessMessage businessMessage = new BusinessMessage();
+        try {
+            String[] positionId = positionCheck.split(",");//分割出来的字符数组
+            for (int i = 0; i < positionId.length; i++) {
+                int id = Integer.parseInt(positionId[i]);
+                Position position =positionMapper.selectByPrimaryKey(id);
+                position.setState(1);
+                position.setUpdateTime(new Date());
+                positionMapper.updateByPrimaryKeySelective(position);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("解冻职位成功");
+            }
+        } catch (Exception e) {
+            log.error("解冻职位失败", e);
+        }
+        return businessMessage;
     }
 
     /**
@@ -226,7 +327,7 @@ public class PositionService {
             if (companyList.size()>0) {
                 compamy_id = companyList.get(0).getId();
             }
-            position.setUserId(user_id);
+//            position.setUserId(user_id);
             position.setCompanyId(compamy_id);
             this.positionMapper.insertSelective(position);
             // 设置业务处理结果

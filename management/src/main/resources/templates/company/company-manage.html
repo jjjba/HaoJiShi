@@ -37,7 +37,7 @@
                 <input class="form-control" name="phone"/>
             </div>
             <div class="form-group">
-                <label>姓名：</label>
+                <label>企业名称：</label>
                 <input class="form-control" name="name"/>
             </div>
             <button class="btn btn-default" onclick="search()"><span class="fa fa-search"></span>查询</button>
@@ -45,43 +45,45 @@
         </div>
     </div>
 
-    <div class="table-responsive">
+
         <div class="row">
             <div class="panel panel-default">
 
                 <div class="panel-body" id="wrapper">
-                    <table class="table text-nowrap" id="sorter">
-                        <thead>
-                        <tr>
-                            <th><input type="checkbox" id="checkAll"/></th>
-                            <th>id</th>
-                            <th>企业名称</th>
-                            <th>注册时间</th>
-                            <th>最近30天访问次数</th>
-                            <th>负责人姓名</th>
-                            <th>负责人职位</th>
-                            <th>手机号</th>
-                            <th>openid</th>
-                            <th>店铺类型</th>
-                            <th>店铺规模</th>
-                            <th>所在城市</th>
-                            <th><button class="btn btn-default" onclick="positionNumSort()">收到的简历数</button></th>
-                            <th>分享报名数</th>
-                            <th>发布职位数</th>
-                            <th>职位曝光总量</th>
-                            <th>职位浏览总量</th>
-                            <th>店铺详细地址</th>
-                            <th>公司特色标签</th>
-                            <th>店铺认证状态</th>
-                            <th>账号状态</th>
-                            <th>店铺简介</th>
-                            <th>店铺照片</th>
-                        </tr>
+                    <div class="table-responsive">
+                        <table class="table text-nowrap" id="sorter">
+                            <thead>
+                            <tr>
+                                <th><input type="checkbox" id="checkAll"/></th>
+                                <th>id</th>
+                                <th>企业名称</th>
+                                <th>注册时间</th>
+                                <th>最近30天访问次数</th>
+                                <th>负责人姓名</th>
+                                <th>负责人职位</th>
+                                <th>手机号</th>
+                                <th>openid</th>
+                                <th>店铺类型</th>
+                                <th>店铺规模</th>
+                                <th>所在城市</th>
+                                <th><button class="btn btn-default" onclick="positionNumSort()">收到的简历数</button></th>
+                                <th>分享报名数</th>
+                                <th>发布职位数</th>
+                                <th>职位曝光总量</th>
+                                <th>职位浏览总量</th>
+                                <th>店铺详细地址</th>
+                                <th>公司特色标签</th>
+                                <th>店铺认证状态</th>
+                                <th>账号状态</th>
+                                <th>店铺简介</th>
+                                <th>店铺照片</th>
+                            </tr>
 
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
                     <div id="pagination"></div>
                 </div>
             </div>
@@ -90,7 +92,7 @@
 
     <!-- [配置]修改模态框 -->
     <!--<div layout:replace="~{company/company-edit}"/>-->
-</div>
+
 
 </body>
 </html>

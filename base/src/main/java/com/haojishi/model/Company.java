@@ -215,6 +215,11 @@ public class Company implements Serializable {
     @Column(name = "account_state")
     private Integer accountState;
 
+    /**
+     * 营业执照审核未通过原因 1营业执照不清晰 2不与营业执照符合
+     */
+    private String why;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -865,6 +870,24 @@ public class Company implements Serializable {
         this.accountState = accountState;
     }
 
+    /**
+     * 获取营业执照审核未通过原因 1营业执照不清晰 2不与营业执照符合
+     *
+     * @return why - 营业执照审核未通过原因 1营业执照不清晰 2不与营业执照符合
+     */
+    public String getWhy() {
+        return why;
+    }
+
+    /**
+     * 设置营业执照审核未通过原因 1营业执照不清晰 2不与营业执照符合
+     *
+     * @param why 营业执照审核未通过原因 1营业执照不清晰 2不与营业执照符合
+     */
+    public void setWhy(String why) {
+        this.why = why == null ? null : why.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -907,6 +930,7 @@ public class Company implements Serializable {
         sb.append(", positionSeeNumber=").append(positionSeeNumber);
         sb.append(", positionExposureNumber=").append(positionExposureNumber);
         sb.append(", accountState=").append(accountState);
+        sb.append(", why=").append(why);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

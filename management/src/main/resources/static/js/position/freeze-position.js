@@ -52,7 +52,7 @@ function loadData(page, size) {
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "position/getAllPosition",
+        url: $('#baseUrl').attr('href') + "position/getAllPositionNotonline",
         data: data,
         success: function (res) {
             $.LoadingOverlay("hide");
@@ -62,8 +62,7 @@ function loadData(page, size) {
                     var list = res.data.list;
                     console.log(list);
                     var id, position_name,position_type,name, sex, age, phone, position_info,
-                        money,experience,create_time,hot,exposure_number,see_number,update_time,
-                        share_number,resume_number, welfare,company_addr;
+                        money,experience,create_time,update_time, welfare,state;
                     $.each(list, function (index, item) {
                         id = item.id;
                         position_name = item.position_name;
@@ -104,38 +103,21 @@ function loadData(page, size) {
                         }
                         create_time = item.create_time;
 
-                        hot = item.hot;
-                        if(hot == null || hot ==""){
-                            hot ="0"
+                        state = item.state;
+                        if(state =="2"){
+                            state ="关闭职位";
+                        }else if(state == "3"){
+                            state ="审核未通过";
                         }
-                        exposure_number = item.exposure_number;
-                        if(exposure_number == null || exposure_number ==""){
-                            exposure_number ="0"
-                        }
-                        see_number = item.see_number;
-                        if(see_number == null || see_number ==""){
-                            see_number ="0"
-                        }
+
                         update_time = item.update_time;
                         if(update_time == null || update_time ==""){
                             update_time ="--"
                         }
-                        share_number = item.share_number;
-                        if(share_number == null || share_number ==""){
-                            share_number ="0"
-                        }
-                        resume_number = item.resume_number;
-                        if(resume_number == null || resume_number ==""){
-                            resume_number ="0"
-                        }
+
                         welfare = item.welfare;
                         if(welfare == null || welfare ==""){
                             welfare ="--"
-                        }
-
-                        company_addr = item.company_addr;
-                        if(company_addr == null || company_addr ==""){
-                            company_addr ="--"
                         }
 
                         var tableHtml = "";
@@ -148,17 +130,12 @@ function loadData(page, size) {
                             '<td>' + position_name + '</td>' +
                             '<td>' + create_time + '</td>' +
                             '<td>' + update_time + '</td>' +
-                            '<td>' + hot + '</td>' +
-                            '<td>' + exposure_number + '</td>' +
-                            '<td>' + see_number + '</td>' +
-                            '<td>' + share_number + '</td>' +
-                            '<td>' + resume_number + '</td>' +
+                            '<td>' + state + '</td>' +
                             '<td>' + money + '</td>' +
                             '<td>' + age + '</td>' +
                             '<td>' + sex + '</td>' +
                             '<td>' + experience + '</td>' +
                             '<td>' + welfare + '</td>' +
-                            '<td>' + company_addr + '</td>'+
                             '<td>' + position_info + '</td>';
                         tableHtml += '</tr>';
                         $('tbody').append(tableHtml);
@@ -207,9 +184,9 @@ function btnExport() {
 }
 
 /**
- * 冻结职位操作
+ * 解冻职位操作
  */
-function frozenExport() {
+function thawPosition() {
     // 显示动画
     var positionCheck = $("input:checkbox[name='checkPersonal']:checked").map(function(index,elem) {
         return $(elem).val();
@@ -221,7 +198,7 @@ function frozenExport() {
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "position/frozenPosition",
+        url: $('#baseUrl').attr('href') + "position/thawPosition",
         data: data,
         success: function (res) {
             // 关闭动画
@@ -238,9 +215,9 @@ function frozenExport() {
 }
 
 /**
- * 关闭职位操作
+ * 上线职位操作
  */
-function shutDownExport() {
+function onlineExport() {
     // 显示动画
     var positionCheck = $("input:checkbox[name='checkPersonal']:checked").map(function(index,elem) {
         return $(elem).val();
@@ -251,7 +228,7 @@ function shutDownExport() {
     };
     $.ajax({
         type: "GET",
-        url: $('#baseUrl').attr('href') + "position/shutDownPosition",
+        url: $('#baseUrl').attr('href') + "position/onlineExport",
         data: data,
         success: function (res) {
             // 关闭动画
@@ -266,12 +243,4 @@ function shutDownExport() {
         }
 
     });
-}
-
-//补0操作
-function getzf(num){
-    if(parseInt(num) < 10){
-        num = '0'+num;
-    }
-    return num;
 }
