@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.ServicesMapper">
+  <resultMap id="BaseResultMap" type="com.haojishi.model.Services">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="comId" jdbcType="INTEGER" property="comid" />
+    <result column="money" jdbcType="INTEGER" property="money" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="startDate" jdbcType="TIMESTAMP" property="startdate" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="phoneNumber" jdbcType="INTEGER" property="phonenumber" />
+    <result column="surplusNumber" jdbcType="INTEGER" property="surplusnumber" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="comName" jdbcType="VARCHAR" property="comname" />
+    <result column="comPhone" jdbcType="VARCHAR" property="comphone" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    id, comId, money, createDate, startDate, endTime, phoneNumber, surplusNumber, name, 
+    type, comName, comPhone
+  </sql>
+</mapper>
