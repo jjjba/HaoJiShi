@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CommonVisitsMapper">
+
+    <select id="getNumberOfPlatformVisits" resultType="java.util.Map">
+        SELECT count(*)
+        FROM visits_data
+        <where>
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+        </where>
+    </select>
+
+    <select id="getPlatformAccess" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT openid
+        FROM visits_data
+        <where>
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+        </where>
+        GROUP BY openid
+        ) c
+    </select>
+
+    <select id="getNumberOfVisitors" resultType="java.util.Map">
+    SELECT count(*) from (
+    SELECT u.openid,u.type
+    FROM visits_data v,user u
+    <where>
+        u.openid =v.openid and u.type = 3
+        <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+            and visitTime BETWEEN '${beginDate}' and '${endDate}'
+        </if>
+    </where>
+    ) o
+</select>
+
+    <select id="getNumberOfVisitorsPer" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT u.openid,u.type
+        FROM visits_data v,user u
+        <where>
+            u.openid =v.openid and u.type = 3
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+            group by v.openid
+        </where>
+        ) o
+    </select>
+
+
+    <select id="getNumberOfBusinessVisits" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT u.openid,u.type
+        FROM visits_data v,user u
+        <where>
+            u.openid =v.openid and u.type = 2
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+        </where>
+        ) o
+    </select>
+
+    <select id="getNumberOfIndividualVisitors" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT u.openid,u.type
+        FROM visits_data v,user u
+        <where>
+            u.openid =v.openid and u.type = 2
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+            group by v.openid
+        </where>
+        ) o
+    </select>
+
+    <select id="getNumberOfPersonalVisits" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT u.openid,u.type
+        FROM visits_data v,user u
+        <where>
+            u.openid =v.openid and u.type = 1
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+        </where>
+        ) o
+    </select>
+
+    <select id="getNumberOfVisitor" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT u.openid,u.type
+        FROM visits_data v,user u
+        <where>
+            u.openid =v.openid and u.type = 1
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '#${endDate}'
+            </if>
+            group by v.openid
+        </where>
+        ) o
+    </select>
+
+    <select id="getNumberOfShare" resultType="java.util.Map">
+        SELECT count(*)
+        FROM visits_data
+        <where>
+            isShare = 1
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+        </where>
+    </select>
+
+    <select id="getTheNumberOfShare" resultType="java.util.Map">
+        SELECT count(*) from (
+        SELECT u.openid,u.type
+        FROM visits_data v,user u
+        <where>
+            u.openid =v.openid and u.isShare = 1
+            <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
+                and visitTime BETWEEN '${beginDate}' and '${endDate}'
+            </if>
+        </where>
+        ) c
+    </select>
+
+
+</mapper>

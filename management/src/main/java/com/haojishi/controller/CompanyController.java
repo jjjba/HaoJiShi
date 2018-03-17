@@ -1,5 +1,6 @@
 package com.haojishi.controller;
 
+import com.haojishi.service.CommonService;
 import com.haojishi.service.CompanyService;
 import com.haojishi.util.BusinessMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 public class CompanyController {
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private CommonService commonService;
 
-//    @Autowired
-//    private CommonService commonService;
     /**
      * 获取所有企业信息
      *
@@ -113,13 +114,23 @@ public class CompanyController {
     }
     /**
      * 读取城市列表根据pid
-//     * @param pid
+     * @param pid
      * @return
      */
     @RequestMapping("regionList")
-//    public BusinessMessage findRegionListByPid(Integer pid){
-//        return commonService.findRegionListByPid(pid);
-//    }
+    public BusinessMessage findRegionListByPid(Integer pid){
+        return commonService.findRegionListByPid(pid);
+    }
+
+    /**
+     * 根据企业ID获取企业信息
+     * @param id
+     * @return
+     */
+    @GetMapping("findCompanyInfoById")
+    public BusinessMessage findById(Integer id) {
+        return companyService.findOneByid(id);
+    }
 
     /**
      * 添加照片

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -38,6 +39,8 @@ public class CompanyService {
 
     @Autowired
     private Environment environment;
+
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     /**
      * 获取所有企业信息
@@ -173,6 +176,63 @@ public class CompanyService {
         } catch (Exception e) {
             log.error("获取企业照片失败", e);
             message.setMsg("获取企业照片失败");
+        }
+        return message;
+    }
+
+    /**
+     * 获取企业数据
+     * @param id
+     * @return
+     */
+    public BusinessMessage findOneByid(Integer id) {
+        BusinessMessage message = new BusinessMessage(false);
+        try {
+            // 校验用户名是否为空
+            if (null == id) {
+                message.setMsg("企业主键为空");
+            } else {
+                HashMap<String, Object> stringObjectHashMap = new HashMap<>();
+
+                Company company =companyMapper.selectByPrimaryKey(id);
+                User user =userMapper.selectByPrimaryKey(company.getUserId());
+                stringObjectHashMap.put("id",company.getId());
+                stringObjectHashMap.put("company_name",company.getName());
+                stringObjectHashMap.put("create_time",sdf.format(company.getCreateTime()));
+                stringObjectHashMap.put("month_visits",company.getMonthVisits());
+                stringObjectHashMap.put("company_fu_ze_ren",company.getUserName());
+                stringObjectHashMap.put("zhi_wu",company.getZhiWu());
+                stringObjectHashMap.put("phone",company.getPhone());
+                stringObjectHashMap.put("openid",user.getOpenid());
+                stringObjectHashMap.put("company_type",company.getCompanyType());
+                stringObjectHashMap.put("company_scale",company.getCompanyScale());
+                stringObjectHashMap.put("company_addr",company.getCompanyAddr());
+                stringObjectHashMap.put("resume_number",company.getPositionCount());
+                stringObjectHashMap.put("shareNumber",company.getShareNumber());
+                stringObjectHashMap.put("positionNumber",company.getPositionNumber());
+                stringObjectHashMap.put("positionExposureNumber",company.getPositionExposureNumber());
+                stringObjectHashMap.put("positionSeeNumber",company.getPositionSeeNumber());
+                stringObjectHashMap.put("companyAddr",company.getCompanyAddr());
+                stringObjectHashMap.put("company_special",company.getCompanySpecial());
+                stringObjectHashMap.put("company_city",company.getCompanyCity());
+                stringObjectHashMap.put("company_info",company.getCompanyInfo());
+                stringObjectHashMap.put("company_photo",company.getCompanyPhoto());
+                stringObjectHashMap.put("company_addrx",company.getLongitude());
+                stringObjectHashMap.put("company_addry",company.getLatitude());
+                stringObjectHashMap.put("matstate",company.getMatstate());
+                stringObjectHashMap.put("accountState",user.getAccountState());
+                stringObjectHashMap.put("icon",company.getIconPath());
+//                stringObjectHashMap.put("province_id",companyList.get(0).getProvinceId());
+//                stringObjectHashMap.put("city_id",companyList.get(0).getCityId());
+//                stringObjectHashMap.put("area_id",companyList.get(0).getAreaId());
+//                stringObjectHashMap.put("company_id",companyList.get(0).getId());
+
+                message.setData(stringObjectHashMap);
+                message.setMsg("获取数据成功");
+                message.setSuccess(true);
+            }
+        } catch (Exception e) {
+            log.error("查询信息失败", e);
         }
         return message;
     }

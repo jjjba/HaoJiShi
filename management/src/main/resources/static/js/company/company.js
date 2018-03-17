@@ -53,9 +53,8 @@ $(function () {
     }).on('show.bs.modal', function (event) {
         initFileInput("#editModal input[name=icon][type=file]");
         initFileInput("#editModal input[name=company_photo][type=file]");
-        var button = $(event.relatedTarget);
-        var id = button.data('id');
-        ids = id;
+
+        var id = $("input:checkbox[name='checkPersonal']:checked").val();
         var $modal = $(this);
         $modal.find('[name=id]').val(id);
         //读取省市县
@@ -88,11 +87,7 @@ $(function () {
                 }else{
                     $modal.find('[name=iconN]').css("display","none");
                 }
-                // if (item.company_photo != null && item.company_photo !="") {
-                //     $modal.find('[name=photoN]').attr("src",item.company_photo);
-                // }else{
-                //     $modal.find('[name=photoN]').css("display","none");
-                // }
+
                 //绑定市
                 if(item.province_id !=null && item.province_id !=""){
                     $.getJSON($('#baseUrl').attr('href') + 'company/regionList?pid='+item.province_id , function (res) {

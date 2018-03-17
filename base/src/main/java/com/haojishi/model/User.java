@@ -22,7 +22,7 @@ public class User implements Serializable {
     private String password;
 
     /**
-     * 用户类型 1个人用户 2企业用户
+     * 用户类型 1个人用户 2企业用户 3游客
      */
     private Integer type;
 
@@ -36,6 +36,12 @@ public class User implements Serializable {
      */
     @Column(name = "account_state")
     private Integer accountState;
+
+    /**
+     * 是否分享过 1是 2不是
+     */
+    @Column(name = "isShare")
+    private Integer isshare;
 
     private static final long serialVersionUID = 1L;
 
@@ -94,18 +100,18 @@ public class User implements Serializable {
     }
 
     /**
-     * 获取用户类型 1个人用户 2企业用户
+     * 获取用户类型 1个人用户 2企业用户 3游客
      *
-     * @return type - 用户类型 1个人用户 2企业用户
+     * @return type - 用户类型 1个人用户 2企业用户 3游客
      */
     public Integer getType() {
         return type;
     }
 
     /**
-     * 设置用户类型 1个人用户 2企业用户
+     * 设置用户类型 1个人用户 2企业用户 3游客
      *
-     * @param type 用户类型 1个人用户 2企业用户
+     * @param type 用户类型 1个人用户 2企业用户 3游客
      */
     public void setType(Integer type) {
         this.type = type;
@@ -147,6 +153,24 @@ public class User implements Serializable {
         this.accountState = accountState;
     }
 
+    /**
+     * 获取是否分享过 1是 2不是
+     *
+     * @return isShare - 是否分享过 1是 2不是
+     */
+    public Integer getIsshare() {
+        return isshare;
+    }
+
+    /**
+     * 设置是否分享过 1是 2不是
+     *
+     * @param isshare 是否分享过 1是 2不是
+     */
+    public void setIsshare(Integer isshare) {
+        this.isshare = isshare;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -159,6 +183,7 @@ public class User implements Serializable {
         sb.append(", type=").append(type);
         sb.append(", openid=").append(openid);
         sb.append(", accountState=").append(accountState);
+        sb.append(", isshare=").append(isshare);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

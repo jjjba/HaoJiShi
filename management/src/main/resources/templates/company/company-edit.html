@@ -22,9 +22,23 @@
                         <div class="tab-pane active" id="shop-tab-view" style="margin-top:15px;">
 
                             <div class="form-group">
+                                <label class="col-xs-4 control-label">id</label>
+                                <div class="col-xs-8">
+                                    <input  type="text" name="id" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-xs-4 control-label">企业名称</label>
                                 <div class="col-xs-8">
                                     <input type="text" name="company_name" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">注册时间</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="create_time" class="form-control" disabled="disabled">
                                 </div>
                             </div>
 
@@ -45,31 +59,38 @@
                             <div class="form-group">
                                 <label class="col-xs-4 control-label">特色标签</label>
                                 <div class="col-xs-8">
+                                    <input type="checkbox" name="company_special" value="不熬夜">不熬夜&nbsp;&nbsp;
                                     <input type="checkbox" name="company_special" value="工资日结">工资日结&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="工资周结">工资周结&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="保底3个月">保底3个月&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="保底6个月">保底6个月<br>
-                                    <input type="checkbox" name="company_special" value="长期保底">长期保底&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="不拖欠工资">不拖欠工资&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="无任何押金">无任何押金&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="不熬夜">不熬夜<br>
-                                    <input type="checkbox" name="company_special" value="加班少">加班少&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="月休四天">月休四天&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="保底3个月">保底三个月<br/>
+
                                     <input type="checkbox" name="company_special" value="下班早">下班早&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="不押工资">不押工资<br>
-                                    <input type="checkbox" name="company_special" value="宿舍环境好">宿舍环境好&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="工资周结">工资周结&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="保底6个月">保底六个月<br/>
+
+                                    <input type="checkbox" name="company_special" value="加班少">加班少&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="长期保底">长期保底&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="不拖欠工资">不拖欠工资<br/>
+
                                     <input type="checkbox" name="company_special" value="伙食好">伙食好&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="报销车费">报销车费&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="老板大方">老板大方<br>
-                                    <input type="checkbox" name="company_special" value="规范化管理">规范化管理&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="月休四天">月休四天&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="无任何押金">无任何押金<br/>
+
                                     <input type="checkbox" name="company_special" value="上社保">上社保&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="绿色正规店">绿色正规店&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="包吃住">包吃住<br>
-                                    <input type="checkbox" name="company_special" value="店铺环境好">店铺环境好&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="人性化管理">人性化管理&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="免费培训">免费培训&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="客流量大">客流量大<br>
+                                    <input type="checkbox" name="company_special" value="不押工资">不押工资&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="宿舍环境好">宿舍环境好<br/>
+
+                                    <input type="checkbox" name="company_special" value="包吃住">包吃住&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="报销车费">报销车费&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="规范化管理">规范化管理<br/>
+
                                     <input type="checkbox" name="company_special" value="福利好">福利好&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="老板大方">老板大方&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="绿色正规店">绿色正规店<br/>
+
+                                    <input type="checkbox" name="company_special" value="店铺环境好">环境好&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="免费培训">免费培训&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="人性化管理">人性化管理<br/>
+
                                 </div>
                             </div>
                             <div class="form-group">
@@ -132,6 +153,13 @@
                                         <option value="理疗店">理疗店</option>
                                         <option value="商务会所">商务会所</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">店铺照片</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="company_photo" class="form-control" disabled="disabled">
                                 </div>
                             </div>
                         </div>

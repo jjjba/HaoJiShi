@@ -36,6 +36,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         //企业用户查看照片
         registry.addViewController("/companyPhoto-manage").setViewName("/company/companyPhoto-manage");
 
+        /**
+         * 数据分析
+         */
+        //用户访问量
+        registry.addViewController("/visitNumber").setViewName("/visitData/visitNumber");
 
         /**
          * 数据审核
