@@ -1,5 +1,7 @@
 package com.haojishi.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.haojishi.mapper.CommonPersonalMapper;
@@ -13,12 +15,17 @@ import com.haojishi.util.JuheSms;
 import com.haojishi.util.PhoneCheck;
 import com.haojishi.util.RemortIP;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.client.fluent.Form;
+import org.apache.http.client.fluent.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +44,71 @@ public class PersonalService {
 
     @Autowired
     private CommonPersonalMapper commonPersonalMapper;
+
+    /**
+     *
+     * @param code
+     * @return BusinessMessage - 存储用户信息
+     */
+    public BusinessMessage login(String code) {
+        log.debug("进入用户登陆接口 ：code = [" + code + "]");
+        BusinessMessage businessMessage = new BusinessMessage();
+        try {
+            // 请求微信服务器
+            String result = Request.Post("https://api.weixin.qq.com/sns/jscode2session")
+                    .bodyForm(Form.form()
+                            .add("appid", environment.getProperty("api.appid"))
+                            .add("secret", environment.getProperty("api.secret"))
+                            .add("js_code", code)
+                            .add("grant_type", "authorization_code")
+                            .build(), StandardCharsets.UTF_8)
+                    .execute().returnContent().asString(StandardCharsets.UTF_8);
+            // 检测微信服务器返回信息
+            if (StringUtils.isEmpty(result)) {
+                businessMessage.setMsg("微信服务器返回信息为空，请重试");
+            } else {
+                JSONObject json = JSON.parseObject(result);
+                // 检测是否包含错误信息
+                if (json.containsKey("errcode")) {
+                    businessMessage.setData(json);
+                } else {
+                    //创建用户
+                    String openId = json.getString("openid");
+                    String sessionKey = json.getString("session_key");
+                    if (StringUtils.isEmpty(openId) || StringUtils.isEmpty(sessionKey)) {
+                        businessMessage.setMsg("解析微信服务器数据失败，请重试");
+                    } else {
+                        Map<String, Object> map = new HashMap<>();
+                        Example example = new Example(User.class);
+                        example.createCriteria().andEqualTo("openid", openId);
+                        List<User> users = userMapper.selectByExample(example);
+                        if (users != null && users.size() > 0) {
+                            User user = users.get(0);
+                            map.put("openId", openId);
+                            map.put("id", user.getId());
+                            map.put("sessionKey", sessionKey);
+                            map.put("type", user.getType());
+                            businessMessage.setData(map);
+                        } else {
+                            User user = new User();
+                            user.setOpenid(openId);
+//                            user.setCreateTime(new Date());
+                            userMapper.insertSelective(user);
+                            map.put("openId", openId);
+                            map.put("id", user.getId());
+                            map.put("sessionKey", sessionKey);
+                            businessMessage.setData(map);
+                        }
+                    }
+                }
+            }
+            businessMessage.setSuccess(true);
+        } catch (Exception e) {
+            log.error("登录失败", e);
+            businessMessage.setMsg("登录失败");
+        }
+        return businessMessage;
+    }
 
     /**
      * 发送手机验证码
@@ -133,7 +205,7 @@ public class PersonalService {
                 personalMap.put("hope_city",personal.getHopeCity());
                 personalMap.put("expect_money",personal.getExpectMoney());
                 personalMap.put("hope_job",personal.getHopeJob());
-                personalMap.put("info",personal.getInfo());
+                personalMap.put("info",personal.getMyselfInfo());
                 personalMap.put("job_experience",personal.getJobExperience());
                 businessMessage.setData(personalMap);
             }else{

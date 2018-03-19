@@ -7,8 +7,8 @@
             s.comId, s.money, date_format(s.endTime,'%Y-%m-%d %H:%i:%s') as endDate, s.phoneNumber, s.name, s.type,
             date_format(s.startDate,'%Y-%m-%d %H:%i:%s') as startDate, date_format(s.createDate,'%Y-%m-%d %H:%i:%s') as createDate,
             s.surplusNumber, c.name as comName, c.phone
-        FROM service s
-        LEFT JOIN company c ON c.id = s.comId
+        FROM service s,company c,user u
+        WHERE c.id = s.comId and c.user_id = u.id and (u.account_state = 1 OR u.account_state = 2)
         ORDER BY
             createDate DESC
     </select>
@@ -18,8 +18,8 @@
         e.id,e.company_id, e.money, date_format(e.end_date,'%Y-%m-%d %H:%i:%s') as end_date, e.type,
         date_format(e.create_time,'%Y-%m-%d %H:%i:%s') as create_date,
         c.name as comName, c.phone
-        FROM entrust e
-        LEFT JOIN company c ON c.id = e.company_id
+        FROM entrust e,company c,user u
+        WHERE c.id = e.company_id and c.user_id = u.id and (u.account_state = 1 OR u.account_state = 2)
         ORDER BY
         create_date DESC
     </select>

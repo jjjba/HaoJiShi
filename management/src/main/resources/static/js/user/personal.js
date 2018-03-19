@@ -407,6 +407,10 @@ function loadData(page, size) {
     });
 }
 
+function search() {
+    loadData(page,size);
+}
+
 /**
  * 冻结求职者账户操作
  */

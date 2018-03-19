@@ -108,10 +108,9 @@
     </select>
 
     <select id="getNumberOfShare" resultType="java.util.Map">
-        SELECT count(*)
+        SELECT SUM(isShare)
         FROM visits_data
         <where>
-            isShare = 1
             <if test="beginDate != '' and beginDate != null and endDate != '' and endDate != null">
                 and visitTime BETWEEN '${beginDate}' and '${endDate}'
             </if>

@@ -6,7 +6,6 @@ import com.haojishi.mapper.CommonCompanyMapper;
 import com.haojishi.mapper.CompanyMapper;
 import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Company;
-import com.haojishi.model.Personal;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import tk.mybatis.mapper.entity.Example;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -222,9 +220,9 @@ public class CompanyService {
                 stringObjectHashMap.put("matstate",company.getMatstate());
                 stringObjectHashMap.put("accountState",user.getAccountState());
                 stringObjectHashMap.put("icon",company.getIconPath());
-//                stringObjectHashMap.put("province_id",companyList.get(0).getProvinceId());
-//                stringObjectHashMap.put("city_id",companyList.get(0).getCityId());
-//                stringObjectHashMap.put("area_id",companyList.get(0).getAreaId());
+                stringObjectHashMap.put("province_id",company.getProvinceId());
+                stringObjectHashMap.put("city_id",company.getCityId());
+                stringObjectHashMap.put("area_id",company.getAreaId());
 //                stringObjectHashMap.put("company_id",companyList.get(0).getId());
 
                 message.setData(stringObjectHashMap);
@@ -243,121 +241,107 @@ public class CompanyService {
      * @param company_name
      * @param company_scale
      * @param company_special_str
-     * @param province_id
-     * @param city_id
-     * @param area_id
-     * @param pid
+     * @param matstate
+     * @param accountState
+     * @param province
      * @param company_info
-     * @param company_photo
-     * @param company_addrx
-     * @param company_addry
+     * @param city
+     * @param area
      * @param company_addr
      * @param company_type
-     * @param company_city
+     * @param zhi_wu
      * @return
      */
-    public BusinessMessage update(Integer id, String company_name, String company_scale, String company_special_str, Integer province_id, Integer city_id, Integer area_id, Integer pid, String company_info, MultipartFile company_photo,MultipartFile icon, String company_addrx, String company_addry, String company_addr, String company_type, String company_city) {
+    public BusinessMessage update(Integer id, String company_name,String company_info,int matstate,int accountState,
+                                  String company_scale, String company_special_str, Integer province, Integer city,
+                                  Integer area, String zhi_wu,String phone,
+                                  MultipartFile icon, String company_addr, String company_type, String company_fu_ze_ren) {
         BusinessMessage message = new BusinessMessage(false);
         try {
-            //用户信息
-            Example example = new Example(Company.class);
-            example.createCriteria().andEqualTo("userId", id);
-            List<Company> companyList = this.companyMapper.selectByExample(example);
-            if (companyList.size()>0) {
-                pid=companyList.get(0).getId();
-                //更新用户信息
-                Company company =companyMapper.selectByPrimaryKey(pid);
-                String photoName = company.getCompanyPhoto();
-//                String iconName = company.getIcon();
-                if (icon != null) {
-                    String pathCheckPath2 = environment.getProperty("api.fileImagePath");
-                    File hashFile = new File(pathCheckPath2);
-                    //没有就创建
-                    if (!hashFile.exists()) {
-                        hashFile.mkdirs();
-                    }
-                    String photoName1 = reamNameFile(icon, pathCheckPath2);
-                    if(!StringUtils.isEmpty(photoName1)) {
-//                        iconName = environment.getProperty("api.ImageSrc") + "/" + photoName1;
-                    }
-//                    log.debug("上传Logo图片：" + iconName);
-                }
-                if (company_photo != null) {
-                    String pathCheckPath = environment.getProperty("api.fileImagePath");
-                    File hashFile = new File(pathCheckPath);
-                    //没有就创建
-                    if (!hashFile.exists()) {
-                        hashFile.mkdirs();
-                    }
-                    String photoName2 = reamNameFile(company_photo, pathCheckPath);
-                    if(!StringUtils.isEmpty(photoName2)) {
-                        photoName = environment.getProperty("api.ImageSrc") + "/" + photoName2;
-                    }
-                    log.debug("上传图片：" + photoName);
-                }
 
-//                company.setCompanyName(company_name);
-                company.setCompanyScale(company_scale);
-                company.setCompanySpecial(company_special_str);
-                company.setProvinceId(province_id);
-                company.setCityId(city_id);
-                company.setAreaId(area_id);
-                company.setCompanyInfo(company_info);
-//                company.setIcon(iconName);
-                company.setCompanyPhoto(photoName);
-//                company.setCompanyAddrx(company_addrx);
-//                company.setCompanyAddry(company_addry);
-                company.setCompanyAddr(company_addr);
-                company.setCompanyType(company_type);
-                company.setCompanyCity(company_city);
-                this.companyMapper.updateByPrimaryKeySelective(company);
-            }else{
-                //添加用户信息
-                Company company=new Company();
-
-                String iconName = "";
-                if (icon != null) {
-                    String pathCheckPath3 = environment.getProperty("api.fileImagePath");
-                    File hashFile = new File(pathCheckPath3);
-                    //没有就创建
-                    if (!hashFile.exists()) {
-                        hashFile.mkdirs();
-                    }
-                    String photoName3 = reamNameFile(icon, pathCheckPath3);
-                    if(!StringUtils.isEmpty(photoName3)) {
-                        iconName = environment.getProperty("api.ImageSrc") + "/" + photoName3;
-                    }
+            //更新用户信息
+            Company company =companyMapper.selectByPrimaryKey(id);
+            String iconName = company.getIconPath();
+            if (icon != null) {
+                String pathCheckPath2 = environment.getProperty("api.fileImagePath");
+                File hashFile = new File(pathCheckPath2);
+                //没有就创建
+                if (!hashFile.exists()) {
+                    hashFile.mkdirs();
+                }
+                String photoName1 = reamNameFile(icon, pathCheckPath2);
+                if(!StringUtils.isEmpty(photoName1)) {
+                        iconName = environment.getProperty("api.ImageSrc") + "/" + photoName1;
+                }
                     log.debug("上传Logo图片：" + iconName);
-                }
+            }
 
-                String photoName = "";
-                if (company_photo != null) {
-                    String pathCheckPath4 = environment.getProperty("api.fileImagePath");
-                    File hashFile = new File(pathCheckPath4);
-                    //没有就创建
-                    if (!hashFile.exists()) {
-                        hashFile.mkdirs();
-                    }
-                    photoName = reamNameFile(company_photo, pathCheckPath4);
-                    log.debug("上传图片：" + photoName);
-                }
-                company.setUserId(id);
-//                company.setCompanyName(company_name);
+                User user =userMapper.selectByPrimaryKey(company.getUserId());
+                user.setAccountState(accountState);
+                userMapper.updateByPrimaryKeySelective(user);
+                company.setUserName(company_fu_ze_ren);
+                company.setPhone(phone);
+                company.setZhiWu(zhi_wu);
+                company.setMatstate(matstate);
+                company.setUpdateTime(new Date());
+                company.setName(company_name);
                 company.setCompanyScale(company_scale);
                 company.setCompanySpecial(company_special_str);
-                company.setProvinceId(province_id);
-                company.setCityId(city_id);
-                company.setAreaId(area_id);
+                company.setProvinceId(province);
+                company.setCityId(city);
+                company.setAreaId(area);
                 company.setCompanyInfo(company_info);
-//                company.setIcon(iconName);
-                company.setCompanyPhoto(photoName);
-//                company.setCompanyAddrx(company_addrx);
-//                company.setCompanyAddry(company_addry);
+                company.setIconPath(iconName);
                 company.setCompanyAddr(company_addr);
                 company.setCompanyType(company_type);
-                company.setCompanyCity(company_city);
-                this.companyMapper.insertSelective(company);
-            }
+                this.companyMapper.updateByPrimaryKeySelective(company);
+//            }else{
+//                //添加用户信息
+//                Company company=new Company();
+//
+//                String iconName = "";
+//                if (icon != null) {
+//                    String pathCheckPath3 = environment.getProperty("api.fileImagePath");
+//                    File hashFile = new File(pathCheckPath3);
+//                    //没有就创建
+//                    if (!hashFile.exists()) {
+//                        hashFile.mkdirs();
+//                    }
+//                    String photoName3 = reamNameFile(icon, pathCheckPath3);
+//                    if(!StringUtils.isEmpty(photoName3)) {
+//                        iconName = environment.getProperty("api.ImageSrc") + "/" + photoName3;
+//                    }
+//                    log.debug("上传Logo图片：" + iconName);
+//                }
+//
+//                String photoName = "";
+//                if (company_photo != null) {
+//                    String pathCheckPath4 = environment.getProperty("api.fileImagePath");
+//                    File hashFile = new File(pathCheckPath4);
+//                    //没有就创建
+//                    if (!hashFile.exists()) {
+//                        hashFile.mkdirs();
+//                    }
+//                    photoName = reamNameFile(company_photo, pathCheckPath4);
+//                    log.debug("上传图片：" + photoName);
+//                }
+//                company.setUserId(id);
+////                company.setCompanyName(company_name);
+//                company.setCompanyScale(company_scale);
+//                company.setCompanySpecial(company_special_str);
+//                company.setProvinceId(province_id);
+//                company.setCityId(city_id);
+//                company.setAreaId(area_id);
+//                company.setCompanyInfo(company_info);
+////                company.setIcon(iconName);
+//                company.setCompanyPhoto(photoName);
+////                company.setCompanyAddrx(company_addrx);
+////                company.setCompanyAddry(company_addry);
+//                company.setCompanyAddr(company_addr);
+//                company.setCompanyType(company_type);
+//                company.setCompanyCity(company_city);
+//                this.companyMapper.insertSelective(company);
+//            }
 
             // 设置业务处理结果
             message.setSuccess(true);

@@ -89,8 +89,8 @@ public class CompanyController {
     }
 
     /**
-     * 跟新企业信息
-     * @param request
+     * 更新企业信息
+     *
      * @param id
      * @param company_name
      * @param company_scale
@@ -98,19 +98,24 @@ public class CompanyController {
      * @param province
      * @param city
      * @param area
-     * @param pid
      * @param company_info
-     * @param company_photo
-     * @param company_addrx
-     * @param company_addry
+     * @param matstate
+     * @param accountState
+     * @param company_fu_ze_ren
      * @param company_addr
      * @param company_type
-     * @param company_city
+     * @param zhi_wu
      * @return
      */
     @PostMapping("updateCompanyById")
-    public BusinessMessage update(HttpServletRequest request, Integer id, String company_name, String company_scale, String company_special_str, Integer province, Integer city, Integer area, Integer pid, String company_info, MultipartFile company_photo,MultipartFile icon, String company_addrx, String company_addry, String company_addr, String company_type, String company_city) {
-        return companyService.update(id,company_name,company_scale,company_special_str,province,city,area,pid,company_info,company_photo,icon,company_addrx,company_addry,company_addr, company_type,company_city);
+    public BusinessMessage update(Integer id, String company_name,String company_info,int matstate,int accountState,
+                                  String company_scale, String company_special_str, Integer province, Integer city,
+                                  Integer area,String zhi_wu,String phone,
+                                  MultipartFile icon, String company_addr, String company_type, String company_fu_ze_ren) {
+        return companyService.update(id, company_name,company_info, matstate, accountState,
+         company_scale,  company_special_str,  province,  city,
+                 area, zhi_wu, phone,
+                 icon,  company_addr,  company_type,  company_fu_ze_ren);
     }
     /**
      * 读取城市列表根据pid

@@ -54,7 +54,7 @@ public class CompanyService {
             for(Company company : companyList){
 
                 Map<String, Object> map = new HashMap<>();
-                map.put("companyName",company.getCompanyName());
+                map.put("companyName",company.getName());
             }
 
             if(null!=findAll &&findAll.size()>0){

@@ -43,6 +43,62 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-xs-4 control-label">最近30天访问次数</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="month_visits" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">负责人姓名</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="company_fu_ze_ren" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">负责人职位</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="zhi_wu" id="zhi_wu">
+                                        <option value="老板/投资人">老板/投资人</option>
+                                        <option value="店长">店长</option>
+                                        <option value="主管">主管</option>
+                                        <option value="经理">经理</option>
+                                        <option value="部长">部长</option>
+                                        <option value="大堂经理">大堂经理</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">phone</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="phone" class="form-control" >
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">openid</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="openid" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">店铺类型</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="company_type" id="company_type">
+                                        <option value="社区店">社区店</option>
+                                        <option value="足浴店">足浴店</option>
+                                        <option value="高端会所">高端会所</option>
+                                        <option value="养生馆">养生馆</option>
+                                        <option value="大型水会">大型水会</option>
+                                        <option value="其他">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-xs-4 control-label">店铺规模</label>
                                 <div class="col-xs-8">
                                     <select class="form-control" name="company_scale" id="company_scale">
@@ -56,6 +112,72 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">所在城市</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" name="province" id="province" onchange="loadRegion(this,'city')">
+                                        <option value="">省</option>
+                                    </select>
+                                    <select class="form-control" name="city" id="city" onchange="loadRegion(this,'area')">
+                                        <option value="">市</option>
+                                    </select>
+                                    <select class="form-control" name="area" id="area">
+                                        <option value="">区</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">公司Logo</label>
+                                <div class="col-xs-8">
+                                    <img src="" name="iconN" width="300px;">
+                                    <input type="file" name="icon" id="icon">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">收到的简历数</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="resume_number" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">分享报名数量</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="shareNumber" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">发布职位数量</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="positionNumber" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">职位曝光量</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="positionExposureNumber" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">职位浏览量</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="positionSeeNumber" class="form-control" disabled="disabled">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-xs-4 control-label">公司详细地址</label>
+                                <div class="col-xs-8">
+                                    <input type="text" name="company_addr" class="form-control" >
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-xs-4 control-label">特色标签</label>
                                 <div class="col-xs-8">
@@ -85,72 +207,18 @@
 
                                     <input type="checkbox" name="company_special" value="福利好">福利好&nbsp;&nbsp;
                                     <input type="checkbox" name="company_special" value="老板大方">老板大方&nbsp;&nbsp;
-                                    <input type="checkbox" name="company_special" value="绿色正规店">绿色正规店<br/>
+                                    <input type="checkbox" name="company_special" value="发展空间大">发展空间大<br/>
 
                                     <input type="checkbox" name="company_special" value="店铺环境好">环境好&nbsp;&nbsp;
                                     <input type="checkbox" name="company_special" value="免费培训">免费培训&nbsp;&nbsp;
                                     <input type="checkbox" name="company_special" value="人性化管理">人性化管理<br/>
 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">所在城市</label>
-                                <div class="col-xs-8">
-                                    <select class="form-control" name="province" id="province" onchange="loadRegion(this,'city')">
-                                        <option value="">省</option>
-                                    </select>
-                                    <select class="form-control" name="city" id="city" onchange="loadRegion(this,'area')">
-                                        <option value="">市</option>
-                                    </select>
-                                    <select class="form-control" name="area" id="area">
-                                        <option value="">区</option>
-                                    </select>
-                                </div>
-                            </div>
+                                    <input type="checkbox" name="company_special" value="店铺美女多">美女多&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="客流量大">客流量大&nbsp;&nbsp;
+                                    <input type="checkbox" name="company_special" value="有绩效奖金">有绩效奖金<br/>
 
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">公司Logo</label>
-                                <div class="col-xs-8">
-                                    <img src="" name="iconN" width="300px;">
-                                    <input type="file" name="icon" id="icon">
                                 </div>
                             </div>
-                            <div class="form-group" style="display: none">
-                                <label class="col-xs-4 control-label">公司照片</label>
-                                <div class="col-xs-8">
-                                    <img src="" name="photoN" width="300px;">
-                                    <input type="file" name="company_photo" id="company_photo">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">x</label>
-                                <div class="col-xs-8">
-                                    <input type="text" name="company_addrx" class="form-control" >
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">y</label>
-                                <div class="col-xs-8">
-                                    <input type="text" name="company_addry" class="form-control" >
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">地址</label>
-                                <div class="col-xs-8">
-                                    <input type="text" name="company_addr" class="form-control" >
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-xs-4 control-label">店铺类型</label>
-                                <div class="col-xs-8">
-                                    <select class="form-control" name="company_type" id="company_type">
-                                        <option value="社区店">社区店</option>
-                                        <option value="理疗店">理疗店</option>
-                                        <option value="商务会所">商务会所</option>
-                                    </select>
-                                </div>
-                            </div>
-
 
                             <div class="form-group">
                                 <label class="col-xs-4 control-label">店铺认证状态</label>

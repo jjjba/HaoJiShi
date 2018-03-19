@@ -78,7 +78,7 @@ public class VisitsDataService {
             visits.put("qyfwrs",map6.get("count(*)"));
             visits.put("grfwcs",map7.get("count(*)"));
             visits.put("grfwrs",map8.get("count(*)"));
-            visits.put("fxcs",map9.get("count(*)"));
+            visits.put("fxcs",map9.get("SUM(isShare)"));
             visits.put("fxrs",map10.get("count(*)"));
             businessMessage.setMsg("获取用户访问量数据成功");
             businessMessage.setData(visits);

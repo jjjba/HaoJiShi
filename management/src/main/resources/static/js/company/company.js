@@ -1,21 +1,7 @@
 /**
- * Created by xzcy-01 on 2017/12/8.
+ * @author 梁闯
+ * @date 2018/03/17 15.53
  */
-
-/**
- * 定义下类型排序规则变量
- */
-var typeSort;
-/**
- * 定义总销售额排序规则变量
- */
-var totalSalesAmountSort;
-
-/**
- * 定义今日订单数排序规则变量
- */
-var orderCountSort;
-
 
 // 默认页码
 var page = 1;
@@ -71,17 +57,52 @@ $(function () {
                 var item = res.data;
                 console.log(item);
                 $modal.find('[name=pid]').val(item.pid);
-                $modal.find('[name=company_city]').val(item.company_city);
-                $modal.find('[name=company_special_str]').val(item.company_special);
+                $modal.find('[name=id]').val(item.id);
                 $modal.find('[name=company_name]').val(item.company_name);
-                $modal.find('[name=company_scale]').val(item.company_scale);
-                $modal.find('[name=province]').val(item.province_id);
-                $modal.find('[name=company_info]').val(item.company_info);
+                $modal.find('[name=create_time]').val(item.create_time);
+                $modal.find('[name=month_visits]').val(item.month_visits);
+                $modal.find('[name=company_fu_ze_ren]').val(item.company_fu_ze_ren);
+                $modal.find('[name=zhi_wu]').val(item.zhi_wu);
+                $modal.find('[name=phone]').val(item.phone);
+                $modal.find('[name=openid]').val(item.openid);
                 $modal.find('[name=company_type]').val(item.company_type);
-                $modal.find('[name=company_addrx]').val(item.company_addrx);
-                $modal.find('[name=company_addry]').val(item.company_addry);
+                $modal.find('[name=company_scale]').val(item.company_scale);
+                $modal.find('[name=resume_number]').val(item.resume_number);
+                $modal.find('[name=shareNumber]').val(item.shareNumber);
+                $modal.find('[name=positionNumber]').val(item.positionNumber);
+                $modal.find('[name=positionExposureNumber]').val(item.positionExposureNumber);
+                $modal.find('[name=positionSeeNumber]').val(item.positionSeeNumber);
                 $modal.find('[name=company_addr]').val(item.company_addr);
-
+                $modal.find('[name=company_special_str]').val(item.company_special);
+                var matstate =item.matstate;
+                if(matstate == "1"){
+                    matstate ="审核通过"
+                }else if(matstate == "2"){
+                    matstate ="审核未通过"
+                }else {
+                    matstate ="审核中"
+                }
+                $modal.find('[name=matstate]').val(matstate);
+                var accountState =item.accountState;
+                if(accountState == "1"){
+                    accountState ="正常状态"
+                }else if(accountState == "2"){
+                    accountState ="冻结状态"
+                }else if(accountState == "3"){
+                    accountState ="删除状态"
+                }else {
+                    accountState ="未知"
+                }
+                $modal.find('[name=accountState]').val(accountState);
+                $modal.find('[name=company_info]').val(item.company_info);
+                var company_photo =item.company_photo;
+                if(company_photo == null || company_photo == ""){
+                    company_photo ="无"
+                }else {
+                    company_photo ="有"
+                }
+                $modal.find('[name=company_photo]').val(company_photo);
+                $modal.find('[name=province]').val(item.province_id);
                 if (item.icon != null && item.icon !="") {
                     $modal.find('[name=iconN]').attr("src",item.icon);
                 }else{
@@ -148,6 +169,8 @@ $(function () {
             if (res.success) {
                 // 隐藏模态框
                 $modal.modal('hide');
+                $modal.find('.alert').find('span').text(res.msg);
+                $modal.find('.alert').show();
                 // 重新加载数据
                 loadData();
             } else {
