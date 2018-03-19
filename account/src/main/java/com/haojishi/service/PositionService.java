@@ -49,7 +49,6 @@ public class PositionService {
         return businessMessage;
     }
 
-
     public BusinessMessage getPositionByCompanyId(Integer companyId){
         BusinessMessage businessMessage =new BusinessMessage();
         return businessMessage;
