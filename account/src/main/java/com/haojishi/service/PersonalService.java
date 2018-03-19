@@ -30,6 +30,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author 梁闯
+ * @date 2018/03/19 16.10
+ */
 @Slf4j
 @Service
 public class PersonalService {
@@ -144,12 +148,23 @@ public class PersonalService {
 
     }
 
+    /**
+     * 求职者注册
+     *
+     * @param phone
+     * @param password
+     * @param openid
+     * @return
+     */
     public BusinessMessage registerPersonal(String phone,String password,String openid){
         BusinessMessage businessMessage =new BusinessMessage();
-//        Example personalExample =new Example(Personal.class);
-
-
-
+        User user =new User();
+        user.setOpenid(openid);
+        user.setPassword(password);
+        user.setPhone(phone);
+        userMapper.insertSelective(user);
+        businessMessage.setMsg("注册成功");
+        businessMessage.setSuccess(true);
         return businessMessage;
     }
 

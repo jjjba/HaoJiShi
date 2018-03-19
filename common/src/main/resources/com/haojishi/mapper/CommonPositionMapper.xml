@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haojishi.mapper.CommonPositionMapper">
 
+    <select id="getPositionByAddress" resultType="java.util.Map">
+        SELECT c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+        c.name,c.company_type,c.company_scale
+        FROM position p,company c,user u
+        where p.company_id =c.id AND c.user_id =u.id and u.account_state = 1 and c.matState = 1
+              and p.state = 1 AND c.company_city like concat('%',#{address},'%')
+        ORDER BY
+        p.hot DESC
+    </select>
+
     <!-- 查询所有职位信息或者根据公司姓名或者手机号查询职位信息 -->
     <select id="getAllPosition" resultType="java.util.Map">
         SELECT p.id,p.position_name,p.position_type,p.sex,p.age,p.money,p.experience,p.position_info,p.hot,
