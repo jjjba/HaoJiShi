@@ -60,10 +60,10 @@ public class RemortIP {
                 reader.close();
                 Ip = result.substring(result.indexOf( "该IP所在地为：" ));
                 Ip = Ip.substring(Ip.indexOf( "：") + 1);
-//            String province = strIP.substring(6, strIP.indexOf("省"));
-                city = Ip.substring(Ip.indexOf("省") + 1, Ip.indexOf("市"));
+//                String province = IP.substring(6, IP.indexOf("省"));
+                city = Ip.substring(Ip.indexOf("市"));//Ip.indexOf("省") + 1,
             }else {
-                city="石家庄";
+                city="石家庄市";
             }
             return city;
 

@@ -12,11 +12,12 @@
     <result column="openid" jdbcType="VARCHAR" property="openid" />
     <result column="account_state" jdbcType="INTEGER" property="accountState" />
     <result column="isShare" jdbcType="INTEGER" property="isshare" />
+    <result column="subscribe" jdbcType="INTEGER" property="subscribe" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, phone, password, type, openid, account_state, isShare
+    id, phone, password, type, openid, account_state, isShare, subscribe
   </sql>
 </mapper>

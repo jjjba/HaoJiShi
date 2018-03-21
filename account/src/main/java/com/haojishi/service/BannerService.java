@@ -19,22 +19,21 @@ public class BannerService {
     @Autowired
     private BannerMapper bannerMapper;
 
-    public BusinessMessage getAllBanner(Integer page,Integer size){
+    /**
+     * 获取所有求职者端banner
+     *
+     * @return BusinessMessage
+     */
+    public BusinessMessage getPersonalBanner(){
         BusinessMessage businessMessage = new BusinessMessage();
         try {
-            if (null == page || page < 1) {
-                page = 1;
-            }
-            if (null == size || size < 1) {
-                size = 10;
-            }
-            // 设置分页信息
-            PageHelper.startPage(page, size);
+
             Example bannerExample = new Example(Banner.class);
+            bannerExample.createCriteria().andEqualTo("classification",1);
             bannerExample.setOrderByClause("sort");
             List<Banner> bannerList = bannerMapper.selectByExample(bannerExample);
             if (bannerList != null && bannerList.size() > 0) {
-                businessMessage.setData(new PageInfo<>(bannerList));
+                businessMessage.setData(bannerList);
                 businessMessage.setSuccess(true);
                 businessMessage.setMsg("获取banner成功");
             } else {

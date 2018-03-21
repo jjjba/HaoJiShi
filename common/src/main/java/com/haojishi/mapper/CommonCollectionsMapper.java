@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 王强
- * @date 2018/1/13 0013.
+ * @author 梁闯
+ * @date 2018/3/21 23.48
  */
 public interface CommonCollectionsMapper {
 
-    List<Map<String, Object>> getMyCollectionsByUserId(@Param("userId") Integer userId);
+    List<Map<String, Object>> getCollectPositionByUserId(@Param("userId") Integer userId);
 }

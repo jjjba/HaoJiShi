@@ -43,6 +43,11 @@ public class User implements Serializable {
     @Column(name = "isShare")
     private Integer isshare;
 
+    /**
+     * 判断用户有没有关注公众号 0没有 1关注
+     */
+    private Integer subscribe;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -171,6 +176,24 @@ public class User implements Serializable {
         this.isshare = isshare;
     }
 
+    /**
+     * 获取判断用户有没有关注公众号 0没有 1关注
+     *
+     * @return subscribe - 判断用户有没有关注公众号 0没有 1关注
+     */
+    public Integer getSubscribe() {
+        return subscribe;
+    }
+
+    /**
+     * 设置判断用户有没有关注公众号 0没有 1关注
+     *
+     * @param subscribe 判断用户有没有关注公众号 0没有 1关注
+     */
+    public void setSubscribe(Integer subscribe) {
+        this.subscribe = subscribe;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -184,6 +207,7 @@ public class User implements Serializable {
         sb.append(", openid=").append(openid);
         sb.append(", accountState=").append(accountState);
         sb.append(", isshare=").append(isshare);
+        sb.append(", subscribe=").append(subscribe);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

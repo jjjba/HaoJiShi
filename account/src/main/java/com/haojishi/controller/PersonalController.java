@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/personal")
@@ -29,12 +30,11 @@ public class PersonalController {
     /**
      * 根据personalId查询求职者信息
      *
-     * @param id
      * @return BusinessMessage - 求职者信息
      */
-    @RequestMapping("/getPersonalByPersonalId")
-    public BusinessMessage getPersonalByPersonalId(Integer id){
-        return personalServicel.getPersonalByPersonalId(id);
+    @RequestMapping("/getPersonalInfo")
+    public BusinessMessage getPersonalInfo(HttpSession session){
+        return personalServicel.getPersonalInfo(session);
     }
 
     /**

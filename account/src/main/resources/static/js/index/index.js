@@ -17,9 +17,7 @@ var size = 10;
 
 
 $(function () {
-    //加载动画
-    setTimeout("loading()",5000);
-    //读取数据
+
     loadData();
     //banner初始化设置时长
     $('#myCarousel').carousel({interval:3000});
@@ -79,125 +77,13 @@ $(function () {
 
 
 
-    function loadData() {
 
-        var data = {
-        page: page,
-        size: size,
-        // name: $('.navbar-form').find('[name=name]').val(),
-        // phone: $('.navbar-form').find('[name=phone]').val(),
-        };
-        $.ajax({
-            type: "POST",
-            url: "personal/getAllPersonal",
-            data: data,
-            success: function (res) {
-                alert("成功了")
-                if (res.success) {
-                    // 清空表格
-                    $('tbody').empty();
-                    // 添加数据到表格
-                    var list = res.data.list;
-                    console.log("======"+res.data);
-                    var id, name, sex, age, phone, job_experience, state, address, hope_job, expect_money, avatar;
-                    $.each(list, function (index, item) {
-                        console.log("得到的数据：" + item);
-                        id = item.id;
-                        phone = item.phone;
-                        name =item.name;
-                        sex =item.sex;
-                        age =item.age;
-                        job_experience =item.job_experience;
-                        state =item.state;
-                        address =item.address;
-                        hope_job =item.hope_job;
-                        expect_money =item.expect_money;
-                        avatar =item.avatar;
-                        if (phone == null || phone == "") {
-                            phone = "---";
-                        }
-                        if (name == null || name == "") {
-                            name = "---";
-                        }
-                        if (sex == null || sex == "") {
-                            sex = "---";
-                        }
-                        if (age == null || age == "") {
-                            age = "---";
-                        }
-                        if (job_experience == null || job_experience == "") {
-                            job_experience = "---";
-                        }
-                        if (state == null || state == "") {
-                            state = "---";
-                        }
-                        if (address == null || address == "") {
-                            address = "---";
-                        }
-                        if (hope_job == null || hope_job == "") {
-                            hope_job = "---";
-                        }
-                        if (expect_money == null || expect_money == "") {
-                            expect_money = "---";
-                        }
-                        if (avatar == null || avatar == "") {
-                            avatar = "---";
-                        }
-
-                        var tableHtml = "";
-                        tableHtml +=
-                            '<tr>' +
-                            '<td rowspan="4"><img src="'+avatar+'" style="width: 60px;height: 60px;"/></td>' +
-                            '<td>' + name + '</td>' +
-                            '<td>' + sex + '</td>' +
-                            '<td>' + expect_money + '</td>' +
-                            '</tr>'+
-                            '<tr>'+
-                            '<td>' + job_experience + '</td>' +
-                            '<td>' + state + '</td>' +
-                            '<td>' + address + '</td>' +
-                            '</tr>'+
-                            '<tr>'+
-                            '<td>意向工作:</td>' +
-                            '<td>' + hope_job + '</td>' +
-                            '</tr>'+
-                            '<tr>'+
-                            '<td colspan="4"><a href="tel:'+phone+'" >电话联系</a></td>'+
-                            '</tr>';
-                        $('tbody').append(tableHtml);
-                    });
-
-                    // 初始化分页控件
-                    // $("#pagination").bs_pagination({
-                    //     currentPage: res.data.pageNum,
-                    //     totalRows: res.data.total,
-                    //     rowsPerPage: res.data.pageSize,
-                    //     totalPages: res.data.pages,
-                    //     onChangePage: function (event, data) {
-                    //         page = data.currentPage;
-                    //         size = data.rowsPerPage;
-                    //
-                    //         loadData(data.currentPage, data.rowsPerPage);
-                    //     }
-                    // });
-
-                } else {
-                    $('tbody').empty();
-                    // $("#pagination").empty();
-                    // $("#pagination").removeClass("well");
-                }
-            }
-        });
-    }
     
     function loadBanner() {
         
     }
 
-function loading(){
-    var box=document.getElementById("loading");
-    box.style.display="none";
-}
+
 
 function tell() {
     alert("电话联系")

@@ -14,21 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/banner")
+@RequestMapping("banner")
 public class BannerController {
 
     @Autowired
     private BannerService bannerService;
 
     /**
-     * 获取所有banner
+     * 获取所有求职者端banner
      *
-     * @param size
-     * @param page
      * @return BusinessMessage
      */
-    @RequestMapping("/getAllBanner")
-    public BusinessMessage getAllBanner(Integer page,Integer size){
-        return bannerService.getAllBanner(page,size);
+    @RequestMapping("getPersonalBanner")
+    public BusinessMessage getAllBanner(){
+        return bannerService.getPersonalBanner();
     }
 }

@@ -24,6 +24,7 @@ import org.springframework.util.StringUtils;
 import tk.mybatis.mapper.entity.Example;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
@@ -202,17 +203,21 @@ public class PersonalService {
     /**
      * 根据personalId获取求职者信息
      *
-     * @param id
      * @return BusinessMessage - 求职者信息
      */
-    public BusinessMessage getPersonalByPersonalId(Integer id){
+    public BusinessMessage getPersonalInfo(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        if(id == null){
-            businessMessage.setMsg("求职者id为空");
-        }else{
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =userMapper.selectByExample(userExample);
+        if(users != null && users.size() > 0){
+            int id =users.get(0).getId();
             Personal personal =personalMapper.selectByPrimaryKey(id);
             if(personal != null){
                 Map<String,Object> personalMap =new HashMap<>();
+                personalMap.put("state",personal.getState());
+                personalMap.put("sex",personal.getSex());
                 personalMap.put("name",personal.getName());
                 personalMap.put("age",personal.getAge());
                 personalMap.put("address",personal.getAddress());
@@ -227,6 +232,8 @@ public class PersonalService {
                 businessMessage.setMsg("未获取到该求职者信息");
             }
             businessMessage.setSuccess(true);
+        }else {
+            businessMessage.setMsg("未获取到用户信息");
         }
         return businessMessage;
     }

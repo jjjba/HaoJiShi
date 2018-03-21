@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.haojishi.mapper.CommonCollectionsMapper">
-    <select id="getMyCollectionsByUserId" resultType="java.util.Map">
-        SELECT p.id,p.`user_id`,p.`position_name`,p.`position_type`,p.`sex`,p.`age`,p.`money`,p.`experience`,p.`position_info`,c.`company_name`,c.company_photo,c.company_city,c.icon,c.id as companyId FROM `position` p  LEFT JOIN company c ON p.`company_id` = c.`id`
-        WHERE p.`id` IN (SELECT position_id FROM `collections` where user_id=#{userId})
-    </select>
-</mapper>

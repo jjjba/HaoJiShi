@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.haojishi.mapper.CommonCollectionsMapper">
+    <select id="getCollectPositionByUserId" resultType="java.util.Map">
+        SELECT  col.id,c.name,c.company_type,c.company_city,c.company_scale,c.icon_path,p.position_name,p.hot,p.money,
+            p.sex,p.age,p.experience
+            FROM user u,company c,collect_position col,position p
+        WHERE u.id =c.user_id and c.id =p.company_id and p.id =col.position_id
+            and u.id = #{userId}
+    </select>
+</mapper>

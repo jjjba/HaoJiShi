@@ -1,91 +1,4 @@
-<!--<?xml version="1.0" encoding="UTF-8"?>-->
-<!--<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"-->
-	<!--xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">-->
-	<!--<modelVersion>4.0.0</modelVersion>-->
 
-
-
-	<!--<groupId>com.haojishi</groupId>-->
-	<!--<artifactId>account</artifactId>-->
-	<!--&lt;!&ndash;<version>0.0.1-SNAPSHOT</version>&ndash;&gt;-->
-	<!--<packaging>war</packaging>-->
-
-	<!--<name>account</name>-->
-	<!--<description>好技狮公众号</description>-->
-
-	<!--<dependencies>-->
-
-        <!--<dependency>-->
-            <!--<groupId>com.haojishi</groupId>-->
-            <!--<artifactId>common</artifactId>-->
-            <!--<version>${project.version}</version>-->
-        <!--</dependency>-->
-
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-		    <!--<version>1.5.6.RELEASE</version>-->
-        <!--</dependency>-->
-
-
-
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-web</artifactId>-->
-		    <!--<version>1.5.6.RELEASE</version>-->
-        <!--</dependency>-->
-
-		<!--&lt;!&ndash;<dependency>&ndash;&gt;-->
-			<!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
-			<!--&lt;!&ndash;<artifactId>spring-boot-starter-tomcat</artifactId>&ndash;&gt;-->
-			<!--&lt;!&ndash;<scope>compile</scope>&ndash;&gt;-->
-		<!--&lt;!&ndash;</dependency>&ndash;&gt;-->
-
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.boot</groupId>-->
-			<!--<artifactId>spring-boot-starter-test</artifactId>-->
-			<!--<version>1.5.6.RELEASE</version>-->
-            <!--<scope>test</scope>-->
-		<!--</dependency>-->
-
-
-    <!--</dependencies>-->
-
-	<!--&lt;!&ndash;<build>&ndash;&gt;-->
-		<!--&lt;!&ndash;<plugins>&ndash;&gt;-->
-			<!--&lt;!&ndash;<plugin>&ndash;&gt;-->
-				<!--&lt;!&ndash;<groupId>org.springframework.boot</groupId>&ndash;&gt;-->
-				<!--&lt;!&ndash;<artifactId>spring-boot-maven-plugin</artifactId>&ndash;&gt;-->
-			<!--&lt;!&ndash;</plugin>&ndash;&gt;-->
-		<!--&lt;!&ndash;</plugins>&ndash;&gt;-->
-	<!--&lt;!&ndash;</build>&ndash;&gt;-->
-
-    <!--<build>-->
-        <!--<finalName>account</finalName>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-dependency-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>copy-dependencies</id>-->
-                        <!--<phase>compile</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy-dependencies</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/lib-->
-                            <!--</outputDirectory>-->
-                            <!--<includeScope>system</includeScope>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-        <!--</plugins>-->
-    <!--</build>-->
-
-
-<!--</project>-->
 
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -184,6 +97,7 @@
 </dependencies>
 <build>
     <finalName>account</finalName>
+
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -204,6 +118,7 @@
             </executions>
         </plugin>
     </plugins>
+
 </build>
 </project>
 

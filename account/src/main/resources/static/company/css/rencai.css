@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+body{ padding-top:8rem; background:#f7f7f7;}
+
+/*搜索框开始*/
+.searchis{ background:#fff; height:4rem; width:100%; position:fixed; left:0; top:0; border-bottom:1px solid #ebebeb;display:box; display:-webkit-box; display:-moz-box;}
+  .zubiis{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;}
+    .zhiwiis{width:100%; height:4rem; font-size: 16px; color: #404040; text-align:center; background:none; text-indent:3rem;}
+	.youcss{ width:3rem; padding-top:1.2rem;}
+	.aniusss{ width:1.6rem; height:1.6rem; display:block; background:url(../images/biao03.png) no-repeat center; background-size:100% 100%; -moz-background-size:100% 100%; -webkit-background-size:100% 100%;}
+/*搜索框结束*/
+
+
+/*一块开始*/
+.rcxinxis{ background:#fff; padding:1rem 1.2rem 1rem 1.2rem; margin-bottom:1rem;}
+  /*上边开始*/
+  .rcktops{ border-bottom:1px dashed #ebebeb; display:box; display:-webkit-box; display:-moz-box; padding:0.4rem 0 1rem 0;}
+    
+	/*左开始*/
+	 .reclefs{ width:5.6rem;}
+	    .reclefs img{ width:100%; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+	/*左结束*/
+	/*右开始*/
+	.recryous{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem;}
+	  .rcvsise{ padding-top:3px;}
+	  .rminsii,.rminsii02{font-size:1.6rem; color:#404040;}
+	  .rminsii span{ display:inline-block; vertical-align:middle; background:#e4f7ff; border:1px solid #00c1ff; color:#00c1ff; font-size:1.1rem; border-radius:3px; padding:0 3px 0 3px; font-weight:bold;}
+	  
+      .rminsii02 span{ display:inline-block; vertical-align:middle; background:#ffebf2; border:1px solid #FF5592; color:#FF5592; font-size:1.1rem; border-radius:3px; padding:0 3px 0 3px; font-weight:bold;}
+	  
+	  .rminsii span img,.rminsii02 span img{ width:1.3rem; vertical-align:middle; font-weight:normal;}
+	  
+	  .ciiuss{font-size:1.6rem; color:#FF6118; font-weight:bold;}
+	  
+	  .xnxyusie{font-size:12px; color:#9E9E9E; padding-top:1.2rem;}
+	  
+	/*右结束*/
+  /*上边结束*/
+   
+   /*下边开始*/
+   .pxbiuss{display:box; display:-webkit-box; display:-moz-box; padding-top:0.8rem;}
+     
+	 .pxlefts{font-size:1.4rem; color:#404040; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; padding-top:0.7rem;}
+	 
+	 .pxyouls{width:3.1rem;}
+	 .pxyouls img{ width:100%;}
+   /*下边结束*/
+   
+/*一块结束*/
+
+
+
+
+
+
+
+
+
+
+
+
+
