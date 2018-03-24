@@ -14,10 +14,15 @@ public interface CommonPositionMapper {
 
     List<Map<String,Object>> getPositionByAddress(@Param("address") String address);
 
-    List<Map<String,Object>> getPositionByAddressPro(@Param("province_id") String province_id);
+    List<Map<String,Object>> getPositionByAddressPro(@Param("pid") String pid);
+
+    List<Map<String,Object>> getPositionByParams(@Param("city") String city,@Param("type") String type,@Param("money") String money,@Param("scale") String scale);
 
     List<Map<String,Object>> getPositionById(@Param("id") Integer id);
 
     List<Map<String,Object>> getAllPosition(@Param("name") String name, @Param("phone") String phone);
+
     List<Map<String,Object>> getAllPositionNotonline(@Param("name") String name, @Param("phone") String phone);
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +67,26 @@ public class CompanyService {
         }catch(Exception e){
             log.error("获取分页查询信息失败", e);
             businessMessage.setMsg("获取企业列表不存在，请重试");
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 根据企业id查询企业信息
+     *
+     * @param session
+     * @return
+     */
+    public BusinessMessage getCompanyInfoByCompanyId(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int id = (int) session.getAttribute("cid");
+            Company company =companyMapper.selectByPrimaryKey(id);
+            businessMessage.setSuccess(true);
+            businessMessage.setData(company);
+            businessMessage.setMsg("获取企业信息成功");
+        }catch (Exception e){
+            log.error("获取企业id失败",e);
         }
         return businessMessage;
     }

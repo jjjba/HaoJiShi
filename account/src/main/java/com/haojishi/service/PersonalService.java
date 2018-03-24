@@ -4,11 +4,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.haojishi.mapper.CommonPersonalMapper;
-import com.haojishi.mapper.CommonUserMapper;
-import com.haojishi.mapper.PersonalMapper;
-import com.haojishi.mapper.UserMapper;
+import com.haojishi.mapper.*;
 import com.haojishi.model.Personal;
+import com.haojishi.model.Position;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.JuheSms;
@@ -26,10 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author 梁闯
@@ -49,6 +44,9 @@ public class PersonalService {
 
     @Autowired
     private CommonPersonalMapper commonPersonalMapper;
+
+    @Autowired
+    private PositionMapper positionMapper;
 
     /**
      *
@@ -237,6 +235,55 @@ public class PersonalService {
         }
         return businessMessage;
     }
+
+    /**
+     * 获取求职者期望工作分类
+     *
+     * @param session
+     * @return
+     */
+    public BusinessMessage getPersonalHopeJobClassification(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        List<Map<String,Object>> positionType =new ArrayList<>();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =userMapper.selectByExample(userExample);
+        if(users != null && users.size() > 0){
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            if(personals != null && personals.size() > 0){
+                String hopeJob =personals.get(0).getHopeJob();
+                String[] job =hopeJob.split(",");
+                for(int i = 0;i < job.length;i++){
+                    String job1 =job[i];
+                    Example positionExample =new Example(Position.class);
+                    positionExample.createCriteria().andEqualTo("positionName",job1);
+                    List<Position> positions =positionMapper.selectByExample(positionExample);
+                    for(int j = 0;j < positions.size();j++){
+                        String jobType =positions.get(j).getPositionType();
+                        Map<String,Object> map =new HashMap<>();
+                        map.put("positionType",jobType);
+                        positionType.add(map);
+                    }
+                }
+                businessMessage.setMsg("获取求职者分类成功");
+                businessMessage.setSuccess(true);
+                businessMessage.setData(positionType);
+            }else {
+                businessMessage.setMsg("未获取到求职者信息");
+                log.error("未获取到求职者信息");
+            }
+        }else {
+            businessMessage.setMsg("未获取到用户信息");
+            log.error("未获取到用户信息");
+        }
+        return businessMessage;
+    }
+
+
+
 
     /**
      * 根据求职者id修改信息

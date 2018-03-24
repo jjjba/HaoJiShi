@@ -29,4 +29,14 @@ public class BannerController {
     public BusinessMessage getAllBanner(){
         return bannerService.getPersonalBanner();
     }
+
+    /**
+     * 获取所有企业端banner
+     *
+     * @return BusinessMessage
+     */
+    @RequestMapping("getCompanyBanner")
+    public BusinessMessage getCompanyBanner(){
+        return bannerService.getCompanyBanner();
+    }
 }

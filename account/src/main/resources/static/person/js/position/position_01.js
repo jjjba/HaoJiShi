@@ -30,3 +30,7 @@ function goIndex() {
 function goMySelf() {
     window.location.href="/transition/transition_goMySelf";
 }
+
+function citySearch() {
+    window.location.href="/transition/city_search";
+}

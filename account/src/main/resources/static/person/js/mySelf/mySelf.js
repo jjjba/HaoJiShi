@@ -90,3 +90,11 @@ function accountSettings() {
 function switchingIdentity() {
     window.location.href="/transition/switching_identity";
 }
+
+function goIndex() {
+    window.location.href="/transition/transition_goIndex";
+}
+
+function goPosition() {
+    window.location.href="/transition/transition_all_position";
+}

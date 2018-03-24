@@ -1,12 +1,12 @@
 ﻿<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">  <!---->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>个人端-职位</title>
+<title>好技狮·您的好助手</title>
 
     <!-- 公用样式 开始 -->
     <link type="text/css" href="/static/person/css/response.css"
@@ -17,30 +17,29 @@
           th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
 
-    <link type="text/css" href="/static/person/css/position_02/zhiwei.css"
-          th:href="@{/person/css/position_02/zhiwei.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/person/css/position_02/index.css"
-          th:href="@{/person/css/position_02/index.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/position/zhiwei.css"
+          th:href="@{/person/css/position/zhiwei.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/position/index.css"
+          th:href="@{/person/css/position/index.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/bottom.css"
-          th:href="@{/person/css/bottom.css}"rel="stylesheet"/>
+          th:href="@{/person/css/bottom.css}" rel="stylesheet"/>
     <!--下拉导航开始-->
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}" ></script>
-    <script type="text/javascript" src="/static/person/js/position_02/zhiwei.js"
-            th:src="@{/person/js/position_02/zhiwei.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position/zhiwei.js"
+            th:src="@{/person/js/position/zhiwei.js}" ></script>
     <!--下拉导航结束-->
-    <link type="text/css" href="/static/person/css/position_02/diqu.css"
-          th:href="@{/person/css/position_02/diqu.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/position/diqu.css"
+          th:href="@{/person/css/position/diqu.css}" rel="stylesheet" />
     <!--地区选择开始-->
-    <script type="text/javascript" src="/static/person/js/position_02/zepto.js"
-            th:src="@{/person/js/position_02/zepto.js}" ></script>
-    <script type="text/javascript" src="/static/person/js/position_02/city.js"
-            th:src="@{/person/js/position_02/city.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position/zepto.js"
+            th:src="@{/person/js/position/zepto.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position/city.js"
+            th:src="@{/person/js/position/city.js}" ></script>
     <!--地区选择结束-->
-    <script type="text/javascript" src="/static/person/js/position_02/position_02.js"
-          th:src="@{/person/js/position_02/position_02.js}" ></script>
-    
-    
+    <script type="text/javascript" src="/static/person/js/position/position_02.js"
+          th:src="@{/person/js/position/position_02.js}" ></script>
+
 </head>
 <body>
     
@@ -75,7 +74,7 @@
   
   <!--右边开始-->
   <div class="fr yocyis">
-    <a href="#" class="clearfix">搜索城市 <img src="images/xuanzes.png" /></a>
+    <a href="#" class="clearfix" type="cancel" onclick="citySearch()">搜索城市 <img src="/static/person/images/xuanzes.png" th:src="@{/person/images/xuanzes.png}"/></a>
   </div>
   <!--右边结束-->
   
@@ -299,19 +298,15 @@
     
     </div>
     <!--地区结束-->
-    
-    
+
+
     <!--分类开始-->
-    <div class="zwciys01"> 
-        <div class="fenlisse">
-          <ul>
-            <li><a href="#">足疗师</a></li>
-            <li><a href="#">足疗师</a></li>
-            <li><a href="#">足疗师</a></li>
-            <li><a href="#">足疗师</a></li>
-          </ul>
-          <h2><a href="#">重新选择职位类别</a></h2>
-        </div>
+    <div class="zwciys01">
+      <div class="fenlisse">
+        <ul id="positionType">
+        </ul>
+        <h2><a href="#">重新选择职位类别</a></h2>
+      </div>
     </div>
     <!--分类结束-->
     
@@ -319,113 +314,58 @@
      <div class="zwciys02">
         <div class="flsxi02">
           <!--薪资要求开始-->
+          <div id="money">
           <div class="xzdpgms">
             <h2>薪资要求</h2>
             <p>
-              <a href="#" class="cuiysy">全部</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
+              <a href="#" class="cuiysy" data="全部">全部</a>
+              <a href="#" data="面议">面议</a>
+              <a href="#" data="3000元以下/月">3000元以下/月</a>
+              <a href="#" data="3000-5000元/月">3000-5000元/月</a>
+              <a href="#" data="5000-8000元/月">5000-8000元/月</a>
+              <a href="#" data="8000-10000元/月">8000-10000元/月</a>
+              <a href="#" data="10000-15000元/月">10000-15000元/月</a>
+              <a href="#" data="15000-20000元/月">15000-20000元/月</a>
+              <a href="#" data="20000元以上/月">20000元以上/月</a>
             </p>
+          </div>
           </div>
           <!--薪资要求结束-->
           
           <!--店铺规模开始-->
+          <div class="scale">
           <div class="xzdpgms">
-            <h2>店铺规模</h2>
-            <p>
-              <a href="#" class="cuiysy">全部</a>
-              <a href="#">500平以上</a>
-              <a href="#">500平以上</a>
-              <a href="#">500平以上</a>
-            </p>
+              <h2>店铺规模</h2>
+              <p>
+                <a href="#" class="cuiysy" data="全部">全部</a>
+                <a href="#" data="100㎡以下">100㎡以下</a>
+                <a href="#" data="100-300㎡">100-300㎡</a>
+                <a href="#" data="300-500㎡<">300-500㎡</a>
+                <a href="#" data="500-1000㎡">500-1000㎡</a>
+                <a href="#" data="1000-2000㎡">1000-2000㎡</a>
+                <a href="#" data="2000-5000㎡">2000-5000㎡</a>
+                <a href="#" data="5000㎡以上">5000㎡以上</a>
+              </p>
+          </div>
           </div>
           <!--店铺规模结束-->
           
           <!--确定按钮开始-->
           <div class="qranius">
-            <a href="#" class="qdius">确定</a>
+            <a href="#" class="qdius" onclick="loadPositionByPars()">确定</a>
           </div>
           <!--确定按钮结束-->
-          
         </div>
      </div>
     <!--筛选结束-->
-    
-
 
     <!--一块开始-->
-    <div class="reconblock">
-      <a href="#">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs">SPA技师</div>
-        <div class="fr reseyous"><span class="yse01">急聘</span> <span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资及年限开始-->
-      <div class="wagesyears clearfix">
-        <div class="fl wayealfs">7000-9000/月</div>
-        <div class="fr wayefris">经验不限 | 35岁以下 | 仅限女</div>
-      </div>
-      <!--工资及年限结束-->
-      <!--公司名称地址开始-->
-        <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <img src="images/tupian01.png" />
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1>常乐足道</h1>
-            <p>单体店 | 1500㎡ | 杭州市 上城区</p>
-          </div>
-          <!--右边结束-->
-        </div>
-      <!--公司名称地址结束-->
-      </a>
+    <div class="positionList">
+
     </div>
     <!--一块结束-->
     
-    
-    <!--一块开始-->
-    <div class="reconblock">
-      <a href="#">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs">足疗师（保底6000）</div>
-        <div class="fr reseyous"><span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资及年限开始-->
-      <div class="wagesyears clearfix">
-        <div class="fl wayealfs">7000-9000/月</div>
-        <div class="fr wayefris">经验不限 | 35岁以下 | 仅限女</div>
-      </div>
-      <!--工资及年限结束-->
-      <!--公司名称地址开始-->
-        <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <img src="images/tupian01.png" />
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1>常乐足道</h1>
-            <p>单体店 | 1500㎡ | 杭州市 上城区</p>
-          </div>
-          <!--右边结束-->
-        </div>
-      <!--公司名称地址结束-->
-      </a>
-    </div>
-    <!--一块结束-->
+
 
   
   <!--最底部开始-->

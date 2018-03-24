@@ -23,14 +23,14 @@ public class PositionController {
 
 
     /**
-     * 获取同城职位信息
+     * 个人端首页推荐职位
      *
-     * @param request
-     * @return BusinessMessage - 同城所有职位信息
+     * @param session
+     * @return
      */
-    @RequestMapping("getPositionByAddress")
-    public BusinessMessage getPositionByAddress(HttpServletRequest request){
-        return positionService.getPositionByAddress(request);
+    @RequestMapping("getPositionInIndex")
+    public BusinessMessage getPositionInIndex(HttpServletRequest request,HttpSession session){
+        return positionService.getPositionInIndex(request,session);
     }
 
     /**
@@ -44,5 +44,31 @@ public class PositionController {
         return positionService.getPositionById(session);
     }
 
+    /**
+     * 获取同城职位信息
+     *
+     * @param session
+     * @return BusinessMessage - 同城所有职位信息
+     */
+    @RequestMapping("getPosition")
+    public BusinessMessage getPosition(HttpSession session){
+        return positionService.getPosition(session);
+    }
+
+    /**
+     * 求职者端 求职者页面条件查询
+     *
+     * @param session
+     * @param type
+     * @param city
+     * @param money
+     * @param scale
+     * @return
+     */
+    @RequestMapping("getPositionByParams")
+    public BusinessMessage getPositionByParams(HttpSession session,String type,
+                                               String city,String money,String scale){
+        return positionService.getPositionByParams(session, type, city, money, scale);
+    }
 
 }

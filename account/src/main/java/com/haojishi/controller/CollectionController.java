@@ -33,8 +33,8 @@ public class CollectionController {
      * @return BusinessMessage - 取消收藏职位是否成功
      */
     @RequestMapping("cancelCollectPosition")
-    public BusinessMessage cancelCollectPosition(Integer id){
-        return collectionService.cancelCollectPosition(id);
+    public BusinessMessage cancelCollectPosition(HttpSession session){
+        return collectionService.cancelCollectPosition(session);
     }
 
     /**

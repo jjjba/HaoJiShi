@@ -110,4 +110,5 @@
         FROM company c
         WHERE c.user_id = #{userId}
     </select>
+
 </mapper>

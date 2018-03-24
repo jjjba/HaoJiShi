@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/personal")
+@RequestMapping("personal")
 public class PersonalController {
 
     @Autowired
@@ -25,6 +25,16 @@ public class PersonalController {
     @RequestMapping("/getAllPersonal")
     public BusinessMessage getAllPersoanal(HttpServletRequest request,Integer page,Integer size){
         return personalServicel.getAllPersonal(request,page,size);
+    }
+    /**
+     * 获取求职者期望工作分类
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("getPersonalHopeJobClassification")
+    public BusinessMessage getPersonalHopeJobClassification(HttpSession session){
+        return personalServicel.getPersonalHopeJobClassification(session);
     }
 
     /**

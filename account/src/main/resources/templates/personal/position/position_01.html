@@ -18,30 +18,33 @@
     <!-- 公用样式 结束 -->
 
 
-    <link type="text/css" href="/static/person/css/position_01/zhiwei.css"
-          th:href="@{/person/css/position_01/zhiwei.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/person/css/position_01/index.css"
-          th:href="@{/person/css/position_01/index.css}" rel="stylesheet" />
-    <link type="text/css" href=/static/person/css/position_01/bottom.css"
-          th:href="@{/person/css/position_01/bottom.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/position/zhiwei.css"
+          th:href="@{/person/css/position/zhiwei.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/position/index.css"
+          th:href="@{/person/css/position/index.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/bottom.css"
+        th:href="@{/person/css/bottom.css}" rel="stylesheet"/>
 
     <!--下拉导航开始-->
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}" ></script>
-    <script type="text/javascript" src="/static/person/js/position_01/zhiwei.js"
-            th:src="@{/person/js/position_01/zhiwei.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position/zhiwei.js"
+            th:src="@{/person/js/position/zhiwei.js}" ></script>
     <!--下拉导航结束-->
     
     
-    <link type="text/css" href="/static/person/css/position_01/diqu.css"
-          th:href="@{/person/css/position_01/diqu.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/position/diqu.css"
+          th:href="@{/person/css/position/diqu.css}" rel="stylesheet" />
     
     <!--地区选择开始-->
-    <script type="text/javascript" src="/static/person/js/position_01/zepto.js"
-            th:src="@{/person/js/position_01/zepto.js}" ></script>
-    <script type="text/javascript" src="/static/person/js/position_01/city.js"
-            th:src="@{/person/js/position_01/city.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position/zepto.js"
+            th:src="@{/person/js/position/zepto.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position/city.js"
+            th:src="@{/person/js/position/city.js}" ></script>
     <!--地区选择结束-->
+
+  <script type="text/javascript" src="/static/person/js/position/position_01.js"
+          th:src="@{/person/js/position/position_01.js}" ></script>
     
     
     
@@ -50,7 +53,7 @@
     
     <!--搜索框开始-->
      <div class="searchis">
-       <a href="#">
+       <a href="#" onclick="transition_search()">
          职位
        </a>
      </div>
@@ -79,7 +82,7 @@
   
   <!--右边开始-->
   <div class="fr yocyis">
-    <a href="#" class="clearfix">搜索城市 <img src="images/xuanzes.png" /></a>
+    <a href="#" class="clearfix" onclick="citySearch()">搜索城市 <img src="/static/person/images/xuanzes.png" th:src="@{/person/images/xuanzes.png}"/></a>
   </div>
   <!--右边结束-->
   

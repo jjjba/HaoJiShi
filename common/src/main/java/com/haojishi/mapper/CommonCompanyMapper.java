@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 王强
- * @date 2018/1/11 0011
+ * @author 梁闯
+ * @date 2018/03/22 16.38
  */
 public interface CommonCompanyMapper {
 
@@ -25,4 +25,7 @@ public interface CommonCompanyMapper {
     List<Map<String,Object>> getAllCompanyState(@Param("name") String name, @Param("phone") String phone);
 
     Map<String, Object> queryCompanyInfo(@Param("userId") Long userId);
+
+
+
 }

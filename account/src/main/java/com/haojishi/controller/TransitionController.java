@@ -123,5 +123,30 @@ public class TransitionController {
         return "personal/mySelf/switching_identity";
     }
 
+    /**
+     * 跳转城市搜索页面
+     * @return
+     */
+    @RequestMapping("city_search")
+    public String city_search(){
+        return "personal/position/city_search";
+    }
+
+    /**
+     * 跳转选择求职岗位页面
+     * @return
+     */
+    @RequestMapping("job_position")
+    public String job_position(){
+        return "personal/position/job_position";
+    }
+
+    @RequestMapping("company_info")
+    public String company_info(HttpSession session,Integer cid){
+        session.removeAttribute("cid");
+        session.setAttribute("cid",cid);
+        return "personal/company_info";
+    }
+
 
 }

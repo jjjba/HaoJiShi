@@ -54,9 +54,10 @@ function loadPersonalBanner() {
 function loadPositionData() {
     $.ajax({
         type: "POST",
-        url: "/position/getPositionByAddress",
+        url: "/position/getPositionInIndex",
         success: function (res) {
             if (res.success) {
+                $('.positionList').empty();
                 var list = res.data;
                 var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
                 $.each(list, function (index, item) {
@@ -89,7 +90,10 @@ function loadPositionData() {
                     if(sex == null || sex == ""){
                         sex ="未填写";
                     }
-
+                    icon_path =item.icon_path;
+                    if(icon_path == null || icon_path == ""){
+                        icon_path="../../person/images/icon_company_default.png";
+                    }
                     name =item.name;
                     if(name == null || name == ""){
                         name ="未填写";
@@ -102,8 +106,9 @@ function loadPositionData() {
                     if(company_scale == null || company_scale == ""){
                         company_scale ="未填写";
                     }
-                    var reconblock = "";
-                    reconblock +=
+                    var positionList = "";
+                    positionList +=
+                        '<div class="reconblock">'+
                         '<a href="#" onclick="loadPositionInfo(\'/transition/transition_position_info?id='+id+'\')">' +
                         '<div class="respise clearfix">' +
                         '<div class="fl reselefs">'+position_name+'</div>' +
@@ -115,7 +120,7 @@ function loadPositionData() {
                         '</div>'+
                         '<div class="corpnames">'+
                         '<div class="corpzuos">'+
-                        '<div class="icon"></div>'+
+                        '<img src="'+icon_path+'" />'+
                         '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>'+
                         '</div>'+
                         '<div class="corpryous">'+
@@ -123,17 +128,10 @@ function loadPositionData() {
                         '<p>'+company_type+' | '+company_scale+' | '+company_city+'</p>'+
                         '</div>'+
                         '</div>'+
-                        '</a>';
-                    $('.reconblock').append(reconblock);
-
-                    icon_path =item.icon_path;
-                    if(icon_path == null || icon_path == ""){
-                        $('.icon').append('<img src="../../person/images/icon_company_default.png" />');
-                    }else {
-                        $('.icon').append('<img src="'+icon_path+'" />');
-                    }
+                        '</a>'+
+                        '</div>';
+                    $('.positionList').append(positionList);
                 });
-
             }
         }
     });

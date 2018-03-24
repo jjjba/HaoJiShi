@@ -63,9 +63,10 @@ public class CollectionService {
      *
      * @return BusinessMessage - 取消收藏职位是否成功
      */
-    public BusinessMessage cancelCollectPosition(Integer id){
+    public BusinessMessage cancelCollectPosition(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
+            int id = (int) session.getAttribute("positionId");
             collectPositionMapper.deleteByPrimaryKey(id);
             businessMessage.setMsg("取消成功");
             businessMessage.setSuccess(true);

@@ -14,7 +14,8 @@ var id;
 	$(".toolbarframe").hide();
 	$(".toolbarframe02").hide();
 	$(".toolbarframe03").hide();
-
+    $(".toolbarframe04").hide();
+    $(".toolbarframe05").hide();
 
       $('.d-btn').click(function(){
       if(type == "3"){
@@ -37,14 +38,14 @@ var id;
                       $(".toolbarframe").hide();
                       $(".toolbarframe02").hide();
                       $(".toolbarframe03").show();
-                      setTimeout('$(".toolbarframe").hide()',900);
+                      setTimeout('$(".toolbarframe03").hide()',900);
                   }
               })
 
-          }else{
+          }else if($(this).text()=="已收藏"){
               $.ajax({
                   type: "POST",
-                  url:"/collection/cancelCollectPosition?id="+id,
+                  url:"/collection/cancelCollectPosition",
                   success: function (res) {
                       console.log("====-------"+JSON.stringify(res.data))
                       $('.sctcws01').html("<i></i>收藏").removeClass("curs");
@@ -58,7 +59,7 @@ var id;
                       $(".toolbarframe").hide();
                       $(".toolbarframe02").hide();
                       $(".toolbarframe03").show();
-                      setTimeout('$(".toolbarframe").hide()',900);
+                      setTimeout('$(".toolbarframe03").hide()',900);
                   }
               })
 
@@ -68,7 +69,7 @@ var id;
 
       $('.sctcws02').click(function(){
           if(type == "3"){
-              $('.tacne01').show();
+              $('.tacne02').show();
           }else {
               if(resumeNumber == "0"){
                   $(".tacne04").show();
@@ -88,9 +89,10 @@ function loadPositionInfoById() {
         url: "/position/getPositionById",
         success: function (res) {
             if (res.success) {
+                $('.sbnecont').empty();
                 var list = res.data;
                 var company_addr,name,id,position_info,company_city,position_name,hot,
-					money,experience,age,sex,icon_path,name,company_type,company_scale,collectNumber;
+					money,experience,age,sex,icon_path,name,company_type,company_scale,collectNumber,cid;
                 $.each(list, function (index, item) {
                     id = item.id;
                     resumeNumber =item.resumeNumber;
@@ -138,7 +140,10 @@ function loadPositionInfoById() {
                     if (sex == null || sex == "") {
                         sex = "未填写";
                     }
-
+                    icon_path =item.icon_path;
+                    if(icon_path == null || icon_path == ""){
+                        icon_path = "../../person/images/icon_company_default.png";
+                    }
                     name = item.name;
                     if (name == null || name == "") {
                         name = "未填写";
@@ -152,7 +157,7 @@ function loadPositionInfoById() {
                         company_scale = "未填写";
                     }
                     var sbnecont = "";
-                    sbnecont +=
+                    sbnecont +=''+
                         '<div class="sbontshs">' +
                         '<div class="respise clearfix">' +
                         '<div class="fl reselefs">'+position_name+'</div>' +
@@ -167,21 +172,18 @@ function loadPositionInfoById() {
                         '</div>' +
                         '<div class="corpnames">' +
                         '<div class="corpzuos">' +
-                        '<div class="icon"></div> ' +
+                        '<img src="'+icon_path+'" />' +
                         '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>' +
                         '</div>' +
+                        '<a href="#" onclick="loadCompanyInfo(\'/transition/company_info?cid='+item.cid+ '\')"> '+
                         '<div class="corpryous">' +
                         '<h1>'+name+'</h1>' +
                         '<p>'+company_type+' | '+company_scale+' | '+company_city+'</p>' +
                         '<img src="../../person/images/yjts.png" class="jtois" />' +
                         '</div>' +
-                        '</div>' ;
-                    icon_path = item.icon_path;
-                    if (icon_path == null || icon_path == "") {
-                        $('.icon').append('<img src="../../person/images/icon_company_default.png" />');
-                    } else {
-                        $('.icon').append('<img src="' + icon_path + '" />');
-                    }
+                        '</a>'+
+                        '</div>';
+
                     $('.sbnecont').append(sbnecont);
                     $('.zwqxconts').append(position_info);
                     $('.dzlefs').append(company_addr);
@@ -198,12 +200,29 @@ function loadPositionInfoById() {
     });
 }
 
-// function shoucang() {
-//
-// }
+function yingpin() {
+    if(type == "3"){
+        $('.tacne03').show();
+    }else {
+        $.ajax({
+            url:"/resume/submitResume",
+            type:"POST",
+            success : function (res) {
+                $(".toolbarframe04").show();
+                setTimeout('$(".toolbarframe04").hide()',900);
+            },
 
+            error : function (res) {
+                $(".toolbarframe05").show();
+                setTimeout('$(".toolbarframe05").hide()',900);
+            }
+        })
+    }
+}
 
-
+function loadCompanyInfo(url) {
+    window.location.href=url;
+}
 
 
 

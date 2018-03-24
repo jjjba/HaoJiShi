@@ -41,13 +41,13 @@ body{background:#f7f7f7; padding-bottom:4rem;}
 	vertical-align:middle;
 	width:5.5rem;
 	height:2.8rem;
-	background:url(../images/kgy01.png) no-repeat center;
+	background:url(../../images/kgy01.png) no-repeat center;
 	background-size:100% 100%;
 	-moz-background-size:100% 100%;
 	-webkit-background-size:100% 100%;
 }
 .regular-checkbox:checked + label {
-	background:url(../images/kgy02.png) no-repeat center;
+	background:url(../../images/kgy02.png) no-repeat center;
 	background-size:100% 100%;
 	-moz-background-size:100% 100%;
 	-webkit-background-size:100% 100%;
