@@ -95,21 +95,22 @@ $(document).ready(function() {
 	         $(".dhxlfs03").removeClass("curts");
 	   });
 
-  $(".fenlisse ul li,.fenlisse h2").click(function(){
+  $(".fenlisse ul li,.fenlisse h2,#positionType").click(function(){
 	  
 	  $(".zwciys01").hide();
 	  $(".dhxlfs01").removeClass("curts");
 	  
 	  });
 
+    $(".rmcshis p a,.city-list p,.city-list ul li,.container").click(function(){
+        $("#region111111111111").hide();
+
+        $(".dhxlfs03").removeClass("curts");
+
+    });
+
   
-  $(".rmcshis p a,.city-list p").click(function(){
-	  
-	  $(".dqkouss").hide();
-	  
-	  $(".dhxlfs03").removeClass("curts");
-	  
-	  });
+
 
 
 });

@@ -9,13 +9,17 @@ var resumeNumber;
 var id;
 
   $(function() {
-    loadPositionInfoById();
+
 	
 	$(".toolbarframe").hide();
 	$(".toolbarframe02").hide();
 	$(".toolbarframe03").hide();
     $(".toolbarframe04").hide();
     $(".toolbarframe05").hide();
+    $("#yingpin").hide();
+    $("#yiyingpin").hide();
+
+      loadPositionInfoById();
 
       $('.d-btn').click(function(){
       if(type == "3"){
@@ -75,6 +79,11 @@ var id;
                   $(".tacne04").show();
               }else {
                   window.location.href="tel:"+phone;
+                  $.ajax({
+                      url:"/resume/addResumeTellPhoneNum",
+                      type:"POST",
+                      data :id,
+                  });
               }
           }
       });
@@ -91,13 +100,15 @@ function loadPositionInfoById() {
             if (res.success) {
                 $('.sbnecont').empty();
                 var list = res.data;
-                var company_addr,name,id,position_info,company_city,position_name,hot,
+                var company_addr,name,position_info,company_city,position_name,hot,
 					money,experience,age,sex,icon_path,name,company_type,company_scale,collectNumber,cid;
                 $.each(list, function (index, item) {
                     id = item.id;
                     resumeNumber =item.resumeNumber;
-                    if(resumeNumber == null || resumeNumber ==""){
-                        resumeNumber ="0";
+                    if(resumeNumber == "0"){
+                        $("#yingpin").show();
+                    }else {
+                        $("#yiyingpin").show();
                     }
                     collectNumber =item.collectNumber;
                     if(collectNumber == null || collectNumber ==""){

@@ -123,8 +123,8 @@ public class Company implements Serializable {
     /**
      * 修改时间
      */
-    @Column(name = "update_time")
-    private Date updateTime;
+    @Column(name = "modify_time")
+    private Date modifyTime;
 
     /**
      * 收到的简历数量
@@ -155,12 +155,6 @@ public class Company implements Serializable {
      */
     @Column(name = "create_time")
     private Date createTime;
-
-    /**
-     * 修改时间
-     */
-    @Column(name = "modify_time")
-    private Date modifyTime;
 
     /**
      * 营业执照地址
@@ -585,19 +579,19 @@ public class Company implements Serializable {
     /**
      * 获取修改时间
      *
-     * @return update_time - 修改时间
+     * @return modify_time - 修改时间
      */
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getModifyTime() {
+        return modifyTime;
     }
 
     /**
      * 设置修改时间
      *
-     * @param updateTime 修改时间
+     * @param modifyTime 修改时间
      */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setModifyTime(Date modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     /**
@@ -688,24 +682,6 @@ public class Company implements Serializable {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    /**
-     * 获取修改时间
-     *
-     * @return modify_time - 修改时间
-     */
-    public Date getModifyTime() {
-        return modifyTime;
-    }
-
-    /**
-     * 设置修改时间
-     *
-     * @param modifyTime 修改时间
-     */
-    public void setModifyTime(Date modifyTime) {
-        this.modifyTime = modifyTime;
     }
 
     /**
@@ -914,13 +890,12 @@ public class Company implements Serializable {
         sb.append(", companyType=").append(companyType);
         sb.append(", iconPath=").append(iconPath);
         sb.append(", zhiWu=").append(zhiWu);
-        sb.append(", updateTime=").append(updateTime);
+        sb.append(", modifyTime=").append(modifyTime);
         sb.append(", positionCount=").append(positionCount);
         sb.append(", companyInfo=").append(companyInfo);
         sb.append(", companyPhoto=").append(companyPhoto);
         sb.append(", matstate=").append(matstate);
         sb.append(", createTime=").append(createTime);
-        sb.append(", modifyTime=").append(modifyTime);
         sb.append(", licensePath=").append(licensePath);
         sb.append(", lastLoginTime=").append(lastLoginTime);
         sb.append(", monthVisits=").append(monthVisits);

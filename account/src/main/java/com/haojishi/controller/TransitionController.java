@@ -141,11 +141,47 @@ public class TransitionController {
         return "personal/position/job_position";
     }
 
+    /**
+     * 跳转企业公司详情页面
+     *
+     * @param session
+     * @param cid
+     * @return
+     */
     @RequestMapping("company_info")
     public String company_info(HttpSession session,Integer cid){
         session.removeAttribute("cid");
         session.setAttribute("cid",cid);
         return "personal/company_info";
+    }
+
+    /**
+     * 跳转我的简历页面
+     * @return
+     */
+    @RequestMapping("my_resume")
+    public String my_resume(){
+        return "personal/mySelf/my_resume";
+    }
+
+    /**
+     * 跳转我的个人简介页面
+     *
+     * @return
+     */
+    @RequestMapping("go_personal_profile")
+    public String go_personal_profile(){
+        return "personal/mySelf/personal_profile";
+    }
+
+    /**
+     * 跳转个人标签页面
+     *
+     * @return
+     */
+    @RequestMapping("update_my_special")
+    public String update_my_special(){
+        return "personal/mySelf/my_special";
     }
 
 

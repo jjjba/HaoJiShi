@@ -87,7 +87,7 @@
                 AND p.position_type = #{type}
             </if>
             <if test="city != '' and city != null">
-                AND c.company_city = #{city}
+                AND c.company_city like concat(#{city},'%')
             </if>
             AND u.account_state = 1
         </where>

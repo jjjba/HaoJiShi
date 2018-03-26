@@ -328,10 +328,21 @@ public class PositionService {
         return businessMessage;
     }
 
-
+    /**
+     * 根据企业id获取职位信息
+     *
+     * @param session
+     * @return
+     */
     public BusinessMessage getPositionByCid(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         int cid = (int) session.getAttribute("cid");
+        Example positionExample =new Example(Position.class);
+        positionExample.createCriteria().andEqualTo("companyId",cid);
+        List<Position> positions =positionMapper.selectByExample(positionExample);
+        businessMessage.setMsg("获取企业职位信息成功");
+        businessMessage.setData(positions);
+        businessMessage.setSuccess(true);
         return businessMessage;
     }
 

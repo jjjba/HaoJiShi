@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ padding-top:4rem;}
+
+.topbus{ height:4rem; width:100%; background:#fff; border-bottom:1px solid #ebebeb; position:fixed; left:0; top:0; z-index:3;}
+
+.tbusinto{ width:100%; height:4rem; position:relative; font-size:1.6rem; color:#404040; text-align:center; line-height:4rem;}
+
+.zjtous{display:block; position:absolute; left:1rem; top:0rem;}
+.zjtous img{ height:1.8rem;}
+
+.qudeds{font-size:1.4rem; display:block; position:absolute; right:1rem; top:0.15rem;}
+.srhos{color:#FF6118;}
+.kbshis{color:#D9D9D9;}
+
+

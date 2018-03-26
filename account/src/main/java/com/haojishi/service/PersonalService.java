@@ -19,10 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -225,6 +228,13 @@ public class PersonalService {
                 personalMap.put("hope_job",personal.getHopeJob());
                 personalMap.put("info",personal.getMyselfInfo());
                 personalMap.put("job_experience",personal.getJobExperience());
+                personalMap.put("phone",personal.getPhone());
+                personalMap.put("mySelfInfo",personal.getMyselfInfo());
+                personalMap.put("myHometown",personal.getMyHometown());
+                personalMap.put("special",personal.getSpecial());
+                personalMap.put("recordSchool",personal.getRecordSchool());
+                personalMap.put("onceDo",personal.getOnceDo());
+                personalMap.put("photo",personal.getPhotos());
                 businessMessage.setData(personalMap);
             }else{
                 businessMessage.setMsg("未获取到该求职者信息");
@@ -242,8 +252,10 @@ public class PersonalService {
      * @param session
      * @return
      */
-    public BusinessMessage getPersonalHopeJobClassification(HttpSession session){
+    public BusinessMessage getPersonalHopeJobClassification(HttpSession session,HttpServletRequest request){
         BusinessMessage businessMessage =new BusinessMessage();
+        RemortIP remortIP =new RemortIP();
+        String address =remortIP.getAddressByIP(request);
         List<Map<String,Object>> positionType =new ArrayList<>();
         String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
@@ -265,6 +277,7 @@ public class PersonalService {
                         String jobType =positions.get(j).getPositionType();
                         Map<String,Object> map =new HashMap<>();
                         map.put("positionType",jobType);
+                        map.put("address",address);
                         positionType.add(map);
                     }
                 }
@@ -286,15 +299,124 @@ public class PersonalService {
 
 
     /**
-     * 根据求职者id修改信息
+     * 根据求职者openid修改信息
      *
-     * @param id
+     * @param session
      * @return BusinessMessage
      */
-    public BusinessMessage updatePersonalByPersonalId(Integer id){
+    public BusinessMessage updatePersonalByPersonalOpenid(HttpSession session, String address, String hopeCity, Integer age, String sex,
+                                                          String hopeJob, String expectMoney, String jobExperience, String myHometown,
+                                                          String myselfInfo, String special, String recordSchool, String name, String onceDo,
+                                                          String phone, MultipartFile photo, MultipartFile avatar){
         BusinessMessage businessMessage =new BusinessMessage();
-        Personal personal =personalMapper.selectByPrimaryKey(id);
-//        personal.setAvatar();
+        try {
+            String openid = (String) session.getAttribute("openid");
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> users =userMapper.selectByExample(userExample);
+            if(users != null && users.size() > 0){
+                int id =users.get(0).getId();
+                Personal personal =personalMapper.selectByPrimaryKey(id);
+                String photoName = personal.getPhotos();
+                String iconName = personal.getAvatar();
+                if (avatar != null) {
+                    String pathCheckPath2 = environment.getProperty("api.fileImagePath");
+                    File hashFile = new File(pathCheckPath2);
+                    //没有就创建
+                    if (!hashFile.exists()) {
+                        hashFile.mkdirs();
+                    }
+                    String photoName1 = reamNameFile(avatar, pathCheckPath2);
+                    if(!StringUtils.isEmpty(photoName1)) {
+                        iconName = environment.getProperty("api.ImageSrc") + "/" + photoName1;
+                    }
+                    log.debug("上传Logo图片：" + iconName);
+                }
+                if (photo != null) {
+                    String pathCheckPath = environment.getProperty("api.fileImagePath");
+                    File hashFile = new File(pathCheckPath);
+                    //没有就创建
+                    if (!hashFile.exists()) {
+                        hashFile.mkdirs();
+                    }
+                    String photoName2 = reamNameFile(photo, pathCheckPath);
+                    if(!StringUtils.isEmpty(photoName2)) {
+                        photoName = environment.getProperty("api.ImageSrc") + "/" + photoName2;
+                    }
+                    log.debug("上传图片：" + photoName);
+                }
+                if(address != null){
+                    personal.setAddress(address);
+                }
+                if(age != null){
+                    personal.setAge(age);
+                }
+                if(hopeCity != null){
+                    personal.setHopeCity(hopeCity);
+                }
+                if(hopeJob != null){
+                    personal.setHopeJob(hopeJob);
+                }
+                if(expectMoney != null){
+                    personal.setExpectMoney(expectMoney);
+                }
+                if(jobExperience != null){
+                    personal.setJobExperience(jobExperience);
+                }
+                if(myHometown != null){
+                    personal.setMyHometown(myHometown);
+                }
+                if(myselfInfo != null){
+                    personal.setMyselfInfo(myselfInfo);
+                }
+                if(special != null){
+                    personal.setSpecial(special);
+                }
+                if(sex != null){
+                    personal.setSex(sex);
+                }
+                if(recordSchool != null){
+                    personal.setRecordSchool(recordSchool);
+                }
+                if(name != null){
+                    personal.setName(name);
+                }
+                if(onceDo != null){
+                    personal.setOnceDo(onceDo);
+                }
+                if(phone != null){
+                    personal.setPhone(phone);
+                }
+                if(iconName != null){
+                    personal.setAvatar(iconName);
+                }
+                if(photoName != null){
+                    personal.setPhotos(photoName);
+                }
+                personal.setUpdateTime(new Date());
+                personalMapper.updateByPrimaryKeySelective(personal);
+                businessMessage.setMsg("修改求职者信息成功");
+                businessMessage.setSuccess(true);
+            }else {
+                log.error("未获取到用户信息");
+            }
+
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
         return businessMessage;
+    }
+
+    public String reamNameFile(MultipartFile file, String hashFile) throws IOException {
+        //获取后缀
+        String filename = file.getOriginalFilename();
+        String prefix = filename.substring(filename.lastIndexOf(".") + 1);
+        String targetFileName = null;
+        if(!StringUtils.isEmpty(prefix)){
+            targetFileName = UUID.randomUUID().toString().replaceAll("-", "") + "." + prefix;
+            File targetFile = new File(hashFile, targetFileName);
+            file.transferTo(targetFile);
+        }
+        return targetFileName;
     }
 }

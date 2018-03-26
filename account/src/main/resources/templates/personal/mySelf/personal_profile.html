@@ -1,0 +1,122 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>我的-个人介绍</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/person/css/response.css"
+            th:href="@{/person/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/public.css"
+            th:href="@{/person/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/xiangying.css"
+            th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
+	<!-- 公用样式 结束 -->
+    
+    <link type="text/css" href="/static/person/css/personal_profile/top.css"
+            th:href="@{/person/css/personal_profile/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/personal_profile/wodedh.css"
+            th:href="@{/person/css/personal_profile/wodedh.css}" rel="stylesheet" />
+
+
+    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
+            th:src="@{/person/js/jquery-3.2.1.js}"></script>
+    
+    <script type="text/javascript">
+    //字数限制
+    window.onload = function() {
+        //（document）
+        document.getElementById('note').onkeyup = function() {        
+            document.getElementById('text-count').innerHTML=this.value.length;
+        }
+    //（jquery）
+        $('#note2').keyup(function() {
+        //    var val=$('#note2').val();
+        //    var len=val.length;
+        var len=this.value.length
+                    $('#text-count2').text(len);
+        })
+    }
+    $(function () {
+        $.ajax({
+            url:"/personal/getPersonalInfo",
+            type:"POST",
+            success : function (res) {
+                $('#note').html(res.data.mySelfInfo);
+            }
+        });
+
+        $("#lookTemplate").click(function(e) {
+            $('#note').html("我来自云南昆明，身高1.65米，颜值高从事足疗养生行业5年多，会足疗、修脚、采耳。我性格开朗，" +
+                "有良好的服务意识和沟通能力。期望在浙江寻找一个面积大一点，管理正规，生意稳定的店铺工作。" +
+                "我之前曾在华良良子、重庆富侨先后做过足浴推拿技师、培训助理、部长等岗位，经验丰富，沟通能力好。");
+        });
+
+        $(".bcnois").click(function(e) {
+            console.log($('#note').val());
+            $.ajax({
+                url:"/personal/updatePersonalByPersonalOpenid",
+                type:"POST",
+                data:{
+                    myselfInfo : $('#note').val()
+                    },
+                success : function (res) {
+                    window.location.href="/transition/my_resume";
+                }
+            })
+        });
+    });
+
+    function onBack() {
+        window.location.href="/transition/my_resume";
+    }
+   </script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     自我介绍
+     <a href="#" class="zjtous" onclick="onBack()"><img src="/static/person/images/biao04.png" th:src="@{/person/images/biao04.png}" /></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--内容开始-->
+ <div class="dlsryshi">
+   <textarea cols="40" rows="5" id="note" name="note" maxlength="100" value="" class="srdziss" onkeyup="this.value=this.value.substring(0, 100)" placeholder="请输入内容"></textarea>
+        <div class="textright ysiisr"><span id="text-count" value="">0</span>/100</div>
+ </div>
+ 
+ <div class="bhxners">
+   <a href="#" id="lookTemplate">不会写？看看别人怎么写...</a>
+ </div>
+ 
+ 
+ <div class="bcanius">
+   <a href="#" class="bcnois">保存</a>
+ </div>
+ 
+ <!--内容结束-->
+ 
+ 
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

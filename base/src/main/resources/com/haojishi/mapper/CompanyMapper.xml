@@ -25,13 +25,12 @@
     <result column="company_type" jdbcType="VARCHAR" property="companyType" />
     <result column="icon_path" jdbcType="VARCHAR" property="iconPath" />
     <result column="zhi_wu" jdbcType="VARCHAR" property="zhiWu" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="position_count" jdbcType="INTEGER" property="positionCount" />
     <result column="company_info" jdbcType="VARCHAR" property="companyInfo" />
     <result column="company_photo" jdbcType="VARCHAR" property="companyPhoto" />
     <result column="matState" jdbcType="INTEGER" property="matstate" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
     <result column="license_path" jdbcType="VARCHAR" property="licensePath" />
     <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
     <result column="month_visits" jdbcType="INTEGER" property="monthVisits" />
@@ -49,9 +48,8 @@
     -->
     id, user_id, age, sex, phone, user_name, register_type, longitude, latitude, name, 
     company_scale, company_special, company_city, province_id, city_id, area_id, company_addr, 
-    company_type, icon_path, zhi_wu, update_time, position_count, company_info, company_photo, 
-    matState, create_time, modify_time, license_path, last_login_time, month_visits, 
-    openid, share_number, position_number, position_see_number, position_exposure_number, 
-    account_state, why
+    company_type, icon_path, zhi_wu, modify_time, position_count, company_info, company_photo, 
+    matState, create_time, license_path, last_login_time, month_visits, openid, share_number, 
+    position_number, position_see_number, position_exposure_number, account_state, why
   </sql>
 </mapper>

@@ -71,4 +71,14 @@ public class PositionController {
         return positionService.getPositionByParams(session, type, city, money, scale);
     }
 
+    /**
+     * 根据企业id获取职位信息
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("getPositionByCid")
+    public BusinessMessage getPositionByCid(HttpSession session){
+        return positionService.getPositionByCid(session);
+    }
 }

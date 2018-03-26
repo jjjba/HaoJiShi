@@ -25,4 +25,26 @@ public class ResumeController {
     public BusinessMessage submitResume(HttpSession session){
         return resumeService.submitResume(session);
     }
+
+    /**
+     * 求职者给企业打电话增加电话次数
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("addResumeTellPhoneNum")
+    public BusinessMessage addResumeTellPhoneNum(HttpSession session){
+        return resumeService.addResumeTellPhoneNum(session);
+    }
+
+    /**
+     * 获取求职者投递记录
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("getAllSubmitResume")
+    public BusinessMessage getAllSubmitResume(HttpSession session){
+        return resumeService.getAllSubmitResume(session);
+    }
 }

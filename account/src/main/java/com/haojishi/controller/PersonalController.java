@@ -5,6 +5,7 @@ import com.haojishi.util.BusinessMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,7 @@ public class PersonalController {
      * @param request
      * @return 所有求职者信息
      */
-    @RequestMapping("/getAllPersonal")
+    @RequestMapping("getAllPersonal")
     public BusinessMessage getAllPersoanal(HttpServletRequest request,Integer page,Integer size){
         return personalServicel.getAllPersonal(request,page,size);
     }
@@ -33,16 +34,16 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("getPersonalHopeJobClassification")
-    public BusinessMessage getPersonalHopeJobClassification(HttpSession session){
-        return personalServicel.getPersonalHopeJobClassification(session);
+    public BusinessMessage getPersonalHopeJobClassification(HttpSession session,HttpServletRequest request){
+        return personalServicel.getPersonalHopeJobClassification(session,request);
     }
 
     /**
-     * 根据personalId查询求职者信息
+     * 根据personalOpenid查询求职者信息
      *
      * @return BusinessMessage - 求职者信息
      */
-    @RequestMapping("/getPersonalInfo")
+    @RequestMapping("getPersonalInfo")
     public BusinessMessage getPersonalInfo(HttpSession session){
         return personalServicel.getPersonalInfo(session);
     }
@@ -57,5 +58,20 @@ public class PersonalController {
     @RequestMapping("/code")
     public BusinessMessage code(String phone, HttpServletRequest request){
         return personalServicel.sendPhoneCode(phone,request);
+    }
+
+    /**
+     * 根据求职者openid修改信息
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalByPersonalOpenid")
+    public BusinessMessage updatePersonalByPersonalOpenid(HttpSession session, String address, String hopeCity, Integer age, String sex,
+                                                          String hopeJob, String expectMoney, String jobExperience, String myHometown,
+                                                          String myselfInfo, String special, String recordSchool, String name, String onceDo,
+                                                          String phone, MultipartFile photo, MultipartFile avatar){
+        return personalServicel.updatePersonalByPersonalOpenid(session, address, hopeCity, age, sex, hopeJob, expectMoney, jobExperience,
+                myHometown, myselfInfo, special, recordSchool, name, onceDo, phone, photo, avatar);
     }
 }

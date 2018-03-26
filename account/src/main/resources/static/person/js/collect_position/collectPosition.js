@@ -87,3 +87,7 @@ function loadCollectPosition() {
         }
     })
 }
+
+function onBack() {
+    window.location.href="/transition/transition_goMySelf";
+}

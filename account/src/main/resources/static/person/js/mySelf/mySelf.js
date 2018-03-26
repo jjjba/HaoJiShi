@@ -29,17 +29,27 @@ function loadPersonalData() {
             if(age == '' || age == null){
                 age ="未填写"
             }
+            avatar =per.avatar;
+            if(avatar == '' || avatar == null){
+                avatar="../../person/images/tupian.png";
+            }
+            sex =per.sex;
+            if(sex == '男'){
+                sex="../../person/images/biao05.png";
+            }else{
+                sex="../../person/images/biao06.png";
+            }
 
             var sbjltitis ='<div class="sbtopxxs">'+
                 '<div class="sblefs">'+
-                '<div class="icon"></div>'+
+                '<img src="'+avatar+'" />'+
                 '</div>'+
                 '<div class="sbyours">'+
-                '<div class="lylyus">'+name+' <span class="sex"></span></div>'+
+                '<div class="lylyus">'+name+' <span><img src="'+sex+'">'+age+'</span></div>'+
                 '<div class="grxhzls">'+state+'</div>'+
                 '</div>'+
                 '</div>'+
-                '<a href="#">'+
+                '<a href="/transition/my_resume" onclick="loadPersonalInfo()">'+
                 '<div class="xibkass">'+
                 '<div class="progressbar">'+
                 '<span>35</span>%'+
@@ -51,18 +61,7 @@ function loadPersonalData() {
                 '</div>'+
                 '</a>';
             $('.sbjltitis').append(sbjltitis);
-            avatar =per.avatar;
-            if(avatar == '' || avatar == null){
-                $('.icon').append('<img src="../../person/images/tupian.png}" />');
-            }else {
-                $('.icon').append('<img src="'+avatar+'" />');
-            }
-            sex =per.sex;
-            if(sex == '男'){
-                $('.sex').append('<img src="../../person/images/biao05.png">'+age);
-            }else{
-                $('.icon').append('<img src="../../person/images/biao06.png">'+age);
-            }
+
         },
         error :function (res) {
 
@@ -97,4 +96,8 @@ function goIndex() {
 
 function goPosition() {
     window.location.href="/transition/transition_all_position";
+}
+
+function loadPersonalInfo() {
+    window.location.href="/transition/my_resume";
 }

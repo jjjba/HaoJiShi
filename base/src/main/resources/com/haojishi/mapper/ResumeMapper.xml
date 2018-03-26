@@ -11,11 +11,12 @@
     <result column="position_id" jdbcType="INTEGER" property="positionId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="tellPhoneNum" jdbcType="INTEGER" property="tellphonenum" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, personal_id, company_id, position_id, create_time, update_time
+    id, personal_id, company_id, position_id, create_time, update_time, tellPhoneNum
   </sql>
 </mapper>

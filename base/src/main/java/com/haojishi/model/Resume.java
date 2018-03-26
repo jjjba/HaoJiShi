@@ -42,6 +42,12 @@ public class Resume implements Serializable {
     @Column(name = "update_time")
     private Date updateTime;
 
+    /**
+     * 拨打电话次数
+     */
+    @Column(name = "tellPhoneNum")
+    private Integer tellphonenum;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -152,6 +158,24 @@ public class Resume implements Serializable {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 获取拨打电话次数
+     *
+     * @return tellPhoneNum - 拨打电话次数
+     */
+    public Integer getTellphonenum() {
+        return tellphonenum;
+    }
+
+    /**
+     * 设置拨打电话次数
+     *
+     * @param tellphonenum 拨打电话次数
+     */
+    public void setTellphonenum(Integer tellphonenum) {
+        this.tellphonenum = tellphonenum;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -164,6 +188,7 @@ public class Resume implements Serializable {
         sb.append(", positionId=").append(positionId);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
+        sb.append(", tellphonenum=").append(tellphonenum);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
