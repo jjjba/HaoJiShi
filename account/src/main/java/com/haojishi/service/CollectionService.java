@@ -1,12 +1,7 @@
 package com.haojishi.service;
 
-import com.haojishi.mapper.CollectPositionMapper;
-import com.haojishi.mapper.CommonCollectionsMapper;
-import com.haojishi.mapper.PersonalMapper;
-import com.haojishi.mapper.UserMapper;
-import com.haojishi.model.CollectPosition;
-import com.haojishi.model.Personal;
-import com.haojishi.model.User;
+import com.haojishi.mapper.*;
+import com.haojishi.model.*;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +14,12 @@ import java.util.*;
 @Slf4j
 @Service
 public class CollectionService {
+
+    @Autowired
+    private CompanyMapper companyMapper;
+
+    @Autowired
+    private CollectPersonalMapper collectPersonalMapper;
 
     @Autowired
     private PersonalMapper personalMapper;
@@ -67,7 +68,17 @@ public class CollectionService {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             int id = (int) session.getAttribute("positionId");
-            collectPositionMapper.deleteByPrimaryKey(id);
+            String openid = (String) session.getAttribute("openid");
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> users =userMapper.selectByExample(userExample);
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Example example =new Example(CollectPosition.class);
+            example.createCriteria().andEqualTo("personalId",personals.get(0).getId()).andEqualTo("positionId",id);
+            List<CollectPosition> col =collectPositionMapper.selectByExample(example);
+            collectPositionMapper.deleteByPrimaryKey(col.get(0).getId());
             businessMessage.setMsg("取消成功");
             businessMessage.setSuccess(true);
         } catch (Exception e) {
@@ -101,5 +112,70 @@ public class CollectionService {
             businessMessage.setMsg("获取收藏职位列表失败");
         }
         return  businessMessage;
+    }
+
+
+    /**
+     * 收藏求职者
+     * @param session
+     * @return
+     */
+    public BusinessMessage collectPersonal(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            String openid = (String) session.getAttribute("openid");
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> users =userMapper.selectByExample(userExample);
+            if(users !=null && users.size() > 0){
+                Example comExample =new Example(Company.class);
+                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                List<Company> companies =companyMapper.selectByExample(comExample);
+                CollectPersonal collectPersonal =new CollectPersonal();
+                collectPersonal.setCompanyId(companies.get(0).getId());
+                collectPersonal.setCreateTime(new Date());
+                collectPersonal.setPersonalId((Integer) session.getAttribute("personalId"));
+                collectPersonalMapper.insertSelective(collectPersonal);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("收藏求职者成功");
+            }else {
+                log.error("未获取到用户信息");
+            }
+        }catch (Exception e){
+            log.error("收藏求职者失败",e);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 取消收藏求职者
+     * @param session
+     * @return
+     */
+    public BusinessMessage cancelCollectPersonal(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int personalId = (int) session.getAttribute("personalId");
+            String openid = (String) session.getAttribute("openid");
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> users =userMapper.selectByExample(userExample);
+            if(users !=null && users.size() > 0){
+                Example comExample =new Example(Company.class);
+                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                List<Company> companies =companyMapper.selectByExample(comExample);
+                Example colExample =new Example(CollectPersonal.class);
+                colExample.createCriteria().andEqualTo("companyId",companies.get(0).getId()).andEqualTo("personalId",personalId);
+                List<CollectPersonal> col =collectPersonalMapper.selectByExample(colExample);
+                collectPersonalMapper.deleteByPrimaryKey(col.get(0).getId());
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("取消收藏求职者成功");
+            }else {
+                log.error("未获取到用户信息");
+            }
+        }catch (Exception e){
+            log.error("取消收藏求职者失败",e);
+        }
+        return businessMessage;
     }
 }

@@ -52,90 +52,17 @@ public class PositionService {
             List<Map<String,Object>> positionList =new ArrayList<>();   //意向城市 省份所有职位数据
             List<Map<String,Object>> position =new ArrayList<>();       //意向城市 所有职位数据
             List<Map<String,Object>> positions =new ArrayList<>();      //意向省份 所有职位数据
-            List<Map<String,Object>> pos =new ArrayList<>();
             String openid = (String) session.getAttribute("openid");
             Example userExample =new Example(User.class);
             userExample.createCriteria().andEqualTo("openid",openid);
             List<User> users =userMapper.selectByExample(userExample);
             if(users != null && users.size() > 0) {
-                int type =users.get(0).getType();
-                if(type == 1){
-                    businessMessage =getPositionByPersonalAddress(users.get(0).getId());
+                    businessMessage =getPositionByUserId(request,users.get(0).getId());
                     position = (List<Map<String, Object>>) businessMessage.getData();
                     for(int i = 0;i < 10;i++){
                         positionList.add(position.get(i));
                     }
                     businessMessage.setMsg("获取首页推荐职位成功");
-                }else if(type == 2){
-                    Example comExample =new Example(Company.class);
-                    comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                    List<Company> companies =companyMapper.selectByExample(comExample);
-                    if(companies != null && companies.size() > 0){
-                        String address =companies.get(0).getCompanyCity();
-                        position =commonPositionMapper.getPositionByAddress(address);
-                        if(position.size() > 10){
-                            for(int a = 0;a < 10;a++){
-                                positionList.add(position.get(a));
-                            }
-                        }else {
-                            Example example = new Example(Region.class);
-                            example.createCriteria().andEqualTo("name", address);
-                            List<Region> regionList = regionMapper.selectByExample(example);
-                            List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
-                            for(int i = 0;i < list.size();i++){
-                                for(int d = 0;d < position.size();d++) {
-                                    if (list.get(i).get("id") != position.get(d).get("id")) {
-                                        positions.add(list.get(i));
-                                    }
-                                }
-                            }
-                            for(int a = 0;a < position.size();a++){
-                                pos.add(position.get(a));
-                            }
-                            for(int b = 0;b < positions.size();b++){
-                                pos.add(positions.get(b));
-                            }
-                            for(int c = 0;c < 10;c++){
-                                positionList.add(pos.get(c));
-                            }
-                        }
-                    }else {
-                        businessMessage.setMsg("未获取到企业信息");
-                        log.error("未获取到企业信息");
-                    }
-                }else{
-                    RemortIP remortIP =new RemortIP();
-                    String address =remortIP.getAddressByIP(request);
-                    position =commonPositionMapper.getPositionByAddress(address);
-                    if(position.size() > 10) {
-                        for(int a = 0;a < 10;a++){
-                            positionList.add(position.get(a));
-                        }
-                    }else{
-                        Example example = new Example(Region.class);
-                        example.createCriteria().andEqualTo("name", address);
-                        List<Region> regionList = regionMapper.selectByExample(example);
-                        List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
-                        for(int i = 0;i < list.size();i++){
-                            for(int d = 0;d < position.size();d++) {
-                                if (list.get(i).get("id") != position.get(d).get("id")) {
-                                    positions.add(list.get(i));
-                                }
-                            }
-                        }
-                        for(int a = 0;a < position.size();a++){
-                            pos.add(position.get(a));
-                        }
-                        for(int b = 0;b < positions.size();b++){
-                            pos.add(positions.get(b));
-                        }
-                        for(int c = 0;c < 10;c++){
-                            positionList.add(pos.get(c));
-                        }
-                    }
-                }
-                businessMessage.setMsg("获取求职者信息成功");
-                businessMessage.setData(positionList);
             }else {
                 log.error("未获取到用户信息");
                 businessMessage.setMsg("未获取到用户信息");
@@ -223,7 +150,7 @@ public class PositionService {
      * @param session
      * @return BusinessMessage - 同城所有职位信息
      */
-    public BusinessMessage getPosition(HttpSession session){
+    public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
@@ -231,7 +158,7 @@ public class PositionService {
         List<User> users =userMapper.selectByExample(userExample);
         if(users != null && users.size() > 0) {
             int id = users.get(0).getId();
-            businessMessage=getPositionByPersonalAddress(id);
+            businessMessage=getPositionByUserId(request,id);
         }else{
             businessMessage.setMsg("未获取到用户信息");
             log.error("未获取到用户信息");
@@ -260,18 +187,21 @@ public class PositionService {
     }
 
     /**
-     * 根据求职者意向城市 意向工作推荐职位
+     * 根据用户id查看是否注册 以及完善求职者用户信息
      * @param userId
      * @return
      */
-    public BusinessMessage getPositionByPersonalAddress(Integer userId){
+    public BusinessMessage getPositionByUserId(HttpServletRequest request,Integer userId){
         BusinessMessage businessMessage =new BusinessMessage();
         List<Map<String,Object>> positionList =new ArrayList();                //意向城市和省份所有职位数据
         List<Map<String,Object>> position =new ArrayList<>();                  //意向城市职位数据
         List<Map<String,Object>> positions =new ArrayList<>();
+        List<Map<String,Object>> posi =new ArrayList<>();
         Example perExample = new Example(Personal.class);
         perExample.createCriteria().andEqualTo("userId", userId);
+        //查询求职者列表是否有该求职者信息
         List<Personal> personals = personalMapper.selectByExample(perExample);
+        //有说明注册并完善信息
         if (personals != null && personals.size() > 0) {
             String hopeCity =personals.get(0).getHopeCity();
             String hopeJob =personals.get(0).getHopeJob();
@@ -322,8 +252,36 @@ public class PositionService {
             businessMessage.setSuccess(true);
             businessMessage.setMsg("获取职位成功");
         }else {
-            businessMessage.setMsg("未获取到求职者信息");
-            log.error("未获取到求职者信息");
+            //没有说明是游客或者只注册未完善信息
+            RemortIP remortIP =new RemortIP();
+            String address =remortIP.getAddressByIP(request);
+            position =commonPositionMapper.getPositionByAddress(address);
+            if(position.size() > 10) {
+                for(int a = 0;a < 10;a++){
+                    positionList.add(position.get(a));
+                }
+            }else{
+                Example example = new Example(Region.class);
+                example.createCriteria().andEqualTo("name", address);
+                List<Region> regionList = regionMapper.selectByExample(example);
+                List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
+                for(int i = 0;i < list.size();i++){
+                    for(int d = 0;d < position.size();d++) {
+                        if (list.get(i).get("id") != position.get(d).get("id")) {
+                            positions.add(list.get(i));
+                        }
+                    }
+                }
+                for(int a = 0;a < position.size();a++){
+                    posi.add(position.get(a));
+                }
+                for(int b = 0;b < positions.size();b++){
+                    posi.add(positions.get(b));
+                }
+                for(int c = 0;c < 10;c++){
+                    positionList.add(posi.get(c));
+                }
+            }
         }
         return businessMessage;
     }
@@ -345,5 +303,6 @@ public class PositionService {
         businessMessage.setSuccess(true);
         return businessMessage;
     }
+
 
 }

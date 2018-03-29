@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* CSS Document */
+body{background:#f7f7f7; padding-bottom:4rem;}
+
+  .cjwtisl{ background:#fff; padding:0 0 0 1.2rem; margin-top:1rem;}
+   
+   .cjwtisl li{ border-bottom:1px solid #ebebeb; padding:1.3rem 1.2rem 1.3rem 0;} 
+    
+	.cjwtisl li:last-child{ border:0;}
+	
+	.cjwtisl li a{ display:block;display:box; display:-webkit-box; display:-moz-box;}
+     .zbwzs01{font-size:1.6rem; color:#404040; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; padding-right:1.2rem;}
+      
+	  .zbwzs02{ width:0.7rem;}
+        .zbwzs02 img{ width:100%; padding-top:0.5rem;}
+    
+	/*联系客服开始*/
+	.lxkfuis{ width:100%; height:4rem; position:fixed; left:0; bottom:0; background:#fff;  border-top:1px solid #ebebeb;}
+	  .lxkfuis a{ display:block; width:100%; font-size:1.7rem; color:#FF6118; text-align:center; height:4rem; line-height:4rem;}
+	  .lxkfuis a img{ width:1.6rem; vertical-align:middle;}
+	/*联系客服结束*/
+   
+    /*问题详情开始*/
+	.nrxxiyus{background:#fff; margin-top:1rem; padding:1rem 0 1rem 1.2rem;}
+	  .nrxxiyus h1{ border-bottom:1px solid #ebebeb; font-size:1.6rem; color:#404040; padding:0.5rem 0 1.2rem 0;}
+	   .nrxxiyus p{font-size:1.6rem; color:#9E9E9E; padding:1rem 1.2rem 0 0;}
+	/*问题详情结束*/
+    
+	/*隐私设置开始*/
+	.yszshezhis{ background:#fff; padding:1rem 1.2rem 1rem 1.2rem; margin-top:1rem;}
+	 .zcyouus{font-size:1.6rem; color:#404040; padding-top:0.5rem;}
+	   .yoiuciis{}
+	   
+	   
+ .regular-checkbox {
+	display: none;
+}
+.regular-checkbox + label {
+	background-color: #fff;
+	display: inline-block;
+	vertical-align:middle;
+	width:5.5rem;
+	height:2.8rem;
+	background:url(../images/kgy01.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+}
+.regular-checkbox:checked + label {
+	background:url(../images/kgy02.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	border: 0;
+	
+} 
+	   
+	/*隐私设置结束*/
+    
+	/*修改手机开始*/
+	.xgsjhoma{ background:#fff; padding:0 0 0 1.2rem; margin-top:1rem;}
+	  .sbyouis{ padding:1.3rem 0 1.3rem 0; display:box; display:-webkit-box; display:-moz-box; border-bottom:1px solid #ebebeb;}
+	  .luyilf01{ width:6rem;font-size:1.6rem;color: #404040;}
+	  .luyilf02{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;}
+	  .sjuyys{ width:100%; font-size:1.6rem; color:#404040; padding-top:0.1rem}
+	  
+	  .botmxs{padding:1.3rem 1.2rem 1.3rem 0; display:box; display:-webkit-box; display:-moz-box;}
+	   .zuoceso{font-size:1.6rem; color:#404040; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;}
+	  
+	  
+	  .youbyois{ width:10rem; padding-top:0.3rem;}
+	  .yzxis{ width:100%; background:none; border:0; font-size:1.4rem; color:#FF6118; text-align:right;}
+	  
+	/*修改手机结束*/
+
+    /*账号设置开始*/
+	.xgsjhoma ul li{border-bottom:1px solid #ebebeb;}
+	.xgsjhoma ul li:last-child{ border:0;}
+	.xgsjhoma ul li a{padding:1.3rem 1.2rem 1.3rem 0; display:block;}
+	
+	.zbiuus01{font-size:1.6rem; color:#404040;}
+	 .zbiuus02{ font-size:1.4rem; color:#9E9E9E;}
+	 .zbiuus02 img{ width:0.7rem; vertical-align:middle; margin-left:1rem;}
+	 
+	 
+	 .tcdlyus{ padding:1rem 0 0 0;}
+	  .tcdlans{ display:block; width:100%; background:#fff; font-size:1.6rem; color:#FF5252; text-align:center; padding:1.3rem 0 1.3rem 0;}
+	 
+	/*账号设置结束*/
+    
+	/*城市搜索开始*/
+	
+	.sskuis{background:#fff; padding:1rem 1.2rem 1rem 1.2rem; display:box; display:-webkit-box; display:-moz-box; border-bottom:1px solid #ebebeb;}
+	  .zukiiuss{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; background:#f2f2f2; height:3rem; border-radius:3.5rem; display:box; display:-webkit-box; display:-moz-box;}
+	  .srii001{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;}
+	  .yupois{ width:100%; text-indent:1rem; font-size:1.4rem; color:#9E9E9E; background:none; border:0; padding-top:0.7rem;}
+	  .youckiis{ width:2.3rem; text-align:center; padding:0.6rem 0.5rem 0 0;}
+	   .youckiis img{ width:100%;}
+	   .quxiaoys{ width:3.5rem; text-align:right; font-size:1.4rem; color:#404040; padding-top:0.6rem;}
+	    .quxiaoys a{color:#404040;}
+		
+		.listbks{ background:#fff;}
+		.listbks li{border-bottom:1px solid #ebebeb; padding:1.3rem 1.2rem 1.3rem 1.2rem; font-size:1.4rem; color:#404040;}
+		.listbks li:last-child{ border:0;}
+		
+		.qklishs{ display:block; font-size:1.4rem; color:#9E9E9E; text-align:center; margin-top:3rem;}
+	/*城市搜索结束*/
+.luyilf02{ font-size:1.6rem; color:#404040;}
+
+
+  .bcanius{ position:fixed; bottom:0; left:0; width:100%; height:4rem;}
+  
+  .bcnois{ width:100%; height:4rem; display:block; border:0; background: #FF6118; font-size:1.7rem; color:#FFFFFF; text-align:center; line-height:4rem;}
+  
+
+
+
+
+
+
+
+
+
+

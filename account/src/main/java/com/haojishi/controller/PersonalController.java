@@ -74,4 +74,69 @@ public class PersonalController {
         return personalServicel.updatePersonalByPersonalOpenid(session, address, hopeCity, age, sex, hopeJob, expectMoney, jobExperience,
                 myHometown, myselfInfo, special, recordSchool, name, onceDo, phone, photo, avatar);
     }
+
+    /**
+     * 获取求职者简历状态
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("getResumeState")
+    public BusinessMessage getResumeState(HttpSession session){
+        return personalServicel.getResumeState(session);
+    }
+
+    /**
+     * 隐藏求职者简历
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("hideResumeState")
+    public BusinessMessage hideResumeState(HttpSession session){
+        return personalServicel.hideResumeState(session);
+    }
+
+    /**
+     * 显示求职者简历
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("showResumeState")
+    public BusinessMessage showResumeState(HttpSession session){
+        return personalServicel.showResumeState(session);
+    }
+
+    /**
+     * 获取企业端推荐求职者数据
+     *
+     * @param request
+     * @param session
+     * @return
+     */
+    @RequestMapping("getIndexPersonal")
+    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session){
+        return personalServicel.getIndexPersonal(request,session);
+    }
+
+    /**
+     * 企业端获取求职者简历
+     *
+     * @return BusinessMessage - 求职者简历
+     */
+    @RequestMapping("getPersonalInfoById")
+    public BusinessMessage getPersonalInfoById(HttpSession session){
+        return personalServicel.getPersonalInfoById(session);
+    }
+
+    /**
+     * 根据企业所在城市/省份获取企业端求职者信息
+     *
+     * @return
+     */
+    @RequestMapping("getPersonal")
+    public BusinessMessage getPersonal(HttpServletRequest request,HttpSession session){
+        return personalServicel.getPersonal(request, session);
+    }
 }

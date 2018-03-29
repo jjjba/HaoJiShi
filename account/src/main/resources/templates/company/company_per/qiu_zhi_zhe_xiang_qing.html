@@ -1,0 +1,256 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>人才详情</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    
+    <link type="text/css" href="/static/company/css/qiu_zhi_zhe_xiang_qing/top.css"
+          th:href="@{/company/css/qiu_zhi_zhe_xiang_qing/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/qiu_zhi_zhe_xiang_qing/xiangqing.css"
+          th:href="@{/company/css/qiu_zhi_zhe_xiang_qing/xiangqing.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/qiu_zhi_zhe_xiang_qing/bottom02.css"
+          th:href="@{/company/css/qiu_zhi_zhe_xiang_qing/bottom02.css}" rel="stylesheet" />
+    
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script src="/static/company/js/qiu_zhi_zhe_xiang_qing/lightgallery.js" th:src="@{/company/js/qiu_zhi_zhe_xiang_qing/lightgallery.js}"></script>
+
+
+    <script type="text/javascript" src="/static/company/js/qiu_zhi_zhe_xiang_qing/xiangqing.js"
+            th:src="@{/company/js/qiu_zhi_zhe_xiang_qing/xiangqing.js}" ></script>
+    
+    <!--个人照片开始-->
+    <script type="text/javascript" src="/static/company/js/qiu_zhi_zhe_xiang_qing/jquery.mCustomScrollbar.concat.min.js"
+            th:src="@{/company/js/qiu_zhi_zhe_xiang_qing/jquery.mCustomScrollbar.concat.min.js}" ></script>
+    <script>
+		(function($){
+			$(window).load(function(){
+				
+				$.mCustomScrollbar.defaults.theme="light-2"; //set "light-2" as the default theme
+				
+				$("#ho").mCustomScrollbar({
+					axis:"x",
+					advanced:{autoExpandHorizontalScroll:true}
+				});
+		
+			});
+		})(jQuery);
+	</script>
+    <script>
+        lightGallery(document.getElementById('lightgallery'));
+    </script>
+    <!--个人照片结束-->
+     
+      <!--图片放大开始-->
+      <link rel="stylesheet" type="text/css" href="/static/company/css/qiu_zhi_zhe_xiang_qing/lightgallery.min.css"
+      th:href="@{/company/css/qiu_zhi_zhe_xiang_qing/lightgallery.min.css}">
+
+      <style type="text/css">
+	  
+		.lg-toolbar .lg-download:after {
+			content: "下载";
+			font-size:1.2rem;
+		}
+		.lg-toolbar .lg-close:after {
+			content: "关闭";
+			font-size:1.2rem;
+		}
+		
+		.lg-actions .lg-next:before {
+			content: "";
+			display:block;
+           background:url(../../../static/company/images/next.png) no-repeat;
+		   width:4rem; height:4rem;
+		   background-size:100% 100%; -moz-background-size:100% 100%; -webkit-background-size:100% 100%;
+           }
+		.lg-actions .lg-prev:after {
+			content: "";
+			display:block;
+           background:url(../../../static/company/images/prev.png) no-repeat;
+		   width:4rem; height:4rem;
+		   background-size:100% 100%;-moz-background-size:100% 100%; -webkit-background-size:100% 100%;
+		}
+		
+      </style>
+      <!--图片放大结束-->
+     
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     简历详情
+     <a href="#" class="zjtous" onclick="goBack()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}" /></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--个人资料开始-->
+ <div class="grzlyuis">
+ </div>
+ <!--个人资料结束-->
+ <!--求职意向开始-->
+ <div class="zwxqius">
+ </div>
+ <!--求职意向结束-->
+  <!--自我介绍开始-->
+ <div class="zwxqius02" id="mySelfInfo" style="display: none">
+   <!--标题开始-->
+   <div class="zwxtits">自我介绍</div>
+   <!--标题结束-->
+   <!--内容开始-->
+   <div class="zwqxconts" id="myself">
+   </div>
+   <!--内容结束-->
+ </div>
+ <!--自我介绍结束-->
+
+  <!--详细资料开始-->
+ <div class="zwxqius02" id="ziliao" style="display: none">
+   <!--标题开始-->
+   <div class="zwxtits">详细资料</div>
+   <!--标题结束-->
+   <!--内容开始-->
+   <div class="zwqxconts" id="xiangxiziliao">
+   </div>
+   <!--内容结束-->
+ </div>
+ <!--详细资料结束-->
+ 
+ <!--个人照片开始-->
+ <div class="zwxqius02" id="photoes" style="display: none">
+   <!--标题开始-->
+   <div class="zwxtits">个人照片</div>
+   <!--标题结束-->
+   
+   <!--内容开始-->
+<div class="made scrollbox" id="horizontal" >
+    <div class="madegame" id="ho">
+    	<ul class="clearfix" id="lightgallery">
+    	</ul>
+    </div>
+     			 
+</div>
+   <!--内容结束-->
+   
+ </div>
+ <!--个人照片结束-->
+ 
+ 
+ <!--最底部开始-->
+ <div class="footres">
+   <!--收藏开始-->
+   <div class="d-btn scnass"><i></i>收藏</div>
+   <!--收藏结束-->
+
+   <!--联系TA开始-->
+   <div class="wyypins">
+     <a href="#" onclick="tellPhone()">联系TA</a>
+   </div>
+   <!--联系TA结束-->
+   
+ </div>
+ <!--最底部结束-->
+ 
+<!--收藏提示弹窗开始-->
+    <div class="toolbarframe">收藏成功</div>
+    <div class="toolbarframe02">取消成功</div>
+    <div class="toolbarframe03">收藏失败,请重试!!</div>
+    <div class="toolbarframe04">取消失败,请重试!!</div>
+<!--收藏提示弹窗结束-->
+ 
+ 
+ <!--图片放大开始-->
+
+<!--图片放大结束-->
+ 
+ 
+ 
+   <!--收藏弹出层开始-->
+  <div class="popupus xianyin01" id="denglu" style="display: none">
+    <!--里边开始-->
+    <div class="pupuinto">
+      <div class="lbyis">
+        <p class="patopss">登录后才可以收藏人才</p>
+        <ul>
+          <li class="wzkljgz01" id="zaikandenglu"><a href="#">我再看看</a></li>
+          <li class="wzkljgz02" id="likedenglu"><a href="#">立刻登录</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--里边结束-->
+  </div>
+
+ <div class="popupus xianyin01" id="wanshan" style="display: none">
+     <!--里边开始-->
+     <div class="pupuinto">
+         <div class="lbyis">
+             <p class="patopss">完善信息才可以收藏人才</p>
+             <ul>
+                 <li class="wzkljgz01" id="zaikanwanshan"><a href="#">我再看看</a></li>
+                 <li class="wzkljgz02" id="likewanshan"><a href="#">立刻完善</a></li>
+             </ul>
+         </div>
+     </div>
+     <!--里边结束-->
+ </div>
+  <!--收藏弹出层结束-->
+  
+  
+  
+   <!--电话弹出层开始-->
+  <div class="popupus xianyin02" style="display: none">
+    <!--里边开始-->
+    <div class="pupuinto">
+      <div class="lbyis">
+        <p class="patopss">开通好技师快招服务后才可以电话直接联系人才</p>
+        <ul>
+          <li class="wzkljgz01" id="zaikankaitong"><a href="#">我再看看</a></li>
+          <li class="wzkljgz02" id="likekaitong"><a href="#">立刻开通</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--里边结束-->
+  </div>
+
+ <div class="popupus xianyin03" style="display: none">
+     <!--里边开始-->
+     <div class="pupuinto">
+         <div class="lbyis">
+             <p class="patopss">您的好技师服务已到期,请续费,才可以电话直接联系人才</p>
+             <ul>
+                 <li class="wzkljgz01" id="zaikanxufei"><a href="#">我再看看</a></li>
+                 <li class="wzkljgz02" id="likexufei"><a href="#">立刻续费</a></li>
+             </ul>
+         </div>
+     </div>
+     <!--里边结束-->
+ </div>
+  <!--电话弹出层结束-->
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

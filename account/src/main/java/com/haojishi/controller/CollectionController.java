@@ -46,4 +46,24 @@ public class CollectionController {
     public BusinessMessage selectCollectPosition(HttpSession session){
         return collectionService.selectCollectPosition(session);
     }
+
+    /**
+     * 收藏求职者
+     * @param session
+     * @return
+     */
+    @RequestMapping("collectPersonal")
+    public BusinessMessage collectPersonal(HttpSession session){
+        return collectionService.collectPersonal(session);
+    }
+
+    /**
+     * 取消收藏求职者
+     * @param session
+     * @return
+     */
+    @RequestMapping("cancelCollectPersonal")
+    public BusinessMessage cancelCollectPersonal(HttpSession session){
+        return collectionService.cancelCollectPersonal(session);
+    }
 }

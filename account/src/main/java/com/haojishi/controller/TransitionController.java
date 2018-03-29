@@ -184,5 +184,127 @@ public class TransitionController {
         return "personal/mySelf/my_special";
     }
 
+    /**
+     * 跳转隐私设置页面
+     *
+     * @return
+     */
+    @RequestMapping("go_privacy_setting")
+    public String go_privacy_setting(){
+        return "personal/mySelf/privacy_setting";
+    }
+
+    /**
+     * 跳转企业快招页面
+     *
+     * @return
+     */
+    @RequestMapping("go_kuai_zhao")
+    public String go_kuai_zhao(){
+        return "company/company_index/kuai_zhao";
+    }
+
+    /**
+     * 跳转企业首页
+     *
+     * @return
+     */
+    @RequestMapping("go_company_index")
+    public String go_company_index(){
+        return "company/company_index/companyIndex";
+    }
+
+    /**
+     * 跳转企业招聘简报页面
+     *
+     * @return
+     */
+    @RequestMapping("go_zhao_pin_jian_bao")
+    public String go_zhao_pin_jian_bao(){
+        return "company/company_index/zhao_pin_jian_bao";
+    }
+
+    /**
+     * 跳转企业委托招聘页面
+     *
+     * @return
+     */
+    @RequestMapping("go_wei_tuo_zhao_pin")
+    public String go_wei_tuo_zhao_pin(){
+        return "company/company_index/wei_tuo_zhao_pin";
+    }
+
+    /**
+     * 跳转企业开通委托招聘页面
+     *
+     * @return
+     */
+    @RequestMapping("go_kai_tong_wei_tuo")
+    public String go_kai_tong_wei_tuo(){
+        return "company/company_index/kai_tong_wei_tuo";
+    }
+
+    /**
+     * 跳转企业查看所有求职者页面
+     *
+     * @return
+     */
+    @RequestMapping("go_qiu_zhi_zhe")
+    public String go_qiu_zhi_zhe(){
+        return "company/company_per/qiu_zhi_zhe";
+    }
+
+    /**
+     * 跳转企业我的页面
+     *
+     * @return
+     */
+    @RequestMapping("go_wo_de")
+    public String go_wo_de(){
+        return "company/company_myself/wo_de";
+    }
+
+    /**
+     * 跳转企业咨询阅览页面
+     *
+     * @return
+     */
+    @RequestMapping("go_zi_xun_yue_lan")
+    public String go_zi_xun_yue_lan(){
+        return "company/company_index/zi_xun_yue_lan";
+    }
+
+    /**
+     * 跳转求职者详情页面
+     *
+     * @return
+     */
+    @RequestMapping("go_qiu_zhi_zhe_xiang_qing")
+    public String go_qiu_zhi_zhe_xiang_qing(HttpSession session,Integer id){
+        session.removeAttribute("personalId");
+        session.setAttribute("personalId",id);
+        return "company/company_per/qiu_zhi_zhe_xiang_qing";
+    }
+
+    /**
+     * 跳转填写企业信息页面
+     *
+     * @return
+     */
+    @RequestMapping("go_zhu_ce_tian_xie_xin_xi")
+    public String go_zhu_ce_tian_xie_xin_xi(){
+        return "company/company_myself/zhu_ce_tian_xie_xin_xi";
+    }
+
+    /**
+     * 跳转注册企业页面
+     *
+     * @return
+     */
+    @RequestMapping("go_zhu_ce")
+    public String go_zhu_ce(HttpSession session,Integer id){
+        return "company/company_myself/zhu_ce";
+    }
+
 
 }

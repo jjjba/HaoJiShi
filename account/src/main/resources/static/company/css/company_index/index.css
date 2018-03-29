@@ -1,0 +1,163 @@
+@charset "utf-8";
+/* CSS Document */
+html,body{ width:100%; height:100%; overflow:auto;}
+
+body{ background:#f7f7f7;}
+
+/*通告开始*/
+.nouents{ background:#fff; height:4rem; display:box; display:-webkit-box; display:-moz-box; margin-top:1rem;}
+  /*左边开始*/
+  .nouzuos{ width:5rem; padding-left:1.2rem;}
+    .nouzuos img{ width:2.5rem; padding-top:1rem;}
+  /*左边结束*/
+  /*右边开始*/
+  .notice_active{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; height:4rem; padding:0; overflow: hidden; padding-right:1.2rem;}
+  .notice_active li{ font-size:1.4rem; color:#363F50; line-height:4rem; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis;}
+  .notice_active li a{color:#363F50;}
+  /*右边结束*/
+/*通告结束*/
+
+/*推荐职位开始*/
+.recpion{ padding-top:1rem;}
+   /*标题开始*/
+   .tjzw{ background:#fff; border-bottom:1px solid #ebebeb; background:#fff;  font-size:1.5rem; color:#404040; font-weight:bold; padding:1.3rem 0 1.3rem 1.2rem;}
+   /*标题结束*/
+   /*一块开始*/
+   .reconblock{ background:#fff; padding:1.5rem 1.2rem 1.5rem 1.2rem; margin-bottom:1rem;}
+      /*职位开始*/
+	  .respise{}
+	    .reselefs{font-size:1.7rem; color:#404040; font-weight:bolder;}
+		.reseyous{ padding-top:4px;}
+		.reseyous span{ display:inline-block; border-radius:16px; -moz-border-radius:16px; -webkit-border-radius:16px; -ms-border-radius:16px; -o-border-radius:16px; font-size:1.1rem; padding:1px 6px 1px 6px; vertical-align:middle;}
+		.reseyous span.yse01{ background:#ffe9de; border:1px solid #ff6118; color:#ff6118;}
+		.reseyous span.yse02{ background:#ffecec; border:1px solid #ff3a3a; color:#ff3a3a; margin-left:3px;}
+	  /*职位结束*/
+	  /*工资及年限开始*/
+	  .wagesyears{ padding:15px 0 15px 0;}
+	    .wayealfs{font-size:1.6rem; color:#FF6118; font-weight:bold;}
+		.wayefris{font-size:1.4rem; color: #9E9E9E; padding-top:3px;}
+	  /*工资及年限结束*/
+	  /*公司名称地址开始*/
+	  .corpnames{display:box; display:-webkit-box; display:-moz-box;}
+	     /*左边开始*/
+		 .corpzuos{width:5rem; position:relative;}
+		 .corpzuos img{ border:1px solid #e5e5e5; width:100%; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -ms-border-radius:5px; -o-border-radius:5px;}
+		 .yrzs{ position:absolute; width:100%; text-align:center; left:0; bottom:-0.68rem;}
+		 .yrzs img{ width:3.5rem; border:0;}
+		 /*左边结束*/
+		 /*右边开始*/
+		 .corpryous{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem; padding-top:5px;}
+		   .corpryous h1{font-size:1.4rem; color:#404040;overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis; text-overflow:ellipsis;}
+		   .corpryous p{font-size:1.2rem; color:#9E9E9E; padding-top:5px;}
+		 /*右边结束*/
+	  /*公司名称地址结束*/
+   /*一块结束*/
+/*推荐职位结束*/
+
+
+/*招人才开始*/
+.rectents{ position:fixed; z-index:100; bottom:5.6rem; right:0;}
+  .rectents img{ width:9rem;}
+/*招人才结束*/
+
+
+/*一块开始*/
+.rcxinxis{ background:#fff; padding:1rem 1.2rem 1rem 1.2rem; margin-bottom:1rem;}
+  /*上边开始*/
+  .rcktops{ border-bottom:1px dashed #ebebeb; display:box; display:-webkit-box; display:-moz-box; padding:0.4rem 0 1rem 0;}
+    
+	/*左开始*/
+	 .reclefs{ width:5.6rem;}
+	    .reclefs img{ width:100%; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px;}
+	/*左结束*/
+	/*右开始*/
+	.recryous{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem;}
+	  .rcvsise{ padding-top:3px;}
+	  .rminsii,.rminsii02{font-size:1.6rem; color:#404040;}
+	  .rminsii span{ display:inline-block; vertical-align:middle; background:#e4f7ff; border:1px solid #00c1ff; color:#00c1ff; font-size:1.1rem; border-radius:3px; padding:0 3px 0 3px; font-weight:bold;}
+	  
+      .rminsii02 span{ display:inline-block; vertical-align:middle; background:#ffebf2; border:1px solid #FF5592; color:#FF5592; font-size:1.1rem; border-radius:3px; padding:0 3px 0 3px; font-weight:bold;}
+	  
+	  .rminsii span img,.rminsii02 span img{ width:1.3rem; vertical-align:middle; font-weight:normal;}
+	  
+	  .ciiuss{font-size:1.6rem; color:#FF6118; font-weight:bold;}
+	  
+	  .xnxyusie{font-size:12px; color:#9E9E9E; padding-top:1.2rem;}
+	  
+	/*右结束*/
+  /*上边结束*/
+   
+   /*下边开始*/
+   .pxbiuss{display:box; display:-webkit-box; display:-moz-box; padding-top:0.8rem;}
+     
+	 .pxlefts{font-size:1.4rem; color:#404040; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; padding-top:0.7rem;}
+	 
+	 .pxyouls{width:3.1rem;}
+	 .pxyouls img{ width:100%;}
+   /*下边结束*/
+   
+/*一块结束*/
+
+
+
+
+
+
+/*弹出层开始*/
+
+.popupus{ position:fixed; width:100%; height:100%; background:url(../../images/tcbg.png); left:0; top:0; z-index:1000;}
+   
+   /*里边开始*/
+   .pupuinto{ width:100%; height:100%; position:relative;}
+     
+	 .lbyis{ position:absolute; width:70%; left:15%; top:25%; background:#fff; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
+	   
+	   .lbyis h1{font-size:1.6rem; color:#404040; text-align:center; font-weight:bold; padding:2rem 0 0.5rem 0;}
+	    .lbyis p{font-size:1.4rem; color:#404040; text-align:center; padding:1rem 1.2rem 1.5rem 1.2rem;}
+	   
+	   .lbyis ul{display:box; display:-webkit-box; display:-moz-box; border-top:1px solid #dbdbdb;}
+	   .lbyis ul li{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; font-size:1.6rem; color:#FF6118; text-align:center; padding:1rem 0 1rem 0;}
+	   .lbyis ul li a{ color:#FF6118;}
+	   
+	   .lbyis ul li.wzkljgz01{ border-right:1px solid #dbdbdb;}
+	   
+	   
+	   .lbyis p.patopss{ padding-top:2rem;}
+   /*里边结束*/
+   
+/*弹出层结束*/
+
+
+/*导航开始*/
+.navers{ background:#fff; padding:1.3rem 0 1.3rem 0; margin-top:1rem; }
+  .navers ul{display:box; display:-webkit-box; display:-moz-box; }
+    .navers ul li{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; text-align:center;}
+	.navers ul li a h1{ text-align:center;}
+	.navers ul li a h1 img{ width:50%;}
+	.navers ul li a p{font-size:1.2rem; color:#404040; text-align:center; padding-top:0.8rem;}
+/*导航结束*/
+
+/*副导航开始*/
+.fnavies{ background:#fff; padding:0rem 1.2rem 0.5rem 1.2rem; }
+
+.fnavies ul{ padding-bottom:0.5rem;}
+.fnavies ul li{ width:49%;}
+
+.fnavies ul li a{ width:100%;}
+/*副导航结束*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

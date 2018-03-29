@@ -26,23 +26,14 @@ function loadPersonalBanner() {
         success: function (res) {
             if (res.success) {
                 var list = res.data;
-                console.log('====='+list);
-                var id, imageUrl, url;
+                var id, url;
                 $.each(list, function (index, item) {
                     id = item.id;
                     url =item.url;
                     if(url == null || url == ""){
                         url ="#";
                     }
-                    var scroll = "";
-                    scroll +=
-                        '<div class="scroll-container swiper-container">' +
-                        '<div class="swiper-wrapper">' +
-                        '<div class="swiper-slide"><a href="'+url+'"><img src="'+item.imageUrl+'" /></a></div>' +
-                        '</div>' +
-                        '</div>'+
-                        '<div class="pagination"></div>';
-                    $('.scroll').append(scroll);
+                    $('.swiper-wrapper').append('<div class="swiper-slide"><a href="'+url+'"><img src="'+item.imageUrl+'" /></a></div>');
                 });
 
             }
@@ -69,10 +60,6 @@ function loadPositionData() {
                     position_name =item.position_name;
                     if(position_name == null || position_name == ""){
                         position_name ="未填写";
-                    }
-                    hot =item.hot;
-                    if(hot == null || hot == ""){
-                        hot ="0";
                     }
                     money =item.money;
                     if(money == null || money == ""){

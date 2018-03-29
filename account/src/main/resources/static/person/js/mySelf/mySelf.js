@@ -101,3 +101,7 @@ function goPosition() {
 function loadPersonalInfo() {
     window.location.href="/transition/my_resume";
 }
+
+function privacySetting() {
+    window.location.href="/transition/go_privacy_setting"
+}

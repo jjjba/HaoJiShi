@@ -51,8 +51,8 @@ public class PositionController {
      * @return BusinessMessage - 同城所有职位信息
      */
     @RequestMapping("getPosition")
-    public BusinessMessage getPosition(HttpSession session){
-        return positionService.getPosition(session);
+    public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
+        return positionService.getPosition(request,session);
     }
 
     /**

@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:#fff;}
+
+
+.dlpicus{ text-align:center;}
+
+.dlpicus img{ width:7.5rem; padding:4rem 0 2rem 0;}
+
+
+  .dhusyts{ background:#fff; border:1px solid #979797; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; display:box; display:-webkit-box; display:-moz-box; width:80%; margin:0 auto; padding:1rem 1.2rem 1rem 1.2rem; }
+
+   .dhhris{ width:1.5rem;}
+    .dhhris img{ width:100%;}
+   
+   .dhhris02{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem;}
+     
+	 .srkuiiis{ width:100%; font-size:1.6rem; color:#404040;}
+
+
+
+.dhhris03{ width:2.5rem; padding-top:0.3rem;}
+
+
+.matyopos{ margin-top:1.6rem;}
+.matyopos02{ margin-top:0.6rem;}
+
+
+/*单选按钮开始*/
+ .regular-checkbox {
+	display: none;
+}
+.regular-checkbox + label {
+	background-color: #fff;
+	display: inline-block;
+	vertical-align:middle;
+	width:2.5rem;
+	height:1.5rem;
+	background:url(../../images/yan001.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+}
+.regular-checkbox:checked + label {
+	background:url(../../images/yan002.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	border: 0;
+	
+} 
+/*单选按钮结束*/
+
+
+
+.sjgyyts{font-size:1.2rem; color:#404040; text-align:center; padding:2rem 0 2rem 0;}
+ .sjgyyts a{color:#FF6118;}
+
+
+
+.dlaniuss{ width:80%; margin:0 auto;}
+
+.dlaniuss a{ display:block; width:100%; background:#FF6118; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; font-size:1.7rem; color:#FFFFFF; text-align:center; padding:1rem 0 1rem 0;}
+
+.zxjiiuss{font-size:1.4rem; color:#FF6118; text-align:center; padding:6rem 0 5rem 0;}
+.zxjiiuss a{ color:#FF6118;}
+.zxjiiuss a img{ width:1rem; vertical-align:middle;}
+
+
+
+
+
+.youbyois{ width:10rem; padding-top:0.3rem;}
+	  .yzxis{ width:100%; background:none; border:0; font-size:1.4rem; color:#FF6118; text-align:right;}
+
+
+
+
+.toolbarframe{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.7rem; width:16rem; height:5rem; line-height:5rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-2.5rem; margin-left:-8rem;}
+
+
+
+
+
+
+
+
+
+

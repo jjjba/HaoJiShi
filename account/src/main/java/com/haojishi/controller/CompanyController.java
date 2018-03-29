@@ -15,11 +15,6 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @RequestMapping("getAllCompany")
-    public BusinessMessage getAllCompany(){
-       return companyService.getAllCompany();
-    }
-
     /**
      * 根据企业id查询企业信息
      *
@@ -29,5 +24,25 @@ public class CompanyController {
     @RequestMapping("getCompanyInfoByCompanyId")
     public BusinessMessage getCompanyInfoByCompanyId(HttpSession session){
         return companyService.getCompanyInfoByCompanyId(session);
+    }
+
+    /**
+     * 判断用户是否是企业用户以及是否符合打电话以及是否收藏
+     * @param session
+     * @return
+     */
+    @RequestMapping("loadUserCompanyInfo")
+    public BusinessMessage loadUserCompanyInfo(HttpSession session){
+        return companyService.loadUserCompanyInfo(session);
+    }
+
+    /**
+     * 更新企业快招服务打电话次数
+     * @param session
+     * @return
+     */
+    @RequestMapping("updatePhoneNum")
+    public BusinessMessage updatePhoneNum(HttpSession session){
+        return companyService.updatePhoneNum(session);
     }
 }

@@ -1,22 +1,14 @@
 package com.haojishi.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.haojishi.mapper.CommonCompanyMapper;
-import com.haojishi.mapper.CompanyMapper;
-import com.haojishi.mapper.UserMapper;
-import com.haojishi.model.Company;
+import com.haojishi.mapper.*;
+import com.haojishi.model.*;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
-
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -30,47 +22,10 @@ public class CompanyService {
 
     @Autowired
     private CommonCompanyMapper commonCompanyMapper;
-
-    /**
-     * 读取企业列表
-     * @return
-     */
-    public BusinessMessage getAllCompany() {
-        BusinessMessage businessMessage = new BusinessMessage(false);
-        try{
-//            if(null==page|| page <1){
-//                page=1;
-//            }
-//            if(null==size || size <1){
-//                size=10;
-//            }
-
-            // 设置分页信息
-//            PageHelper.startPage(page, size);
-//            List<Map<String, Object>> findAll = commonCompanyMapper.findCompanyByPars(name, phone);
-            Example companyExample =new Example(Company.class);
-//            companyExample.setOrderByClause("c");
-            List<Company> companyList =companyMapper.selectByExample(companyExample);
-            List<Map<String, Object>> findAll = new ArrayList<>();
-            for(Company company : companyList){
-
-                Map<String, Object> map = new HashMap<>();
-                map.put("companyName",company.getName());
-            }
-
-            if(null!=findAll &&findAll.size()>0){
-                businessMessage.setData(new PageInfo<>(findAll));
-                businessMessage.setSuccess(true);
-            }else{
-                businessMessage.setMsg("获取企业列表不存在，请重试");
-            }
-        }catch(Exception e){
-            log.error("获取分页查询信息失败", e);
-            businessMessage.setMsg("获取企业列表不存在，请重试");
-        }
-        return businessMessage;
-    }
-
+    @Autowired
+    private CollectPersonalMapper collectPersonalMapper;
+    @Autowired
+    private ServicesMapper servicesMapper;
     /**
      * 根据企业id查询企业信息
      *
@@ -90,5 +45,111 @@ public class CompanyService {
         }
         return businessMessage;
     }
+
+    /**
+     * 判断用户是否是企业用户以及是否符合打电话以及是否收藏
+     * @param session
+     * @return
+     */
+    public BusinessMessage loadUserCompanyInfo(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            List<Map<String,Object>> list =new ArrayList<>();
+            String openid = (String) session.getAttribute("openid");
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> users =usersMapper.selectByExample(userExample);
+            if(users != null && users.size() > 0){
+                Example comExample =new Example(Company.class);
+                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                List<Company> companies =companyMapper.selectByExample(comExample);
+                //如果企业不为空 说明是企业用户并且完善完信息
+                if(companies != null && companies.size() > 0){
+                    Example colExample =new Example(CollectPersonal.class);
+                    colExample.createCriteria().andEqualTo("companyId",companies.get(0).getId()).andEqualTo("personalId",session.getAttribute("personalId"));
+                    List<CollectPersonal> collectPersonals =collectPersonalMapper.selectByExample(colExample);
+                    Map<String,Object> map =new HashMap<>();
+                    if(collectPersonals != null && collectPersonals.size() > 0){
+                        map.put("isCollect","1");
+                    }
+                    Example serviceExample =new Example(Services.class);
+                    serviceExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
+                    List<Services> services =servicesMapper.selectByExample(serviceExample);
+                    if(services != null &&services.size() > 0){
+                        if(services.get(0).getType() .equals("1") ){
+                            if(services.get(0).getSurplusnumber() > 0){
+                                map.put("isKuaiZhao","1");
+                            }else {
+                                map.put("isKuaiZhao","2");
+                            }
+                        }else if(services.get(0).getType() .equals("2") ){
+                            if(services.get(0).getEndtime().getTime() > new Date().getTime()){
+                                map.put("isKuaiZhao","1");
+                            }else {
+                                map.put("isKuaiZhao","2");
+                            }
+                        }
+                    }else {
+                        map.put("isKuaiZhao","3");
+                    }
+                    list.add(map);
+                    businessMessage.setSuccess(true);
+                    businessMessage.setData(list);
+                }else {
+                    //如果企业为空 说明该用户是游客或者注册但是未完善信息
+                    String phone =users.get(0).getPhone();
+                    Map<String,Object> map =new HashMap<>();
+                    //如果手机号存在 说明已经注册 但是未完善信息
+                    if(phone != null && phone != ""){
+                        map.put("isRegist","2");
+                    }else {
+                        map.put("isregist","3");
+                    }
+                    list.add(map);
+                    businessMessage.setData(list);
+                    businessMessage.setSuccess(true);
+                }
+            }else {
+                log.error("未获取到用户信息");
+            }
+        }catch (Exception e){
+            log.error("获取企业用户信息失败",e);
+        }
+        return  businessMessage;
+    }
+
+    /**
+     * 更新企业快招服务打电话次数
+     * @param session
+     * @return
+     */
+    public BusinessMessage updatePhoneNum(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            String openid = (String) session.getAttribute("openid");
+             Example userExample =new Example(User.class);
+             userExample.createCriteria().andEqualTo("openid",openid);
+             List<User> users =usersMapper.selectByExample(userExample);
+             if(users != null && users.size() > 0){
+                 Example comExample =new Example(Company.class);
+                 comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                 List<Company> companies =companyMapper.selectByExample(comExample);
+                 Example serExample =new Example(Services.class);
+                 serExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
+                 List<Services> services =servicesMapper.selectByExample(serExample);
+                 services.get(0).setSurplusnumber(services.get(0).getSurplusnumber() - 1);
+                 servicesMapper.updateByPrimaryKeySelective(services.get(0));
+                 businessMessage.setMsg("更新企业快招打电话次数成功");
+                 businessMessage.setSuccess(true);
+             }else {
+                 log.error("未获取到用户信息");
+             }
+        }catch (Exception e){
+            log.error("更新企业快招打电话次数失败",e);
+        }
+        return businessMessage;
+    }
+
+
 
 }
