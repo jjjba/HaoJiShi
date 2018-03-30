@@ -306,5 +306,38 @@ public class TransitionController {
         return "company/company_myself/zhu_ce";
     }
 
+    /**
+     * 我的界面（跳转到账号设置界面）
+     * @return
+     */
+    @RequestMapping("wo_de_zhang_hao_she_zhi")
+    public String wo_de_zhang_hao_she_zhi(){
+        return "company/company_myself/wo_de_zhang_hao_she_zhi";
+    }
 
+    /**
+     * 我的界面（跳转到招聘简报界面）
+     * @return
+     */
+    @RequestMapping("wo_de_zhao_pin_jian_bao")
+    public String wo_de_zhao_pin_jian_bao(){
+        return "company/company_myself/wo_de_zhao_pin_jian_bao";
+    }
+
+    /**
+     * 我的界面（跳转到我的人才收藏界面）
+     * @return
+     */
+    @RequestMapping("wo_de_ren_cai_shou_cang")
+    public String wo_de_ren_cai_shou_cang(){
+        return "company/company_myself/wo_de_ren_cai_shou_cang";
+    }
+    /**
+     * 我的界面（跳转到常见问题页面）
+     * @return
+     */
+    @RequestMapping("wo_de_chang_jian_wen_ti")
+    public String wo_de_chang_jian_wen_ti(){
+        return "company/company_myself/wo_de_chang_jian_wen_ti";
+    }
 }

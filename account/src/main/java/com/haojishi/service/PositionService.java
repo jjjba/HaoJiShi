@@ -281,6 +281,9 @@ public class PositionService {
                 for(int c = 0;c < 10;c++){
                     positionList.add(posi.get(c));
                 }
+                businessMessage.setData(positionList);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("获取职位成功");
             }
         }
         return businessMessage;
