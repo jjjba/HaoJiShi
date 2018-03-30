@@ -139,4 +139,16 @@ public class PersonalController {
     public BusinessMessage getPersonal(HttpServletRequest request,HttpSession session){
         return personalServicel.getPersonal(request, session);
     }
+
+    /**
+     * 企业端根据条件查找求职者信息
+     * @param positionName
+     * @param sex
+     * @param age
+     * @return
+     */
+    @RequestMapping("getPersonalByParams")
+    public BusinessMessage getPersonalByParams(String positionName,String sex,String age){
+        return personalServicel.getPersonalByParams(positionName, sex, age);
+    }
 }

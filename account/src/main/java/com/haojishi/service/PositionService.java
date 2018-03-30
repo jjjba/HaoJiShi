@@ -233,7 +233,7 @@ public class PositionService {
                         for(int c = 0;c < job.length;c++){
                             if(list.get(b).get("position_name").equals(job[c])){
                                 for(int d = 0;d < position.size();d++){
-                                    if(list.get(b).get("id") != position.get(d).get("id") && list.get(b).get("id").equals(position.get(d).get("id"))){
+                                    if(list.get(b).get("id") != position.get(d).get("id") && !list.get(b).get("id").equals(position.get(d).get("id"))){
                                         positions.add(list.get(b));
                                     }
                                 }

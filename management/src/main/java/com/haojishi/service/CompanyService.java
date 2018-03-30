@@ -283,7 +283,7 @@ public class CompanyService {
                 company.setPhone(phone);
                 company.setZhiWu(zhi_wu);
                 company.setMatstate(matstate);
-                company.setUpdateTime(new Date());
+                company.setModifyTime(new Date());
                 company.setName(company_name);
                 company.setCompanyScale(company_scale);
                 company.setCompanySpecial(company_special_str);

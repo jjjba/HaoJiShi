@@ -23,20 +23,20 @@ var phone;  //求职者手机号
    
   $('.d-btn').click(function(){
   	if(isRegist == "2"){
-  		$('#wanshan').show();
-        $("#zaikanwanshan").click(function(){
-            $("#wanshan").hide();
+  		$('#wanshanshoucang').show();
+        $("#zaikanwanshanshoucang").click(function(){
+            $("#wanshanshoucang").hide();
         });
-        $("#likewanshan").click(function(){
-            $("#wanshan").hide();
+        $("#likewanshanshoucang").click(function(){
+            $("#wanshanshoucang").hide();
             window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
         });
 	}else if(isRegist == "3"){
-        $('#denglu').show();
-        $("#zaikandenglu").click(function(){
-            $("#denglu").hide();
+        $('#denglushoucang').show();
+        $("#zaikandenglushoucang").click(function(){
+            $("#denglushoucang").hide();
         });
-        $("#likedenglu").click(function(){
+        $("#likedenglushoucang").click(function(){
             window.location.href="/transition/go_zhu_ce";
         });
 	}else {
@@ -182,20 +182,21 @@ function loadUserInfo() {
 
 function tellPhone() {
     if(isRegist == "2"){
-        $('#wanshan').show();
-        $("#zaikanwanshan").click(function(){
-            $("#wanshan").hide();
+        $('#wanshandianhua').show();
+        $("#zaikanwanshandianhua").click(function(){
+            $("#wanshandianhua").hide();
         });
-        $("#likewanshan").click(function(){
-            $("#wanshan").hide();
+        $("#likewanshandianhua").click(function(){
+            $("#wanshandianhua").hide();
             window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
         });
     }else if(isRegist == "3"){
-        $('#denglu').show();
-        $("#zaikandenglu").click(function(){
-            $("#denglu").hide();
+        $('#dengludianhua').show();
+        $("#zaikandengludianua").click(function(){
+            $("#dengludianhua").hide();
         });
-        $("#likedenglu").click(function(){
+        $("#likedengludianhua").click(function(){
+            $("#dengludianhua").hide();
             window.location.href="/transition/go_zhu_ce";
         });
     }else {

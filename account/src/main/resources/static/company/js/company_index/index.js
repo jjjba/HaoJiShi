@@ -1,4 +1,8 @@
 // JavaScript Document
+
+var isRegist;//判断是否登陆
+var isKuaiZhao;//是否开通快招服务  1开通并且未到期 2开通已到期 3未开通
+var phone;  //求职者手机号
 $(document).ready(function() {
 
     // var mySwiper = new Swiper('.scroll-container',{
@@ -14,7 +18,7 @@ $(document).ready(function() {
 	loadCompanyBanner();
     loadIndexModule();
     loadPersonal();
-
+    loadUserInfo();
 	$(".wzkljgz01").click(function(){
 		$(".popupus").hide();
 		});
@@ -86,6 +90,7 @@ function loadPersonal(){
             var avatar,sex;
             $.each(list, function (index, item) {
                 avatar =item.avatar;
+                phone =item.phone;
                 if(avatar == null || avatar == ""){
                     if(item.sex == "男"){
 
@@ -116,7 +121,7 @@ function loadPersonal(){
                     '</div>'+
                     '<div class="pxbiuss">'+
                     '<div class="pxlefts">'+item.hopeJob+'</div>'+
-                    '<div class="pxyouls"><a href="#" onclick="tellPhone()"><img src="./../company/images/biao07.png" /></div></a>'+
+                    '<div class="pxyouls"><a href="#" onclick="tellPhone()" ><img src="./../company/images/biao07.png" /></a></div>'+
                     '</div>'+
                     '</div>'+
                     '</a>';
@@ -125,6 +130,78 @@ function loadPersonal(){
         }
     })
 }
+
+function loadUserInfo() {
+    $.ajax({
+        url:"/company/loadUserCompanyInfo",
+        type:"POST",
+        success :function (res) {
+            console.log("data============="+JSON.stringify(res.data));
+            isCollect =res.data[0].isCollect;
+            isKuaiZhao =res.data[0].isKuaiZhao;
+            isRegist =res.data[0].isRegist;
+            console.log("isCollect============="+isCollect);
+            console.log("isKuaiZhao============"+isKuaiZhao);
+            console.log("isRegist=============="+isRegist);
+        }
+    })
+}
+
+function tellPhone() {
+    if(isRegist == "2"){
+        $('#wanshan').show();
+        $("#zaikanwanshan").click(function(){
+            $("#wanshan").hide();
+        });
+        $("#likewanshan").click(function(){
+            $("#wanshan").hide();
+            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+        });
+    }else if(isRegist == "3"){
+        $('#denglu').show();
+        $("#zaikandenglu").click(function(){
+            $("#denglu").hide();
+        });
+        $("#likedenglu").click(function(){
+            $("#denglu").hide();
+            window.location.href="/transition/go_zhu_ce";
+        });
+    }else {
+        if(isKuaiZhao == "1"){
+            $.ajax({
+                url:"/company/updatePhoneNum",
+                type:"POST",
+                success : function (res) {
+                    console.log("更改次数成功");
+                    window.location.href="tel:"+phone;
+                },
+                error : function (res) {
+                    console.log("更改次数失败");
+                    window.location.href="tel:"+phone;
+                }
+            });
+        }else if(isKuaiZhao == "2"){
+            $('.xianyin03').show();
+            $("#zaikanxufei").click(function(){
+                $('.xianyin03').hide();
+            });
+            $("#likexufei").click(function(){
+                $('.xianyin03').hide();
+                window.location.href="/transition/go_kuai_zhao";
+            });
+        }else if(isKuaiZhao == "3"){
+            $('.xianyin02').show();
+            $("#zaikankaitong").click(function(){
+                $("#xianyin02").hide();
+            });
+            $("#likekaitong").click(function(){
+                $("#xianyin02").hide();
+                window.location.href="/transition/go_kuai_zhao";
+            });
+        }
+    }
+}
+
 
 function loadPersonalInfoById(url) {
     window.location.href=url;
