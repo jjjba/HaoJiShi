@@ -72,6 +72,21 @@ public class PositionController {
     }
 
     /**
+     * 求职者端02 求职者页面条件查询
+     *
+     * @param positionName
+     * @param city
+     * @param money
+     * @param scale
+     * @return
+     */
+    @RequestMapping("getPositionByParams02")
+    public BusinessMessage getPositionByParams02(String positionName,
+                                                 String city,String money,String scale){
+        return positionService.getPositionByParams02(positionName, city, money, scale);
+    }
+
+    /**
      * 根据企业id获取职位信息
      *
      * @param session

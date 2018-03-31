@@ -49,18 +49,6 @@ public class PersonalController {
     }
 
     /**
-     * 给用户手机发送验证码
-     *
-     * @param phone
-     * @param request
-     * @return BusinessMessage - 是否发送成功验证码
-     */
-    @RequestMapping("/code")
-    public BusinessMessage code(String phone, HttpServletRequest request){
-        return personalServicel.sendPhoneCode(phone,request);
-    }
-
-    /**
      * 根据求职者openid修改信息
      *
      * @param session
@@ -150,5 +138,15 @@ public class PersonalController {
     @RequestMapping("getPersonalByParams")
     public BusinessMessage getPersonalByParams(String positionName,String sex,String age){
         return personalServicel.getPersonalByParams(positionName, sex, age);
+    }
+
+    /**
+     *切换求职者身份获取用户是未登陆还是未完善信息
+     * @param session
+     * @return
+     */
+    @RequestMapping("getPersonalState")
+    public BusinessMessage getPersonalState(HttpSession session){
+        return personalServicel.getPersonalState(session);
     }
 }

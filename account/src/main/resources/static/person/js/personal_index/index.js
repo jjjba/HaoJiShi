@@ -1,7 +1,7 @@
 // JavaScript Document
 $(function() {
 
-	loadPersonalBanner();
+	// loadPersonalBanner();
 
 	loadPositionData();
     
@@ -19,27 +19,27 @@ $(function() {
 	
 });
 
-function loadPersonalBanner() {
-    $.ajax({
-        type: "POST",
-        url: "/banner/getPersonalBanner",
-        success: function (res) {
-            if (res.success) {
-                var list = res.data;
-                var id, url;
-                $.each(list, function (index, item) {
-                    id = item.id;
-                    url =item.url;
-                    if(url == null || url == ""){
-                        url ="#";
-                    }
-                    $('.swiper-wrapper').append('<div class="swiper-slide"><a href="'+url+'"><img src="'+item.imageUrl+'" /></a></div>');
-                });
-
-            }
-        }
-    });
-}
+// function loadPersonalBanner() {
+//     $.ajax({
+//         type: "POST",
+//         url: "/banner/getPersonalBanner",
+//         success: function (res) {
+//             if (res.success) {
+//                 var list = res.data;
+//                 var id, url;
+//                 $.each(list, function (index, item) {
+//                     id = item.id;
+//                     url =item.url;
+//                     if(url == null || url == ""){
+//                         url ="#";
+//                     }
+//                     $('.swiper-wrapper').append('<div class="swiper-slide"><a href="'+url+'"><img src="'+item.imageUrl+'" /></a></div>');
+//                 });
+//
+//             }
+//         }
+//     });
+// }
 
 
 function loadPositionData() {
@@ -53,6 +53,10 @@ function loadPositionData() {
                 var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
                 $.each(list, function (index, item) {
                     id = item.id;
+                    hot =item.hot;
+                    if(hot == null || hot == ""){
+                        hot ="0";
+                    }
                     company_city =item.company_city;
                     if(company_city == null || company_city == ""){
                         company_city ="未填写";

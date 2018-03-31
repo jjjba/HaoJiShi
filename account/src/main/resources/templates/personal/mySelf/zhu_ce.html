@@ -1,0 +1,97 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>注册</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    
+    <link type="text/css" href="/static/company/css/zhu_ce/top.css"
+          th:href="@{/company/css/zhu_ce/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css"
+          th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
+    
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+                th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript" src="/static/company/js/zhu_ce/dpzcez.js"
+                th:src="@{/company/js/zhu_ce/dpzcez.js}" ></script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     验证码登录
+     <a href="#" class="zjtous"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--登录图片开始-->
+ <div class="dlpicus"><img src="/static/company/images/dlutoup.png" th:src="@{/company/images/dlutoup.png}" /></div>
+ <!--登录图片结束-->
+ 
+ <!--电话输入开始-->
+ <div class="dhusyts matyopos02">
+   <div class="dhhris"><img src="/static/company/images/dlzhma01.png" th:src="@{/company/images/dlzhma01.png}" /></div>
+   <div class="dhhris02"><input type="text" placeholder="手机号" class="srkuiiis" id="phoneNumber"/></div>
+ </div>
+ <!--电话输入结束-->
+ 
+ <!--密码输入开始-->
+ <div class="dhusyts matyopos">
+   <div class="dhhris"><img src="/static/company/images/yamatub.png" th:src="@{/company/images/yamatub.png}" /></div>
+   <div class="dhhris02"><input type="text" class="srkuiiis sjyzm" placeholder="验证码" /></div>
+   <div class="youbyois"> 
+   <input type="button" class="yzxis" value="获取验证码" />
+<script type="text/javascript">
+
+
+</script>
+   </div>
+ </div>
+ <!--密码输入结束-->
+
+ <div class="sjgyyts">
+   登录即代表你已同意 <a href="#">《好技狮用户协议》</a>
+ </div>
+ 
+ <div class="dlaniuss">
+  <a href="#" onclick="jinru()">进入</a>
+ </div>
+
+<!--验证码不正确提示开始-->
+ <div class="toolbarframe buzhengque" style="display: none">验证码不正确</div>
+ <div class="toolbarframe zhengque" style="display: none">验证码已发送,请注意查收~</div>
+ <div class="toolbarframe huoqushibai" style="display: none">获取验证码失败,请重试!!</div>
+ <div class="toolbarframe shuruzhengqueshouji" style="display: none">请输入正确手机号码!!</div>
+ <div class="toolbarframe shurushouji" style="display: none">请输入手机号码!!</div>
+<!--验证码不正确提示结束-->
+
+ <div class="zxjiiuss">
+   <a href="#">使用密码登录 <img src="/static/company/images/yjtous.png" th:src="@{/company/images/yjtous.png}" /></a>
+ </div>
+</body>
+</html>
+
+
+
+
+
+
+
+

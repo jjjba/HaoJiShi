@@ -80,7 +80,7 @@
 <!--店铺地址结束-->
 
 <!--最底部开始-->
-<div class="footres" style="display: none">
+<div class="footres">
     <!--收藏开始-->
     <div class="d-btn scnass sctcws01"><i></i>收藏</div>
     <!--收藏结束-->
@@ -91,56 +91,80 @@
     <!--拨打电话结束-->
 
     <!--我要应聘开始-->
-    <div class="wyypins sctcws03" id="yingpin">
+    <div class="wyypins sctcws03" id="yingpin" style="display: none">
         <a href="#" onclick="yingpin()">我要应聘</a>
     </div>
 
-    <div class="wyypins1" id="yiyingpin">
+    <div class="wyypins1" id="yiyingpin" style="display: none">
         <a href="#" disabled="disabled">已应聘</a>
     </div>
     <!--我要应聘结束-->
-
 </div>
 <!--最底部结束-->
 
 <!--收藏提示弹窗开始-->
-<div class="toolbarframe">已收藏</div>
-<div class="toolbarframe02">已取消</div>
-<div class="toolbarframe03">收藏失败</div>
+<div class="toolbarframe" style="display: none">已收藏</div>
+<div class="toolbarframe02" style="display: none">已取消</div>
+<div class="toolbarframe03" style="display: none">收藏失败</div>
 <!--收藏提示弹窗结束-->
 
 <!-- 投递简历弹框开始 -->
-<div class="toolbarframe04">应聘成功</div>
-<div class="toolbarframe05">应聘失败,请重试!!</div>
+<div class="toolbarframe04" style="display: none">应聘成功</div>
+<div class="toolbarframe05" style="display: none">应聘失败,请重试!!</div>
 <!-- 投递简历弹框结束 -->
-
+<div class="toolbarframe06" style="display: none">拨打电话失败,请重试!!</div>
 
 <!--  收藏弹层开始-->
 <div class="popupus tacne01" style="display: none">
-    里边开始
+    <!-- 里边开始 -->
     <div class="pupuinto">
         <div class="lbyis">
             <p>登录后才能收藏心仪的职位哦~</p>
             <ul>
-                <li class="wzkljgz01"><a href="#">我再看看</a></li>
-                <li class="wzkljgz02"><a href="#">立即登录</a></li>
+                <li class="wzkljgz01 zaikandenglushoucang"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijidenglushoucang"><a href="#">立即登录</a></li>
             </ul>
         </div>
     </div>
-    里边结束
+    <!-- 里边结束 -->
+</div>
+<div class="popupus tacne02" style="display: none">
+    <!-- 里边开始 -->
+    <div class="pupuinto">
+        <div class="lbyis">
+            <p>完善信息后才能收藏心仪的职位哦~</p>
+            <ul>
+                <li class="wzkljgz01 zaikanwanshanshoucang"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijiwanshanshoucang"><a href="#">立即完善</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 里边结束 -->
 </div>
 <!--收藏弹层结束-->
 
-
 <!--电话弹层开始-->
-<div class="popupus tacne02" style="display: none">
+<div class="popupus tacne03" style="display: none">
     <!--里边开始-->
     <div class="pupuinto">
         <div class="lbyis">
             <p>登录后才可以拨打企业电话哦~</p>
             <ul>
-                <li class="wzkljgz01"><a href="#">我再看看</a></li>
-                <li class="wzkljgz02"><a href="#">立即登录</a></li>
+                <li class="wzkljgz01 zaikandengludianhua"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijidengludianhua"><a href="#">立即登录</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--里边结束-->
+</div>
+<div class="popupus tacne04" style="display: none">
+    <!--里边开始-->
+    <div class="pupuinto">
+        <div class="lbyis">
+            <p>完善信息后才可以拨打企业电话哦~</p>
+            <ul>
+                <li class="wzkljgz01 zaikanwanshandianhua"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijiwanshandianhua"><a href="#">立即完善</a></li>
             </ul>
         </div>
     </div>
@@ -149,14 +173,14 @@
 <!--电话弹层结束-->
 
 <!--电话弹层开始-->
-<div class="popupus tacne04" style="display: none">
+<div class="popupus tacne05" style="display: none">
     <!--里边开始-->
     <div class="pupuinto">
         <div class="lbyis">
             <p>投递简历后才可以拨打企业电话哦~</p>
             <ul>
-                <li class="wzkljgz01"><a href="#">我再看看</a></li>
-                <li class="wzkljgz02"><a href="#">立即投递</a></li>
+                <li class="wzkljgz01 zaikantoudi"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijitoudi"><a href="#">立即投递</a></li>
             </ul>
         </div>
     </div>
@@ -166,14 +190,27 @@
 
 
 <!--应聘弹层开始-->
-<div class="popupus tacne03">
+<div class="popupus tacne06" style="display: none">
     <!--里边开始-->
     <div class="pupuinto">
         <div class="lbyis">
             <p>登录后才能给店铺投递简历哦~</p>
             <ul>
-                <li class="wzkljgz01"><a href="#">我再看看</a></li>
-                <li class="wzkljgz02"><a href="#">立即登录</a></li>
+                <li class="wzkljgz01 zaikandenglutoudi"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijidenglutoudi"><a href="#">立即登录</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--里边结束-->
+</div>
+<div class="popupus tacne07" style="display: none">
+    <!--里边开始-->
+    <div class="pupuinto">
+        <div class="lbyis">
+            <p>完善信息后才能给店铺投递简历哦~</p>
+            <ul>
+                <li class="wzkljgz01 zaikanwanshantoudi"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02 lijiwanshantoudi"><a href="#">立即完善</a></li>
             </ul>
         </div>
     </div>

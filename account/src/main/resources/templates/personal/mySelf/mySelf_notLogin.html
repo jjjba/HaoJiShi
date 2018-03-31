@@ -1,0 +1,184 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>好技师·您的好帮手</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/person/css/response.css"
+          th:href="@{/person/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/public.css"
+          th:href="@{/person/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/xiangying.css"
+          th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    <link type="text/css" href="/static/person/css/mySelf/top.css"
+          th:href="@{/person/css/mySelf/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/mySelf/wodes.css"
+          th:href="@{/person/css/mySelf/wodes.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/mySelf/bottom.css"
+          th:href="@{/person/css/mySelf/bottom.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
+            th:src="@{/person/js/jquery-3.2.1.js}" ></script>
+
+    <script type="text/javascript" src="/static/person/js/mySelf/yctcs.js"
+            th:src="@{/person/js/mySelf/yctcs.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/mySelf/mySelf_notLogin.js"
+            th:src="@{/person/js/mySelf/mySelf_notLogin.js}" ></script>
+
+</head>
+<body>
+
+<!--头部开始-->
+<div class="topbus">
+    <!--里边开始-->
+    <div class="tbusinto">
+        我的
+    </div>
+    <!--里边结束-->
+</div>
+<!--头部结束-->
+
+<!--上边开始-->
+<div class="sbjltitis">
+    <!--上开始-->
+    <div class="sbtopxxs">
+        <!--左开始-->
+        <div class="sblefs">
+            <img src="/static/person/images/tupian.png" th:src="@{/person/images/tupian.png}"/>
+        </div>
+        <!--左结束-->
+        <!--右开始-->
+        <div class="sbyours">
+            <div class="lylyus">李雨乐</div>
+        </div>
+        <!--右结束-->
+    </div>
+    <!--上结束-->
+
+    <!--下开始-->
+    <a href="#">
+        <div class="xibkass">
+            <!--左边圆形进度条开始-->
+            <div class="progressbar">
+                <span>0</span>%
+            </div>
+            <!--左边圆形进度条结束-->
+            <!--右边开始-->
+            <div class="ycbuyss">
+                完善简历，获取更多工作机会
+            </div>
+            <!--右边结束-->
+            <!--右箭头开始-->
+            <div class="ycjtouis"><img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" /></div>
+            <!--右箭头结束-->
+        </div>
+    </a>
+    <!--下结束-->
+</div>
+<!--上边结束-->
+
+
+<!--一块开始-->
+<div class="dyikuys">
+    <ul>
+        <li class="clearfix borderbom">
+            <a href="#" class="fl" onclick="collectPosition()"><img src="/static/person/images/wode01.png"
+                                        th:src="@{/person/images/wode01.png}"/> 职位收藏</a>
+            <a href="#" class="fr" onclick="collectPosition()"><img src="/static/person/images/yjts.png"
+                                        th:src="@{/person/images/yjts.png}" /></a>
+        </li>
+        <li class="clearfix">
+            <a href="#" class="fl" onclick="deliveryRecords()"><img src="/static/person/images/wode02.png"
+                                        th:src="@{/person/images/wode02.png}" /> 投递记录</a>
+            <a href="#" class="fr" onclick="deliveryRecords()"><img src="/static/person/images/yjts.png"
+                                        th:src="@{/person/images/yjts.png}" /></a>
+        </li>
+    </ul>
+</div>
+<!--一块结束-->
+
+<!--一块开始-->
+<div class="dyikuys">
+    <ul>
+        <li class="clearfix borderbom">
+            <a href="#" class="fl" onclick="commonProblem()"><img src="/static/person/images/wode03.png"
+                                        th:src="@{/person/images/wode03.png}"/> 常见问题</a>
+            <a href="#" class="fr" onclick="commonProblem()"><img src="/static/person/images/yjts.png"
+                                        th:src="@{/person/images/yjts.png}"/></a>
+        </li>
+        <li class="clearfix">
+            <a href="#" class="fl" onclick="privacySetting()"><img src="/static/person/images/wode04.png"
+                                        th:src="@{/person/images/wode04.png}"/> 隐私设置</a>
+            <a href="#" class="fr" onclick="privacySetting()"><img src="/static/person/images/yjts.png"
+                                        th:src="@{/person/images/yjts.png}"/></a>
+        </li>
+    </ul>
+</div>
+<!--一块结束-->
+
+
+<!--一块开始-->
+<div class="dyikuys">
+    <ul>
+        <li class="clearfix borderbom">
+            <a href="#" class="fl" onclick="accountSettings()"><img src="/static/person/images/wode05.png"
+                                        th:src="@{/person/images/wode05.png}"/> 账号设置</a>
+            <a href="#" class="fr" onclick="accountSettings()"><img src="/static/person/images/yjts.png"
+                                        th:src="@{/person/images/yjts.png}"/></a>
+        </li>
+        <li class="clearfix">
+            <a href="#" class="fl" onclick="switchingIdentity()"><img src="/static/person/images/wode06.png"
+                                        th:src="@{/person/images/wode06.png}"/> 切换身份</a>
+            <a href="#" class="fr" onclick="switchingIdentity()">我要招人才 <img src="/static/person/images/yjts.png"
+                                              th:src="@{/person/images/yjts.png}"/></a>
+        </li>
+    </ul>
+</div>
+<!--一块结束-->
+
+
+
+
+
+<!--最底部开始-->
+<div class="footers">
+    <ul>
+        <li>
+            <a href="#">
+                <i class="botmbg01" onclick="goPosition()"></i>
+                <p>职位</p>
+            </a>
+        </li>
+        <li>
+            <a href="#">
+                <i class="botmbg02" onclick="goIndex()"></i>
+                <p>首页</p>
+            </a>
+        </li>
+        <li class="actives">
+            <a href="#">
+                <i class="botmbg03"></i>
+                <p>我的</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--最底部结束-->
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+

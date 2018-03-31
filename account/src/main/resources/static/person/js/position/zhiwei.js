@@ -109,13 +109,43 @@ $(document).ready(function() {
 
     });
 
-  
-
-
-
 });
 
-
+function jishilei() {
+    $('#jishi').show();
+    $('#guanli').hide();
+    $('#qianting').hide();
+    $('#houqin').hide();
+    $('#peixun').hide();
+}
+function guanlilei() {
+    $('#jishi').hide();
+    $('#guanli').show();
+    $('#qianting').hide();
+    $('#houqin').hide();
+    $('#peixun').hide();
+}
+function qiantinglei() {
+    $('#jishi').hide();
+    $('#guanli').hide();
+    $('#qianting').show();
+    $('#houqin').hide();
+    $('#peixun').hide();
+}
+function houqinlei() {
+    $('#jishi').hide();
+    $('#guanli').hide();
+    $('#qianting').hide();
+    $('#houqin').show();
+    $('#peixun').hide();
+}
+function peixunlei() {
+    $('#jishi').hide();
+    $('#guanli').hide();
+    $('#qianting').hide();
+    $('#houqin').hide();
+    $('#peixun').show();
+}
 
 
 

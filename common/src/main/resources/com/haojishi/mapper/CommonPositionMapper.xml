@@ -95,6 +95,30 @@
         p.hot
     </select>
 
+    <select id="getPositionByParams02" resultType="java.util.Map">
+        SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+        c.name,c.company_type,c.company_scale
+        FROM position p,company c,user u
+        <where>
+            p.company_id =c.id AND c.user_id =u.id and p.state = 1 and c.matState = 1
+            <if test="money != '' and money != null">
+                AND p.money = #{money}
+            </if>
+            <if test="scale != '' and scale != null">
+                AND p.company_scale = #{scale}
+            </if>
+            <if test="positionName != '' and positionName != null">
+                AND p.position_type = #{positionName}
+            </if>
+            <if test="city != '' and city != null">
+                AND c.company_city like concat(#{city},'%')
+            </if>
+            AND u.account_state = 1
+        </where>
+        ORDER BY
+        p.hot
+    </select>
+
     <select id="queryPersonalInfo" resultType="java.util.Map">
         SELECT  p.id,p.sex,p.age,p.expect_money,p.job_experience,p.state,p.info
         FROM personal p

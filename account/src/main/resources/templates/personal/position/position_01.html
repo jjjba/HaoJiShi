@@ -50,64 +50,64 @@
     
 </head>
 <body>
-    
-    <!--搜索框开始-->
-     <div class="searchis">
-       <a href="#" onclick="transition_search()">
-         职位
-       </a>
-     </div>
-    <!--搜索框结束-->
 
-    <!--下拉导航开始-->
-     <div class="xldhusa">
-       <ul>
-         <li class="dhxlfs03">全国</li>
-         <li class="dhxlfs01">分类</li>
-         <li class="dhxlfs02">筛选</li>
-       </ul>
-     </div>
-    <!--下拉导航结束-->
-    
-    <!--地区开始-->
-    <div class="dqkouss">
-    
-    
-    <!--里边开始-->
-<!--当前城市开始-->
-<div class="dqcshis clearfix">
-  <!--左边开始-->
-  <div class="fl zcwzuis">当前城市：石家庄</div>
-  <!--左边结束-->
-  
-  <!--右边开始-->
-  <div class="fr yocyis">
-    <a href="#" class="clearfix" onclick="citySearch()">搜索城市 <img src="/static/person/images/xuanzes.png" th:src="@{/person/images/xuanzes.png}"/></a>
+<!--搜索框开始-->
+<div class="searchis">
+  <a href="#" onclick="transition_search()">
+    职位
+  </a>
+</div>
+<!--搜索框结束-->
+
+<!--下拉导航开始-->
+<div class="xldhusa">
+  <ul>
+    <li class="dhxlfs03"><a href="#">全国</a></li>
+    <li class="dhxlfs01">分类</li>
+    <li class="dhxlfs02">筛选</li>
+  </ul>
+</div>
+<!--下拉导航结束-->
+
+<!--地区开始-->
+<div class="dqkouss" id="region111111111111">
+
+
+  <!--里边开始-->
+  <!--当前城市开始-->
+  <div class="dqcshis clearfix">
+    <!--左边开始-->
+    <div class="fl zcwzuis"></div>
+    <!--左边结束-->
+
+    <!--右边开始-->
+    <div class="fr yocyis">
+      <a href="#" class="clearfix" type="cancel" onclick="citySearch()">搜索城市 <img src="/static/person/images/xuanzes.png" th:src="@{/person/images/xuanzes.png}"/></a>
+    </div>
+    <!--右边结束-->
+
   </div>
-  <!--右边结束-->
-  
-</div>
-<!--当前城市结束-->
+  <!--当前城市结束-->
 
 
-<!--热门城市开始-->
-<div class="rmcshis">
-  <h2>热门城市</h2>
-  <p>
-    <a href="#">北京</a>
-    <a href="#">上海</a>
-    <a href="#">石家庄</a>
-    <a href="#">石家庄</a>
-    <a href="#">石家庄</a>
-    <a href="#">石家庄</a>
-  </p>
-</div>
-<!--热门城市结束-->
+  <!--热门城市开始-->
+  <div class="rmcshis">
+    <h2>热门城市</h2>
+    <p>
+      <a href="#">北京</a>
+      <a href="#">上海</a>
+      <a href="#">石家庄</a>
+      <a href="#">石家庄</a>
+      <a href="#">石家庄</a>
+      <a href="#">石家庄</a>
+    </p>
+  </div>
+  <!--热门城市结束-->
 
-<!--显示点击的是哪一个字母-->
-<div id="showLetter" class="showLetter"><span>A</span></div>
-<!--城市索引查询-->
-<div class="letter">
+  <!--显示点击的是哪一个字母-->
+  <div id="showLetter" class="showLetter"><span>A</span></div>
+  <!--城市索引查询-->
+  <div class="letter">
     <h1>热门</h1>
     <ul>
       <li><a href="#a1">A</a></li>
@@ -134,178 +134,146 @@
       <li><a href="#a22">Z</a></li>
     </ul>
   </div>
-<!--城市列表-->
-<div class="container">
-  <div class="city">
-    <div class="city-list">
-     <a href="#a1" name="a1"></a>
-     <span class="city-letter" id="A1">A</span>
-      <p data-id="210300">鞍山市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a2" name="a2"></a>
-    <span class="city-letter" id="B1">B</span>
-      <p data-id="220800">白城市</p>
-      <p data-id="150200">包头市</p>
-    </div>
-    <div class="city-list">
-       <a href="#a3" name="a3"></a>
-      <span class="city-letter" id="C1">C</span>
-      <p data-id="140400">长治市</p>
-      <p data-id="130900">沧州市</p>
-      <p data-id="320400">常州市</p>
-      <p data-id="330282">慈溪市</p>
-    </div>
-    <div class="city-list">
-       <a href="#a4" name="a4"></a>
-      <span class="city-letter" id="D1">D</span>
-
-      <p data-id="232700">大兴安岭地区</p>
-      <p data-id="140200">大同市</p>
-      <p data-id="230600">大庆市</p>
-    </div>
-    <div class="city-list">
-       <a href="#a5" name="a5"></a>
-      <span class="city-letter" id="E1">E</span>
-      <p data-id="150600">鄂尔多斯市</p>
-      <p data-id="420700">鄂州市</p>
-      <p data-id="422800">恩施土家族苗族自治州</p>
-    </div>
-    <div class="city-list">
-      <a href="#a6" name="a6"></a>
-      <span class="city-letter" id="F1">F</span>
-      <p data-id="210900">阜新市</p>
-      <p data-id="210400">抚顺市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a7" name="a7"></a>
-      <span class="city-letter" id="G1">G</span>
-      <p data-id="440100">广州市</p>
-      <p data-id="360700">赣州市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a8" name="a8"></a>
-      <span class="city-letter" id="H1">H</span>
-      <p data-id="231100">黑河市</p>
-      <p data-id="211400">葫芦岛市</p>
-      <p data-id="330481">海宁市</p>
-      <p data-id="320800">淮安市</p>
-      <p data-id="131100">衡水市</p>
-      <p data-id="150100">呼和浩特市</p>
-      <p data-id="330500">湖州市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a9" name="a9"></a>
-      <span class="city-letter" id="J1">J</span>
-      <p data-id="210700">锦州市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a10" name="a10"></a>
-      <span class="city-letter" id="K1">K</span>
-      <p data-id="320583">昆山市</p>
-      <p data-id="410200">开封市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a11" name="a11"></a>
-      <span class="city-letter" id="L1">L</span>
-      <p data-id="141000">临汾市</p>
-
-    </div>
-    <div class="city-list">
-      <a href="#a12" name="a12"></a>
-      <span class="city-letter" id="M1">M</span>
-      <p data-id="231000">牡丹江市</p>
-
-    </div>
-    <div class="city-list">
-      <a href="#a13" name="a13"></a>
-      <span class="city-letter" id="N1">N</span>
-      <p data-id="320100">南京市</p>
-      <p data-id="330200">宁波市</p>
-
-    </div>
-    <div class="city-list">
-      <a href="#a14" name="a14"></a>
-      <span class="city-letter" id="P1">P</span>
-      <p data-id="211100">盘锦市</p>
-      <p data-id="360300">萍乡市</p>
-      <p data-id="410400">平顶山市</p>
-      <p data-id="410900">濮阳市</p>
-      <p data-id="350300">莆田市</p>
-      <p data-id="510400">攀枝花市</p>
-      <p data-id="530800">普洱市</p>
-      <p data-id="620800">平凉市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a15" name="a15"></a>
-      <span class="city-letter" id="Q1">Q</span>
-      <p data-id="130300">秦皇岛市</p>
-      <p data-id="230200">齐齐哈尔市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a16" name="a16"></a>
-      <span class="city-letter" id="R1">R</span>
-      <p data-id="320682">如皋市</p>
-      <p data-id="371082">荣成市</p>
-      <p data-id="371100">日照市</p>
-      <p data-id="542301">日喀则市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a17" name="a17"></a>
-      <span class="city-letter" id="S1">S</span>
-      <p data-id="220300">四平市</p>
-      <p data-id="231200">绥化市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a18" name="a18"></a>
-      <span class="city-letter" id="T1">T</span>
-      <p data-id="140100">太原市</p>
-      <p data-id="211200">铁岭市</p>
-      <p data-id="220500">通化市</p>
-      <p data-id="130200">唐山市</p>
-      <p data-id="320585">太仓市</p>
-      <p data-id="120100">天津市</p>
-      <p data-id="321200">泰州市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a19" name="a19"></a>
-      <span class="city-letter" id="W1">W</span>
-      <p data-id="330300">温州市</p>
-      <p data-id="320200">无锡市</p>
-      <p data-id="150900">乌兰察布市</p>
-      <p data-id="150300">乌海市</p>
-      <p data-id="340200">芜湖市</p>
-    </div>
-    <div class="city-list">
-      <a href="#a20" name="a20"></a>
-      <span class="city-letter" id="X1">X</span>
-      <p data-id="140900">忻州市</p>
-      <p data-id="152500">锡林郭勒盟</p>
-      <p data-id="130500">邢台市</p>
-      <p data-id="152200">兴安盟</p>
-    </div>
-    <div class="city-list">
-      <a href="#a21" name="a21"></a>
-      <span class="city-letter" id="Y1">Y</span>
-      <p data-id="320282">宜兴市</p>
-      <p data-id="222400">延边朝鲜族自治州</p>
-
-    </div>
-    <div class="city-list">
-      <a href="#a22" name="a22"></a>
-      <span class="city-letter" id="Z1">Z</span>
-      <p data-id="130700">张家口市</p>
-      <p data-id="330681">诸暨市</p>
-      <p data-id="321100">镇江市</p>
-
+  <!--城市列表-->
+  <div class="container">
+    <div class="city">
+      <div class="city-list">
+        <a href="#a1" name="a1"></a>
+        <span class="city-letter" id="A1">A</span>
+        <ul class="reg1">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a2" name="a2"></a>
+        <span class="city-letter" id="B1">B</span>
+        <ul class="reg2">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a3" name="a3"></a>
+        <span class="city-letter" id="C1">C</span>
+        <ul class="reg3">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a4" name="a4"></a>
+        <span class="city-letter" id="D1">D</span>
+        <ul class="reg4">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a5" name="a5"></a>
+        <span class="city-letter" id="E1">E</span>
+        <ul class="reg5">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a6" name="a6"></a>
+        <span class="city-letter" id="F1">F</span>
+        <ul class="reg6">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a7" name="a7"></a>
+        <span class="city-letter" id="G1">G</span>
+        <ul class="reg7">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a8" name="a8"></a>
+        <span class="city-letter" id="H1">H</span>
+        <ul class="reg8">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a9" name="a9"></a>
+        <span class="city-letter" id="J1">J</span>
+        <ul class="reg9">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a10" name="a10"></a>
+        <span class="city-letter" id="K1">K</span>
+        <ul class="reg10">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a11" name="a11"></a>
+        <span class="city-letter" id="L1">L</span>
+        <ul class="reg11">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a12" name="a12"></a>
+        <span class="city-letter" id="M1">M</span>
+        <ul class="reg12">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a13" name="a13"></a>
+        <span class="city-letter" id="N1">N</span>
+        <ul class="reg13">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a14" name="a14"></a>
+        <span class="city-letter" id="P1">P</span>
+        <ul class="reg14">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a15" name="a15"></a>
+        <span class="city-letter" id="Q1">Q</span>
+        <ul class="reg15">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a16" name="a16"></a>
+        <span class="city-letter" id="R1">R</span>
+        <ul class="reg16">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a17" name="a17"></a>
+        <span class="city-letter" id="S1">S</span>
+        <ul class="reg17">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a18" name="a18"></a>
+        <span class="city-letter" id="T1">T</span>
+        <ul class="reg18">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a19" name="a19"></a>
+        <span class="city-letter" id="W1">W</span>
+        <ul class="reg19">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a20" name="a20"></a>
+        <span class="city-letter" id="X1">X</span>
+        <ul class="reg20">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a21" name="a21"></a>
+        <span class="city-letter" id="Y1">Y</span>
+        <ul class="reg21">
+        </ul>
+      </div>
+      <div class="city-list">
+        <a href="#a22" name="a22"></a>
+        <span class="city-letter" id="Z1">Z</span>
+        <ul class="reg22">
+        </ul>
+      </div>
     </div>
   </div>
+  <!--里边结束-->
 </div>
-    <!--里边结束-->
-    
-    
-    </div>
-    <!--地区结束-->
+<!--地区结束-->
     
     
     <!--分类开始-->
@@ -314,23 +282,68 @@
           <!--左边开始-->
           <div class="fllfzuos">
             <ul>
-              <li class="houvers"><a href="#">技术类</a></li>
-              <li><a href="#">管理类</a></li>
-              <li><a href="#">前厅类</a></li>
+              <li class="houvers"><a href="#" onclick="jishilei()">技师类</a></li>
+              <li><a href="#" onclick="guanlilei()">管理类</a></li>
+              <li><a href="#" onclick="qiantinglei()">前厅类</a></li>
+              <li><a href="#" onclick="houqinlei()">后勤类</a></li>
+              <li><a href="#" onclick="peixunlei()">培训类</a></li>
             </ul>
           </div>
           <!--左边结束-->
           <!--右边开始-->
-          <div class="flriyous">
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
-            <span>厨师</span>
+          <div class="flriyous" id="jishi">
+            <a href="#" data="理疗师"><span>理疗师</span></a>
+            <a href="#" data="足疗师"><span>足疗师</span></a>
+            <a href="#" data="按摩师"><span>按摩师</span></a>
+            <a href="#" data="针灸师"><span>针灸师</span></a>
+            <a href="#" data="推拿师"><span>推拿师</span></a>
+            <a href="#" data="修脚师"><span>修脚师</span></a>
+            <a href="#" data="推油师"><span>推油师</span></a>
+            <a href="#" data="采耳师"><span>采耳师</span></a>
+            <a href="#" data="指压师"><span>指压师</span></a>
+            <a href="#" data="SPA师"><span>SPA师</span></a>
+            <a href="#" data="盲人按摩师"><span>盲人按摩师</span></a>
+            <a href="#" data="其他"><span>其他</span></a>
+          </div>
+          <div class="flriyous" id="guanli" style="display: none">
+            <a href="#" data="副总经理"><span>副总经理</span></a>
+            <a href="#" data="营运经理"><span>营运经理</span></a>
+            <a href="#" data="总经理"><span>总经理</span></a>
+            <a href="#" data="店长助理"><span>店长助理</span></a>
+            <a href="#" data="经理助理"><span>经理助理</span></a>
+            <a href="#" data="店长"><span>店长</span></a>
+            <a href="#" data="区域经理"><span>区域经理</span></a>
+            <a href="#" data="营销总监"><span>营销总监</span></a>
+            <a href="#" data="其他"><span>其他</span></a>
+          </div>
+          <div class="flriyous" id="qianting" style="display: none">
+            <a href="#" data="大堂经理/领班"><span>大堂经理/领班</span></a>
+            <a href="#" data="收银/吧员"><span>收银/吧员</span></a>
+            <a href="#" data="咨客/客服"><span>咨客/客服</span></a>
+            <a href="#" data="迎宾/接待"><span>迎宾/接待</span></a>
+            <a href="#" data="客户经理"><span>客户经理</span></a>
+            <a href="#" data="销售"><span>销售</span></a>
+            <a href="#" data="部长"><span>部长</span></a>
+            <a href="#" data="其他"><span>其他</span></a>
+          </div>
+          <div class="flriyous" id="houqin" style="display: none">
+            <a href="#" data="皮鞋美容师"><span>皮鞋美容师</span></a>
+            <a href="#" data="储备干部"><span>储备干部</span></a>
+            <a href="#" data="文员"><span>文员</span></a>
+            <a href="#" data="服务员"><span>服务员</span></a>
+            <a href="#" data="采购"><span>采购</span></a>
+            <a href="#" data="保洁"><span>保洁</span></a>
+            <a href="#" data="厨师"><span>厨师</span></a>
+            <a href="#" data="保安"><span>保安</span></a>
+            <a href="#" data="司机"><span>司机</span></a>
+            <a href="#" data="其他"><span>其他</span></a>
+          </div>
+          <div class="flriyous" id="peixun" style="display: none">
+            <a href="#" data="技术总监"><span>技术总监</span></a>
+            <a href="#" data="技术老师"><span>技术老师</span></a>
+            <a href="#" data="其他"><span>其他</span></a>
+            <a href="#" data="礼仪导师"><span>礼仪导师</span></a>
+            <a href="#" data="培训讲师"><span>培训讲师</span></a>
           </div>
           <!--右边结束-->
         </div>
@@ -341,28 +354,39 @@
      <div class="zwciys02">
         <div class="flsxi02">
           <!--薪资要求开始-->
+          <div id="money">
           <div class="xzdpgms">
             <h2>薪资要求</h2>
             <p>
-              <a href="#" class="cuiysy">全部</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
-              <a href="#">5000以上</a>
+              <a href="#" class="cuiysy" data="">全部</a>
+              <a href="#" data="面议">面议</a>
+              <a href="#" data="3000元以下/月">3000元以下/月</a>
+              <a href="#" data="3000-5000元/月">3000-5000元/月</a>
+              <a href="#" data="5000-8000元/月">5000-8000元/月</a>
+              <a href="#" data="8000-10000元/月">8000-10000元/月</a>
+              <a href="#" data="10000-15000元/月">10000-15000元/月</a>
+              <a href="#" data="15000-20000元/月">15000-20000元/月</a>
+              <a href="#" data="20000元以上/月">20000元以上/月</a>
             </p>
+          </div>
           </div>
           <!--薪资要求结束-->
           
           <!--店铺规模开始-->
+          <div class="scale">
           <div class="xzdpgms">
             <h2>店铺规模</h2>
             <p>
-              <a href="#" class="cuiysy">全部</a>
-              <a href="#">500平以上</a>
-              <a href="#">500平以上</a>
-              <a href="#">500平以上</a>
+              <a href="#" class="cuiysy" data="">全部</a>
+              <a href="#" data="100㎡以下">100㎡以下</a>
+              <a href="#" data="100-300㎡">100-300㎡</a>
+              <a href="#" data="300-500㎡<">300-500㎡</a>
+              <a href="#" data="500-1000㎡">500-1000㎡</a>
+              <a href="#" data="1000-2000㎡">1000-2000㎡</a>
+              <a href="#" data="2000-5000㎡">2000-5000㎡</a>
+              <a href="#" data="5000㎡以上">5000㎡以上</a>
             </p>
+          </div>
           </div>
           <!--店铺规模结束-->
           
@@ -379,74 +403,7 @@
 
 
     <!--一块开始-->
-    <div class="reconblock">
-      <a href="#">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs">SPA技师</div>
-        <div class="fr reseyous"><span class="yse01">急聘</span> <span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资及年限开始-->
-      <div class="wagesyears clearfix">
-        <div class="fl wayealfs">7000-9000/月</div>
-        <div class="fr wayefris">经验不限 | 35岁以下 | 仅限女</div>
-      </div>
-      <!--工资及年限结束-->
-      <!--公司名称地址开始-->
-        <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <img src="images/tupian01.png" />
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1>常乐足道</h1>
-            <p>单体店 | 1500㎡ | 杭州市 上城区</p>
-          </div>
-          <!--右边结束-->
-        </div>
-      <!--公司名称地址结束-->
-      </a>
-    </div>
-    <!--一块结束-->
-    
-    
-    <!--一块开始-->
-    <div class="reconblock">
-      <a href="#">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs">足疗师（保底6000）</div>
-        <div class="fr reseyous"><span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资及年限开始-->
-      <div class="wagesyears clearfix">
-        <div class="fl wayealfs">7000-9000/月</div>
-        <div class="fr wayefris">经验不限 | 35岁以下 | 仅限女</div>
-      </div>
-      <!--工资及年限结束-->
-      <!--公司名称地址开始-->
-        <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <img src="images/tupian01.png" />
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1>常乐足道</h1>
-            <p>单体店 | 1500㎡ | 杭州市 上城区</p>
-          </div>
-          <!--右边结束-->
-        </div>
-      <!--公司名称地址结束-->
-      </a>
-    </div>
+    <div class="personalList1111"></div>
     <!--一块结束-->
 
   
@@ -460,13 +417,13 @@
        </a>
       </li>
       <li>
-       <a href="#">
+       <a href="#" onclick="goIndex()">
          <i class="botmbg02"></i>
          <p>首页</p>
        </a>
       </li>
       <li>
-       <a href="#">
+       <a href="#" onclick="goMySelf()">
          <i class="botmbg03"></i>
          <p>我的</p>
        </a>

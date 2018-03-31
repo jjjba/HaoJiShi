@@ -51,7 +51,6 @@ public class PositionService {
         try{
             List<Map<String,Object>> positionList =new ArrayList<>();   //意向城市 省份所有职位数据
             List<Map<String,Object>> position =new ArrayList<>();       //意向城市 所有职位数据
-            List<Map<String,Object>> positions =new ArrayList<>();      //意向省份 所有职位数据
             String openid = (String) session.getAttribute("openid");
             Example userExample =new Example(User.class);
             userExample.createCriteria().andEqualTo("openid",openid);
@@ -82,65 +81,122 @@ public class PositionService {
      */
     public BusinessMessage getPositionById(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        int id = (int) session.getAttribute("positionId");
-        String openid = (String) session.getAttribute("openid");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);  //15859228476   //17331153729
-        List<User> user =userMapper.selectByExample(userExample);             //登陆用户
-        List<Map<String,Object>> position =new ArrayList<>();
-        Example perExample =new Example(Personal.class);
-        perExample.createCriteria().andEqualTo("userId",user.get(0).getId());
-        List<Personal> personals =personalMapper.selectByExample(perExample);
-        int type =0;
-        List<Resume> resumes =null;
-        if(user != null && user.size() > 0){
-            type =user.get(0).getType();
-            Example resumeExample =new Example(Resume.class);
-            resumeExample.createCriteria().andEqualTo("personalId",personals.get(0).getId()).andEqualTo("positionId",id);
-            resumes=resumeMapper.selectByExample(resumeExample);
-        }
-        Company company =companyMapper.selectByPrimaryKey(positionMapper.selectByPrimaryKey(id).getCompanyId());
-        List<Map<String,Object>> positionInfo=commonPositionMapper.getPositionById(id);
+        List<Map<String,Object>> positionList =new ArrayList<>();
+        Map<String,Object> map =new HashMap<>();
+        try {
+            int id = (int) session.getAttribute("positionId");
+            String openid = (String) session.getAttribute("openid");
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> user =userMapper.selectByExample(userExample);
+            if(user != null && user.size() > 0){
+                Example perExample =new Example(Personal.class);
+                perExample.createCriteria().andEqualTo("userId",user.get(0).getId());
+                List<Personal> personals =personalMapper.selectByExample(perExample);
+                if(personals != null && personals.size() > 0){
+                    Example resumeExample =new Example(Resume.class);
+                    resumeExample.createCriteria().andEqualTo("personalId",personals.get(0).getId()).andEqualTo("positionId",id);
+                    List<Resume> resumes=resumeMapper.selectByExample(resumeExample);
+                    if(resumes != null && resumes.size() > 0){
+                        map.put("isDelivery","1");
+                    }
+                    Example collectExample =new Example(CollectPosition.class);
+                    collectExample.createCriteria().andEqualTo("personalId",personals.get(0).getId()).andEqualTo("positionId",id);
+                    List<CollectPosition> collectPositions =collectPositionMapper.selectByExample(collectExample);
+                    if(collectPositions != null && collectPositions.size() > 0){
+                        map.put("isCollect","1");
+                    }
 
-        //设置热度以及访问量
-        Position position1 =positionMapper.selectByPrimaryKey(id);
-        position1.setHot(position1.getHot() + 10);
-        position1.setSeeNumber(position1.getSeeNumber() + 1);
-        positionMapper.updateByPrimaryKeySelective(position1);
-        Example collectExample =new Example(CollectPosition.class);
-        collectExample.createCriteria().andEqualTo("personalId",personals.get(0).getId()).andEqualTo("positionId",id);
-        List<CollectPosition> collectPositions =collectPositionMapper.selectByExample(collectExample);
-        if(positionInfo != null && positionInfo.size() > 0){
-            Map<String,Object> map =new HashMap<>();
-            map.put("cid",company.getId());
-            map.put("phone",company.getPhone());
-            map.put("company_addr",company.getCompanyAddr());
-            map.put("name",company.getName());
-            map.put("collectNumber",collectPositions.size());
-            map.put("resumeNumber",resumes.size());
-            map.put("type",type);
-            map.put("id",positionInfo.get(0).get("id"));
-            map.put("position_info",positionInfo.get(0).get("position_info"));
-            map.put("company_addr",positionInfo.get(0).get("company_addr"));
-            map.put("company_city",positionInfo.get(0).get("company_city"));
-            map.put("position_name",positionInfo.get(0).get("position_name"));
-            map.put("hot",positionInfo.get(0).get("hot"));
-            map.put("money",positionInfo.get(0).get("money"));
-            map.put("experience",positionInfo.get(0).get("experience"));
-            map.put("age",positionInfo.get(0).get("age"));
-            map.put("sex",positionInfo.get(0).get("sex"));
-            map.put("icon_path",positionInfo.get(0).get("icon_path"));
-            map.put("name",positionInfo.get(0).get("name"));
-            map.put("company_type",positionInfo.get(0).get("company_type"));
-            map.put("company_scale",positionInfo.get(0).get("company_scale"));
-            position.add(map);
+                    Position position =positionMapper.selectByPrimaryKey(id);
+                    Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
 
-            businessMessage.setData(position);
-            businessMessage.setMsg("获取职位信息成功");
-        }else {
-            businessMessage.setMsg("暂无数据");
+                    //设置热度以及访问量
+                    position.setHot(position.getHot() + 10);
+                    position.setSeeNumber(position.getSeeNumber() + 1);
+                    positionMapper.updateByPrimaryKeySelective(position);
+                    //设置返回数据
+                    map.put("cid",company.getId());
+                    map.put("phone",company.getPhone());
+                    map.put("company_addr",company.getCompanyAddr());
+                    map.put("name",company.getName());
+                    map.put("id",position.getId());
+                    map.put("position_info",position.getPositionInfo());
+                    map.put("company_city",company.getCompanyCity());
+                    map.put("position_name",position.getPositionName());
+                    map.put("hot",position.getHot());
+                    map.put("money",position.getMoney());
+                    map.put("experience",position.getExperience());
+                    map.put("age",position.getAge());
+                    map.put("sex",position.getSex());
+                    map.put("icon_path",company.getIconPath());
+                    map.put("company_type",company.getCompanyType());
+                    map.put("company_scale",company.getCompanyScale());
+                    positionList.add(map);
+                }else {
+                    String phone =user.get(0).getPhone();
+                    if(phone != null && phone != "" && !phone.equals("") && !phone.equals("null")){
+                        map.put("isRegist","2");
+                        Position position =positionMapper.selectByPrimaryKey(id);
+                        Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
+                        //设置热度以及访问量
+                        position.setHot(position.getHot() + 10);
+                        position.setSeeNumber(position.getSeeNumber() + 1);
+                        positionMapper.updateByPrimaryKeySelective(position);
+                        //设置返回数据
+                        map.put("cid",company.getId());
+                        map.put("phone",company.getPhone());
+                        map.put("company_addr",company.getCompanyAddr());
+                        map.put("name",company.getName());
+                        map.put("id",position.getId());
+                        map.put("position_info",position.getPositionInfo());
+                        map.put("company_city",company.getCompanyCity());
+                        map.put("position_name",position.getPositionName());
+                        map.put("hot",position.getHot());
+                        map.put("money",position.getMoney());
+                        map.put("experience",position.getExperience());
+                        map.put("age",position.getAge());
+                        map.put("sex",position.getSex());
+                        map.put("icon_path",company.getIconPath());
+                        map.put("company_type",company.getCompanyType());
+                        map.put("company_scale",company.getCompanyScale());
+                        positionList.add(map);
+                    }else {
+                        map.put("isRegist","3");
+                        Position position =positionMapper.selectByPrimaryKey(id);
+                        Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
+                        //设置热度以及访问量
+                        position.setHot(position.getHot() + 10);
+                        position.setSeeNumber(position.getSeeNumber() + 1);
+                        positionMapper.updateByPrimaryKeySelective(position);
+                        //设置返回数据
+                        map.put("cid",company.getId());
+                        map.put("phone",company.getPhone());
+                        map.put("company_addr",company.getCompanyAddr());
+                        map.put("name",company.getName());
+                        map.put("id",position.getId());
+                        map.put("position_info",position.getPositionInfo());
+                        map.put("company_city",company.getCompanyCity());
+                        map.put("position_name",position.getPositionName());
+                        map.put("hot",position.getHot());
+                        map.put("money",position.getMoney());
+                        map.put("experience",position.getExperience());
+                        map.put("age",position.getAge());
+                        map.put("sex",position.getSex());
+                        map.put("icon_path",company.getIconPath());
+                        map.put("company_type",company.getCompanyType());
+                        map.put("company_scale",company.getCompanyScale());
+                        positionList.add(map);
+                    }
+                }
+                businessMessage.setData(positionList);
+                businessMessage.setSuccess(true);
+                businessMessage.setMsg("获取职位信息成功");
+            }else {
+                log.error("未获取到用户信息,获取用户信息失败");
+            }
+        }catch (Exception e){
+            log.error("获取职位信息失败",e);
         }
-        businessMessage.setSuccess(true);
         return businessMessage;
     }
 
@@ -167,7 +223,7 @@ public class PositionService {
     }
 
     /**
-     * 求职者端 求职者页面条件查询
+     * 求职者端01 求职者页面条件查询
      *
      * @param session
      * @param type
@@ -187,6 +243,25 @@ public class PositionService {
     }
 
     /**
+     * 求职者端02 求职者页面条件查询
+     *
+     * @param positionName
+     * @param city
+     * @param money
+     * @param scale
+     * @return
+     */
+    public BusinessMessage getPositionByParams02(String positionName,
+                                               String city,String money,String scale){
+        BusinessMessage businessMessage =new BusinessMessage();
+        List<Map<String,Object>> position =commonPositionMapper.getPositionByParams02(city, positionName, money, scale);
+        businessMessage.setMsg("获取职位成功");
+        businessMessage.setData(position);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
+    /**
      * 根据用户id查看是否注册 以及完善求职者用户信息
      * @param userId
      * @return
@@ -196,7 +271,6 @@ public class PositionService {
         List<Map<String,Object>> positionList =new ArrayList();                //意向城市和省份所有职位数据
         List<Map<String,Object>> position =new ArrayList<>();                  //意向城市职位数据
         List<Map<String,Object>> positions =new ArrayList<>();
-        List<Map<String,Object>> posi =new ArrayList<>();
         Example perExample = new Example(Personal.class);
         perExample.createCriteria().andEqualTo("userId", userId);
         //查询求职者列表是否有该求职者信息
@@ -207,7 +281,6 @@ public class PositionService {
             String hopeJob =personals.get(0).getHopeJob();
             String[] city = hopeCity.split(",");
             String[] job = hopeJob.split(",");
-            List<Map<String,Object>> companies =null;
             //意向城市职位
             for (int i = 0; i < city.length; i++) {
                 String address =city[i];
@@ -232,11 +305,7 @@ public class PositionService {
                     for(int b = 0;b < list.size();b++){
                         for(int c = 0;c < job.length;c++){
                             if(list.get(b).get("position_name").equals(job[c])){
-                                for(int d = 0;d < position.size();d++){
-                                    if(list.get(b).get("id") != position.get(d).get("id") && !list.get(b).get("id").equals(position.get(d).get("id"))){
-                                        positions.add(list.get(b));
-                                    }
-                                }
+                                positions.add(list.get(b));
                             }
                         }
                     }
@@ -244,6 +313,12 @@ public class PositionService {
             }
             for(int j = 0;j < position.size();j++){
                 positionList.add(position.get(j));
+            }
+
+            for(int d = 0;d < positions.size();d++) {
+                if(position.contains(positions.get(d))){
+                    positions.remove(d);
+                }
             }
             for(int a = 0;a < positions.size();a++){
                 positionList.add(positions.get(a));
@@ -256,35 +331,24 @@ public class PositionService {
             RemortIP remortIP =new RemortIP();
             String address =remortIP.getAddressByIP(request);
             position =commonPositionMapper.getPositionByAddress(address);
-            if(position.size() > 10) {
-                for(int a = 0;a < 10;a++){
-                    positionList.add(position.get(a));
-                }
-            }else{
-                Example example = new Example(Region.class);
-                example.createCriteria().andEqualTo("name", address);
-                List<Region> regionList = regionMapper.selectByExample(example);
-                List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
-                for(int i = 0;i < list.size();i++){
-                    for(int d = 0;d < position.size();d++) {
-                        if (list.get(i).get("id") != position.get(d).get("id")) {
-                            positions.add(list.get(i));
-                        }
-                    }
-                }
-                for(int a = 0;a < position.size();a++){
-                    posi.add(position.get(a));
-                }
-                for(int b = 0;b < positions.size();b++){
-                    posi.add(positions.get(b));
-                }
-                for(int c = 0;c < 10;c++){
-                    positionList.add(posi.get(c));
-                }
-                businessMessage.setData(positionList);
-                businessMessage.setSuccess(true);
-                businessMessage.setMsg("获取职位成功");
+            for(int a = 0;a < position.size();a++){
+                positionList.add(position.get(a));
             }
+            Example example = new Example(Region.class);
+            example.createCriteria().andEqualTo("name", address);
+            List<Region> regionList = regionMapper.selectByExample(example);
+            List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
+            for(int d = 0;d < list.size();d++) {
+                if(position.contains(list.get(d))){
+                    list.remove(d);
+                }
+            }
+            for(int b = 0;b < list.size();b++){
+                positionList.add(list.get(b));
+            }
+            businessMessage.setData(positionList);
+            businessMessage.setSuccess(true);
+            businessMessage.setMsg("获取职位成功");
         }
         return businessMessage;
     }

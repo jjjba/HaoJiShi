@@ -1,29 +1,34 @@
 // JavaScript Document
 
 var phone;
-
 var type;
-
-var resumeNumber;
-
 var id;
-
+var isRegist;
+var isDelivery;
+var isCollect;
   $(function() {
-
-	
-	$(".toolbarframe").hide();
-	$(".toolbarframe02").hide();
-	$(".toolbarframe03").hide();
-    $(".toolbarframe04").hide();
-    $(".toolbarframe05").hide();
-    $("#yingpin").hide();
-    $("#yiyingpin").hide();
 
       loadPositionInfoById();
 
       $('.d-btn').click(function(){
-      if(type == "3"){
+      if(isRegist == "3") {
           $('.tacne01').show();
+          $('.zaikandenglushoucang').click(function () {
+              $('.tacne01').hide();
+          });
+          $('.lijidenglushoucang').click(function () {
+              $('.tacne01').hide();
+              window.location.href = "/transition/go_zhu_ce1";
+          });
+      }else if(isRegist == "2"){
+          $('.tacne02').show();
+          $('.zaikanwanshanshoucang').click(function () {
+              $('.tacne02').hide();
+          });
+          $('.lijiwanshanshoucang').click(function () {
+              $('.tacne02').hide();
+              window.location.href = "";
+          });
       }else {
           if($(this).text()=="收藏"){
               $.ajax({
@@ -33,14 +38,10 @@ var id;
                       id =res.data.id
                       $('.sctcws01').html("<i></i>已收藏").addClass("curs");
                       $(".toolbarframe").show();
-                      $(".toolbarframe02").hide();
-                      $(".toolbarframe03").hide();
                       setTimeout('$(".toolbarframe").hide()',900);
                   },
                   error : function () {
                       $('.sctcws01').html("<i></i>收藏").removeClass("curs");
-                      $(".toolbarframe").hide();
-                      $(".toolbarframe02").hide();
                       $(".toolbarframe03").show();
                       setTimeout('$(".toolbarframe03").hide()',900);
                   }
@@ -53,15 +54,11 @@ var id;
                   success: function (res) {
                       console.log("====-------"+JSON.stringify(res.data))
                       $('.sctcws01').html("<i></i>收藏").removeClass("curs");
-                      $(".toolbarframe").hide();
                       $(".toolbarframe02").show();
-                      $(".toolbarframe03").hide();
                       setTimeout('$(".toolbarframe02").hide()',900);
                   },
                   error : function () {
                       $('.sctcws01').html("<i></i>已收藏").addClass("curs");
-                      $(".toolbarframe").hide();
-                      $(".toolbarframe02").hide();
                       $(".toolbarframe03").show();
                       setTimeout('$(".toolbarframe03").hide()',900);
                   }
@@ -72,24 +69,53 @@ var id;
 			});
 
       $('.sctcws02').click(function(){
-          if(type == "3"){
-              $('.tacne02').show();
+          if(isRegist == "3") {
+              $('.tacne03').show();
+              $('.zaikandengludianhua').click(function () {
+                  $('.tacne03').hide();
+              });
+              $('.lijidengludianhua').click(function () {
+                  $('.tacne03').hide();
+                  window.location.href = "/transition/go_zhu_ce1";
+              });
+          }else if(isRegist == "2") {
+              $('.tacne04').show();
+              $('.zaikanwanshandianhua').click(function () {
+                  $('.tacne04').hide();
+              });
+              $('.lijiwanshandianhua').click(function () {
+                  $('.tacne04').hide();
+                  window.location.href = "/transition/";
+              });
           }else {
-              if(resumeNumber == "0"){
-                  $(".tacne04").show();
-              }else {
-                  window.location.href="tel:"+phone;
+              if(isDelivery == "1"){
                   $.ajax({
                       url:"/resume/addResumeTellPhoneNum",
                       type:"POST",
                       data :id,
+                      success :function () {
+                          window.location.href="tel:"+phone;
+                      },
+                      error : function () {
+                          $('.toolbarframe06').show();
+                          setTimeout('$(".toolbarframe06").hide()',900);
+
+                      }
+                  });
+
+              }else {
+                  $(".tacne05").show();
+                  $('.zaikantoudi').click(function () {
+                      $('.tacne05').hide();
+                  });
+                  $('.lijitoudi').click(function () {
+                      $('.tacne05').hide();
+                      yingpin();
                   });
               }
           }
       });
-
-		 
-      });
+  });
 
 
 function loadPositionInfoById() {
@@ -101,20 +127,12 @@ function loadPositionInfoById() {
                 $('.sbnecont').empty();
                 var list = res.data;
                 var company_addr,name,position_info,company_city,position_name,hot,
-					money,experience,age,sex,icon_path,name,company_type,company_scale,collectNumber,cid;
+					money,experience,age,sex,icon_path,name,company_type,company_scale;
                 $.each(list, function (index, item) {
                     id = item.id;
-                    resumeNumber =item.resumeNumber;
-                    if(resumeNumber == "0"){
-                        $("#yingpin").show();
-                    }else {
-                        $("#yiyingpin").show();
-                    }
-                    collectNumber =item.collectNumber;
-                    if(collectNumber == null || collectNumber ==""){
-                        collectNumber ="0"
-                    }
-                    type =item.type;
+                    isDelivery =item.isDelivery;
+                    isCollect =item.isCollect;
+                    isRegist =item.isRegist;
                     company_addr = item.company_addr;
                     if (company_addr == null || company_addr == "") {
                         company_addr = "未填写"
@@ -198,10 +216,12 @@ function loadPositionInfoById() {
                     $('.sbnecont').append(sbnecont);
                     $('.zwqxconts').append(position_info);
                     $('.dzlefs').append(company_addr);
-                    if(type != "2"){
-                        $('.footres').show()
+                    if(isDelivery == "1"){
+                        $('#yiyingpin').show()
+                    }else {
+                        $('#yingpin').show();
                     }
-                    if(collectNumber != 0) {
+                    if(isCollect == "1") {
                         $('.sctcws01').html("<i></i>已收藏").addClass("curs");
                     }
                 });
@@ -212,8 +232,24 @@ function loadPositionInfoById() {
 }
 
 function yingpin() {
-    if(type == "3"){
-        $('.tacne03').show();
+    if(isRegist == "2") {
+        $('.tacne07').show();
+        $('.zaikanwanshantoudi').click(function(){
+            $('.tacne07').hide();
+        });
+        $('.lijiwanshantoudi').click(function(){
+            $('.tacne07').hide();
+            window.location.href="";
+        });
+    }else if(isRegist == "3"){
+        $('.tacne06').show();
+        $('.zaikandenglutoudi').click(function(){
+            $('.tacne06').hide();
+        });
+        $('.lijidenglutoudi').click(function(){
+            $('.tacne06').hide();
+            window.location.href="/transition/go_zhu_ce1";
+        });
     }else {
         $.ajax({
             url:"/resume/submitResume",

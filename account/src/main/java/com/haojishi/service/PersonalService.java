@@ -20,7 +20,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -111,40 +110,6 @@ public class PersonalService {
             businessMessage.setMsg("登录失败");
         }
         return businessMessage;
-    }
-
-    /**
-     * 发送手机验证码
-     *
-     * @param phone
-     * @param request
-     * @return BusinessMessage - 是否发送成功验证码
-     */
-    public BusinessMessage sendPhoneCode(String phone, HttpServletRequest request) {
-        BusinessMessage businessMessage = new BusinessMessage();
-        try {
-            if (null == phone) {
-                businessMessage.setMsg("请填写手机号码");
-                return businessMessage;
-            }
-            //判断手机号是否是真的手机号
-            if (PhoneCheck.checkCellphone(phone)) {
-                String smstplId = environment.getProperty("api.smstplId");
-                String smsKey = environment.getProperty("api.smsKey");
-                int mobile_code = (int) ((Math.random() * 9.0D + 1.0D) * 100000.0D);
-                JuheSms.getRequest2(phone, smstplId, String.valueOf(mobile_code), smsKey);
-                request.getServletContext().setAttribute("code" + phone, mobile_code);
-                businessMessage.setMsg("发送成功");
-                businessMessage.setSuccess(true);
-                return businessMessage;
-            }
-            businessMessage.setMsg("请输入正确的手机号");
-        } catch (Exception e) {
-            log.debug("发送验证码失败：", e);
-            businessMessage.setMsg("发送失败");
-        }
-        return businessMessage;
-
     }
 
     /**
@@ -851,6 +816,34 @@ public class PersonalService {
             businessMessage.setData(personalList);
         }catch (Exception e){
             log.error("根据条件查找求职者信息失败",e);
+        }
+        return businessMessage;
+    }
+
+    /**
+     *
+     * @param session
+     * @return
+     */
+    public BusinessMessage getPersonalState(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        Map<String,Object> map =new HashMap<>();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =userMapper.selectByExample(userExample);
+        if(users != null && users.size() > 0) {
+            Example personalExample = new Example(Personal.class);
+            personalExample.createCriteria().andEqualTo("userId", users.get(0).getId());
+            List<Personal> personals = personalMapper.selectByExample(personalExample);
+            if (personals.get(0).getPhone() != null && personals.get(0).getPhone() != ""
+                    && !personals.get(0).getPhone().equals("") && !personals.get(0).getPhone().equals("null")) {
+                map.put("isRegist","2");
+            }else {
+                map.put("isRegist","3");
+            }
+            businessMessage.setData(map);
+            businessMessage.setSuccess(true);
         }
         return businessMessage;
     }

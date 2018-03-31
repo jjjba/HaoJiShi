@@ -1,6 +1,8 @@
 package com.haojishi.controller;
 
+import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
+import com.haojishi.model.Personal;
 import com.haojishi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,9 @@ public class TransitionController {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private PersonalMapper personalMapper;
     /**
      * 跳转职位详情页面
      * @param session
@@ -43,12 +48,17 @@ public class TransitionController {
         Example example =new Example(User.class);
         example.createCriteria().andEqualTo("openid",openid);
         List<User> userList =userMapper.selectByExample(example);
-        int type =userList.get(0).getType();
-        if(type == 2 || type == 3){
-            return "personal/position/position_01";
-        }else {
-            return "personal/position/position_02";
+        if(userList != null && userList.size() > 0){
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userList.get(0).getId());
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            if(personals != null && personals.size() > 0){
+                return "personal/position/position_02";
+            }else {
+                return "personal/position/position_01";
+            }
         }
+        return "personal/position/position_01";
     }
 
     /**
@@ -225,7 +235,7 @@ public class TransitionController {
     }
 
     /**
-     * 跳转企业委托招聘页面
+     * 企业委托招聘页面
      *
      * @return
      */
@@ -235,7 +245,7 @@ public class TransitionController {
     }
 
     /**
-     * 跳转企业开通委托招聘页面
+     * 企业端=======开通委托招聘页面
      *
      * @return
      */
@@ -245,7 +255,7 @@ public class TransitionController {
     }
 
     /**
-     * 跳转企业查看所有求职者页面
+     * 企业端=======查看所有求职者页面
      *
      * @return
      */
@@ -297,12 +307,12 @@ public class TransitionController {
     }
 
     /**
-     * 跳转注册企业页面
+     * 企业端=========跳转注册企业页面
      *
      * @return
      */
     @RequestMapping("go_zhu_ce")
-    public String go_zhu_ce(HttpSession session,Integer id){
+    public String go_zhu_ce(){
         return "company/company_myself/zhu_ce";
     }
 
@@ -339,5 +349,14 @@ public class TransitionController {
     @RequestMapping("wo_de_chang_jian_wen_ti")
     public String wo_de_chang_jian_wen_ti(){
         return "company/company_myself/wo_de_chang_jian_wen_ti";
+    }
+
+    /**
+     * 求职者端========跳转登录注册页面
+     * @return
+     */
+    @RequestMapping("go_zhu_ce1")
+    public String go_zhu_ce1(){
+        return "personal/mySelf/zhu_ce";
     }
 }
