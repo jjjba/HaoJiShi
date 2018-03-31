@@ -56,6 +56,16 @@ public class CompanyController {
         return companyService.getRenCaishoucang(session);
     }
 
+    /**
+     * 修改手机号前的获取手机号操作
+     * @param session
+     * @return
+     */
+    @RequestMapping("updatePhoneNu")
+    public BusinessMessage updatePhoneNu(HttpSession session){
+        return  companyService.updatePhoneNu(session);
+    }
+
 
 
 }
