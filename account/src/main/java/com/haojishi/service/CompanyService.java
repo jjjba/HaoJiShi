@@ -169,20 +169,40 @@ public class CompanyService {
             List<Company> companies =companyMapper.selectByExample(comExample);
             if(companies != null && companies.size()>0){
                 Example collectExample = new Example(CollectPersonal.class);
-                collectExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
+                collectExample.createCriteria().andEqualTo("companyId",companies.get(0).getUserId());
                 List<CollectPersonal> collectPersonals = collectPersonalMapper.selectByExample(collectExample);
                 if(collectPersonals !=null && collectPersonals.size()>0){
-                    Example personalExample = new Example(Personal.class);
                     List<Personal> personals = new ArrayList<Personal>();
                     for(int i=0;i<collectPersonals.size();i++){
-
+                        Example personalExample = new Example(Personal.class);
+                        log.error("hahahhahahhahah"+collectPersonals.get(i).getPersonalId().toString());
+                        personalExample.createCriteria().andEqualTo("id",collectPersonals.get(i).getPersonalId());
+                        personals.add(personalMapper.selectByExample(personalExample).get(0));
                     }
-
+                    businessMessage.setData(personals);
+                    businessMessage.setSuccess(true);
                 }
             }
         }
-        return  null;
-
+        return  businessMessage;
     }
 
+    /**
+     * 获取手机号前的操作  先得到手机号
+     * @param session
+     * @return
+     */
+    public BusinessMessage updatePhoneNu(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            log.error("手机号是------"+users.get(0).getPhone());
+            businessMessage.setData(users.get(0));
+            businessMessage.setSuccess(true);
+        }
+        return businessMessage;
+    }
 }

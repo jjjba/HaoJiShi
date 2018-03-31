@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
     function chushihua() {
         $.ajax({
             type:"post",
@@ -10,7 +10,7 @@ $(document).ready(function() {
             }
         })
     }
-});
+});*/
 function fanhui() {
     window.location.href="/transition/go_wo_de";
 }
