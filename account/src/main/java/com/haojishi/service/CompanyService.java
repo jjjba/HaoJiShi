@@ -26,6 +26,8 @@ public class CompanyService {
     private CollectPersonalMapper collectPersonalMapper;
     @Autowired
     private ServicesMapper servicesMapper;
+    @Autowired
+    private PersonalMapper personalMapper;
     /**
      * 根据企业id查询企业信息
      *
@@ -150,6 +152,37 @@ public class CompanyService {
         return businessMessage;
     }
 
+    /**
+     * 得到收藏人的简历
+     * @param session
+     * @return
+     */
+    public BusinessMessage getRenCaishoucang(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users !=null && users.size()>0){
+            Example comExample =new Example(Company.class);
+            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(comExample);
+            if(companies != null && companies.size()>0){
+                Example collectExample = new Example(CollectPersonal.class);
+                collectExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
+                List<CollectPersonal> collectPersonals = collectPersonalMapper.selectByExample(collectExample);
+                if(collectPersonals !=null && collectPersonals.size()>0){
+                    Example personalExample = new Example(Personal.class);
+                    List<Personal> personals = new ArrayList<Personal>();
+                    for(int i=0;i<collectPersonals.size();i++){
 
+                    }
+
+                }
+            }
+        }
+        return  null;
+
+    }
 
 }

@@ -45,4 +45,17 @@ public class CompanyController {
     public BusinessMessage updatePhoneNum(HttpSession session){
         return companyService.updatePhoneNum(session);
     }
+
+    /**
+     * 得到收藏人的简历
+     * @param session
+     * @return
+     */
+    @RequestMapping("getRenCaishoucang")
+    public BusinessMessage getRenCaishoucang(HttpSession session){
+        return companyService.getRenCaishoucang(session);
+    }
+
+
+
 }
