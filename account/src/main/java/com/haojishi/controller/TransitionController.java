@@ -319,9 +319,9 @@ public class TransitionController {
      * 我的界面（跳转到招聘简报界面）
      * @return
      */
-    @RequestMapping("wo_de_zhao_pin_jian_bao")
+    @RequestMapping("wo_de_jian_li_guan_li")
     public String wo_de_zhao_pin_jian_bao(){
-        return "company/company_myself/wo_de_zhao_pin_jian_bao";
+        return "company/company_myself/wo_de_jian_li_guan_li";
     }
 
     /**
@@ -339,5 +339,23 @@ public class TransitionController {
     @RequestMapping("wo_de_chang_jian_wen_ti")
     public String wo_de_chang_jian_wen_ti(){
         return "company/company_myself/wo_de_chang_jian_wen_ti";
+    }
+
+    /**
+     * 企业端 我的界面（跳转到切换身份界面）
+     * @return
+     */
+    @RequestMapping("wo_de_qie_huan_shen_fen")
+    public String wo_de_qie_huan_shen_fen(){
+        return "company/company_myself/wo_de_qie_huan_shen_fen";
+    }
+
+    /**
+     * 企业端  账号设置（修改手机号界面）
+     * @return
+     */
+    @RequestMapping("wo_de_xiu_gai_shou_ji_hao")
+    public String xiugaishoujihao(){
+        return "company/company_myself/wo_de_xiu_gai_shou_ji_hao";
     }
 }
