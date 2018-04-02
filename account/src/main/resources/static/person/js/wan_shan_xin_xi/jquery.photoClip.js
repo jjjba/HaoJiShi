@@ -26,9 +26,9 @@ var imgsource ='';
 (function(root, factory) {
 	"use strict";
 	if (typeof define === "function" && define.amd) {
-		define(["jquery", "iscroll-zoom", "hammer"], factory);
+		define(["jquery", "static/person/js/wan_shan_xin_xi/iscroll-zoom", "wan_shan_xin_xi/hammer"], factory);
 	} else if (typeof exports === "object") {
-		module.exports = factory(require("jquery"), require("iscroll-zoom"), require("hammer"));
+		module.exports = factory(require("jquery"), require("static/person/js/wan_shan_xin_xi/iscroll-zoom"), require("static/person/js/wan_shan_xin_xi/hammer"));
 	} else {
 		factory(root.jQuery, root.IScroll, root.Hammer);
 	}

@@ -66,6 +66,6 @@ logging:
 
 api:
   #图片和视频存放路径
-  fileImagePath: /usr/local/tomcat7/webapps/image
-  ImageSrc: https://118.24.109.190:8075/image
+  fileImagePath: /var/tomcat/tomcat-7/webapps/image
+  ImageSrc: https://118.24.109.190:8080/image
 

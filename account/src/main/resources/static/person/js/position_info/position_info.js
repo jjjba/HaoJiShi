@@ -27,7 +27,7 @@ var isCollect;
           });
           $('.lijiwanshanshoucang').click(function () {
               $('.tacne02').hide();
-              window.location.href = "";
+              window.location.href = "/transition/go_wan_shan_xin_xi";
           });
       }else {
           if($(this).text()=="收藏"){
@@ -85,7 +85,7 @@ var isCollect;
               });
               $('.lijiwanshandianhua').click(function () {
                   $('.tacne04').hide();
-                  window.location.href = "/transition/";
+                  window.location.href = "/transition/go_wan_shan_xin_xi";
               });
           }else {
               if(isDelivery == "1"){
@@ -239,7 +239,7 @@ function yingpin() {
         });
         $('.lijiwanshantoudi').click(function(){
             $('.tacne07').hide();
-            window.location.href="";
+            window.location.href="/transition/go_wan_shan_xin_xi";
         });
     }else if(isRegist == "3"){
         $('.tacne06').show();

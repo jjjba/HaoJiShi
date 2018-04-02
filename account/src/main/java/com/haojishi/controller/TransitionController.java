@@ -359,4 +359,13 @@ public class TransitionController {
     public String go_zhu_ce1(){
         return "personal/mySelf/zhu_ce";
     }
+
+    /**
+     * 求职者端========跳转完善信息页面
+     * @return
+     */
+    @RequestMapping("go_wan_shan_xin_xi")
+    public String go_wan_shan_xin_xi(){
+        return "personal/mySelf/wan_shan_xin_xi";
+    }
 }
