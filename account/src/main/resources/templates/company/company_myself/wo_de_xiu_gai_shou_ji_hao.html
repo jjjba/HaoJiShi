@@ -16,6 +16,8 @@
 
     <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/top.css" th:href="@{/company/css/wo_de_zhang_hao_she_zhi/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/cjwts.css" th:href="@{/company/css/wo_de_zhang_hao_she_zhi/cjwts.css}" rel="stylesheet" />
+
+
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js" th:src="@{/company/js/jquery-3.2.1.js}"></script>
     <script type="text/javascript" src="/static/company/js/wo_de_xiu_gai_shou_ji_hao/xiugaishoujihao.js" th:src="@{/company/js/wo_de_xiu_gai_shou_ji_hao/xiugaishoujihao.js}"></script>
     
@@ -46,30 +48,7 @@
       <div class="youbyois">
         
 <input type="button" class="yzxis" value="获取验证码" onclick="sendCode(this)" />
-<script type="text/javascript">
- var clock = '';
- var nums = 60;
- var btn;
- function sendCode(thisBtn)
- { 
- btn = thisBtn;
- btn.disabled = true; //将按钮置为不可点击
- btn.value = nums+'s';
- clock = setInterval(doLoop, 1000); //一秒执行一次
- }
- function doLoop()
- {
- nums--;
- if(nums > 0){
-  btn.value = nums+'s';
- }else{
-  clearInterval(clock); //清除js定时器
-  btn.disabled = false;
-  btn.value = '重新获取验证码';
-  nums = 10; //重置时间
- }
- }
-</script>
+          <input type="text" id="yzmyc" style="display: none"/>
         
       </div>
     </div>
@@ -82,38 +61,15 @@
   <div class="xgsjhoma">
     <div class="sbyouis">
       <div class="luyilf01">新手机</div>
-      <div class="luyilf02"><input type="text" class="sjuyys" placeholder="请输入新手机号" /></div>
+      <div class="luyilf02"><input type="text" class="sjuyys" id="newPhoneNum" placeholder="请输入新手机号" /></div>
     </div>
     
     <div class="botmxs clearfix">
       <div class="zuoceso"><input type="text" class="sjuyys" placeholder="验证码" /></div>
       <div class="youbyois">
         
-<input type="button" class="yzxis" value="获取验证码" onclick="sendCode(this)" />
-<script type="text/javascript">
- var clock = '';
- var nums = 60;
- var btn;
- function sendCode(thisBtn)
- { 
- btn = thisBtn;
- btn.disabled = true; //将按钮置为不可点击
- btn.value = nums+'s';
- clock = setInterval(doLoop, 1000); //一秒执行一次
- }
- function doLoop()
- {
- nums--;
- if(nums > 0){
-  btn.value = nums+'s';
- }else{
-  clearInterval(clock); //清除js定时器
-  btn.disabled = false;
-  btn.value = '重新获取验证码';
-  nums = 10; //重置时间
- }
- }
-</script>
+<input type="button" class="yzxis" value="获取验证码" onclick="sendCode1(this)" />
+
         
       </div>
     </div>

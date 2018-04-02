@@ -40,4 +40,16 @@ public class MobileCodeController {
     public BusinessMessage code(String phone, HttpServletRequest request){
         return mobileCodeService.sendPhoneCode(phone,request);
     }
+
+    /**
+     * 给用户手机发送验证码
+     *
+     * @param request
+     * @return BusinessMessage - 是否发送成功验证码
+     */
+    @RequestMapping("codes")
+    public BusinessMessage codes(HttpServletRequest request){
+        String phone = request.getParameter("phone");
+        return mobileCodeService.sendPhoneCode(phone,request);
+    }
 }

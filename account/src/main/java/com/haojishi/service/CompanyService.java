@@ -199,7 +199,6 @@ public class CompanyService {
         userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
-            log.error("手机号是------"+users.get(0).getPhone());
             businessMessage.setData(users.get(0));
             businessMessage.setSuccess(true);
         }
