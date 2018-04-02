@@ -4,15 +4,11 @@ import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Personal;
 import com.haojishi.model.User;
-import com.haojishi.service.MobileCodeService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -21,7 +17,6 @@ import java.util.List;
  * @date 2018/03/20 15.14
  */
 @Controller
-@Slf4j
 @RequestMapping("transition")
 public class TransitionController {
 
@@ -364,14 +359,13 @@ public class TransitionController {
     public String go_zhu_ce1(){
         return "personal/mySelf/zhu_ce";
     }
-    @RequestMapping("wo_de_xiu_gai_shou_ji_hao")
-    public String wo_de_xiu_gai_shou_ji_hao(){
-        return "company/company_myself//wo_de_xiu_gai_shou_ji_hao";
-    }
-    @RequestMapping("test")
-    public void test(HttpServletRequest request){
-        log.error("开始首都航空骄傲不是打开还安徽省不敢打哈高速等哈说不定就开会");
-        MobileCodeService mb = new MobileCodeService();
-        mb.sendPhoneCode("13733319694",request);
+
+    /**
+     * 求职者端========跳转完善信息页面
+     * @return
+     */
+    @RequestMapping("go_wan_shan_xin_xi")
+    public String go_wan_shan_xin_xi(){
+        return "personal/mySelf/wan_shan_xin_xi";
     }
 }

@@ -21,7 +21,7 @@ spring:
       test-while-idle: true
       test-on-return: true
       filters: stat, wall, slf4j
-      aop-patterns: com.xzcysoft.mapper.*
+      aop-patterns: com.haojishi.mapper.*
       stat-view-servlet:
         login-username: wangqiang
         login-password: 123456123
@@ -44,8 +44,8 @@ spring:
             version: v1.0.0
 
 mybatis:
-    type-aliases-package: com.xzcysoft.model
-    mapper-locations: classpath:com/xzcysoft/mapper/*.xml
+    type-aliases-package: com.haojishi.model
+    mapper-locations: classpath:com/haojishi/mapper/*.xml
 
 mapper:
     mappers:
