@@ -1,6 +1,7 @@
 package com.haojishi.WeChat;
 
 import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class UserInfoUtil {
+
 
     public static String getOpenId(String code){
         String url="https://api.weixin.qq.com/sns/oauth2/access_token?  appid=wx3e4as9adbc62b1e9&secret=1cafcbae8abed3fb3ba31394509c12c9&code="+code+"&grant_type=authorization_code";

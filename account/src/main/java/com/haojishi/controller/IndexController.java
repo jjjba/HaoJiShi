@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@RequestMapping("account")
 public class IndexController {
-
     @Autowired
     private UserMapper userMapper;
     @Autowired

@@ -16,12 +16,8 @@ public class CompanyService {
 
     @Autowired
     private CompanyMapper companyMapper;
-
     @Autowired
     private UserMapper usersMapper;
-
-    @Autowired
-    private CommonCompanyMapper commonCompanyMapper;
     @Autowired
     private CollectPersonalMapper collectPersonalMapper;
     @Autowired
