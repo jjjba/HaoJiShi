@@ -66,6 +66,59 @@ public class CompanyController {
         return  companyService.updatePhoneNu(session);
     }
 
+    /**
+     * 将手机号今次那个更替（企业端修改手机号）
+     * @param phoneNum
+     * @return
+     */
+    @RequestMapping("updatePhone")
+    public BusinessMessage updatePhone(String phoneNum,HttpSession session){
+        return  companyService.updatePhone(phoneNum,session);
+    }
 
+    /**
+     * 没有密码的设置密码（账号设置里面）
+     * @param Password
+     * @param session
+     * @return
+     */
+    @RequestMapping("setPassword")
+    public BusinessMessage setPassword(String Password,HttpSession session){
+        return  companyService.setPassword(Password,session);
+    }
 
+    /**
+     * 得到用户（账号设置里面）
+     * @return
+     */
+    @RequestMapping("getUser")
+    public BusinessMessage getUser(HttpSession session){
+        return  companyService.getUser(session);
+    }
+    /**
+     * 得到用户（账号设置里面）
+     * @return
+     */
+    @RequestMapping("updateShenfen")
+    public BusinessMessage updateShenfen(int shenfen,HttpSession session){
+        return  companyService.updateShenfen(shenfen,session);
+    }
+    /**
+     * 得到收到的简历（简历管理）
+     * @return
+     */
+    @RequestMapping("getJianli")
+    public BusinessMessage getJianli(HttpSession session){
+        return  companyService.getJianli(session);
+    }
+
+    /**
+     * 看是不是通过认证
+     * @param session
+     * @return
+     */
+    @RequestMapping("getCompanyOkorFalse")
+    public BusinessMessage getCompanyOkorFalse(HttpSession session){
+        return companyService.getCompanyOkorFalse(session);
+    }
 }

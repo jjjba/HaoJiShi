@@ -20,7 +20,7 @@
     <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/top.css"
           th:href="@{/company/css/wo_de_zhang_hao_she_zhi/top.css}" rel="stylesheet"/>
     <link type="text/css" href="/static/company/css/wo_de_qie_huan_shen_fen/xzsfen.css" th:href="@{/company/css/wo_de_qie_huan_shen_fen/xzsfen.css}"  rel="stylesheet" />
-
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css" th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
             th:src="@{/company/js/jquery-3.2.1.js}"></script>
     
@@ -58,14 +58,16 @@
    <li class="fr" id="num2" onclick="updateDisplyIdValues()">
      <h1><img src="/static/company/images/txia002.png" th:src="@{/company/images/txia002.png}" /></h1>
      <p>我要招人才</p>
-       <p style="display: none"><input type="text" id="displyId" value=""/></p>
+       <p style="display: none"><input type="text" id="displyId" value=""/><input type="text" id="displyIds" value=""/></p>
    </li>
  </ul>
  <!--内容结束-->
- 
+ <div class="toolbarframe shenfenNo" style="display: none">身份切换失败！！！</div>
+ <div class="toolbarframe shenfenYes" style="display: none">身份切换成功！即将调回上级页面！！！</div>
+ <div class="toolbarframe shenfen" style="display: none">身份未切换！！！</div>
  <!--确定按钮开始-->
  <div class="qdinuns">
-   <a href="#" class="qeudinius">确定</a>
+   <a href="#" class="qeudinius" onclick="qiehuan()">确定</a>
  </div>
  <!--确定按钮结束-->
  

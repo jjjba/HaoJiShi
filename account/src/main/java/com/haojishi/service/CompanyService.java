@@ -28,6 +28,8 @@ public class CompanyService {
     private ServicesMapper servicesMapper;
     @Autowired
     private PersonalMapper personalMapper;
+    @Autowired
+    private ResumeMapper resumeMapper;
     /**
      * 根据企业id查询企业信息
      *
@@ -175,7 +177,6 @@ public class CompanyService {
                     List<Personal> personals = new ArrayList<Personal>();
                     for(int i=0;i<collectPersonals.size();i++){
                         Example personalExample = new Example(Personal.class);
-                        log.error("hahahhahahhahah"+collectPersonals.get(i).getPersonalId().toString());
                         personalExample.createCriteria().andEqualTo("id",collectPersonals.get(i).getPersonalId());
                         personals.add(personalMapper.selectByExample(personalExample).get(0));
                     }
@@ -201,7 +202,145 @@ public class CompanyService {
         if (users !=null && users.size()>0){
             businessMessage.setData(users.get(0));
             businessMessage.setSuccess(true);
+
         }
         return businessMessage;
+    }
+
+    /**
+     * 进行数据库 修改手机号的操作（企业端修改手机号最后的操作）
+     * @param phoneNum
+     * @return
+     */
+    public BusinessMessage updatePhone(String phoneNum,HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            User user = users.get(0);
+            user.setPhone(phoneNum);
+            int in  = usersMapper.updateByPrimaryKeySelective(user);
+            businessMessage.setData(in);
+            businessMessage.setSuccess(true);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 没有密码的设置密码（账号设置里面）
+     * @param Password
+     * @param session
+     * @return
+     */
+    public BusinessMessage setPassword(String Password,HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            User user = users.get(0);
+            user.setPassword(Password);
+            int in  = usersMapper.updateByPrimaryKeySelective(user);
+            businessMessage.setData(in);
+            businessMessage.setSuccess(true);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 得到一个用户
+     * @param session
+     * @return
+     */
+    public BusinessMessage getUser(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            businessMessage.setData(users.get(0));
+            businessMessage.setSuccess(true);
+        }
+        return businessMessage;
+    }
+    /**
+     * 修改身份（我的里面）
+     * @param shenfen
+     * @param session
+     * @return
+     */
+    public BusinessMessage updateShenfen(int shenfen,HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            User user = users.get(0);
+            user.setType(shenfen);
+            int in  = usersMapper.updateByPrimaryKeySelective(user);
+            businessMessage.setData(in);
+            businessMessage.setSuccess(true);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 收到的简历
+     * @param session
+     * @return
+     */
+    public BusinessMessage getJianli(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            Example comExample =new Example(Company.class);
+            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(comExample);
+            if (companies!=null && companies.size()>0){
+                Example resumeExample =new Example(Resume.class);
+                resumeExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
+                List<Resume> resuses = resumeMapper.selectByExample(resumeExample);
+                if(resuses !=null && resuses.size()>0){
+                    List<Personal> personals = new ArrayList<Personal>();
+                    for(int i=0;i<resuses.size();i++){
+                        Example personalExample = new Example(Personal.class);
+                        personalExample.createCriteria().andEqualTo("id",resuses.get(i).getPersonalId());
+                        personals.add(personalMapper.selectByExample(personalExample).get(0));
+                    }
+                    businessMessage.setData(personals);
+                    businessMessage.setSuccess(true);
+                }
+            }
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 获取公司
+     * @param session
+     * @return
+     */
+    public BusinessMessage getCompanyOkorFalse(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String openid = (String) session.getAttribute("openid");
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",openid);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if (users !=null && users.size()>0){
+            Example comExample =new Example(Company.class);
+            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(comExample);
+            businessMessage.setData(companies.get(0));
+            businessMessage.setSuccess(true);
+        }
+       return businessMessage;
     }
 }

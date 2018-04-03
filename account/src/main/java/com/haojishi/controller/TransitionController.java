@@ -273,6 +273,15 @@ public class TransitionController {
     public String go_wo_de(){
         return "company/company_myself/wo_de";
     }
+    /**
+     * 跳转企业简历管理
+     *
+     * @return
+     */
+    @RequestMapping("wo_de_jian_li_guan_li")
+    public String wo_de_jian_li_guan_li(){
+        return "company/company_myself/wo_de_jian_li_guan_li";
+    }
 
     /**
      * 跳转企业咨询阅览页面
@@ -316,6 +325,14 @@ public class TransitionController {
         return "company/company_myself/zhu_ce";
     }
 
+    /**
+     * 我的界面（跳转到账号设置界面）
+     * @return
+     */
+    @RequestMapping("wo_de_qie_huan_shen_fen")
+    public String wo_de_qie_huan_shen_fen(){
+        return "company/company_myself/wo_de_qie_huan_shen_fen";
+    }
     /**
      * 我的界面（跳转到账号设置界面）
      * @return
@@ -367,5 +384,47 @@ public class TransitionController {
     @RequestMapping("go_wan_shan_xin_xi")
     public String go_wan_shan_xin_xi(){
         return "personal/mySelf/wan_shan_xin_xi";
+    }
+
+    /**
+     * 企业端 账号设置 我的修改手机号
+     * @return
+     */
+    @RequestMapping("wo_de_xiu_gai_shou_ji_hao")
+    public String wo_de_xiu_gai_shou_ji_hao(){
+        return  "company/company_myself/wo_de_xiu_gai_shou_ji_hao";
+    }
+
+    /**
+     * 企业端账号设置 密码修改
+     * @return
+     */
+    @RequestMapping("wo_de_xiu_gai_mi_ma")
+    public String wo_de_xiu_gai_mi_ma(){
+        return "company/company_myself/wo_de_xiu_gai_mi_ma";
+    }
+    /**
+     * 企业端账号设置 密码修改
+     * @return
+     */
+    @RequestMapping("wo_de_she_zhi_mi_ma")
+    public String wo_de_she_zhi_mi_ma(){
+        return "company/company_myself/wo_de_she_zhi_mi_ma";
+    }
+    /**
+     * 企业端账号设置 密码修改
+     * @return
+     */
+    @RequestMapping("zhiweiguanlirenzhneg")
+    public String wo_de_zhiweiguanli_renzheng(){
+        return "company/company_myself/zhiweiguanli_renzheng";
+    }
+    /**
+     * 企业端账号设置 密码修改
+     * @return
+     */
+    @RequestMapping("zhiweiguanliweirenzheng")
+    public String wo_de_zhiweiguanli_weirenzheng(){
+        return "company/company_myself/zhiweiguanli_weirenzheng";
     }
 }

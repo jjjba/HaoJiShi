@@ -1,11 +1,11 @@
-$(document).ready(function () {
+$(document).ready(function() {
     $.ajax({
-        type: "post",
-        url: "/company/getRenCaishoucang",
-        success: function (msg) {
-            var msh = msg.data;
-            var htm ="";
-            for (var i = 0; i < msh.length; i++) {
+        type:"post",
+        url:"/company/getJianli",
+        success:function (msg) {
+            var lists = msg.data;
+            var htm = "";
+            for(var i =0; i < lists.length;i++){
                 htm+= "<div class='rcxinxis'><div class='rcktops'><div class='reclefs'><img src='";
                 htm+=msg.data[i].avatar;
                 htm+="'/></div><div class='recryous'><div class='clearfix rcvsise'><div class='fl rminsii'>";
@@ -24,11 +24,12 @@ $(document).ready(function () {
                 htm+=msg.data[i].hopeJob;
                 htm+="</div><div class='pxyouls'><img src='../../company/images/biao07.png'/></div></div></div>"
             }
-            $("#addid").html(htm);
+            console.log(htm);
+            $("#shoudaojianli").html(htm);
         }
     })
-});
+})
 
-function renfan() {
+function fanhuiwode() {
     window.location.href = "/transition/go_wo_de";
 }
