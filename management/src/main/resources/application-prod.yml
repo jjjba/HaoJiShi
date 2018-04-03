@@ -1,4 +1,6 @@
 spring:
+  jmx:
+    default-domain: management
 # AOP 配置
   aop:
     proxy-target-class: true
@@ -6,9 +8,10 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/hjs?useSSL=false&characterEncoding=UTF-8
+#      url: jdbc:mysql://localhost:3306/hjs?useSSL=false&characterEncoding=UTF-8
+      url: jdbc:mysql://118.190.133.194:3306/hjs?useSSL=false&characterEncoding=UTF-8
       username: root
-      password: 123456
+      password: JSH@#0629SDJU
       initial-size: 2
       max-active: 30
       min-idle: 2
@@ -21,9 +24,9 @@ spring:
       test-while-idle: true
       test-on-return: true
       filters: stat, wall, slf4j
-             stat-view-servlet:
-        login-username: wangqiang
-        login-password: 123456123
+#             stat-view-servlet:
+#        login-username: wangqiang
+#        login-password: 123456123
 
 # Thymeleaf
   thymeleaf:
@@ -66,6 +69,6 @@ logging:
 
 api:
   #图片和视频存放路径
-  fileImagePath: /var/tomcat/tomcat-7/webapps/image
-  ImageSrc: https://118.24.109.190:8080/image
+  fileImagePath: /var/tomcat/tomcat-8/webapps/image
+  ImageSrc: http://118.24.109.190:443/image
 

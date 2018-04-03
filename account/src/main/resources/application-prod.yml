@@ -1,12 +1,15 @@
 spring:
 # AOP 配置
+  jmx:
+      default-domain: account
   aop:
     proxy-target-class: true
 # 数据源配置
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/hjs-smail?useSSL=false&characterEncoding=UTF-8
+#      url: jdbc:mysql://localhost:3306/hjs-smail?useSSL=false&characterEncoding=UTF-8
+      url: jdbc:mysql://118.190.133.194:3306/hjs?useSSL=false&characterEncoding=UTF-8
       username: root
       password: JSH@#0629SDJU
       initial-size: 2
@@ -67,6 +70,6 @@ logging:
 
 api:
   #图片和视频存放路径
-  fileImagePath: /data/software/tomcatsmail/webapps/image
-  ImageSrc: https://www.haojishi.net/image
+  fileImagePath: /var/tomcat/tomcat-8/webapps/image
+  ImageSrc: http://118.24.109.190:443/image
 
