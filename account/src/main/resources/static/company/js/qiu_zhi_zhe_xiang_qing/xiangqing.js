@@ -29,7 +29,7 @@ var phone;  //求职者手机号
         });
         $("#likewanshanshoucang").click(function(){
             $("#wanshanshoucang").hide();
-            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+            window.location.href="../transition/go_zhu_ce_tian_xie_xin_xi";
         });
 	}else if(isRegist == "3"){
         $('#denglushoucang').show();
@@ -37,7 +37,7 @@ var phone;  //求职者手机号
             $("#denglushoucang").hide();
         });
         $("#likedenglushoucang").click(function(){
-            window.location.href="/transition/go_zhu_ce";
+            window.location.href="../transition/go_zhu_ce";
         });
 	}else {
         if($(this).text()=="收藏"){
@@ -98,7 +98,7 @@ var phone;  //求职者手机号
 
 function loadPersonalInfo() {
 	$.ajax({
-		url:"/personal/getPersonalInfoById",
+		url:"../personal/getPersonalInfoById",
 		type:"POST",
 		success : function (res) {
 			var list =res.data;
@@ -107,15 +107,15 @@ function loadPersonalInfo() {
 			var avatar =list.avatar;
 			if(avatar == null || avatar == ""){
                 if(sex == "男"){
-                    avatar = "../../company/images/tupian01.png"
+                    avatar = "../company/images/tupian01.png"
                 }else {
-                    avatar = "../../company/images/tupian02.png"
+                    avatar = "../company/images/tupian02.png"
                 }
 			}
 			if(sex == "男"){
-				sex = "../../company/images/biao05.png"
+				sex = "../company/images/biao05.png"
 			}else {
-				sex = "../../company/images/biao06.png"
+				sex = "../company/images/biao06.png"
 			}
 			var grzlyuis='<div class="sbuiys">'+
 				'<div class="sbxtlfs">'+
@@ -161,10 +161,9 @@ function loadPersonalInfo() {
 
 function loadUserInfo() {
 	$.ajax({
-		url:"/company/loadUserCompanyInfo",
+		url:"../company/loadUserCompanyInfo",
 		type:"POST",
 		success :function (res) {
-            console.log("data============="+JSON.stringify(res.data));
             isCollect =res.data[0].isCollect;
             isKuaiZhao =res.data[0].isKuaiZhao;
             isRegist =res.data[0].isRegist;
@@ -188,7 +187,7 @@ function tellPhone() {
         });
         $("#likewanshandianhua").click(function(){
             $("#wanshandianhua").hide();
-            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+            window.location.href="../transition/go_zhu_ce_tian_xie_xin_xi";
         });
     }else if(isRegist == "3"){
         $('#dengludianhua').show();
@@ -197,12 +196,12 @@ function tellPhone() {
         });
         $("#likedengludianhua").click(function(){
             $("#dengludianhua").hide();
-            window.location.href="/transition/go_zhu_ce";
+            window.location.href="../transition/go_zhu_ce";
         });
     }else {
         if(isKuaiZhao == "1"){
             $.ajax({
-                url:"/company/updatePhoneNum",
+                url:"../company/updatePhoneNum",
                 type:"POST",
                 success : function (res) {
                     console.log("更改次数成功");
@@ -219,7 +218,7 @@ function tellPhone() {
                 $('.xianyin03').hide();
             });
             $("#likexufei").click(function(){
-                window.location.href="/transition/go_kuai_zhao";
+                window.location.href="../transition/go_kuai_zhao";
             });
         }else if(isKuaiZhao == "3"){
             $('.xianyin02').show();
@@ -227,7 +226,7 @@ function tellPhone() {
                 $("#xianyin02").hide();
             });
             $("#likekaitong").click(function(){
-                window.location.href="/transition/go_kuai_zhao";
+                window.location.href="../transition/go_kuai_zhao";
             });
         }
 
@@ -237,7 +236,7 @@ function tellPhone() {
 
 }
 function goBack() {
-    window.location.href="/transition/go_qiu_zhi_zhe";
+    window.location.href="../transition/go_qiu_zhi_zhe";
 }
 	  
 

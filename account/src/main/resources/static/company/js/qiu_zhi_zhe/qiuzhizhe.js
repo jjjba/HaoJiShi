@@ -51,7 +51,7 @@ function loadPersonalData() {
     //
     // }
     $.ajax({
-        url:"/personal/getPersonal",
+        url:"../personal/getPersonal",
         type:"POST",
         // data:data,
         success :function (res) {
@@ -63,16 +63,16 @@ function loadPersonalData() {
                     avatar =item.avatar;
                     if(avatar == null || avatar == ""){
                         if(item.sex == "男"){
-                            avatar ="../../company/images/tupian01.png"
+                            avatar ="../company/images/tupian01.png"
                         }else {
-                            avatar ="../../company/images/tupian02.png"
+                            avatar ="../company/images/tupian02.png"
                         }
                     }
                     sex =item.sex;
                     if(sex == "男"){
-                        sex ="../../company/images/biao05.png"
+                        sex ="../company/images/biao05.png"
                     }else {
-                        sex ="../../company/images/biao06.png"
+                        sex ="../company/images/biao06.png"
                     }
                     phone =item.phone;
                     var personaldata ='<a href="#" onclick="loadPersonalInfoById(\'/transition/go_qiu_zhi_zhe_xiang_qing?id='+item.id+'\')" >'+
@@ -91,7 +91,7 @@ function loadPersonalData() {
                         '</div>'+
                         '<div class="pxbiuss">'+
                         '<div class="pxlefts">'+item.hopeJob+'</div>'+
-                        '<div class="pxyouls"><img src="./../company/images/biao07.png" onclick="tellPhone()"/></div>'+
+                        '<div class="pxyouls"><img src="../company/images/biao07.png" onclick="tellPhone()"/></div>'+
                         '</div>'+
                         '</div>'+
                         '</a>';
@@ -103,7 +103,7 @@ function loadPersonalData() {
 }
 function loadPersonalByParams(positionName,sex,age) {
     $.ajax({
-        url:"/personal/getPersonalByParams",
+        url:"../personal/getPersonalByParams",
         type:"POST",
         data:{
             positionName : positionName,
@@ -119,16 +119,16 @@ function loadPersonalByParams(positionName,sex,age) {
                 if(avatar == null || avatar == ""){
                     if(item.sex == "男"){
 
-                        avatar ="../../company/images/tupian01.png"
+                        avatar ="../company/images/tupian01.png"
                     }else {
-                        avatar ="../../company/images/tupian02.png"
+                        avatar ="../company/images/tupian02.png"
                     }
                 }
                 sex =item.sex;
                 if(sex == "男"){
-                    sex ="../../company/images/biao05.png"
+                    sex ="../company/images/biao05.png"
                 }else {
-                    sex ="../../company/images/biao06.png"
+                    sex ="../company/images/biao06.png"
                 }
                 var personaldata ='<a href="#" onclick="loadPersonalInfoById(\'/transition/go_qiu_zhi_zhe_xiang_qing?id='+item.id+'\')" >'+
                     '<div class="rcxinxis">'+
@@ -146,7 +146,7 @@ function loadPersonalByParams(positionName,sex,age) {
                     '</div>'+
                     '<div class="pxbiuss">'+
                     '<div class="pxlefts">'+item.hopeJob+'</div>'+
-                    '<div class="pxyouls"><img src="./../company/images/biao07.png" onclick="tellPhone()"/></div>'+
+                    '<div class="pxyouls"><img src="../company/images/biao07.png" onclick="tellPhone()"/></div>'+
                     '</div>'+
                     '</div>'+
                     '</a>';
@@ -158,10 +158,9 @@ function loadPersonalByParams(positionName,sex,age) {
 
 function loadUserInfo() {
     $.ajax({
-        url:"/company/loadUserCompanyInfo",
+        url:"../company/loadUserCompanyInfo",
         type:"POST",
         success :function (res) {
-            console.log("data============="+JSON.stringify(res.data));
             isCollect =res.data[0].isCollect;
             isKuaiZhao =res.data[0].isKuaiZhao;
             isRegist =res.data[0].isRegist;
@@ -180,7 +179,7 @@ function tellPhone() {
         });
         $("#likewanshan").click(function(){
             $("#wanshan").hide();
-            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+            window.location.href="../transition/go_zhu_ce_tian_xie_xin_xi";
         });
     }else if(isRegist == "3"){
         $('#denglu').show();
@@ -189,12 +188,12 @@ function tellPhone() {
         });
         $("#likedenglu").click(function(){
             $("#denglu").hide();
-            window.location.href="/transition/go_zhu_ce";
+            window.location.href="../transition/go_zhu_ce";
         });
     }else {
         if(isKuaiZhao == "1"){
             $.ajax({
-                url:"/company/updatePhoneNum",
+                url:"../company/updatePhoneNum",
                 type:"POST",
                 success : function (res) {
                     console.log("更改次数成功");
@@ -212,7 +211,7 @@ function tellPhone() {
             });
             $("#likexufei").click(function(){
                 $('.xianyin03').hide();
-                window.location.href="/transition/go_kuai_zhao";
+                window.location.href="../transition/go_kuai_zhao";
             });
         }else if(isKuaiZhao == "3"){
             $('.xianyin02').show();
@@ -221,7 +220,7 @@ function tellPhone() {
             });
             $("#likekaitong").click(function(){
                 $("#xianyin02").hide();
-                window.location.href="/transition/go_kuai_zhao";
+                window.location.href="../transition/go_kuai_zhao";
             });
         }
     }

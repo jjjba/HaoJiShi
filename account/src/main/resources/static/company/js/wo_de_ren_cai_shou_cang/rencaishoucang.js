@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $.ajax({
         type: "post",
-        url: "/company/getRenCaishoucang",
+        url: "../company/getRenCaishoucang",
         success: function (msg) {
             var msh = msg.data;
             var htm ="";
@@ -10,7 +10,7 @@ $(document).ready(function () {
                 htm+=msg.data[i].avatar;
                 htm+="'/></div><div class='recryous'><div class='clearfix rcvsise'><div class='fl rminsii'>";
                 htm+=msg.data[i].name;
-                htm+="<span><img src='../../company/images/biao05.png '>";
+                htm+="<span><img src='../company/images/biao05.png '>";
                 htm+=msg.data[i].age;
                 htm+="</span></div><div class='fr ciiuss'>";
                 htm+=msg.data[i].expectMoney;
@@ -22,7 +22,7 @@ $(document).ready(function () {
                 htm+=msg.data[i].hopeCity;
                 htm+="</div></div></div><div class='pxbiuss'> <div class='pxlefts'>";
                 htm+=msg.data[i].hopeJob;
-                htm+="</div><div class='pxyouls'><img src='../../company/images/biao07.png'/></div></div></div>"
+                htm+="</div><div class='pxyouls'><img src='../company/images/biao07.png'/></div></div></div>"
             }
             $("#addid").html(htm);
         }
@@ -30,5 +30,5 @@ $(document).ready(function () {
 });
 
 function renfan() {
-    window.location.href = "/transition/go_wo_de";
+    window.location.href = "../transition/go_wo_de";
 }

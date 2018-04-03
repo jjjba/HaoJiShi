@@ -1,7 +1,7 @@
 $(document).ready(function() {
         $.ajax({
             type:"post",
-            url:"/company/updatePhoneNu",
+            url:"../company/updatePhoneNu",
             dataType:"json",
             success:function (msg) {
                 var PhoneNum = msg.data;
@@ -38,7 +38,7 @@ function doLoop()
 }
 function PhoneYzm(phone) {
     $.ajax({
-        url:"/mobileCode/codes",
+        url:"../mobileCode/codes",
         data:{"phone":phone},
         datatype:"json",
         success:function (msg) {
@@ -48,7 +48,7 @@ function PhoneYzm(phone) {
 }
 function PhoneYzm2(phone) {
     $.ajax({
-        url:"/mobileCode/codes",
+        url:"../mobileCode/codes",
         data:{"phone":phone},
         datatype:"json",
         success:function (msg) {
@@ -66,7 +66,7 @@ function sendCode1(thisBtn)
     }else{
         $.ajax({
             type:"POST",
-            url:"/mobileCode/getIsPhone",
+            url:"../mobileCode/getIsPhone",
             data:{phoneNumber : newPhoneNum},
             success:function (msg) {
                 if(msg.data.isPhone=="2"){
@@ -111,7 +111,7 @@ function updatePhone() {
     if(oldyzm == oldyzm1 && newyzm == newyzm1){
         $.ajax({
             type:"POST",
-            url:"/company/updatePhone",
+            url:"../company/updatePhone",
             data:{phoneNum:newPhoneNum},
             success:function (msg) {
                 if(msg.data.data == 1){

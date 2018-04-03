@@ -15,7 +15,7 @@ $(document).ready(function() {
     $("#phoneNumber").blur(function(){
     	var phoneNumber =$('#phoneNumber').val();
     	$.ajax({
-			url:"/mobileCode/getIsPhone",
+			url:"../mobileCode/getIsPhone",
 			type:"POST",
 			data:{
 				phoneNumber : phoneNumber,
@@ -32,7 +32,7 @@ $(document).ready(function() {
     $(".yzxis").click(function(){
         var phoneNumber =$('#phoneNumber').val();
         $.ajax({
-            url:"/mobileCode/getIsPhone",
+            url:"../mobileCode/getIsPhone",
             type:"POST",
             data:{
                 phoneNumber : phoneNumber,
@@ -50,7 +50,7 @@ $(document).ready(function() {
             var phoneNumber =$('#phoneNumber').val();
             console.log("phone======"+phoneNumber)
             $.ajax({
-                url:"/mobileCode/code",
+                url:"../mobileCode/code",
                 type:"POST",
                 data:{
                     phone : phoneNumber,
@@ -74,7 +74,7 @@ $(document).ready(function() {
 function jinru() {
     var phoneNumber =$('#phoneNumber').val();
     $.ajax({
-        url:"/mobileCode/getIsPhone",
+        url:"../mobileCode/getIsPhone",
         type:"POST",
         data:{
             phoneNumber : phoneNumber,
