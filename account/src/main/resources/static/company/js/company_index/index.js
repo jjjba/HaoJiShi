@@ -38,7 +38,7 @@ $(document).ready(function() {
 function loadCompanyBanner() {
     $.ajax({
         type: "POST",
-        url: "/banner/getCompanyBanner",
+        url: "../banner/getCompanyBanner",
         success: function (res) {
             if (res.success) {
                 var list = res.data;
