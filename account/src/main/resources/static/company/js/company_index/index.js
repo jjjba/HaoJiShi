@@ -140,9 +140,6 @@ function loadUserInfo() {
             isCollect =res.data[0].isCollect;
             isKuaiZhao =res.data[0].isKuaiZhao;
             isRegist =res.data[0].isRegist;
-            console.log("isCollect============="+isCollect);
-            console.log("isKuaiZhao============"+isKuaiZhao);
-            console.log("isRegist=============="+isRegist);
         }
     })
 }

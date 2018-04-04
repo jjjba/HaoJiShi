@@ -27,13 +27,13 @@ var isCollect;
           });
           $('.lijiwanshanshoucang').click(function () {
               $('.tacne02').hide();
-              window.location.href = "/transition/go_wan_shan_xin_xi";
+              window.location.href = "../transition/go_wan_shan_xin_xi";
           });
       }else {
           if($(this).text()=="收藏"){
               $.ajax({
                   type: "POST",
-                  url:"/collection/collectPosition",
+                  url:"../collection/collectPosition",
                   success: function (res) {
                       id =res.data.id
                       $('.sctcws01').html("<i></i>已收藏").addClass("curs");
@@ -50,7 +50,7 @@ var isCollect;
           }else if($(this).text()=="已收藏"){
               $.ajax({
                   type: "POST",
-                  url:"/collection/cancelCollectPosition",
+                  url:"../collection/cancelCollectPosition",
                   success: function (res) {
                       console.log("====-------"+JSON.stringify(res.data))
                       $('.sctcws01').html("<i></i>收藏").removeClass("curs");
@@ -76,7 +76,7 @@ var isCollect;
               });
               $('.lijidengludianhua').click(function () {
                   $('.tacne03').hide();
-                  window.location.href = "/transition/go_zhu_ce1";
+                  window.location.href = "../transition/go_zhu_ce1";
               });
           }else if(isRegist == "2") {
               $('.tacne04').show();
@@ -85,12 +85,12 @@ var isCollect;
               });
               $('.lijiwanshandianhua').click(function () {
                   $('.tacne04').hide();
-                  window.location.href = "/transition/go_wan_shan_xin_xi";
+                  window.location.href = "../transition/go_wan_shan_xin_xi";
               });
           }else {
               if(isDelivery == "1"){
                   $.ajax({
-                      url:"/resume/addResumeTellPhoneNum",
+                      url:"../resume/addResumeTellPhoneNum",
                       type:"POST",
                       data :id,
                       success :function () {
@@ -121,7 +121,7 @@ var isCollect;
 function loadPositionInfoById() {
     $.ajax({
         type: "POST",
-        url: "/position/getPositionById",
+        url: "../position/getPositionById",
         success: function (res) {
             if (res.success) {
                 $('.sbnecont').empty();
@@ -171,7 +171,7 @@ function loadPositionInfoById() {
                     }
                     icon_path =item.icon_path;
                     if(icon_path == null || icon_path == ""){
-                        icon_path = "../../person/images/icon_company_default.png";
+                        icon_path = "../person/images/icon_company_default.png";
                     }
                     name = item.name;
                     if (name == null || name == "") {
@@ -202,13 +202,13 @@ function loadPositionInfoById() {
                         '<div class="corpnames">' +
                         '<div class="corpzuos">' +
                         '<img src="'+icon_path+'" />' +
-                        '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>' +
+                        '<div class="yrzs"><img src="../person/images/biao02.png" /></div>' +
                         '</div>' +
                         '<a href="#" onclick="loadCompanyInfo(\'/transition/company_info?cid='+item.cid+ '\')"> '+
                         '<div class="corpryous">' +
                         '<h1>'+name+'</h1>' +
                         '<p>'+company_type+' | '+company_scale+' | '+company_city+'</p>' +
-                        '<img src="../../person/images/yjts.png" class="jtois" />' +
+                        '<img src="../person/images/yjts.png" class="jtois" />' +
                         '</div>' +
                         '</a>'+
                         '</div>';
@@ -239,7 +239,7 @@ function yingpin() {
         });
         $('.lijiwanshantoudi').click(function(){
             $('.tacne07').hide();
-            window.location.href="/transition/go_wan_shan_xin_xi";
+            window.location.href="../transition/go_wan_shan_xin_xi";
         });
     }else if(isRegist == "3"){
         $('.tacne06').show();
@@ -248,11 +248,11 @@ function yingpin() {
         });
         $('.lijidenglutoudi').click(function(){
             $('.tacne06').hide();
-            window.location.href="/transition/go_zhu_ce1";
+            window.location.href="../transition/go_zhu_ce1";
         });
     }else {
         $.ajax({
-            url:"/resume/submitResume",
+            url:"../resume/submitResume",
             type:"POST",
             success : function (res) {
                 $(".toolbarframe04").show();
@@ -268,7 +268,7 @@ function yingpin() {
 }
 
 function loadCompanyInfo(url) {
-    window.location.href=url;
+    window.location.href=".."+url;
 }
 
 

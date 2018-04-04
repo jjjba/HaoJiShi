@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.haojishi.config.CookiesUtil;
 import com.haojishi.mapper.*;
 import com.haojishi.model.*;
 import com.haojishi.util.BusinessMessage;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.entity.Example;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -47,6 +50,17 @@ public class PersonalService {
     private CompanyMapper companyMapper;
     @Autowired
     private RegionMapper regionMapper;
+
+    /*public static String Cookis(){
+        Cookie[] cookies = getCookies();
+        if(cookies != null && cookies.length>0){
+
+        }else{
+
+        }
+        return null;
+    }*/
+
     /**
      *
      * @param code

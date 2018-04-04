@@ -2,6 +2,7 @@ package com.haojishi.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.haojishi.config.CookiesUtil;
 import com.haojishi.mapper.BannerMapper;
 import com.haojishi.model.Banner;
 import com.haojishi.util.BusinessMessage;
@@ -9,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
+import javax.servlet.http.Cookie;
 import java.util.List;
 
 /**
@@ -17,10 +20,11 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class BannerService {
+public class BannerService{
 
     @Autowired
     private BannerMapper bannerMapper;
+    BusinessMessage businessMessage = new BusinessMessage();
 
     /**
      * 获取所有求职者端banner
@@ -28,9 +32,7 @@ public class BannerService {
      * @return BusinessMessage
      */
     public BusinessMessage getPersonalBanner(){
-        BusinessMessage businessMessage = new BusinessMessage();
         try {
-
             Example bannerExample = new Example(Banner.class);
             bannerExample.createCriteria().andEqualTo("classification",1);
             bannerExample.setOrderByClause("sort");
@@ -56,9 +58,7 @@ public class BannerService {
      * @return BusinessMessage
      */
     public BusinessMessage getCompanyBanner(){
-        BusinessMessage businessMessage = new BusinessMessage();
         try {
-
             Example bannerExample = new Example(Banner.class);
             bannerExample.createCriteria().andEqualTo("classification",2);
             bannerExample.setOrderByClause("sort");

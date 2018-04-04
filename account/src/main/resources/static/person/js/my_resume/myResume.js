@@ -1,4 +1,4 @@
-
+﻿
 var hopeMoney;
 var experience;
 var school;
@@ -15,7 +15,7 @@ $(function() {
 function loadPersonalInfo() {
     $.ajax({
         type: "POST",
-        url: "/personal/getPersonalInfo",
+        url: "../personal/getPersonalInfo",
         success: function (res) {
             if (res.success) {
                 $('.txuyse').empty();
@@ -36,16 +36,16 @@ function loadPersonalInfo() {
                     }
                     sex =item.sex;
                     if(sex == "男"){
-                        sex ="../../person/images/biao05.png";
+                        sex ="../person/images/biao05.png";
                     }else {
-                        sex ="../../person/images/biao06.png";
+                        sex ="../person/images/biao06.png";
                     }
                     avatar =item.avatar;
                     if(avatar == null || avatar == ""){
-                        if(sex == "../../person/images/biao05.png"){
-                            avatar ="../../person/images/tupian.png";
+                        if(sex == "../person/images/biao05.png"){
+                            avatar ="../person/images/tupian.png";
                         }else {
-                            avatar ="../../person/images/tupian02.png";
+                            avatar ="../person/images/tupian02.png";
                         }
 
                     }
@@ -102,7 +102,7 @@ function loadPersonalInfo() {
                         '<div class="lylyus">'+name+' <span><img src="'+sex+'">'+age+'</span></div>' +
                         '<div class="grxhzls">'+state+'</div>'+
                         '<div class="ycjstts">'+
-                        '<a href="#">基本信息 <img src="../../person/images/yjts.png" /></a>'+
+                        '<a href="#">基本信息 <img src="../person/images/yjts.png" /></a>'+
                         '</div>'+
                         '</div>'+
                         '</div>';
@@ -113,7 +113,7 @@ function loadPersonalInfo() {
                     '<div class="stopsis">'+
                     '<div class="zuoius01">自我介绍</div>'+
                     '<div class="zuoius02">'+mySelfInfo+'</div>'+
-                    '<div class="zuoius03"><img src="../../person/images/yjts.png" /></div>'+
+                    '<div class="zuoius03"><img src="../person/images/yjts.png" /></div>'+
                     '</div>'+
                     '</a>'+
                     '<a href="#" onclick="loadSpecial()">'+
@@ -149,7 +149,7 @@ function loadPersonalInfo() {
                         '                    }\n' +
                         '                });\n' +
                         '            </script>'+
-                        '</div> <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        '</div> <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div>'+
                         '<div class="sryikuys borxboms clearfix">'+
@@ -157,14 +157,14 @@ function loadPersonalInfo() {
                         '<div class="fr yogzztas">'+
                         '<div class="xzzwis">'+
                         '<div id="trigger2" class="zhiiis">'+hope_job+'</div>'+
-                        '</div> <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        '</div> <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div>'+
                         '<a href="#">'+
                         '<div class="sryikuys borxboms clearfix">'+
                         '<div class="fl zcsyks">意向城市</div>'+
                         '<div class="fr youkuiss">'+
-                        hope_city+' <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        hope_city+' <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div>'+
                         '</a>'+
@@ -190,7 +190,7 @@ function loadPersonalInfo() {
                         '                    }\n' +
                         '                });\n' +
                         '            </script>'+
-                        '</div> <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        '</div> <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div>';
                     $('#money').append(money);
@@ -217,19 +217,19 @@ function loadPersonalInfo() {
                         '                    }\n' +
                         '                });\n' +
                         '            </script>'+
-                        '</div> <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        '</div> <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div></div>'+
                         '<a href="#">'+
                         '<div class="sryikuys borxboms clearfix">'+
                         '<div class="fl zcsyks">曾经做过</div>'+
                         '<div class="fr youkuiss">'+
-                        onceDo+' <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        onceDo+' <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div></div></a>'+
                         '<a href="#">'+
                         '<div class="sryikuys clearfix">'+
                         '<div class="fl zcsyks">我的家乡</div>'+
                         '<div class="fr youkuiss">'+
-                        myHometown+' <img src="../../person/images/yjts.png" class="yjtiss" />'+
+                        myHometown+' <img src="../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div></a>';
                     $('#xueli').append(xueli);
@@ -252,7 +252,7 @@ function save() {
     }
     
     $.ajax({
-        url:"/personal/updatePersonalByPersonalOpenid",
+        url:"../personal/updatePersonalByPersonalOpenid",
         type:"POST",
         data:{
             recordSchool : school,
@@ -260,20 +260,20 @@ function save() {
             expectMoney : hopeMoney,
         },
         success : function (res) {
-            window.location.href="/transition/transition_goMySelf";
+            window.location.href="../transition/transition_goMySelf";
         }
     })
 }
 
 
 function loadMySelfInfo() {
-    window.location.href="/transition/go_personal_profile";
+    window.location.href="../transition/go_personal_profile";
 }
 
 function loadSpecial() {
-    window.location.href="/transition/update_my_special";
+    window.location.href="../transition/update_my_special";
 }
 
 function onBack() {
-    window.location.href="/transition/transition_goMySelf";
+    window.location.href="../transition/transition_goMySelf";
 }

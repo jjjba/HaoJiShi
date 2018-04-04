@@ -1,5 +1,6 @@
 package com.haojishi.controller;
 
+import com.haojishi.config.CookiesUtil;
 import com.haojishi.service.BannerService;
 import com.haojishi.util.BusinessMessage;
 import io.swagger.models.auth.In;
@@ -19,6 +20,7 @@ public class BannerController {
 
     @Autowired
     private BannerService bannerService;
+
 
     /**
      * 获取所有求职者端banner

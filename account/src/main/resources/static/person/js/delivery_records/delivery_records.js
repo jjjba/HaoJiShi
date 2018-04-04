@@ -2,7 +2,7 @@
 
 $(function () {
         $.ajax({
-            url :"/resume/getAllSubmitResume",
+            url :"../resume/getAllSubmitResume",
             type:"POST",
             success : function (res) {
                 $('.reconblock').empty();
@@ -47,9 +47,9 @@ $(function () {
                     }if(phone == null || phone == null){
                         phone ="未填写"
                     }if(tellPhoneNumber == null || tellPhoneNumber == 0 || tellPhoneNumber == ''){
-                        tellPhoneNumber ="../../person/images/dianh01.png"
+                        tellPhoneNumber ="../person/images/dianh01.png"
                     }else {
-                        tellPhoneNumber ="../../person/images/dianh02.png"
+                        tellPhoneNumber ="../person/images/dianh02.png"
                     }
 
                     var toudijianli='<div class="reconblock">'+
@@ -65,7 +65,7 @@ $(function () {
                         '<div class="corpnames">'+
                         '<div class="corpzuos">'+
                         '<img src="'+iconPath+'" />'+
-                        '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>'+
+                        '<div class="yrzs"><img src="../person/images/biao02.png" /></div>'+
                         '</div>'+
                         '<div class="corpryous tdljdws">'+
                         '<h1>'+name+'</h1>'+
@@ -85,10 +85,10 @@ $(function () {
 
 
 function onBack() {
-    window.location.href="/transition/transition_goMySelf";
+    window.location.href="../transition/transition_goMySelf";
 }
 
 function loadPositionInfo(url) {
-    window.location.href=url;
+    window.location.href=".."+url;
 }
 

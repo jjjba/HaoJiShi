@@ -7,7 +7,7 @@ $(function () {
 function loadCollectPosition() {
     $.ajax({
         type:'POST',
-        url:'/collection/selectCollectPosition',
+        url:'../collection/selectCollectPosition',
         success :function(res){
             var list =res.data;
             var id,name,company_type,company_city,company_scale,icon_path,position_name,hot,money,sex,age,experience;
@@ -66,7 +66,7 @@ function loadCollectPosition() {
                     '<div class="corpnames">'+
                     '<div class="corpzuos">'+
                     '<div class="icon"></div>'+
-                    '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>'+
+                    '<div class="yrzs"><img src="../person/images/biao02.png" /></div>'+
                     '</div>'+
                     '<div class="corpryous">'+
                     '<h1>'+name+'</h1>'+
@@ -78,7 +78,7 @@ function loadCollectPosition() {
 
                 icon_path =item.icon_path;
                 if(icon_path == null || icon_path == ""){
-                    $('.icon').append('<img src="../../person/images/icon_company_default.png" />');
+                    $('.icon').append('<img src="../person/images/icon_company_default.png" />');
                 }else {
                     $('.icon').append('<img src="'+icon_path+'" />');
                 }
@@ -89,5 +89,5 @@ function loadCollectPosition() {
 }
 
 function onBack() {
-    window.location.href="/transition/transition_goMySelf";
+    window.location.href="../transition/transition_goMySelf";
 }
