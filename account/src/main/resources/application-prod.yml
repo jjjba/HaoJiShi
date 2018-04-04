@@ -73,3 +73,7 @@ api:
   fileImagePath: /var/tomcat/tomcat-8/webapps/image
   ImageSrc: http://118.24.109.190:443/image
 
+
+  appid: wxb363c68215a1d3f1
+  secret: 98e5dbf56fed8c9e0c5fb95f5d34ba05
+

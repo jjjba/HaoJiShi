@@ -1,11 +1,10 @@
 package com.haojishi.util;
 
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
+import javax.net.ssl.*;
 import java.io.*;
 import java.net.URL;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 
 public class HttpsUtil {
 
@@ -83,4 +82,5 @@ public class HttpsUtil {
         }
         return response;
     }
+
 }

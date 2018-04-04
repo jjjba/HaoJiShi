@@ -1,0 +1,234 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>好技师·您的好帮手</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/wodes.css"
+          th:href="@{/company/css/wo_de/wodes.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/bottom.css"
+          th:href="@{/company/css/wo_de/bottom.css}" rel="stylesheet" />
+    
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}"></script>
+
+   
+   <!--圆形进度开始-->
+	   <script type="text/javascript">
+            $(function() {
+                $('.progressbar').each(function(index, el) {
+                    var num = $(this).find('span').text();
+                    $(this).addClass('progressbar-' + num);
+                });
+
+
+
+            });
+       </script>
+   <!--圆形进度结束-->
+        <script type="text/javascript">
+            $(function () {
+                $('.dyikuys .xibkass').click(function () {
+                    $('.popupus').show();
+                });
+                $('.wzkljgz01').click(function () {
+                    $('.popupus').hide();
+                });
+                $('.wzkljgz02 .fbzhiuse').click(function () {
+                    window.location.href="/transition/go_zhu_ce";
+                });
+            })
+        </script>
+   
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     我的
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--上边开始-->
+   <div class="sbjltitis">
+     <!--上开始-->
+     <div class="sbtopxxs">
+       <!--左开始-->
+       <div class="sblefs">
+         <img src="/static/company/images/tuui.png" th:src="@{/company/images/tuui.png}"/>
+       </div>
+       <!--左结束-->
+       <!--右开始-->
+       <div class="sbyours fbzhiuse">
+           <div class="lylyus">登陆/注册</div>
+       </div>
+       <!--右结束-->
+     </div>
+     <!--上结束-->
+     
+     <!--下开始-->
+     <a href="#">
+     <div class="xibkass">
+       
+       <!--左边圆形进度条开始-->
+        <div class="progressbar">
+          <span>0</span>%
+        </div>
+       <!--左边圆形进度条结束-->
+       
+       <!--右边开始-->
+       <div class="ycbuyss">
+         完善店铺，获得更多简历
+       </div>
+       <!--右边结束-->
+       
+       <!--右箭头开始-->
+       <div class="ycjtouis"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
+       <!--右箭头结束-->
+       
+     </div>
+     </a>
+     <!--下结束-->
+     
+   </div>
+ <!--上边结束-->
+ 
+ 
+ <!--一块开始-->
+  <div class="dyikuys">
+    <ul>
+      <li class="clearfix borderbom">
+        <a href="#" class="fl zcuyys0"><img src="/static/company/images/wode07.png" th:src="@{/company/images/wode07.png}" /> 我的快招</a>
+        <a href="#" class="fr"><span class="ciniso">开通快招服务<br />
+主动出击招人才，快人一步</span><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>
+      <li class="clearfix">
+        <a href="#" class="fl" ><img src="/static/company/images/wode10.png" th:src="@{/company/images/wode10.png}"/> 招聘简报</a>
+        <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></a>
+      </li>      
+    </ul>
+  </div>
+ <!--一块结束-->
+ 
+ <!--一块开始-->
+  <div class="dyikuys">
+    <ul>
+      <li class="clearfix borderbom">
+        <a href="#" class="fl" onclick="wodezhiweiguanli()"><img src="/static/company/images/wode08.png" th:src="@{/company/images/wode08.png}" /> 职位管理</a>
+        <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>
+      <li class="clearfix">
+        <a href="#" class="fl" onclick="wodejianliguanli()"><img src="/static/company/images/wode09.png" th:src="@{/company/images/wode09.png}" /> 简历管理</a>
+        <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>      
+    </ul>
+  </div>
+ <!--一块结束-->
+ 
+ 
+ <!--一块开始-->
+  <div class="dyikuys">
+    <ul>
+      <li class="clearfix borderbom">
+        <a href="#" class="fl" onclick="woderencaishoucang()"><img src="/static/company/images/wode01.png" th:src="@{/company/images/wode01.png}" /> 人才收藏</a>
+        <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>
+      <li class="clearfix">
+        <a href="#" class="fl" onclick="wodechangjianwenti()"><img src="/static/company/images/wode03.png" th:src="@{/company/images/wode03.png}" /> 常见问题</a>
+        <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>      
+    </ul>
+  </div>
+ <!--一块结束-->
+ 
+ 
+ <!--一块开始-->
+  <div class="dyikuys">
+    <ul>
+      <li class="clearfix borderbom">
+        <a href="#" onclick="wodezhanghaoshezhi()" class="fl"><img src="/static/company/images/wode05.png" th:src="@{/company/images/wode05.png}" /> 账号设置</a>
+        <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>
+      <li class="clearfix">
+        <a href="#" class="fl" onclick="wodeqiehuanshenfen()"><img src="/static/company/images/wode06.png" th:src="@{/company/images/wode06.png}" /> 切换身份</a>
+        <a href="#" class="fr">我要找工作 <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      </li>      
+    </ul>
+  </div>
+ <!--一块结束-->
+ 
+
+  <!--最底部开始-->
+  <div class="footers">
+    <ul>
+      <li>
+       <a href="#" onclick="gotozhiwei()">
+         <i class="botmbg01"></i>
+         <p>职位</p>
+       </a>
+      </li>
+      <li>
+       <a href="#" onclick="gotoshouye()">
+         <i class="botmbg02"></i>
+         <p>首页</p>
+       </a>
+      </li>
+      <li class="actives">
+       <a href="#">
+         <i class="botmbg03"></i>
+         <p>我的</p>
+       </a>
+      </li>
+    </ul>
+  </div>
+  <!--最底部结束-->
+
+ <!--弹出层开始-->
+ <div class="popupus" style="display: none">
+     <!--里边开始-->
+     <div class="pupuinto">
+         <div class="lbyis">
+             <h1>温馨提示</h1>
+             <p>您还未登录,请先登录,才可以享受更多功能</p>
+             <ul>
+                 <li class="wzkljgz01"><a href="#">我再看看</a></li>
+                 <li class="wzkljgz02"><a href="#">立即登陆</a></li>
+             </ul>
+         </div>
+     </div>
+     <!--里边结束-->
+ </div>
+ <!--弹出层结束-->
+
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,5 +1,7 @@
 package com.haojishi.service;
 
+import com.haojishi.mapper.UserMapper;
+import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.JuheSms;
 import com.haojishi.util.PhoneCheck;
@@ -7,9 +9,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,6 +26,8 @@ public class MobileCodeService {
 
     @Autowired
     private Environment environment;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 用户注册输入手机号验证过是否是正确手机号
@@ -70,5 +76,25 @@ public class MobileCodeService {
         }
         return businessMessage;
 
+    }
+
+    /**
+     * 验证该手机号是否已被注册
+     *
+     * @param phone
+     * @return BusinessMessage -
+     */
+    public BusinessMessage isRegist(String phone) {
+        BusinessMessage businessMessage =new BusinessMessage();
+        Example example =new Example(User.class);
+        example.createCriteria().andEqualTo("phone",phone);
+        List<User> userList =userMapper.selectByExample(example);
+        if(userList.size() > 0){
+            Map<String,Object> map =new HashMap<>();
+            map.put("isRegist","1");
+            businessMessage.setData(map);
+            businessMessage.setSuccess(true);
+        }
+        return businessMessage;
     }
 }

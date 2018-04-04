@@ -50,22 +50,14 @@ public class PositionService {
         BusinessMessage businessMessage =new BusinessMessage();
         try{
             List<Map<String,Object>> positionList =new ArrayList<>();   //意向城市 省份所有职位数据
-            List<Map<String,Object>> position =new ArrayList<>();       //意向城市 所有职位数据
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =userMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0) {
-                    businessMessage =getPositionByUserId(request,users.get(0).getId());
-                    position = (List<Map<String, Object>>) businessMessage.getData();
-                    for(int i = 0;i < 10;i++){
-                        positionList.add(position.get(i));
-                    }
-                    businessMessage.setMsg("获取首页推荐职位成功");
-            }else {
-                log.error("未获取到用户信息");
-                businessMessage.setMsg("未获取到用户信息");
+            int userId = (int) session.getAttribute("userId");
+            businessMessage =getPositionByUserId(request,userId);
+            List<Map<String,Object>> position = (List<Map<String, Object>>) businessMessage.getData();
+            for(int i = 0;i < 10;i++){
+                positionList.add(position.get(i));
             }
+            businessMessage.setMsg("获取首页推荐职位成功");
+
             }catch (Exception e){
             log.error("获取推荐职位错误",e);
         }
@@ -208,17 +200,8 @@ public class PositionService {
      */
     public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
-        List<User> users =userMapper.selectByExample(userExample);
-        if(users != null && users.size() > 0) {
-            int id = users.get(0).getId();
-            businessMessage=getPositionByUserId(request,id);
-        }else{
-            businessMessage.setMsg("未获取到用户信息");
-            log.error("未获取到用户信息");
-        }
+        int userId = (int) session.getAttribute("userId");
+        businessMessage=getPositionByUserId(request,userId);
         return businessMessage;
     }
 

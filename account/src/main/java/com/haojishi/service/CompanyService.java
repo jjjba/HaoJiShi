@@ -339,4 +339,33 @@ public class CompanyService {
         }
        return businessMessage;
     }
+
+    /**
+     * 注册企业用户
+     * @param session
+     * @param phoneNumber
+     * @return
+     */
+    public BusinessMessage registComapny(HttpSession session,String phoneNumber){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            User user =usersMapper.selectByPrimaryKey(userId);
+            if(user != null){
+                if(!user.getPhone().equals(phoneNumber)){
+
+                }
+                user.setPhone(phoneNumber);
+            }else {
+                User user1 =new User();
+                user1.setPhone(phoneNumber);
+                usersMapper.insertSelective(user1);
+            }
+            businessMessage.setSuccess(true);
+            log.info("注册企业用户成功");
+        }catch (Exception e){
+            log.error("注册企业失败",e);
+        }
+        return businessMessage;
+    }
 }

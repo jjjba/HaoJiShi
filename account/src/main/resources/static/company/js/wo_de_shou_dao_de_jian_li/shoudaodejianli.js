@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $.ajax({
         type:"post",
-        url:"../company/getJianli",
+        url:"/company/getJianli",
         success:function (msg) {
             var lists = msg.data;
             var htm = "";
@@ -22,7 +22,7 @@ $(document).ready(function() {
                 htm+=msg.data[i].hopeCity;
                 htm+="</div></div></div><div class='pxbiuss'> <div class='pxlefts'>";
                 htm+=msg.data[i].hopeJob;
-                htm+="</div><div class='pxyouls'><img src='../company/images/biao07.png'/></div></div></div>"
+                htm+="</div><div class='pxyouls'><img src='../../company/images/biao07.png'/></div></div></div>"
             }
             console.log(htm);
             $("#shoudaojianli").html(htm);
@@ -31,5 +31,5 @@ $(document).ready(function() {
 })
 
 function fanhuiwode() {
-    window.location.href = "../transition/go_wo_de";
+    window.location.href = "/transition/go_wo_de";
 }
