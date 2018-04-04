@@ -11,11 +11,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tk.mybatis.mapper.entity.Example;
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @author 梁闯
@@ -38,79 +40,98 @@ public class RedirectController {
      * @param state 重定向状态参数
      * @return
      */
-    @GetMapping("url")
+
+    @RequestMapping("account")
     public String wecahtLogin(@RequestParam(name = "code", required = false) String code,
-                              @RequestParam(name = "state") String state, HttpSession session) {
+                              @RequestParam(name = "state") String state, HttpSession session,HttpServletRequest request) {
         log.info("收到微信重定向跳转.");
         log.info("用户同意授权,获取code:{} , state:{}", code, state);
-        // 1. 用户同意授权,获取code
-        // 2. 通过code换取网页授权access_token
-        if (code != null || !(code.equals(""))) {
-            String WX_APPID =environment.getProperty("api.appid");
-            String WX_APPSECRET =environment.getProperty("api.secret");
-            String APPID = WX_APPID;
-            String SECRET = WX_APPSECRET;
+
+
+        //通过code换取网页授权web_access_token
+        if(code != null || !(code.equals(""))){
+            String APPID = environment.getProperty("api.appid");
+            String SECRET = environment.getProperty("api.secret");
             String CODE = code;
             String WebAccessToken = "";
-            String openId = "";
-            String nickName,sex,openid = "";
-            String REDIRECT_URI = "http://www.xxx.com/url";
-            String SCOPE = "snsapi_userinfo";
-            String getCodeUrl = UserInfoUtil.getCode(APPID, REDIRECT_URI, SCOPE);
-            log.info("第一步:用户授权, get Code URL:{}", getCodeUrl);
-            // 替换字符串，获得请求access token URL
-            String tokenUrl = UserInfoUtil.getWebAccess(APPID, SECRET, CODE);
-            log.info("第二步:get Access Token URL:{}", tokenUrl);
-            // 通过https方式请求获得web_access_token
-            String response = HttpsUtil.httpsRequestToString(tokenUrl, "GET", null);
+            String openId  = "";
+
+            //替换字符串，获得请求URL
+            String token = UserInfoUtil.getWebAccess(APPID, SECRET, CODE);
+            System.out.println("----------------------------token为："+token);
+            //通过https方式请求获得web_access_token
+            String response = HttpsUtil.httpsRequestToString(token, "GET", null);
             JSONObject jsonObject = JSON.parseObject(response);
-            log.info("请求到的Access Token:{}", jsonObject.toJSONString());
+            System.out.println("jsonObject------"+jsonObject);
             if (null != jsonObject) {
                 try {
+
                     WebAccessToken = jsonObject.getString("access_token");
                     openId = jsonObject.getString("openid");
-                    User user =new User();
-                    user.setOpenid(openId);
-                    userMapper.insertSelective(user);
                     Example userExample =new Example(User.class);
-//                    us
-                    session.setAttribute("userId",openId);
-                    log.info("获取access_token成功!");
-                    log.info("WebAccessToken:{} , openId:{}", WebAccessToken, openId);
-                    // 3. 使用获取到的 Access_token 和 openid 拉取用户信息
-                    String userMessageUrl = UserInfoUtil.getUserMessage(WebAccessToken, openId);
-                    log.info("第三步:获取用户信息的URL:{}", userMessageUrl);
-                    // 通过https方式请求获得用户信息响应
-                    String userMessageResponse = HttpsUtil.httpsRequestToString(userMessageUrl, "GET", null);
-                    JSONObject userMessageJsonObject = JSON.parseObject(userMessageResponse);
-                    log.info("用户信息:{}", userMessageJsonObject.toJSONString());
-                    if (userMessageJsonObject != null) {
-                        try {
-                            //用户昵称
-                            nickName = userMessageJsonObject.getString("nickname");
-                            //用户性别
-                            sex = userMessageJsonObject.getString("sex");
-                            sex = (sex.equals("1")) ? "男" : "女";
-                            //用户唯一标识
-                            openid = userMessageJsonObject.getString("openid");
-                            log.info("用户昵称:{}", nickName);
-                            log.info("用户性别:{}", sex);
-                            log.info("OpenId:{}", openid);
-                        } catch (JSONException e) {
-                            log.error("获取用户信息失败");
+                    userExample.createCriteria().andEqualTo("openid",openId);
+                    List<User> users =userMapper.selectByExample(userExample);
+                    if(users != null && users.size() > 0){
+                        session.setAttribute("userId",users.get(0).getId());
+                    }else {
+                        User user =new User();
+                        user.setOpenid(openId);
+                        userMapper.insertSelective(user);
+                        Example userExample1 =new Example(User.class);
+                        userExample1.createCriteria().andEqualTo("openid",openId);
+                        List<User> userList =userMapper.selectByExample(userExample1);
+                        if(userList != null && userList.size()  > 0){
+                            session.setAttribute("userId",userList.get(0).getId());
                         }
                     }
+                    System.out.println("获取access_token成功-------------------------"+WebAccessToken+"----------------"+openId);
+
                 } catch (JSONException e) {
-                    log.error("获取Web Access Token失败");
+                    WebAccessToken = null;// 获取code失败
+                    System.out.println("获取WebAccessToken失败");
                 }
             }
         }
 
-
-
+        String phone ="";
+        String pwd = "";
+        String isTrue ="";
         if(state == "companyIndex" || state.equals("companyIndex")){
+            Cookie[] cookies = request.getCookies();
+            if (cookies!=null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    Cookie cookie = cookies[i];
+                    if (cookie.getName().equals("phone")) {
+                         phone=cookie.getValue();
+                    }
+                    if (cookie.getName().equals("state")) {
+                        isTrue=cookie.getValue();
+                    }
+                    if (cookie.getName().equals("pwd")) {
+                        pwd=cookie.getValue();
+                    }
+                }
+            }
+            return "company/companyIndex";
+        }else {
+            Cookie[] cookies = request.getCookies();
+            if (cookies!=null) {
+                for (int i = 0; i < cookies.length; i++) {
+                    Cookie cookie = cookies[i];
+                    if (cookie.getName().equals("phone")) {
+                        phone=cookie.getValue();
+                    }
+                    if (cookie.getName().equals("state")) {
+                        isTrue=cookie.getValue();
+                    }
+                    if (cookie.getName().equals("pwd")) {
+                        pwd=cookie.getValue();
+                    }
+                }
+            }
+
             return "personal/personalIndex";
         }
-        return "";
+
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("company")
+@RequestMapping("/company")
 public class CompanyController {
 
     @Autowired
@@ -120,5 +120,16 @@ public class CompanyController {
     @RequestMapping("getCompanyOkorFalse")
     public BusinessMessage getCompanyOkorFalse(HttpSession session){
         return companyService.getCompanyOkorFalse(session);
+    }
+
+    /**
+     * 注册企业用户
+     * @param session
+     * @param phoneNumber
+     * @return
+     */
+    @RequestMapping("registComapny")
+    public BusinessMessage registComapny(HttpSession session,String phoneNumber){
+        return companyService.registComapny(session, phoneNumber);
     }
 }

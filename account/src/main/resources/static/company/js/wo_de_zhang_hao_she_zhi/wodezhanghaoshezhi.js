@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $.ajax({
         type:"post",
-        url:"../company/updatePhoneNu",
+        url:"/company/updatePhoneNu",
         dataType:"json",
         success:function (msg) {
             var PhoneNum = msg.data;
@@ -15,14 +15,14 @@ $(document).ready(function() {
     })
 });
 function fanhui() {
-    window.location.href="../transition/go_wo_de";
+    window.location.href="/transition/go_wo_de";
 }
 function xiugaishoujihao() {
-    window.location.href="../transition/wo_de_xiu_gai_shou_ji_hao";
+    window.location.href="/transition/wo_de_xiu_gai_shou_ji_hao";
 }
 function xiugaimima() {
-    window.location.href="../transition/wo_de_xiu_gai_mi_ma";
+    window.location.href="/transition/wo_de_xiu_gai_mi_ma";
 }
 function shezhimima() {
-    window.location.href="../transition/wo_de_she_zhi_mi_ma";
+    window.location.href="/transition/wo_de_she_zhi_mi_ma";
 }

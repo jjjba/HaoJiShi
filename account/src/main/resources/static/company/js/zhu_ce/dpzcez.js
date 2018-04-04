@@ -4,6 +4,7 @@ var nums = 60;
 var btn;
 var isPhone;
 var mobileCode;
+var isRegist;
 $(document).ready(function() {
 
 	// $(".dlaniuss").click(function(){
@@ -12,27 +13,29 @@ $(document).ready(function() {
 	//     setTimeout('$(".toolbarframe").hide()',600);
 	//
 	// 	});
+
     $("#phoneNumber").blur(function(){
-    	var phoneNumber =$('#phoneNumber').val();
-    	$.ajax({
-			url:"../mobileCode/getIsPhone",
-			type:"POST",
-			data:{
-				phoneNumber : phoneNumber,
-			},
-			success : function (res) {
-				if(res.data.isPhone != "1"){
-					$('.shuruzhengqueshouji').show();
-                    setTimeout('$(".shuruzhengqueshouji").hide()',1000);
-				}
+        var phoneNumber =$('#phoneNumber').val();
+        $.ajax({
+            url:"/mobileCode/isRegist",
+            type:"POST",
+            data:{
+                phone : phoneNumber,
+            },
+            success : function (res) {
+                isRegist =res.data.isRegist;
+                if(isRegist == "1"){
+                    $('.yizhuce').show();
+                    setTimeout('$(".yizhuce").hide()',1000);
+                }
             }
-		})
+        })
     });
 
     $(".yzxis").click(function(){
         var phoneNumber =$('#phoneNumber').val();
         $.ajax({
-            url:"../mobileCode/getIsPhone",
+            url:"/mobileCode/getIsPhone",
             type:"POST",
             data:{
                 phoneNumber : phoneNumber,
@@ -50,7 +53,7 @@ $(document).ready(function() {
             var phoneNumber =$('#phoneNumber').val();
             console.log("phone======"+phoneNumber)
             $.ajax({
-                url:"../mobileCode/code",
+                url:"/mobileCode/code",
                 type:"POST",
                 data:{
                     phone : phoneNumber,
@@ -73,8 +76,9 @@ $(document).ready(function() {
 
 function jinru() {
     var phoneNumber =$('#phoneNumber').val();
+
     $.ajax({
-        url:"../mobileCode/getIsPhone",
+        url:"/mobileCode/getIsPhone",
         type:"POST",
         data:{
             phoneNumber : phoneNumber,
@@ -93,7 +97,22 @@ function jinru() {
             $('.buzhengque').show();
             setTimeout('$(".buzhengque").hide()',1000);
         }else {
-            window.location.href="";
+            if(isRegist == "1"){
+                window.location.href="";
+            }else {
+                $.ajax({
+                    url:"/company/registComapny",
+                    type:"POST",
+                    data:{
+                        phoneNumber : phoneNumber,
+                    },
+                    success : function () {
+                        window.location.href="";
+                    }
+                })
+            }
+
+
         }
     }
 

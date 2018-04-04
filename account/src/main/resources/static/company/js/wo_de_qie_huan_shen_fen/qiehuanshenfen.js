@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $.ajax({
         type:"POST",
-        url:"../company/getUser",
+        url:"/company/getUser",
         success:function (msg) {
             if(msg.data.type == 1){
                 $("#num2").removeClass("cuyuis");
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 
 function fanhui() {
-    window.location.href="../transition/go_wo_de";
+    window.location.href="/transition/go_wo_de";
 }
 function updateDisplyIdValue() {
     $("#displyId").val("1");
@@ -38,7 +38,7 @@ function qiehuan() {
     }else{
         $.ajax({
             type:"Post",
-            url:"../company/updateShenfen",
+            url:"/company/updateShenfen",
             data:{shenfen:DisplyIdValue},
             success:function (msg) {
                 if(msg.data == 1){

@@ -1,7 +1,9 @@
 package com.haojishi.controller;
 
+import com.haojishi.mapper.CompanyMapper;
 import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
+import com.haojishi.model.Company;
 import com.haojishi.model.Personal;
 import com.haojishi.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,7 @@ import java.util.List;
  * @date 2018/03/20 15.14
  */
 @Controller
-@RequestMapping("transition")
+@RequestMapping("/transition")
 public class TransitionController {
 
     @Autowired
@@ -25,6 +27,9 @@ public class TransitionController {
 
     @Autowired
     private PersonalMapper personalMapper;
+
+    @Autowired
+    private CompanyMapper companyMapper;
     /**
      * 跳转职位详情页面
      * @param session
@@ -265,16 +270,25 @@ public class TransitionController {
     }
 
     /**
-     * 跳转企业我的页面
+     * 企业端========我的页面
      *
      * @return
      */
     @RequestMapping("go_wo_de")
-    public String go_wo_de(){
-        return "company/company_myself/wo_de";
+    public String go_wo_de(HttpSession session){
+        int userId = (int) session.getAttribute("userId");
+        Example example =new Example(Company.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Company> companies =companyMapper.selectByExample(example);
+        if(companies != null && companies.size() > 0){
+            return "company/company_myself/wo_de";
+        }else {
+            return "company/company_myself/wo_de_wei_deng_lu";
+        }
+
     }
     /**
-     * 跳转企业简历管理
+     * 企业端=========简历管理
      *
      * @return
      */
@@ -284,7 +298,7 @@ public class TransitionController {
     }
 
     /**
-     * 跳转企业咨询阅览页面
+     * 企业端==========咨询阅览
      *
      * @return
      */

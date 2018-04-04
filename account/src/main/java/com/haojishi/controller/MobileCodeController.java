@@ -53,4 +53,15 @@ public class MobileCodeController {
         return mobileCodeService.sendPhoneCode(phone,request);
     }
 
+    /**
+     * 验证该手机号是否已被注册
+     *
+     * @param phone
+     * @return BusinessMessage -
+     */
+    @RequestMapping("isRegist")
+    public BusinessMessage isRegist(String phone) {
+        return mobileCodeService.isRegist(phone);
+    }
+
 }

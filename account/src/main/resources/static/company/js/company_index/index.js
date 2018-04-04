@@ -58,7 +58,7 @@ function loadCompanyBanner() {
 function loadIndexModule() {
     $.ajax({
         type: "POST",
-        url: "../indexModule/getIndexModule",
+        url: "/indexModule/getIndexModule",
         success: function (res) {
             if (res.success) {
                 var list = res.data;
@@ -82,7 +82,7 @@ function loadIndexModule() {
 
 function loadPersonal(){
     $.ajax({
-        url:"../personal/getIndexPersonal",
+        url:"/personal/getIndexPersonal",
         type:"POST",
         success : function (res) {
             $('.personal').empty();
@@ -94,16 +94,16 @@ function loadPersonal(){
                 if(avatar == null || avatar == ""){
                     if(item.sex == "男"){
 
-                        avatar ="../company/images/tupian01.png"
+                        avatar ="../../company/images/tupian01.png"
                     }else {
-                        avatar ="../company/images/tupian02.png"
+                        avatar ="../../company/images/tupian02.png"
                     }
                 }
                 sex =item.sex;
                 if(sex == "男"){
-                    sex ="../company/images/biao05.png"
+                    sex ="../../company/images/biao05.png"
                 }else {
-                    sex ="../company/images/biao06.png"
+                    sex ="../../company/images/biao06.png"
                 }
                 var personalList ='<a href="#" onclick="loadPersonalInfoById(\'/transition/go_qiu_zhi_zhe_xiang_qing?id='+item.id+'\')" >'+
                     '<div class="rcxinxis">'+
@@ -133,7 +133,7 @@ function loadPersonal(){
 
 function loadUserInfo() {
     $.ajax({
-        url:"../company/loadUserCompanyInfo",
+        url:"/company/loadUserCompanyInfo",
         type:"POST",
         success :function (res) {
             console.log("data============="+JSON.stringify(res.data));
@@ -152,7 +152,7 @@ function tellPhone() {
         });
         $("#likewanshan").click(function(){
             $("#wanshan").hide();
-            window.location.href="../transition/go_zhu_ce_tian_xie_xin_xi";
+            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
         });
     }else if(isRegist == "3"){
         $('#denglu').show();
@@ -161,12 +161,12 @@ function tellPhone() {
         });
         $("#likedenglu").click(function(){
             $("#denglu").hide();
-            window.location.href="../transition/go_zhu_ce";
+            window.location.href="/transition/go_zhu_ce";
         });
     }else {
         if(isKuaiZhao == "1"){
             $.ajax({
-                url:"../company/updatePhoneNum",
+                url:"/company/updatePhoneNum",
                 type:"POST",
                 success : function (res) {
                     console.log("更改次数成功");
@@ -184,7 +184,7 @@ function tellPhone() {
             });
             $("#likexufei").click(function(){
                 $('.xianyin03').hide();
-                window.location.href="../transition/go_kuai_zhao";
+                window.location.href="/transition/go_kuai_zhao";
             });
         }else if(isKuaiZhao == "3"){
             $('.xianyin02').show();
@@ -193,7 +193,7 @@ function tellPhone() {
             });
             $("#likekaitong").click(function(){
                 $("#xianyin02").hide();
-                window.location.href="../transition/go_kuai_zhao";
+                window.location.href="/transition/go_kuai_zhao";
             });
         }
     }
@@ -201,29 +201,29 @@ function tellPhone() {
 
 
 function loadPersonalInfoById(url) {
-    window.location.href=".."+url;
+    window.location.href=url;
 }
 
 function gokuaizhao() {
-    window.location.href="../transition/go_kuai_zhao";
+    window.location.href="/transition/go_kuai_zhao";
 }
 
 function gozhaopin() {
-    window.location.href="../transition/go_zhao_pin_jian_bao";
+    window.location.href="/transition/go_zhao_pin_jian_bao";
 }
 
 function goweituo() {
-    window.location.href="../transition/go_wei_tuo_zhao_pin";
+    window.location.href="/transition/go_wei_tuo_zhao_pin";
 }
 
 function goqiuzhizhe() {
-    window.location.href="../transition/go_qiu_zhi_zhe";
+    window.location.href="/transition/go_qiu_zhi_zhe";
 }
 
 function gowode() {
-    window.location.href="../transition/go_wo_de";
+    window.location.href="/transition/go_wo_de";
 }
 
 function gozixun() {
-    window.location.href="../transition/go_zi_xun_yue_lan";
+    window.location.href="/transition/go_zi_xun_yue_lan";
 }

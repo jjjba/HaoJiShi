@@ -2,7 +2,7 @@ function shezhimima() {
     var password = $("#password").val();
     if(password != '' && password != "" && password !=undefined){
         $.ajax({
-            url:"../company/setPassword",
+            url:"/company/setPassword",
             type:"POST",
             data:{Password:password},
             success:function (msg) {
@@ -38,7 +38,7 @@ function updatePassword() {
                 success:function (msg) {
                     if(msg.data.password == oldPassword){
                         $.ajax({
-                            url:"../company/setPassword",
+                            url:"/company/setPassword",
                             type:"POST",
                             data:{Password:newPassword},
                             success:function (msg) {
