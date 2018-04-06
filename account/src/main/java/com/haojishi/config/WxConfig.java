@@ -28,18 +28,19 @@ import java.util.UUID;
 public class WxConfig {
     @Autowired
     private Environment environment;
-
-    public String getToken() {
+    private static String appid = "wxb363c68215a1d3f1";
+    private static String secret ="98e5dbf56fed8c9e0c5fb95f5d34ba05";
+    private static String path = "/var/tomcat/tomcat-8/webapps/image";
+    private static String ImageSrc = "http://wx.haojishi.net/image/";
+    public static String getToken() {
         String accessToken = "";
-        String appid = environment.getProperty("api.appid");
-        String secret =environment.getProperty("api.secret");
         String token_url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
         String requestUrl = token_url.replace("APPID",appid).replace("APPSECRET",secret);
         JSONObject jsonObject = WeChatUtil.httpRequest(requestUrl, "GET", null);
         if (jsonObject != null) {
             try {
                 accessToken = jsonObject.getString("access_token");
-                log.info("access_token==========="+accessToken);
+                log.info("access_token============================"+accessToken);
             } catch (Exception e) {
                 log.error("获取accessToken失败~~~~",e);
             }
@@ -103,9 +104,11 @@ public class WxConfig {
         JSONObject postjson=new JSONObject();
         String ticket =null;
         String url = sign_ticket_create_url.replace("ACCESS_TOKEN",getToken());
+        log.info("url============================"+url);
         try {
             jsonObject = WeChatUtil.httpRequest(url, "POST",postjson.toString());
             ticket= jsonObject.getString("ticket");
+            log.info("ticket============================"+ticket);
         }catch (Exception e) {
             log.error("获取ticket失败",e);
             e.printStackTrace();
@@ -117,13 +120,13 @@ public class WxConfig {
      * @return
      */
     @RequestMapping("uploadWeiXinImg")
-    public BusinessMessage uploadWeiXinImg(String mediaId) {
+    public static BusinessMessage uploadWeiXinImg(String mediaId) {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
-            String path = environment.getProperty("api.fileImagePath");
+
             String imgUrl=downloadMedia(mediaId,path);
             Map<String, Object> map = new HashMap();
-            map.put("imgUrl", imgUrl);
+            map.put("imgUrl", ImageSrc+imgUrl);
             log.info("imgUrl========================"+imgUrl);
             businessMessage.setData(map);
             businessMessage.setSuccess(true);
@@ -138,7 +141,7 @@ public class WxConfig {
      * @param mediaId 媒体文件id
      * @param savePath 文件在本地服务器上的存储路径
      * */
-    public String downloadMedia(String mediaId, String savePath) {
+    public static String downloadMedia(String mediaId, String savePath) {
         String accessToken = getToken();
         String filePath;
         // 拼接请求地址

@@ -4,7 +4,7 @@ $(function () {
     setTimeout('configwx()', 100);
 
 
-    $("#dynamicImage").click(function(e){
+    $(".license").click(function(e){
         chooseImage();
     });
 
@@ -145,6 +145,8 @@ function chooseImage() {
                         },
                         success: function (res) {
                             avatarPath =res.data.imgUrl;
+                            $('#dynamicImage').hide();
+                            $('.license').append('<img src="'+avatarPath+'"/>')
                         }
                     });
                 }

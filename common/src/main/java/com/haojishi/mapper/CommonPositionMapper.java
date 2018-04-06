@@ -28,4 +28,5 @@ public interface CommonPositionMapper {
 
     List<Map<String,Object>> getPositionByParams02(@Param("city") String city,@Param("positionName") String positionName,@Param("money") String money,@Param("scale") String scale);
 
+    List<Map<String,Object>> getPositionByName(@Param("name") String name);
 }

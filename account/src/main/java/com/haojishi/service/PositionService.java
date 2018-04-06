@@ -342,5 +342,19 @@ public class PositionService {
         return businessMessage;
     }
 
+    /**
+     * 求职者端======根据搜索职位或者店铺查询相关职位
+     * @param name
+     * @return
+     */
+    public BusinessMessage getPositionByName(String name){
+        BusinessMessage businessMessage =new BusinessMessage();
+        List<Map<String,Object>> list =commonPositionMapper.getPositionByName(name);
+        businessMessage.setData(list);
+        businessMessage.setMsg("获取搜索信息数据成功");
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
 
 }
