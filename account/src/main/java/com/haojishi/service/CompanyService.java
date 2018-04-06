@@ -2,22 +2,34 @@ package com.haojishi.service;
 
 import com.haojishi.mapper.*;
 import com.haojishi.model.*;
+import com.haojishi.service.weChat.WechatOrderService;
 import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.PhoneCheck;
+import com.haojishi.util.ClientIPUtil;
+import com.haojishi.util.GxlUtil;
+import com.haojishi.util.WxPayUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
 @Service
 public class CompanyService{
+
+    @Autowired
+    private WechatOrderService weChatOrderService;
 
     @Autowired
     private CompanyMapper companyMapper;
@@ -31,6 +43,8 @@ public class CompanyService{
     private PersonalMapper personalMapper;
     @Autowired
     private ResumeMapper resumeMapper;
+    @Autowired
+    private Environment environment;
     /**
      * 根据企业id查询企业信息
      *
@@ -123,6 +137,58 @@ public class CompanyService{
         return  businessMessage;
     }
 
+    public BusinessMessage pay(HttpSession session, Integer money, HttpServletRequest request){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("uderId");
+            Example example =new Example(Company.class);
+            example.createCriteria().andEqualTo("userId",userId);
+            List<Company> companies =companyMapper.selectByExample(example);
+            //走微信支付
+            String body = "好技狮";
+            String detail = "";
+            String attach = "";
+            String goodsTag = "";
+            int totalFee = money * 100;
+            String createIp = ClientIPUtil.getClientIP(request);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            LocalDateTime timeStart = LocalDateTime.now();
+            LocalDateTime timeExpire = timeStart.plusMinutes(5);
+            User users = usersMapper.selectByPrimaryKey(userId);
+            String openId = users.getOpenid();
+            String appId = environment.getProperty("api.appid");
+            String mchId = environment.getProperty("api.mchUserId");
+            String apiKey = environment.getProperty("api.mchUserKey");
+            String notifyUrl = environment.getProperty("api.wechat-callback-url");
+            String uniontid = GxlUtil.createUniontid();
+
+
+            Map<String, Object> result = weChatOrderService.merchantPay(appId, mchId, body, detail, attach, uniontid, totalFee, createIp, timeStart.format(formatter), timeExpire.format(formatter), goodsTag, false, openId, apiKey, notifyUrl);
+            if (null != result) {
+                if (result.containsKey("request_tag")) {
+                }
+                if (result.containsKey("prepay_id")) {
+                    Services service = new Services();
+                    service.setMoney(money);
+                    service.setComid(companies.get(0).getId());
+                    service.setCreatedate(new Date());
+                    TreeMap<String, Object> dataMap = new TreeMap<>();
+                    dataMap.put("appId", appId);
+                    dataMap.put("timeStamp", LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8)));
+                    dataMap.put("nonceStr", WxPayUtil.getRandomUpperStringByLength(32));
+                    dataMap.put("package", "prepay_id=" + result.get("prepay_id"));
+                    dataMap.put("signType", "MD5");
+                    String paySign = WxPayUtil.createSign(dataMap, apiKey);
+                    dataMap.put("paySign", paySign);
+                    businessMessage.setData(dataMap);
+                    businessMessage.setSuccess(true);
+                }
+            }
+        } catch (Exception e) {
+            log.error("支付失败", e);
+        }
+        return businessMessage;
+    }
     /**
      * 更新企业快招服务打电话次数
      * @param session

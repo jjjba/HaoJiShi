@@ -111,4 +111,10 @@
         WHERE c.user_id = #{userId}
     </select>
 
+    <select id="getCompanyCityByUserId" resultType="java.util.Map">
+        SELECT c.company_city
+        FROM company c,user u
+        WHERE c.user_id = u.id and u.id = #{userId}
+    </select>
+
 </mapper>

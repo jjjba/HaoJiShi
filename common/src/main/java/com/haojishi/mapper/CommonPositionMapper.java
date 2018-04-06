@@ -12,6 +12,8 @@ import java.util.Map;
  */
 public interface CommonPositionMapper {
 
+    List<Map<String,Object>> getPositionByUserId(@Param("userId") Integer userId);
+
     List<Map<String,Object>> getPositionByAddress(@Param("address") String address);
 
     List<Map<String,Object>> getPositionByAddressPro(@Param("pid") String pid);
@@ -26,4 +28,5 @@ public interface CommonPositionMapper {
 
     List<Map<String,Object>> getPositionByParams02(@Param("city") String city,@Param("positionName") String positionName,@Param("money") String money,@Param("scale") String scale);
 
+    List<Map<String,Object>> getPositionByName(@Param("name") String name);
 }

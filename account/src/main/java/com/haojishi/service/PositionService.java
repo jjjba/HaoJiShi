@@ -57,7 +57,6 @@ public class PositionService {
                 positionList.add(position.get(i));
             }
             businessMessage.setMsg("获取首页推荐职位成功");
-
             }catch (Exception e){
             log.error("获取推荐职位错误",e);
         }
@@ -77,13 +76,11 @@ public class PositionService {
         Map<String,Object> map =new HashMap<>();
         try {
             int id = (int) session.getAttribute("positionId");
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> user =userMapper.selectByExample(userExample);
-            if(user != null && user.size() > 0){
+            int userId = (int) session.getAttribute("userId");
+            User user =userMapper.selectByPrimaryKey(userId);
+            if(user != null){
                 Example perExample =new Example(Personal.class);
-                perExample.createCriteria().andEqualTo("userId",user.get(0).getId());
+                perExample.createCriteria().andEqualTo("userId",userId);
                 List<Personal> personals =personalMapper.selectByExample(perExample);
                 if(personals != null && personals.size() > 0){
                     Example resumeExample =new Example(Resume.class);
@@ -125,7 +122,7 @@ public class PositionService {
                     map.put("company_scale",company.getCompanyScale());
                     positionList.add(map);
                 }else {
-                    String phone =user.get(0).getPhone();
+                    String phone =user.getPhone();
                     if(phone != null && phone != "" && !phone.equals("") && !phone.equals("null")){
                         map.put("isRegist","2");
                         Position position =positionMapper.selectByPrimaryKey(id);
@@ -199,10 +196,8 @@ public class PositionService {
      * @return BusinessMessage - 同城所有职位信息
      */
     public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
-        BusinessMessage businessMessage =new BusinessMessage();
         int userId = (int) session.getAttribute("userId");
-        businessMessage=getPositionByUserId(request,userId);
-        return businessMessage;
+        return getPositionByUserId(request,userId);
     }
 
     /**
@@ -258,23 +253,22 @@ public class PositionService {
         perExample.createCriteria().andEqualTo("userId", userId);
         //查询求职者列表是否有该求职者信息
         List<Personal> personals = personalMapper.selectByExample(perExample);
-        //有说明注册并完善信息
-        if (personals != null && personals.size() > 0) {
+        if(personals != null && personals.size() > 0){
+            //有说明注册并完善信息
             String hopeCity =personals.get(0).getHopeCity();
-            String hopeJob =personals.get(0).getHopeJob();
             String[] city = hopeCity.split(",");
-            String[] job = hopeJob.split(",");
             //意向城市职位
             for (int i = 0; i < city.length; i++) {
                 String address =city[i];
                 List<Map<String,Object>> pos =commonPositionMapper.getPositionByAddress(address);
-                for(int j = 0;j < pos.size();j++){
-                    for(int k = 0;k < job.length;k++){
-                        if(job[k].equals(pos.get(j).get("position_name"))){
-                            position.add(pos.get(j));
-                        }
+                if(pos != null && pos.size() > 0){
+                    for(int j = 0;j < pos.size();j++){
+                        position.add(pos.get(j));
                     }
                 }
+            }
+            for(int k = 0;k < position.size();k++){
+                positionList.add(position.get(k));
             }
             //意向城市省份职位
             for(int i = 0;i < city.length;i++){
@@ -285,19 +279,13 @@ public class PositionService {
                 if(regions != null && regions.size() > 0){
                     String pid =regions.get(0).getPid();
                     List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(pid);
-                    for(int b = 0;b < list.size();b++){
-                        for(int c = 0;c < job.length;c++){
-                            if(list.get(b).get("position_name").equals(job[c])){
-                                positions.add(list.get(b));
-                            }
+                    if(list != null && list.size() > 0){
+                        for(int j = 0;j < list.size();j++){
+                            positions.add(list.get(j));
                         }
                     }
                 }
             }
-            for(int j = 0;j < position.size();j++){
-                positionList.add(position.get(j));
-            }
-
             for(int d = 0;d < positions.size();d++) {
                 if(position.contains(positions.get(d))){
                     positions.remove(d);
@@ -350,6 +338,20 @@ public class PositionService {
         List<Position> positions =positionMapper.selectByExample(positionExample);
         businessMessage.setMsg("获取企业职位信息成功");
         businessMessage.setData(positions);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
+    /**
+     * 求职者端======根据搜索职位或者店铺查询相关职位
+     * @param name
+     * @return
+     */
+    public BusinessMessage getPositionByName(String name){
+        BusinessMessage businessMessage =new BusinessMessage();
+        List<Map<String,Object>> list =commonPositionMapper.getPositionByName(name);
+        businessMessage.setData(list);
+        businessMessage.setMsg("获取搜索信息数据成功");
         businessMessage.setSuccess(true);
         return businessMessage;
     }
