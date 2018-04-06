@@ -3,16 +3,21 @@ package com.haojishi.service;
 import com.haojishi.mapper.*;
 import com.haojishi.model.*;
 import com.haojishi.util.BusinessMessage;
+import com.haojishi.util.PhoneCheck;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Slf4j
 @Service
-public class CompanyService {
+public class CompanyService{
 
     @Autowired
     private CompanyMapper companyMapper;
@@ -367,5 +372,180 @@ public class CompanyService {
             log.error("注册企业失败",e);
         }
         return businessMessage;
+    }
+    public BusinessMessage wodeXuanze(String phone){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("openid",phone);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users!= null && users.size()>0){
+            Example comExample =new Example(Company.class);
+            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(comExample);
+            if (companies!=null && companies.size()>0){
+                businessMessage.setData(companies.get(0));
+                businessMessage.setSuccess(true);
+            }
+        }
+        return  businessMessage;
+    }
+    /**
+     * 判断手机号 是否正确 还有数据库里面有没有
+     * @param phoneNumber
+     * @return
+     */
+    public BusinessMessage getIsPhone(String phoneNumber){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer num = 0;
+        if (PhoneCheck.checkCellphone(phoneNumber)) {
+            num+=1;
+        }
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("phone",phoneNumber);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users.size()==0){
+            num+=1;
+        }
+        businessMessage.setData(num);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
+    /**
+     * 企业端用户注册时候增加数据库
+     * @param Name
+     * @param dwmj
+     * @param dwmc
+     * @param dplx
+     * @param zhiwei
+     * @param dpfl
+     * @param cityname
+     * @param lat
+     * @param lng
+     * @param poiaddress
+     * @param poiname
+     * @param phone
+     * @return
+     */
+    public BusinessMessage addNewCompany(String Name,String dwmj,String dwmc,String dplx
+            ,String zhiwei,String dpfl,String cityname,String lat,String lng
+            ,String poiaddress,String poiname,String phone){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Company company = new Company();
+        User user = new User();
+        user.setPhone(phone);
+        user.setType(2);
+        user.setAccountState(1);
+        usersMapper.insert(user);
+        company.setUserName(Name);
+        company.setPhone(phone);
+        company.setRegisterType(2);
+        company.setLatitude(lat);
+        company.setLongitude(lng);
+        company.setName(dwmc);
+        company.setCompanySpecial(dpfl);
+        company.setCompanyCity(cityname);
+        company.setCompanyAddr(poiaddress+poiname);
+        company.setCompanyType(dplx);
+        company.setZhiWu(zhiwei);
+        company.setMatstate(2);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        company.setCreateTime(new Date());
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("phone",phone);
+        List<User> users =usersMapper.selectByExample(userExample);
+        int uId = users.get(0).getId();
+        company.setUserId(uId);
+        int in = companyMapper.insert(company);
+        businessMessage.setData("ok");
+        businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+
+    /**
+     * 查询手机号密码是否正确
+     * @param phone
+     * @param password
+     * @return
+     */
+    public BusinessMessage PhonePassword(String phone, String password,HttpSession session){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("phone",phone);
+        userExample.createCriteria().andEqualTo("password",password);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users!= null && users.size()>0){
+            businessMessage.setData(1);
+            businessMessage.setSuccess(true);
+            session.setAttribute("phone",phone);
+            session.setAttribute("zt",1);
+        }
+        return businessMessage;
+    }
+
+    public static Cookie getCookieByName(HttpServletRequest request, String name) {
+        Map<String, Cookie> cookieMap = ReadCookieMap(request);
+        if (cookieMap.containsKey(name)) {
+            Cookie cookie = (Cookie) cookieMap.get(name);
+            return cookie;
+        } else {
+            return null;
+        }
+    }
+    private static Map<String, Cookie> ReadCookieMap(HttpServletRequest request) {
+        Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
+        Cookie[] cookies = request.getCookies();
+        if (null != cookies) {
+            for (Cookie cookie : cookies) {
+                cookieMap.put(cookie.getName(), cookie);
+            }
+        }
+        return cookieMap;
+    }
+    /**
+     * 登陆的入口  通过cookie 判断登录状态
+     * @param request
+     * @return
+     */
+    public BusinessMessage DengLuPuanDuan(HttpServletRequest request,HttpSession session){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Object zt = session.getAttribute("zt");
+        Object phone =  session.getAttribute("phone");
+        if( zt!= null && phone!= null){
+            //可以登陆
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("phone",phone);
+            List<User> users =usersMapper.selectByExample(userExample);
+            if(users!= null && users.size()>0){
+                session.setAttribute("userId",users.get(0).getId());
+            }
+            Example comExample =new Example(Company.class);
+            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(comExample);
+            if(companies != null && companies.size()>0){
+                //未认证
+                if(companies.get(0).getMatstate()==1){
+                    businessMessage.setCode(1);
+                }
+                //认证中
+                if(companies.get(0).getMatstate() ==2){
+                    businessMessage.setCode(2);
+                }
+                //认证通过
+                if(companies.get(0).getMatstate() ==3){
+                    businessMessage.setCode(3);
+                }
+                //认证未通过
+                if(companies.get(0).getMatstate() ==4){
+                    businessMessage.setCode(4);
+                }
+                businessMessage.setData(companies.get(0));
+            }
+        }else {
+            //不能登陆
+            businessMessage.setData("2");
+        }
+        businessMessage.setSuccess(true);
+        return  businessMessage;
     }
 }

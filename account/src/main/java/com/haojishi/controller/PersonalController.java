@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/personal")
+@RequestMapping("personal")
 public class PersonalController {
 
     @Autowired

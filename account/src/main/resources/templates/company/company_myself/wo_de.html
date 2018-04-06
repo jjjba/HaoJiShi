@@ -23,11 +23,13 @@
           th:href="@{/company/css/wo_de/wodes.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/wo_de/bottom.css"
           th:href="@{/company/css/wo_de/bottom.css}" rel="stylesheet" />
-    
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css" th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
             th:src="@{/company/js/jquery-3.2.1.js}"></script>
     <script type="text/javascript" src="/static/company/js/wo_de/wode.js"
             th:src="@{/company/js/wo_de/wode.js}"></script>
+    <script type="text/javascript" src="/static/company/js/wo_de/jquery.cookie.js"
+            th:src="@{/company/js/wo_de/jquery.cookie.js}"></script>
    
    <!--圆形进度开始-->
 	   <script type="text/javascript">
@@ -60,46 +62,37 @@
  <!--上边开始-->
    <div class="sbjltitis">
      <!--上开始-->
-     <div class="sbtopxxs">
-       <!--左开始-->
-       <div class="sblefs">
-         <img src="/static/company/images/tuui.png" th:src="@{/company/images/tuui.png}"/>
+       <div id = "wode">
+
+
        </div>
-       <!--左结束-->
-       <!--右开始-->
-       <div class="sbyours fbzhiuse">
-           <div class="lylyus">常乐足道</div>
-           <div class="dcirzs"><a href="#">点此认证</a></div>
-           
-           <a href="#" class="fbzuysew">发布职位</a>
-           
-       </div>
-       <!--右结束-->
-     </div>
+
+
+
      <!--上结束-->
      
      <!--下开始-->
-     <a href="#">
+     <!--<a href="#">
      <div class="xibkass">
        
-       <!--左边圆形进度条开始-->
+       &lt;!&ndash;左边圆形进度条开始&ndash;&gt;
         <div class="progressbar">
           <span>35</span>%
         </div>
-       <!--左边圆形进度条结束-->
+       &lt;!&ndash;左边圆形进度条结束&ndash;&gt;
        
-       <!--右边开始-->
+       &lt;!&ndash;右边开始&ndash;&gt;
        <div class="ycbuyss">
          完善店铺，获得更多简历
        </div>
-       <!--右边结束-->
+       &lt;!&ndash;右边结束&ndash;&gt;
        
-       <!--右箭头开始-->
+       &lt;!&ndash;右箭头开始&ndash;&gt;
        <div class="ycjtouis"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-       <!--右箭头结束-->
+       &lt;!&ndash;右箭头结束&ndash;&gt;
        
      </div>
-     </a>
+     </a>-->
      <!--下结束-->
      
    </div>
@@ -193,8 +186,8 @@
       </li>
     </ul>
   </div>
-  <!--最底部结束--> 
-
+  <!--最底部结束-->
+ <div class="toolbarframe jinggao" style="display: none">请注册后登陆再进行操作！！！</div>
 <!---首次弹出窗开始-->
   <!--弹出层开始-->
   <div class="popupus">

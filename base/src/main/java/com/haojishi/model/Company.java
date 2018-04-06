@@ -48,12 +48,12 @@ public class Company implements Serializable {
     /**
      * 经度
      */
-    private Double longitude;
+    private String longitude;
 
     /**
      * 纬度
      */
-    private Double latitude;
+    private String latitude;
 
     /**
      * 企业名称
@@ -347,7 +347,7 @@ public class Company implements Serializable {
      *
      * @return longitude - 经度
      */
-    public Double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
@@ -356,7 +356,7 @@ public class Company implements Serializable {
      *
      * @param longitude 经度
      */
-    public void setLongitude(Double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -365,7 +365,7 @@ public class Company implements Serializable {
      *
      * @return latitude - 纬度
      */
-    public Double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
@@ -374,7 +374,7 @@ public class Company implements Serializable {
      *
      * @param latitude 纬度
      */
-    public void setLatitude(Double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 

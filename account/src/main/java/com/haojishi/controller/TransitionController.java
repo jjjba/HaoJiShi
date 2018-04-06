@@ -6,6 +6,7 @@ import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Company;
 import com.haojishi.model.Personal;
 import com.haojishi.model.User;
+import com.haojishi.service.TransitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,8 @@ public class TransitionController {
 
     @Autowired
     private CompanyMapper companyMapper;
+    @Autowired
+    private TransitionService transitionService;
     /**
      * 跳转职位详情页面
      * @param session
@@ -276,16 +279,7 @@ public class TransitionController {
      */
     @RequestMapping("go_wo_de")
     public String go_wo_de(HttpSession session){
-        int userId = (int) session.getAttribute("userId");
-        Example example =new Example(Company.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        List<Company> companies =companyMapper.selectByExample(example);
-        if(companies != null && companies.size() > 0){
             return "company/company_myself/wo_de";
-        }else {
-            return "company/company_myself/wo_de_wei_deng_lu";
-        }
-
     }
     /**
      * 企业端=========简历管理
@@ -441,4 +435,53 @@ public class TransitionController {
     public String wo_de_zhiweiguanli_weirenzheng(){
         return "company/company_myself/zhiweiguanli_weirenzheng";
     }
+    /**
+     * 企业端填写 地址
+     * @return
+     */
+    @RequestMapping("getAddress")
+    public String getAddress(){
+        return "company/company_myself/dianpu_Address";
+    }
+    /**
+     * 企业端填写 姓名
+     * @return
+     */
+    @RequestMapping("BossName")
+    public String BossName(){
+        return "company/company_myself/dianpu_xingming";
+    }
+    /**
+     * 企业端填写 店铺名称
+     * @return
+     */
+    @RequestMapping("dianpuName")
+    public String dianpuName(){
+        return "company/company_myself/dianpu_mingcheng";
+    }
+    /**
+     * 企业端填写 店铺面积
+     * @return
+     */
+    @RequestMapping("dianpuMj")
+    public String dianpuMj(){
+        return "company/company_myself/dianpu_Mj";
+    }
+    /**
+     * 企业端填写 店铺面积
+     * @return
+     */
+    @RequestMapping("dpfl")
+    public String dpfl(){
+        return "company/company_myself/dianpu_fuli";
+    }
+    /**
+     * 企业端填写 店铺面积
+     * @return
+     */
+    @RequestMapping("mimadl")
+    public String mimadl(){
+        return "company/company_myself/mi_ma_denglu";
+    }
+
 }

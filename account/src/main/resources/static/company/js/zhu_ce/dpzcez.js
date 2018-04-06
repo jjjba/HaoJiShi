@@ -1,137 +1,89 @@
 // JavaScript Document
-var clock = '';
-var nums = 60;
-var btn;
-var isPhone;
-var mobileCode;
-var isRegist;
+function shiqu() {
+    var phoneNumber =$('#phoneNumber').val();
+    if(phoneNumber =="" || phoneNumber =='' || phoneNumber==undefined){
+        $('.alera').show();
+        setTimeout('$(".alera").hide()',1000);
+        $("#hqyzm").attr("class","");
+        $("#hqyzm").val("");
+    }else {
+        $("#hqyzm").attr("class","yzxis");
+        $("#hqyzm").val("获取验证码");
+        $.ajax({
+            url:"/company/getIsPhone",
+            type:"POST",
+            data:{
+                phoneNumber : phoneNumber,
+            },
+            success : function (msg) {
+                var OkorFalse = msg.data;
+                console.log(OkorFalse);
+                if(OkorFalse == 2){
+                    $("#hqyzm").attr("class","yzxis");
+                    $("#hqyzm").val("获取验证码");
+                }else{
+                    $('.alera').show();
+                    setTimeout('$(".alera").hide()',1000);
+                    $("#hqyzm").attr("class","");
+                    $("#hqyzm").val("");
+                }
+            }
+        })
+    }
+}
 $(document).ready(function() {
+    
+	$(".toolbarframe").hide();
+	
+	/*$(".dlaniuss").click(function(){
+		$(".toolbarframe").show();
+	    	setTimeout('$(".toolbarframe").hide()',600);
+		});*/
 
-	// $(".dlaniuss").click(function(){
-	//
-	// 	$(".toolbarframe").show();
-	//     setTimeout('$(".toolbarframe").hide()',600);
-	//
-	// 	});
 
-    $("#phoneNumber").blur(function(){
+    $(".yzxis").click(function(){
+        $('.zhengque').show();
+                setTimeout('$(".zhengque").hide()',900);
         var phoneNumber =$('#phoneNumber').val();
         $.ajax({
-            url:"/mobileCode/isRegist",
+            url:"/mobileCode/code",
             type:"POST",
             data:{
                 phone : phoneNumber,
             },
             success : function (res) {
-                isRegist =res.data.isRegist;
-                if(isRegist == "1"){
-                    $('.yizhuce').show();
-                    setTimeout('$(".yizhuce").hide()',1000);
-                }
-            }
-        })
-    });
-
-    $(".yzxis").click(function(){
-        var phoneNumber =$('#phoneNumber').val();
-        $.ajax({
-            url:"/mobileCode/getIsPhone",
-            type:"POST",
-            data:{
-                phoneNumber : phoneNumber,
+                mobileCode =res.data.mobile_code;
+				$.cookie("yzm",mobileCode);
             },
-            success : function (res) {
-                isPhone =res.data.isPhone;
-                if(isPhone != "1"){
-                    $('.shuruzhengqueshouji').show();
-                    setTimeout('$(".shuruzhengqueshouji").hide()',1000);
-                }
+            error : function () {
+                $('.huoqushibai').show();
+                setTimeout('$(".huoqushibai").hide()',900);
             }
-        });
-        if(isPhone == "1"){
-            sendCode(this);
-            var phoneNumber =$('#phoneNumber').val();
-            console.log("phone======"+phoneNumber)
-            $.ajax({
-                url:"/mobileCode/code",
-                type:"POST",
-                data:{
-                    phone : phoneNumber,
-                },
-                success : function (res) {
-                    mobileCode =res.data.mobile_code;
-                    $('.zhengque').show();
-                    setTimeout('$(".zhengque").hide()',900);
-                },
-                error : function () {
-                    $('.huoqushibai').show();
-                    setTimeout('$(".huoqushibai").hide()',900);
-                }
-            })
-		}
-    });
-
+		})
+	})
 });
 
-
 function jinru() {
+	var mobileCode = $.cookie("yzm");
     var phoneNumber =$('#phoneNumber').val();
+    var code  =$('#code').val();
+    console.log(mobileCode + "--------"+ code);
 
-    $.ajax({
-        url:"/mobileCode/getIsPhone",
-        type:"POST",
-        data:{
-            phoneNumber : phoneNumber,
-        },
-        success : function (res) {
-            isPhone =res.data.isPhone;
-            if(isPhone != "1"){
-                $('.shuruzhengqueshouji').show();
-                setTimeout('$(".shuruzhengqueshouji").hide()',1000);
-            }
-        }
-    });
-    if(isPhone == "1"){
-        var sjyzm =$('.sjyzm').val();
-        if(sjyzm != mobileCode){
-            $('.buzhengque').show();
-            setTimeout('$(".buzhengque").hide()',1000);
-        }else {
-            if(isRegist == "1"){
-                window.location.href="";
-            }else {
-                $.ajax({
-                    url:"/company/registComapny",
-                    type:"POST",
-                    data:{
-                        phoneNumber : phoneNumber,
-                    },
-                    success : function () {
-                        window.location.href="";
-                    }
-                })
-            }
-
-
-        }
-    }
-
+    if(mobileCode == code){
+        /*$.cookie("zt", "1", { expires: 10 });
+        $.cookie("phone", phoneNumber, { expires: 10 });*/
+        sessionStorage.setItem("phone",phoneNumber);
+        window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+	}else {
+        $('.buzhengque').show();
+        setTimeout('$(".buzhengque").hide()',900);
+	}
 }
 
-function sendCode(thisBtn) {
-    btn = thisBtn;
-    btn.disabled = true; //将按钮置为不可点击
-    btn.value = nums+'s';
-    clock = setInterval(doLoop, 1000); //一秒执行一次
+function mimadl() {
+    window.location.href="/transition/mimadl"
 }
-function doLoop() {
-    nums--;
-    if(nums > 0){
-        btn.value = nums+'s';
-    }else{
-        clearInterval(clock); //清除js定时器
-        btn.disabled = false;
-        btn.value = '重新获取验证码';
-        nums = 10; //重置时间
-    }
+function zhucefanhui() {
+    window.location.href="/transition/go_wo_de";
 }
+
