@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * @date 2018/03/19 17.14
  */
 @RestController
-@RequestMapping("/position")
+@RequestMapping("position")
 public class PositionController {
     @Autowired
     private PositionService positionService;

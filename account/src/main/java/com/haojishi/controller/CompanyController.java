@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/company")
+@RequestMapping("company")
 public class CompanyController {
 
     @Autowired
@@ -35,7 +36,16 @@ public class CompanyController {
     public BusinessMessage loadUserCompanyInfo(HttpSession session){
         return companyService.loadUserCompanyInfo(session);
     }
-
+    /**
+     * 企业支付
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("pay")
+    public BusinessMessage pay(HttpSession session, Integer money, HttpServletRequest request) {
+        return companyService.pay(session, money, request);
+    }
     /**
      * 更新企业快招服务打电话次数
      * @param session
