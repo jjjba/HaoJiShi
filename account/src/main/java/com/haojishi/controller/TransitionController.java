@@ -49,21 +49,18 @@ public class TransitionController {
      */
     @RequestMapping("transition_all_position")
     public String transition_all_position(HttpSession session){
-        String openid = (String) session.getAttribute("openid");
-        Example example =new Example(User.class);
-        example.createCriteria().andEqualTo("openid",openid);
-        List<User> userList =userMapper.selectByExample(example);
-        if(userList != null && userList.size() > 0){
-            Example perExample =new Example(Personal.class);
-            perExample.createCriteria().andEqualTo("userId",userList.get(0).getId());
-            List<Personal> personals =personalMapper.selectByExample(perExample);
-            if(personals != null && personals.size() > 0){
-                return "personal/position/position_02";
-            }else {
-                return "personal/position/position_01";
-            }
+        int userId = (int) session.getAttribute("userId");
+
+        Example perExample =new Example(Personal.class);
+        perExample.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(perExample);
+        if(personals != null && personals.size() > 0){
+            return "personal/position/position_02";
+        }else {
+            return "personal/position/position_01";
         }
-        return "personal/position/position_01";
+
+
     }
 
     /**
@@ -80,8 +77,15 @@ public class TransitionController {
      * @return
      */
     @RequestMapping("transition_goMySelf")
-    public String transition_goMySelf(){
-        return "personal/mySelf/mySelf";
+    public String transition_goMySelf(HttpSession session){
+        int userId = (int) session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        if(user != null){
+            return "personal/mySelf/mySelf";
+        }else {
+            return "personal/mySelf/mySelf_notLogin";
+        }
+
     }
 
     /**
@@ -440,5 +444,32 @@ public class TransitionController {
     @RequestMapping("zhiweiguanliweirenzheng")
     public String wo_de_zhiweiguanli_weirenzheng(){
         return "company/company_myself/zhiweiguanli_weirenzheng";
+    }
+
+    /**
+     * 求职者端====我的意向城市
+     * @return
+     */
+    @RequestMapping("go_my_hope_city")
+    public String go_my_hope_city(){
+        return "personal/mySelf/my_hope_city";
+    }
+
+    /**
+     * 求职者端====我的意向工作
+     * @return
+     */
+    @RequestMapping("go_my_hope_job")
+    public String go_my_hope_job(){
+        return "personal/mySelf/my_hope_job";
+    }
+
+    /**
+     * 求职者端====我的基本信息
+     * @return
+     */
+    @RequestMapping("go_wo_de_ji_ben_xin_xi")
+    public String go_wo_de_ji_ben_xin_xi(){
+        return "personal/mySelf/wo_de_ji_ben_xin_xi";
     }
 }

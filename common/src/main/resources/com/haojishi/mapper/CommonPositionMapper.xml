@@ -2,6 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.haojishi.mapper.CommonPositionMapper">
 
+    <select id="getPositionByHopeCity" resultType="java.util.Map">
+        (SELECT  p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+             c.name,c.company_type,c.company_scale
+         FROM POSITION p,company c,USER u
+         WHERE p.company_id =c.id AND c.user_id =u.id AND u.account_state = 1 AND c.matState = 1
+               AND p.state = 1 AND c.company_city LIKE concat(#{address},'%')
+         ORDER BY
+             p.hot)
+        UNION
+        (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                       c.name,c.company_type,c.company_scale
+                   FROM POSITION p,company c,USER u
+                   WHERE p.company_id =c.id AND c.user_id =u.id AND u.account_state = 1 AND c.matState = 1
+                         AND p.state = 1 AND c.province_id = #{pid}
+                   ORDER BY
+                       p.hot)
+    </select>
+
     <select id="getPositionByAddress" resultType="java.util.Map">
         SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
         c.name,c.company_type,c.company_scale
@@ -117,6 +135,13 @@
         </where>
         ORDER BY
         p.hot
+    </select>
+
+    <!-- 根据用户企业用户id查询发布的职位 -->
+    <select id="getPositionByUserId" resultType="java.util.Map">
+        SELECT p.id,c.company_city,p.position_name
+        FROM position p,company c,user u
+        where p.company_id =c.id AND c.user_id =u.id AND u.id = #{userId}
     </select>
 
     <select id="queryPersonalInfo" resultType="java.util.Map">

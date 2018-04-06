@@ -3,7 +3,7 @@ var sp = [];
 var special;
 $(function () {
     $.ajax({
-        url:"../personal/getPersonalInfo",
+        url:"/personal/getPersonalInfo",
         type:"POST",
         success :function (res) {
             var spec =res.data.special.split(",");
@@ -264,17 +264,17 @@ function 服务意向强() {
 
 function quedingbaocun() {
     $.ajax({
-        url:"../personal/updatePersonalByPersonalOpenid",
+        url:"/personal/updatePersonalByPersonalOpenid",
         type:"POST",
         data : {
             special : sp.toString()
         },
         success : function (res) {
-            window.location.href="../transition/my_resume";
+            window.location.href="/transition/my_resume";
         }
     })
 }
 
 function fanhui() {
-    window.location.href="../transition/my_resume";
+    window.location.href="/transition/my_resume";
 }

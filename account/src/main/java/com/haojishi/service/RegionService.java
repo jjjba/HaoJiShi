@@ -32,4 +32,34 @@ public class RegionService {
         businessMessage.setSuccess(true);
         return businessMessage;
     }
+
+    /**
+     * 获取所有省份信息
+     * @return
+     */
+    public BusinessMessage getProvince(){
+        BusinessMessage businessMessage =new BusinessMessage();
+        Example example =new Example(Region.class);
+        example.createCriteria().andEqualTo("pid",1);
+        List<Region> regions =regionMapper.selectByExample(example);
+        businessMessage.setData(regions);
+        businessMessage.setSuccess(true);
+        businessMessage.setMsg("获取省份信息成功");
+        return businessMessage;
+    }
+
+    /**
+     * 获取所有省份信息
+     * @return
+     */
+    public BusinessMessage getCityBypId(Integer id){
+        BusinessMessage businessMessage =new BusinessMessage();
+        Example example =new Example(Region.class);
+        example.createCriteria().andEqualTo("pid",id);
+        List<Region> regions =regionMapper.selectByExample(example);
+        businessMessage.setData(regions);
+        businessMessage.setMsg("根据省份获取城市数据成功");
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
 }

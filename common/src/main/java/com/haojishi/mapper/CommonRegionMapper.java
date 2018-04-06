@@ -17,4 +17,8 @@ public interface CommonRegionMapper {
      */
     List<String> getCityNameByProvinceName(@Param("provinces") String[] provinces);
 
+    String getProvinceByCity(@Param("comCity") String comCity);
+
+    List<String> getCityBypId(@Param("pId") Integer pId);
+
 }

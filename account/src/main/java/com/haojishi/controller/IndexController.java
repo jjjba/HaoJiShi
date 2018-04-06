@@ -24,6 +24,8 @@ public class IndexController {
 
     @RequestMapping("personalIndex")
     public String personalIndex(HttpSession session){
+        session.setAttribute("userId",4);
+        session.setAttribute("zt",1);
 //        String openid = (String) session.getAttribute("openid");
 //        if(openid == null || openid.equals("null")){
 //            session.setAttribute("openid","22222222");   //2-15859228476    //1-17331153729
@@ -47,13 +49,13 @@ public class IndexController {
 //                return "personal/mySelf_notLogin";
 //            }
 //        }
-        return "personal/mySelf_notLogin";
+        return "personal/personalIndex";
 
     }
 
     @RequestMapping("companyIndex")
     public String companyIndex(HttpSession session){
-        session.setAttribute("openid","15859228476");   //1-17331153729   //2-15859228476
+        session.setAttribute("userId","4");   //1-17331153729   //2-15859228476
         return "company/company_index/companyIndex";
     }
 }

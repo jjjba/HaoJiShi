@@ -12,6 +12,8 @@ import java.util.Map;
  */
 public interface CommonPositionMapper {
 
+    List<Map<String,Object>> getPositionByUserId(@Param("userId") Integer userId);
+
     List<Map<String,Object>> getPositionByAddress(@Param("address") String address);
 
     List<Map<String,Object>> getPositionByAddressPro(@Param("pid") String pid);

@@ -71,7 +71,7 @@ logging:
 api:
   #图片和视频存放路径
   fileImagePath: /var/tomcat/tomcat-8/webapps/image
-  ImageSrc: http://118.24.109.190:443/image
+  ImageSrc: http://118.24.109.190/image
 
 
   appid: wxb363c68215a1d3f1

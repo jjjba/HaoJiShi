@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>我的-意向城市</title>
+<title>意向城市</title>
 
     <!-- 公用样式 开始 -->
     <link type="text/css" href="/static/person/css/response.css"
@@ -16,6 +16,8 @@
     <link type="text/css" href="/static/person/css/xiangying.css"
                 th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
 	<!-- 公用样式 结束 -->
+    <link type="text/css" href="/static/person/css/position_info/xiangqing.css"
+          th:href="@{/person/css/position_info/xiangqing.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/job_position/top.css"
                 th:href="@{/person/css/job_position/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/job_position/grbqs.css"
@@ -32,7 +34,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      意向城市
-     <a href="#" class="zjtous" onclick="javascript:window.history.go(-1)"><img src="/static/person/images/biao04.png" th:src="@{/person/images/biao04.png}"/></a>
+     <a href="#" class="zjtous" onclick="goBack()"><img src="/static/person/images/biao04.png" th:src="@{/person/images/biao04.png}"/></a>
      <a href="#" class="qudeds srhos">确定</a>
      <!--求职岗位空白时开始-->
       <a href="#" class="qudeds kbshis" style="display:none;">确定</a>
@@ -47,11 +49,6 @@
    <!--有内容时开始-->
    <div class="conthaves">
      <ul class="clearfix">
-       <li>廊坊 <img src="images/hongscs.png" class="gbanius" /></li>
-       <li>石家庄 <img src="images/hongscs.png" class="gbanius" /></li>
-       <li>邯郸 <img src="images/hongscs.png" class="gbanius" /></li>
-       <li>呼和浩特 <img src="images/hongscs.png" class="gbanius" /></li>
-       <li>保定 <img src="images/hongscs.png" class="gbanius" /></li>
      </ul>
    </div>
    <!--有内容时结束-->
@@ -74,27 +71,27 @@
  <!--下边开始-->
         <div class="flsxi01">
           <!--左边开始-->
-          <div class="fllfzuos02">
-            <ul>
-              <li class="houvers"><a href="#">热门地区</a></li>
-              <li><a href="#">山东省</a></li>
-              <li><a href="#">河北省</a></li>
-            </ul>
-          </div>
+            <div class="fllfzuos02">
+                <ul class="provincesssss">
+                <li class="houvers"><a href="#" class="hotPro">热门地区</a></li>
+                </ul>
+            </div>
           <!--左边结束-->
           <!--右边开始-->
-          <div class="flriyous02">
-            <span>全省</span>
-            <span>石家庄</span>
-            <span>济南</span>
-          </div>
+            <div class="flriyous02 hotProvince">
+                <span>北京</span>
+                <span>上海</span>
+                <span>重庆</span>
+                <span>苏州</span>
+                <span>西安</span>
+            </div>
           <!--右边结束-->
         </div>
-    
  <!--下边结束-->
- 
- 
 
+
+ <div class="toolbarframe03" style="display: none">不能选择重复城市</div>
+ <div class="toolbarframe02" style="display: none">最多选择5个城市</div>
  
 
  

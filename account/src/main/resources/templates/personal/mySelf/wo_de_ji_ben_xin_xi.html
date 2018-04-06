@@ -1,13 +1,12 @@
 ﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>基本信息</title>
+<title>我的基本信息</title>
 
     <!-- 公用样式 开始 -->
     <link type="text/css" href="/static/person/css/response.css"
@@ -17,26 +16,30 @@
     <link type="text/css" href="/static/person/css/xiangying.css"
           th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
-
+    
+    
     <link type="text/css" href="/static/person/css/wan_shan_xin_xi/top.css"
           th:href="@{/person/css/wan_shan_xin_xi/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/wan_shan_xin_xi/jbxxs.css"
           th:href="@{/person/css/wan_shan_xin_xi/jbxxs.css}" rel="stylesheet" />
-    
+    <link type="text/css" href="/static/person/css/position_info/xiangqing.css"
+          th:href="@{/person/css/position_info/xiangqing.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" src="/static/person/js/wan_shan_xin_xi/jibenxinxi.js"
+            th:src="@{/person/js/wan_shan_xin_xi/jibenxinxi.js}"></script>
+    <script type="text/javascript" src="/static/person/js/jweixin-1.2.0.js"
+            th:src="@{/person/js/jweixin-1.2.0.js}"></script>
+    <script type="text/javascript" src="/static/person/js/wan_shan_xin_xi/jquery.area.js"
+            th:src="@{/person/js/wan_shan_xin_xi/jquery.area.js}"></script>
     <!--上传头像开始-->
-    
     <link href="/static/person/css/wan_shan_xin_xi/sctx.css"
           th:href="@{/person/css/wan_shan_xin_xi/sctx.css}" rel="stylesheet" type="text/css">
-
     <!--上传头像结束-->
     
     <!--性别开始-->
     <script type="text/javascript">
-	  
 	  $(document).ready(function() {
-        
 	  $('.dijis').click(function(){
 				if($('.d-guanzhu').text()=="男"){
 					$('.d-guanzhu').text("女");
@@ -44,20 +47,23 @@
 					$('.d-guanzhu').text("男");
 				}
 			});
-
     });
-	 
+	  function goBack() {
+          window.location.href="/transition/my_resume";
+      }
     </script>
    <!--性别结束-->
    
    <!--地区选择开始-->
    <link rel="stylesheet" href="/static/person/css/wan_shan_xin_xi/style.css"
-         th:href="@{/person/css/wan_shan_xin_xi/style.css}"/>
+         th:href="@{/person/css/wan_shan_xin_xi/style.css}" />
    <!--地区选择结束-->
    
    <!--选择职位开始-->
-    <link rel="stylesheet" type="text/css" href="/static/person/css/wan_shan_xin_xi/mobileSelect.css">
-    <script src="/static/person/js/wan_shan_xin_xi/mobileSelect.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/static/person/css/wan_shan_xin_xi/mobileSelect.css"
+          th:href="@{/person/css/wan_shan_xin_xi/mobileSelect.css}">
+    <script src="/static/person/js/wan_shan_xin_xi/mobileSelect.js"
+            th:src="@{/person/js/wan_shan_xin_xi/mobileSelect.js}" type="text/javascript"></script>
    <!--选择职位结束-->
    
    
@@ -69,7 +75,8 @@
    <!--里边开始-->
    <div class="tbusinto">
      基本信息
-     <a href="#" class="zjtous"><img src="/static/person/images/biao04.png" th:src="@{/person/images/biao04.png}" /></a>
+     <a href="#" class="zjtous" onclick="goBack()"><img src="/static/person/images/biao04.png"
+                    th:src="@{/person/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
@@ -87,24 +94,13 @@
      <div class="fr yobtouxs clearfix">
        <!--上传头像开始-->
       <div class="sltoucs">
-                <div class="uploader blue">
-                    <input type="text" class="filename" readonly/>
-                    <a class="license">
-                        <img id="img-1" src="/static/person/images/tupian.png" th:src="@{/person/images/tupian.png}" />
-                    </a>
-                    <input id="file0" class="file-3" type="file" size="30" onchange="javascript:setImagePreview();" accept="image/*" capture="camera" />
-                </div>
-                
-                <div class="yulan">
-                    <img src="" id="img0" >
-                    <div class="enter">
-                        <button class="btn-2 fl">取消</button>
-                        <button class="btn-3 fr">确定</button>
-                    </div>
-                </div>
+            <div class="uploader blue">
+                <input type="text" class="filename" readonly/>
+                <a class="license">
+                </a>
+            </div>
       </div>
-         <img src="/static/person/images/yjts.png"
-              th:src="@{/person/images/yjts.png}" class="yjtiss" />
+      <img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" class="yjtiss" />
        <!--上传头像结束-->
        
        
@@ -122,9 +118,7 @@
      <div class="fl zcsyks">姓名</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss">
-       <input type="text" placeholder="请输入姓名" class="stkius" /> <img src="/static/person/images/yjts.png"
-                                                                     th:src="@{/person/images/yjts.png}" class="yjtiss" />
+     <div class="fr youyss namesl">
      </div>
      <!--右边结束-->
    </div>
@@ -136,9 +130,7 @@
      <div class="fl zcsyks">性别</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr sexyous">
-        <div class="d-guanzhu">男</div> <img src="/static/person/images/yjts.png"
-                                            th:src="@{/person/images/yjts.png}" class="yjtiss" />
+     <div class="fr sexyous sexsl">
      </div>
      <!--右边结束-->
    </div>
@@ -151,9 +143,7 @@
      <div class="fl zcsyks">年龄</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss">
-       <input type="text" placeholder="请输入年龄" class="stkius" /> <img src="/static/person/images/yjts.png"
-                                                                     th:src="@{/person/images/yjts.png}" class="yjtiss" />
+     <div class="fr youyss agesl">
      </div>
      <!--右边结束-->
    </div>
@@ -164,105 +154,77 @@
  
  <!--联系方式开始-->
  <div class="cnouyts">
-   <!--所在地区开始-->
+     <!--所在地区开始-->
      <div class="sryikuys borxboms clearfix">
          <!--左边开始-->
          <div class="fl zcsyks">当前所在地</div>
          <!--左边结束-->
-         
+
          <!--右边开始-->
          <div class="fr youkuiss">
-            <!--地区选择开始-->
-            <div class="xzeyosx">
-                <section class="express-area">
-                    <a id="expressArea" href="javascript:void(0)">
-                        <dl>
-                            <dd>省 - 市 - 区/县</dd>
-                        </dl>
-                    </a>
-                </section>
-                <!--选择地区弹层-->
-                <section id="areaLayer" class="express-area-box">
-                    <header>
-                        <h3>选择地区</h3>
-                        <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
-                        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-                    </header>
-                    <article id="areaBox">
-                        <ul id="areaList" class="area-list"></ul>
-                    </article>
-                </section>
-                <!--遮罩层-->
-                <div id="areaMask" class="mask"></div>
-                <script src="/static/person/js/wan_shan_xin_xi/jquery.area.js"></script>
-            </div>    
-            <!--地区选择结束-->
-             <img src="/static/person/images/yjts.png"
-                  th:src="@{/person/images/yjts.png}" class="yjtiss" />
+             <!--地区选择开始-->
+             <div class="xzeyosx">
+                 <section class="express-area">
+                     <a id="expressArea" href="javascript:void(0)">
+                         <dl class="addresssl">
+                         </dl>
+                     </a>
+                 </section>
+                 <!--选择地区弹层-->
+                 <section id="areaLayer" class="express-area-box">
+                     <header>
+                         <h3>选择地区</h3>
+                         <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+                         <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+                     </header>
+                     <article id="areaBox">
+                         <ul id="areaList" class="area-list"></ul>
+                     </article>
+                 </section>
+                 <!--遮罩层-->
+                 <div id="areaMask" class="mask"></div>
+                 <script src="/static/person/js/wan_shan_xin_xi/jquery.area.js" th:src="@{/person/js/wan_shan_xin_xi/jquery.area.js}"></script>
+             </div>
+             <!--地区选择结束-->
+             <img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" class="yjtiss" />
          </div>
          <!--右边结束-->
-         
+
      </div>
-   <!--所在地区结束-->
+     <!--所在地区结束-->
    
    <!--联系方式开始-->
    <div class="sryikuys borxboms clearfix">
      <!--左边开始-->
-     <div class="fl zcsyks">联系方式</div>
+     <div class="fl zcsyks" >联系方式</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss">
-       <input type="text" placeholder="请输入联系方式" class="stkius" /> <img src="/static/person/images/yjts.png"
-                                                                       th:src="@{/person/images/yjts.png}" class="yjtiss" />
+     <div class="fr youyss phonesl">
      </div>
      <!--右边结束-->
    </div>
    <!--联系方式结束-->
-   
-   <!--工作状态开始-->
-   <div class="sryikuys clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks">工作状态</div>
-     <!--左边结束-->
-     
-     <!--右边开始-->
-     <div class="fr yogzztas">
-       
-       <!--选择职位开始-->
-       <div class="xzzwis">
-           <div id="trigger1" class="zhiiis">在职，考虑机会</div>
-            <script type="text/javascript">
-            
-                var weekdayArr=['离职-随时到岗','在职-考虑状态','离职-需要准备'];
-                
-                
-                var mobileSelect1 = new MobileSelect({
-                    trigger: '#trigger1', 
-                    title: '',  
-                    wheels: [
-                                {data: weekdayArr}
-                            ],
-                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-                    transitionEnd:function(indexArr, data){
-                        console.log(data);
-                    },
-                    callback:function(indexArr, data){
-                        console.log(data);
-                    }
-                });
-            
-            
-            </script>
-        </div> <img src="/static/person/images/yjts.png"
-                    th:src="@{/person/images/yjts.png}" class="yjtiss" />
-       <!--选择职位结束-->
-       
+
+     <!--工作状态开始-->
+     <div class="sryikuys clearfix">
+         <!--左边开始-->
+         <div class="fl zcsyks">工作状态</div>
+         <!--左边结束-->
+
+         <!--右边开始-->
+         <div class="fr yogzztas">
+
+             <!--选择职位开始-->
+             <div class="xzzwis statesl">
+             </div> <img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" class="yjtiss" />
+             <!--选择职位结束-->
+
+         </div>
+         <!--右边结束-->
+
      </div>
-     <!--右边结束-->
-     
-   </div>
-   <!--工作状态结束-->   
-   
+     <!--工作状态结束-->
+
  </div>
  <!--联系方式结束-->
  
@@ -279,7 +241,7 @@
 <script src="/static/person/js/wan_shan_xin_xi/iscroll-zoom.js" th:src="@{/person/js/wan_shan_xin_xi/iscroll-zoom.js}"></script>
 <script src="/static/person/js/wan_shan_xin_xi/hammer.js" th:src="@{/person/js/wan_shan_xin_xi/hammer.js}"></script>
 <script src="/static/person/js/wan_shan_xin_xi/jquery.photoClip.js" th:src="@{/person/js/wan_shan_xin_xi/jquery.photoClip.js}"></script>
-<script>
+ <script>
     var obUrl = ''
     //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
     $("#clipArea").photoClip({
@@ -483,8 +445,9 @@ $(".btn-3").click(function(){
 </script>
 <!--上传头像结束-->
 
- 
 
+ <div class="toolbarframe02" style="display: none">保存成功</div>
+ <div class="toolbarframe03" style="display: none">保存失败</div>
  
 </body>
 </html>

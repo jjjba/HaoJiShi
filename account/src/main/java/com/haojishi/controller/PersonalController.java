@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/personal")
+@RequestMapping("personal")
 public class PersonalController {
 
     @Autowired
@@ -54,13 +54,13 @@ public class PersonalController {
      * @param session
      * @return BusinessMessage
      */
-    @RequestMapping("updatePersonalByPersonalOpenid")
-    public BusinessMessage updatePersonalByPersonalOpenid(HttpSession session, String address, String hopeCity, Integer age, String sex,
+    @RequestMapping("updatePersonalByPersonalId")
+    public BusinessMessage updatePersonalByPersonalId(HttpSession session, String address, String hopeCity, Integer age, String sex,
                                                           String hopeJob, String expectMoney, String jobExperience, String myHometown,
                                                           String myselfInfo, String special, String recordSchool, String name, String onceDo,
-                                                          String phone, MultipartFile photo, MultipartFile avatar){
-        return personalServicel.updatePersonalByPersonalOpenid(session, address, hopeCity, age, sex, hopeJob, expectMoney, jobExperience,
-                myHometown, myselfInfo, special, recordSchool, name, onceDo, phone, photo, avatar);
+                                                          String phone, String state, String photo, String avatar){
+        return personalServicel.updatePersonalByPersonalId(session, address, hopeCity, age, sex, hopeJob, expectMoney, jobExperience,
+                myHometown, myselfInfo, special, recordSchool, name, onceDo, phone, state, photo, avatar);
     }
 
     /**

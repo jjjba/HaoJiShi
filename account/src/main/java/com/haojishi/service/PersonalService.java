@@ -50,6 +50,12 @@ public class PersonalService {
     private CompanyMapper companyMapper;
     @Autowired
     private RegionMapper regionMapper;
+    @Autowired
+    private CommonPositionMapper commonPositionMapper;
+    @Autowired
+    private CommonRegionMapper commonRegionMapper;
+    @Autowired
+    private CommonCompanyMapper commonCompanyMapper;
 
     /*public static String Cookis(){
         Cookie[] cookies = getCookies();
@@ -178,47 +184,40 @@ public class PersonalService {
     }
 
     /**
-     * 根据personalId获取求职者信息
+     * 根据userId获取求职者信息
      *
      * @return BusinessMessage - 求职者信息
      */
     public BusinessMessage getPersonalInfo(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
-        List<User> users =userMapper.selectByExample(userExample);
-        if(users != null && users.size() > 0){
-            int id =users.get(0).getId();
-            Personal personal =personalMapper.selectByPrimaryKey(id);
-            if(personal != null){
-                Map<String,Object> personalMap =new HashMap<>();
-                personalMap.put("state",personal.getState());
-                personalMap.put("sex",personal.getSex());
-                personalMap.put("name",personal.getName());
-                personalMap.put("age",personal.getAge());
-                personalMap.put("address",personal.getAddress());
-                personalMap.put("avatar",personal.getAvatar());
-                personalMap.put("hope_city",personal.getHopeCity());
-                personalMap.put("expect_money",personal.getExpectMoney());
-                personalMap.put("hope_job",personal.getHopeJob());
-                personalMap.put("info",personal.getMyselfInfo());
-                personalMap.put("job_experience",personal.getJobExperience());
-                personalMap.put("phone",personal.getPhone());
-                personalMap.put("mySelfInfo",personal.getMyselfInfo());
-                personalMap.put("myHometown",personal.getMyHometown());
-                personalMap.put("special",personal.getSpecial());
-                personalMap.put("recordSchool",personal.getRecordSchool());
-                personalMap.put("onceDo",personal.getOnceDo());
-                personalMap.put("photo",personal.getPhotos());
-                businessMessage.setData(personalMap);
-            }else{
-                businessMessage.setMsg("未获取到该求职者信息");
-            }
-            businessMessage.setSuccess(true);
-        }else {
-            businessMessage.setMsg("未获取到用户信息");
+        int userId = (int) session.getAttribute("userId");
+        Personal personal =personalMapper.selectByPrimaryKey(userId);
+        if(personal != null){
+            Map<String,Object> personalMap =new HashMap<>();
+            personalMap.put("state",personal.getState());
+            personalMap.put("sex",personal.getSex());
+            personalMap.put("name",personal.getName());
+            personalMap.put("age",personal.getAge());
+            personalMap.put("address",personal.getAddress());
+            personalMap.put("avatar",personal.getAvatar());
+            personalMap.put("hope_city",personal.getHopeCity());
+            personalMap.put("expect_money",personal.getExpectMoney());
+            personalMap.put("hope_job",personal.getHopeJob());
+            personalMap.put("info",personal.getMyselfInfo());
+            personalMap.put("job_experience",personal.getJobExperience());
+            personalMap.put("phone",personal.getPhone());
+            personalMap.put("mySelfInfo",personal.getMyselfInfo());
+            personalMap.put("myHometown",personal.getMyHometown());
+            personalMap.put("special",personal.getSpecial());
+            personalMap.put("recordSchool",personal.getRecordSchool());
+            personalMap.put("onceDo",personal.getOnceDo());
+            personalMap.put("photo",personal.getPhotos());
+            businessMessage.setData(personalMap);
+        }else{
+            businessMessage.setMsg("未获取到该求职者信息");
         }
+        businessMessage.setSuccess(true);
+
         return businessMessage;
     }
 
@@ -280,102 +279,74 @@ public class PersonalService {
      * @param session
      * @return BusinessMessage
      */
-    public BusinessMessage updatePersonalByPersonalOpenid(HttpSession session, String address, String hopeCity, Integer age, String sex,
+    public BusinessMessage updatePersonalByPersonalId(HttpSession session, String address, String hopeCity, Integer age, String sex,
                                                           String hopeJob, String expectMoney, String jobExperience, String myHometown,
                                                           String myselfInfo, String special, String recordSchool, String name, String onceDo,
-                                                          String phone, MultipartFile photo, MultipartFile avatar){
+                                                          String phone, String state,String photo, String avatar){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =userMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                int id =users.get(0).getId();
-                Personal personal =personalMapper.selectByPrimaryKey(id);
-                String photoName = personal.getPhotos();
-                String iconName = personal.getAvatar();
-                if (avatar != null) {
-                    String pathCheckPath2 = environment.getProperty("api.fileImagePath");
-                    File hashFile = new File(pathCheckPath2);
-                    //没有就创建
-                    if (!hashFile.exists()) {
-                        hashFile.mkdirs();
-                    }
-                    String photoName1 = reamNameFile(avatar, pathCheckPath2);
-                    if(!StringUtils.isEmpty(photoName1)) {
-                        iconName = environment.getProperty("api.ImageSrc") + "/" + photoName1;
-                    }
-                    log.debug("上传Logo图片：" + iconName);
+                int userId = (int) session.getAttribute("userId");
+
+                Example perExample =new Example(Personal.class);
+                perExample.createCriteria().andEqualTo("userId",userId);
+                List<Personal> personals =personalMapper.selectByExample(perExample);
+                Personal personal =personals.get(0);
+                if (avatar != null && avatar != "") {
+                    personal.setAvatar(avatar);
                 }
-                if (photo != null) {
-                    String pathCheckPath = environment.getProperty("api.fileImagePath");
-                    File hashFile = new File(pathCheckPath);
-                    //没有就创建
-                    if (!hashFile.exists()) {
-                        hashFile.mkdirs();
-                    }
-                    String photoName2 = reamNameFile(photo, pathCheckPath);
-                    if(!StringUtils.isEmpty(photoName2)) {
-                        photoName = environment.getProperty("api.ImageSrc") + "/" + photoName2;
-                    }
-                    log.debug("上传图片：" + photoName);
+                if (photo != null && photo != "") {
+                    personal.setPhotos(photo);
                 }
-                if(address != null){
+                if(address != null && address != ""){
                     personal.setAddress(address);
                 }
                 if(age != null){
                     personal.setAge(age);
                 }
-                if(hopeCity != null){
+                if(hopeCity != null && hopeCity !=""){
                     personal.setHopeCity(hopeCity);
                 }
-                if(hopeJob != null){
+                if(hopeJob != null && hopeJob !=""){
                     personal.setHopeJob(hopeJob);
                 }
-                if(expectMoney != null){
+                if(expectMoney != null && expectMoney !=""){
                     personal.setExpectMoney(expectMoney);
                 }
-                if(jobExperience != null){
+                if(jobExperience != null && jobExperience !=""){
                     personal.setJobExperience(jobExperience);
                 }
-                if(myHometown != null){
+                if(myHometown != null && myHometown !=""){
                     personal.setMyHometown(myHometown);
                 }
-                if(myselfInfo != null){
+                if(myselfInfo != null && myselfInfo !=""){
                     personal.setMyselfInfo(myselfInfo);
                 }
-                if(special != null){
+                if(special != null && special !=""){
                     personal.setSpecial(special);
                 }
-                if(sex != null){
+                if(sex != null && sex !=""){
                     personal.setSex(sex);
                 }
-                if(recordSchool != null){
+                if(recordSchool != null && recordSchool !=""){
                     personal.setRecordSchool(recordSchool);
                 }
-                if(name != null){
+                if(name != null && name !=""){
                     personal.setName(name);
                 }
-                if(onceDo != null){
+                if(onceDo != null && onceDo !=""){
                     personal.setOnceDo(onceDo);
                 }
-                if(phone != null){
+                if(phone != null && phone !=""){
                     personal.setPhone(phone);
                 }
-                if(iconName != null){
-                    personal.setAvatar(iconName);
-                }
-                if(photoName != null){
-                    personal.setPhotos(photoName);
+                if(state != null && state !=""){
+                    personal.setState(state);
                 }
                 personal.setUpdateTime(new Date());
                 personalMapper.updateByPrimaryKeySelective(personal);
                 businessMessage.setMsg("修改求职者信息成功");
                 businessMessage.setSuccess(true);
-            }else {
-                log.error("未获取到用户信息");
-            }
+
 
         }catch (Exception e){
             log.error("修改求职者信息错误",e);
@@ -538,211 +509,46 @@ public class PersonalService {
         try {
             List<Map<String,Object>> personalList =new ArrayList();
             List<Map<String,Object>> proPersonal =new ArrayList();
-            List<Map<String,Object>> personals1 =new ArrayList();
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =userMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                Example comExample =new Example(Company.class);
-                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                //查看该用户有没有注册企业
-                List<Company> company =companyMapper.selectByExample(comExample);
-                //如果有根据企业所在城市显示求职者
-                if(company != null && company.size() > 0){
-                    Example posExample =new Example(Position.class);
-                    posExample.createCriteria().andEqualTo("companyId",company.get(0).getId());
-                    List<Position> positions =positionMapper.selectByExample(posExample);
-                    String companyCity =company.get(0).getCompanyCity();
-                    String city =companyCity.substring(0, companyCity.indexOf("-"));
-                    Example perExample =new Example(Personal.class);
-                    perExample.setOrderByClause("create_time desc");
-                    List<Personal> personals =personalMapper.selectByExample(perExample);
-                    for(int i = 0;i < personals.size();i++){
-                        String[] hopeCity =personals.get(i).getHopeCity().split(",");
-                        String[] hopeJob =personals.get(i).getHopeJob().split(",");
-                        for(int j = 0;j < hopeCity.length;j++){
-                            if(city.equals(hopeCity[j])){
-                                if(positions != null && positions.size() > 0){
-                                    for(int k = 0;k < positions.size();k++){
-                                        for(int a = 0;a < hopeJob.length;a++){
-                                            if(positions.get(k).getPositionName().equals(hopeJob[a])){
-                                                Map<String,Object> map =new HashMap<>();
-                                                map.put("id",personals.get(i).getId());
-                                                map.put("avatar",personals.get(i).getAvatar());
-                                                map.put("phone",personals.get(i).getPhone());
-                                                map.put("name",personals.get(i).getName());
-                                                map.put("sex",personals.get(i).getSex());
-                                                map.put("age",personals.get(i).getAge());
-                                                map.put("hopeJob",personals.get(i).getHopeJob());
-                                                map.put("expectMoney",personals.get(i).getExpectMoney());
-                                                map.put("address",personals.get(i).getAddress());
-                                                map.put("state",personals.get(i).getState());
-                                                map.put("jobExperience",personals.get(i).getJobExperience());
-                                                personals1.add(map);
-                                            }
-                                        }
-                                    }
-                                }else {
-                                    Map<String,Object> map =new HashMap<>();
-                                    map.put("id",personals.get(i).getId());
-                                    map.put("avatar",personals.get(i).getAvatar());
-                                    map.put("phone",personals.get(i).getPhone());
-                                    map.put("name",personals.get(i).getName());
-                                    map.put("sex",personals.get(i).getSex());
-                                    map.put("age",personals.get(i).getAge());
-                                    map.put("hopeJob",personals.get(i).getHopeJob());
-                                    map.put("expectMoney",personals.get(i).getExpectMoney());
-                                    map.put("address",personals.get(i).getAddress());
-                                    map.put("state",personals.get(i).getState());
-                                    map.put("jobExperience",personals.get(i).getJobExperience());
-                                    personals1.add(map);
-                                }
-                            }
-                        }
-                    }
-                    for(int s = 0;s < personals1.size();s++){
-                        personalList.add(personals1.get(s));
-                    }
-                    Example regionExample =new Example(Region.class);
-                    regionExample.createCriteria().andEqualTo("name",city);
-                    List<Region> regions =regionMapper.selectByExample(regionExample);
-                    int id =Integer.parseInt(regions.get(0).getPid());
-                    Region region =regionMapper.selectByPrimaryKey(id);
-                    String province =region.getName();
-                    for(int z = 0;z < personals.size();z++){
-                        String[] hopeCity =personals.get(z).getHopeCity().split(",");
-                        String[] hopeJob =personals.get(z).getHopeJob().split(",");
-                        for(int a = 0;a < hopeCity.length;a++){
-                            String city1 =hopeCity[a];
-                            Example regionExample1 =new Example(Region.class);
-                            regionExample1.createCriteria().andEqualTo("name",city1);
-                            List<Region> regions1 =regionMapper.selectByExample(regionExample1);
-                            Region region1 =regionMapper.selectByPrimaryKey(Integer.parseInt(regions1.get(0).getPid()));
-                            String province1 =region1.getName();
-                            if(province.equals(province1)){
-                                if(positions != null && positions.size() > 0){
-                                    for(int q = 0;q < positions.size();q++){
-                                        for(int w = 0;w < hopeJob.length;w++){
-                                            if(positions.get(q).getPositionName().equals(hopeJob[w])){
-                                                Map<String,Object> map =new HashMap<>();
-                                                map.put("id",personals.get(z).getId());
-                                                map.put("avatar",personals.get(z).getAvatar());
-                                                map.put("phone",personals.get(z).getPhone());
-                                                map.put("name",personals.get(z).getName());
-                                                map.put("sex",personals.get(z).getSex());
-                                                map.put("age",personals.get(z).getAge());
-                                                map.put("hopeJob",personals.get(z).getHopeJob());
-                                                map.put("expectMoney",personals.get(z).getExpectMoney());
-                                                map.put("address",personals.get(z).getAddress());
-                                                map.put("state",personals.get(z).getState());
-                                                map.put("jobExperience",personals.get(z).getJobExperience());
-                                                proPersonal.add(map);
-                                                }
-                                            }
-                                        }
-                                    }else {
-                                    Map<String,Object> map =new HashMap<>();
-                                    map.put("id",personals.get(z).getId());
-                                    map.put("avatar",personals.get(z).getAvatar());
-                                    map.put("phone",personals.get(z).getPhone());
-                                    map.put("name",personals.get(z).getName());
-                                    map.put("sex",personals.get(z).getSex());
-                                    map.put("age",personals.get(z).getAge());
-                                    map.put("hopeJob",personals.get(z).getHopeJob());
-                                    map.put("expectMoney",personals.get(z).getExpectMoney());
-                                    map.put("address",personals.get(z).getAddress());
-                                    map.put("state",personals.get(z).getState());
-                                    map.put("jobExperience",personals.get(z).getJobExperience());
-                                    proPersonal.add(map);
-                                }
-                            }
-                        }
-                    }
-                    for(int d = 0;d < proPersonal.size();d++) {
-                        if(personals1.contains(proPersonal.get(d))){
-                            proPersonal.remove(d);
-                        }
-                    }
-                    for (int t =0;t<proPersonal.size();t++){
-                        personalList.add(proPersonal.get(t));
-                    }
-                    businessMessage.setMsg("获取企业端求职者信息成功");
-                    businessMessage.setSuccess(true);
-                    businessMessage.setData(personalList);
-                }else {
-                    //如果没有说明是游客或者未完善信息
-                    RemortIP remortIP =new RemortIP();
-                    String address =remortIP.getAddressByIP(request);
-                    Example perExample =new Example(Personal.class);
-                    List<Personal> personals =personalMapper.selectByExample(perExample);
-                    for(int i = 0;i < personals.size();i++){
-                        String[] hopeCity =personals.get(i).getHopeCity().split(",");
-                        for(int j = 0;j < hopeCity.length;j++) {
-                            if (address.equals(hopeCity[j])) {
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("id", personals.get(i).getId());
-                                map.put("avatar", personals.get(i).getAvatar());
-                                map.put("phone", personals.get(i).getPhone());
-                                map.put("name", personals.get(i).getName());
-                                map.put("sex", personals.get(i).getSex());
-                                map.put("age", personals.get(i).getAge());
-                                map.put("hopeJob", personals.get(i).getHopeJob());
-                                map.put("expectMoney", personals.get(i).getExpectMoney());
-                                map.put("address", personals.get(i).getAddress());
-                                map.put("state", personals.get(i).getState());
-                                map.put("jobExperience", personals.get(i).getJobExperience());
-                                personals1.add(map);
-                            }
-                        }
-                    }
-                    for(int s = 0;s < personals1.size();s++){
-                        personalList.add(personals1.get(s));
-                    }
-                    Example regionExample =new Example(Region.class);
-                    regionExample.createCriteria().andEqualTo("name",address);
-                    List<Region> regions =regionMapper.selectByExample(regionExample);
-                    int id =Integer.parseInt(regions.get(0).getPid());
-                    Region region =regionMapper.selectByPrimaryKey(id);
-                    String province =region.getName();
-                    for(int a = 0;a < personals.size();a++){
-                        String[] hopeCity =personals.get(a).getHopeCity().split(",");
-                        for(int j = 0;j < hopeCity.length;j++) {
-                            Example regionExample1 =new Example(Region.class);
-                            regionExample1.createCriteria().andEqualTo("name",hopeCity[j]);
-                            List<Region> regions1 =regionMapper.selectByExample(regionExample);
-                            Region region1 =regionMapper.selectByPrimaryKey(Integer.parseInt(regions1.get(0).getPid()));
-                            String province1 =region1.getName();
-                            if(province.equals(province1)){
-                                Map<String, Object> map = new HashMap<>();
-                                map.put("id", personals.get(a).getId());
-                                map.put("avatar", personals.get(a).getAvatar());
-                                map.put("phone", personals.get(a).getPhone());
-                                map.put("name", personals.get(a).getName());
-                                map.put("sex", personals.get(a).getSex());
-                                map.put("age", personals.get(a).getAge());
-                                map.put("hopeJob", personals.get(a).getHopeJob());
-                                map.put("expectMoney", personals.get(a).getExpectMoney());
-                                map.put("address", personals.get(a).getAddress());
-                                map.put("state", personals.get(a).getState());
-                                map.put("jobExperience", personals.get(a).getJobExperience());
-                                proPersonal.add(map);
-                            }
-                        }
-                    }
-
-                    proPersonal.remove(personals1);
-                    System.out.println("============="+proPersonal.remove(personals1));
-                    for(int d = 0;d < proPersonal.size();d++) {
-                        personalList.add(proPersonal.get(d));
-                    }
-                    businessMessage.setData(personalList);
-                    businessMessage.setSuccess(true);
-                    businessMessage.setMsg("获取求职者信息成功");
-                }
+            int userId = (int) session.getAttribute("userId");
+            int zt = (int) session.getAttribute("zt");
+            String city ="";
+            if(zt == 1) {
+                List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(userId);
+                String companyCity1 = (String) companyCity.get(0).get("company_city");
+                city=companyCity1.substring(0, companyCity1.indexOf("-"));
             }else {
-                log.error("未获取到用户信息");
+                RemortIP remortIP =new RemortIP();
+                city =remortIP.getAddressByIP(request);
             }
+
+            List<Map<String,Object>> personal =commonPersonalMapper.getPersonalByCity(city);
+            for(int j = 0;j < personal.size();j++){
+                personalList.add(personal.get(j));
+            }
+            String pId =commonRegionMapper.getProvinceByCity(city);
+            List<String> citys =commonRegionMapper.getCityBypId(Integer.parseInt(pId));
+            for(int i = 0;i < citys.size();i++){
+                String city1 =citys.get(i);
+                List<Map<String,Object>> personal1=commonPersonalMapper.getPersonalByCity(city1);
+                if(personal1 != null && personal1.size() > 0){
+                    for(int j = 0;j < personal1.size();j++){
+                        proPersonal.add(personal1.get(j));
+                    }
+                }
+            }
+
+            for(int d = 0;d < proPersonal.size();d++) {
+                if(personal.contains(proPersonal.get(d))){
+                    proPersonal.remove(d);
+                }
+            }
+            for (int t =0;t<proPersonal.size();t++){
+                personalList.add(proPersonal.get(t));
+            }
+            businessMessage.setMsg("获取企业端求职者信息成功");
+            businessMessage.setSuccess(true);
+            businessMessage.setData(personalList);
+
         }catch (Exception e){
             log.error("获取企业首页推荐求职者信息失败",e);
         }
