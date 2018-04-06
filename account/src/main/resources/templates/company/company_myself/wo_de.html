@@ -41,7 +41,7 @@
             });
        </script>
    <!--圆形进度结束-->
-   
+
    <script type="text/javascript" src="/static/company/js/wo_de/yctcs.js"
             th:src="@{/company/js/wo_de/yctcs.js}"></script>
    
@@ -70,37 +70,37 @@
 
 
      <!--上结束-->
-     
-     <!--下开始-->
-     <!--<a href="#">
-     <div class="xibkass">
-       
-       &lt;!&ndash;左边圆形进度条开始&ndash;&gt;
-        <div class="progressbar">
-          <span>35</span>%
-        </div>
-       &lt;!&ndash;左边圆形进度条结束&ndash;&gt;
-       
-       &lt;!&ndash;右边开始&ndash;&gt;
-       <div class="ycbuyss">
-         完善店铺，获得更多简历
-       </div>
-       &lt;!&ndash;右边结束&ndash;&gt;
-       
-       &lt;!&ndash;右箭头开始&ndash;&gt;
-       <div class="ycjtouis"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-       &lt;!&ndash;右箭头结束&ndash;&gt;
-       
-     </div>
-     </a>-->
-     <!--下结束-->
+
+       <!--下开始-->
+       <a href="#" style="display: block" class="WsXX">
+           <div class="xibkass">
+
+               <!--左边圆形进度条开始-->
+               <div class="progressbar">
+                   <span>35</span>%
+               </div>
+               <!--左边圆形进度条结束-->
+
+               <!--右边开始-->
+               <div class="ycbuyss">
+                   完善店铺，获得更多简历
+               </div>
+               <!--右边结束-->
+
+               <!--右箭头开始-->
+               <div class="ycjtouis"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></div>
+               <!--右箭头结束-->
+
+           </div>
+       </a>
+       <!--下结束-->
      
    </div>
  <!--上边结束-->
  
  
  <!--一块开始-->
-  <div class="dyikuys">
+  <div class="dyikuys" onclick="kuaizhao()">
     <ul>
       <li class="clearfix borderbom">
         <a href="#" class="fl zcuyys0"><img src="/static/company/images/wode07.png" th:src="@{/company/images/wode07.png}" /> 我的快招</a>
@@ -154,9 +154,9 @@
         <a href="#" onclick="wodezhanghaoshezhi()" class="fl"><img src="/static/company/images/wode05.png" th:src="@{/company/images/wode05.png}" /> 账号设置</a>
         <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
       </li>
-      <li class="clearfix">
-        <a href="#" class="fl" onclick="wodeqiehuanshenfen()"><img src="/static/company/images/wode06.png" th:src="@{/company/images/wode06.png}" /> 切换身份</a>
-        <a href="#" class="fr">我要找工作 <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
+      <li class="clearfix" onclick="wodeqiehuanshenfen()">
+        <a href="#" class="fl" ><img src="/static/company/images/wode06.png" th:src="@{/company/images/wode06.png}" /> 切换身份</a>
+        <a href="#" class="fr" id="wyzgz">我要找工作 <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
       </li>      
     </ul>
   </div>

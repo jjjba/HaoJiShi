@@ -18,9 +18,10 @@ function shiqu() {
             success : function (msg) {
                 var OkorFalse = msg.data;
                 console.log(OkorFalse);
-                if(OkorFalse == 2){
+                if(OkorFalse == 2 || OkorFalse == 1){
                     $("#hqyzm").attr("class","yzxis");
                     $("#hqyzm").val("获取验证码");
+                    sessionStorage.setItem("zhuCeOrDl",OkorFalse);
                 }else{
                     $('.alera').show();
                     setTimeout('$(".alera").hide()',1000);
@@ -68,12 +69,19 @@ function jinru() {
     var phoneNumber =$('#phoneNumber').val();
     var code  =$('#code').val();
     console.log(mobileCode + "--------"+ code);
-
+    var zhuCeOrDl = sessionStorage.getItem("zhuCeOrDl");
+    console.log("查出来是"+zhuCeOrDl);
     if(mobileCode == code){
-        /*$.cookie("zt", "1", { expires: 10 });
-        $.cookie("phone", phoneNumber, { expires: 10 });*/
-        sessionStorage.setItem("phone",phoneNumber);
-        window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+        if(zhuCeOrDl == 1){
+            $.cookie("zt",1);
+            $.cookie("phone",phoneNumber);
+            $.cookie("PWD","");
+            window.location.href="/transition/go_wo_de";
+        }
+        if(zhuCeOrDl ==2){
+            sessionStorage.setItem("phone",phoneNumber);
+            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+        }
 	}else {
         $('.buzhengque').show();
         setTimeout('$(".buzhengque").hide()',900);

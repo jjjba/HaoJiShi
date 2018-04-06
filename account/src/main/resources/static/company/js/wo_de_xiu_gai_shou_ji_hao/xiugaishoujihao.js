@@ -17,12 +17,11 @@ function sendCode(thisBtn)
 {
     $('.zhengque').show();
     setTimeout('$(".zhengque").hide()',1000);
-    /*PhoneYzm($("#phoneNum").html());*/
-    PhoneYzm($("#phoneNum").html());
     btn = thisBtn;
     btn.disabled = true; //将按钮置为不可点击
     btn.value = nums+'s';
     clock = setInterval(doLoop, 1000); //一秒执行一次
+    PhoneYzm($("#phoneNum").html());
 }
 function doLoop()
 {
@@ -58,7 +57,6 @@ function PhoneYzm2(phone) {
 }
 function sendCode1(thisBtn)
 {
-    /*PhoneYzm($("#phoneNum").html());*/
     newPhoneNum= $("#newPhoneNum").val();
     if(newPhoneNum =='' || newPhoneNum =="" || newPhoneNum == undefined){
         $('.Newshurushouji').show();
@@ -75,11 +73,11 @@ function sendCode1(thisBtn)
                 }else{
                     $('.zhengque').show();
                     setTimeout('$(".zhengque").hide()',1000);
-                    PhoneYzm2(newPhoneNum);
                     btn = thisBtn;
                     btn.disabled = true; //将按钮置为不可点击
                     btn .value = nums+'s';
                     clock = setInterval(doLoop, 1000); //一秒执行一次
+                    PhoneYzm2(newPhoneNum);
                 }
             }
         })
@@ -117,6 +115,7 @@ function updatePhone() {
                 if(msg.data.data == 1){
                     $('.updateok').show();
                     setTimeout('$(".updateok").hide()',1000);
+                    window.location.href="/transition/go_wo_de";
                 }else {
                     $('.updatefalse').show();
                     setTimeout('$(".updatefalse").hide()',1000);

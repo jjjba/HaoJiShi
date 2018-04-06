@@ -73,6 +73,7 @@ function xinxibaocun() {
             var succ = msg.data;
             $.cookie("zt",1);
             $.cookie("phone",phone);
+            sessionStorage.setItem("ZhuCeOk","OK");
             window.location.href="/transition/go_wo_de";
         }
     })

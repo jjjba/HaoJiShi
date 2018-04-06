@@ -132,23 +132,23 @@ public class CompanyService{
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             String openid = (String) session.getAttribute("openid");
-             Example userExample =new Example(User.class);
-             userExample.createCriteria().andEqualTo("openid",openid);
-             List<User> users =usersMapper.selectByExample(userExample);
-             if(users != null && users.size() > 0){
-                 Example comExample =new Example(Company.class);
-                 comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                 List<Company> companies =companyMapper.selectByExample(comExample);
-                 Example serExample =new Example(Services.class);
-                 serExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
-                 List<Services> services =servicesMapper.selectByExample(serExample);
-                 services.get(0).setSurplusnumber(services.get(0).getSurplusnumber() - 1);
-                 servicesMapper.updateByPrimaryKeySelective(services.get(0));
-                 businessMessage.setMsg("更新企业快招打电话次数成功");
-                 businessMessage.setSuccess(true);
-             }else {
-                 log.error("未获取到用户信息");
-             }
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("openid",openid);
+            List<User> users =usersMapper.selectByExample(userExample);
+            if(users != null && users.size() > 0){
+                Example comExample =new Example(Company.class);
+                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                List<Company> companies =companyMapper.selectByExample(comExample);
+                Example serExample =new Example(Services.class);
+                serExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
+                List<Services> services =servicesMapper.selectByExample(serExample);
+                services.get(0).setSurplusnumber(services.get(0).getSurplusnumber() - 1);
+                servicesMapper.updateByPrimaryKeySelective(services.get(0));
+                businessMessage.setMsg("更新企业快招打电话次数成功");
+                businessMessage.setSuccess(true);
+            }else {
+                log.error("未获取到用户信息");
+            }
         }catch (Exception e){
             log.error("更新企业快招打电话次数失败",e);
         }
@@ -162,9 +162,9 @@ public class CompanyService{
      */
     public BusinessMessage getRenCaishoucang(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if(users !=null && users.size()>0){
             Example comExample =new Example(Company.class);
@@ -196,9 +196,9 @@ public class CompanyService{
      */
     public BusinessMessage updatePhoneNu(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             businessMessage.setData(users.get(0));
@@ -215,9 +215,9 @@ public class CompanyService{
      */
     public BusinessMessage updatePhone(String phoneNum,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             User user = users.get(0);
@@ -237,9 +237,9 @@ public class CompanyService{
      */
     public BusinessMessage setPassword(String Password,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             User user = users.get(0);
@@ -258,9 +258,9 @@ public class CompanyService{
      */
     public BusinessMessage getUser(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             businessMessage.setData(users.get(0));
@@ -276,9 +276,9 @@ public class CompanyService{
      */
     public BusinessMessage updateShenfen(int shenfen,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             User user = users.get(0);
@@ -297,9 +297,9 @@ public class CompanyService{
      */
     public BusinessMessage getJianli(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             Example comExample =new Example(Company.class);
@@ -331,9 +331,9 @@ public class CompanyService{
      */
     public BusinessMessage getCompanyOkorFalse(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        String openid = (String) session.getAttribute("openid");
+        Integer id = (Integer) session.getAttribute("userId");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
+        userExample.createCriteria().andEqualTo("id",id);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             Example comExample =new Example(Company.class);
@@ -342,7 +342,7 @@ public class CompanyService{
             businessMessage.setData(companies.get(0));
             businessMessage.setSuccess(true);
         }
-       return businessMessage;
+        return businessMessage;
     }
 
     /**
@@ -448,7 +448,7 @@ public class CompanyService{
         company.setCompanyAddr(poiaddress+poiname);
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
-        company.setMatstate(2);
+        company.setMatstate(1);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         company.setCreateTime(new Date());
         Example userExample =new Example(User.class);
@@ -483,34 +483,15 @@ public class CompanyService{
         return businessMessage;
     }
 
-    public static Cookie getCookieByName(HttpServletRequest request, String name) {
-        Map<String, Cookie> cookieMap = ReadCookieMap(request);
-        if (cookieMap.containsKey(name)) {
-            Cookie cookie = (Cookie) cookieMap.get(name);
-            return cookie;
-        } else {
-            return null;
-        }
-    }
-    private static Map<String, Cookie> ReadCookieMap(HttpServletRequest request) {
-        Map<String, Cookie> cookieMap = new HashMap<String, Cookie>();
-        Cookie[] cookies = request.getCookies();
-        if (null != cookies) {
-            for (Cookie cookie : cookies) {
-                cookieMap.put(cookie.getName(), cookie);
-            }
-        }
-        return cookieMap;
-    }
     /**
      * 登陆的入口  通过cookie 判断登录状态
-     * @param request
+     * @param
      * @return
      */
-    public BusinessMessage DengLuPuanDuan(HttpServletRequest request,HttpSession session){
+    public BusinessMessage DengLuPuanDuan(String zt,String phone,String pwd,HttpSession session){
         BusinessMessage businessMessage = new BusinessMessage();
-        Object zt = session.getAttribute("zt");
-        Object phone =  session.getAttribute("phone");
+        /*Object zt1 = session.getAttribute("zt");
+        Object phone1 =  session.getAttribute("phone");*/
         if( zt!= null && phone!= null){
             //可以登陆
             Example userExample =new Example(User.class);
@@ -518,6 +499,7 @@ public class CompanyService{
             List<User> users =usersMapper.selectByExample(userExample);
             if(users!= null && users.size()>0){
                 session.setAttribute("userId",users.get(0).getId());
+                businessMessage.setDataOne(users.get(0).getType());
             }
             Example comExample =new Example(Company.class);
             comExample.createCriteria().andEqualTo("userId",users.get(0).getId());

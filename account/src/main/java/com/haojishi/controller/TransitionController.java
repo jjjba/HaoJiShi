@@ -8,10 +8,12 @@ import com.haojishi.model.Personal;
 import com.haojishi.model.User;
 import com.haojishi.service.TransitionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -484,4 +486,127 @@ public class TransitionController {
         return "company/company_myself/mi_ma_denglu";
     }
 
+    /**
+     * 店铺认证
+     * @return
+     */
+    @RequestMapping("RenZheng")
+    public String RenZheng(){
+        return "company/company_myself/wo_de_DPrenzheng";
+    }
+
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqinga")
+    public String wenti_xiangqinga(){
+        return"company/company_myself/problem/wenti_xiangqinga";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingb")
+    public String wenti_xiangqingb(){
+        return"company/company_myself/problem/wenti_xiangqingb";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingc")
+    public String wenti_xiangqingc(){
+        return"company/company_myself/problem/wenti_xiangqingc";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingd")
+    public String wenti_xiangqingd(){
+        return"company/company_myself/problem/wenti_xiangqingd";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqinge")
+    public String wenti_xiangqinge(){
+        return"company/company_myself/problem/wenti_xiangqinge";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingf")
+    public String wenti_xiangqingf(){
+        return"company/company_myself/problem/wenti_xiangqingf";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingg")
+    public String wenti_xiangqingg(){
+        return"company/company_myself/problem/wenti_xiangqingg";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingh")
+    public String wenti_xiangqingh(){
+        return"company/company_myself/problem/wenti_xiangqingh";
+    }
+    /**
+     * 快招页面
+     * @return
+     */
+    @RequestMapping("kuaizhao")
+    public String kuaizhao(){
+        return"company/company_myself/kuai_zhao";
+    }
+
+    /**
+     * 编辑职位界面
+     * @return
+     */
+    @RequestMapping("bianji_zhiwei")
+    public String bianji_zhiwei(){
+        return"company/company_myself/bianji_zhiwei";
+    }
+    /**
+     * 编辑职位名称
+     * @return
+     */
+    @RequestMapping("zwmingCheng")
+    public String zwmingCheng(){
+        return"company/company_myself/zhiwei_mingcheng";
+    }
+    /**
+     * 编辑职位名称
+     * @return
+     */
+    @RequestMapping("zhiwei_fuli")
+    public String zhiwei_fuli(){
+        return"company/company_myself/zhiwei_fuli";
+    }
+    /**
+     * 编辑职位名称
+     * @return
+     */
+    @RequestMapping("zhiwei_miaoshu")
+    public String zhiwei_miaoshu(){
+        return"company/company_myself/zhiwei_miaoshu";
+    }
+
+    /**
+     * 预览职位名称
+     * @return
+     */
+    @RequestMapping("zhiwei_xiangqing")
+    public String zhiwei_xiangqing(){
+        return"company/company_myself/zhiwei_xiangqing";
+    }
 }

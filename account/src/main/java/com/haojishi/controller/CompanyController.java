@@ -184,11 +184,11 @@ public class CompanyController {
 
     /**
      * 登陆的入口  通过cookie 判断登录状态
-     * @param request
+     * @param
      * @return
      */
     @RequestMapping("DengLuPuanDuan")
-    public BusinessMessage DengLuPuanDuan(HttpServletRequest request,HttpSession session){
-        return  companyService.DengLuPuanDuan(request,session);
+    public BusinessMessage DengLuPuanDuan(String zt,String phone,String pwd,HttpSession session){
+        return  companyService.DengLuPuanDuan(zt,phone,pwd,session);
     }
 }

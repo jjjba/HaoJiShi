@@ -8,33 +8,45 @@ $(document).ready(function() {
      console.log(zt);
      console.log(phone);
      console.log(pwd);
+     var okOr = sessionStorage.getItem("ZhuCeOk");
+    /* if(okOr == "OK"){
+
+     }*/
     if(zt == 1 && (phone!= undefined && phone !=''&& phone!="" )){
         $.ajax({
             url:"/company/DengLuPuanDuan",
             type:"POST",
+            data:{"zt":zt,"phone":phone,"pwd":pwd},
             success:function (msg) {
-                /*console.log(msg.code);*/
-                var htm = "<div class='sbtopxxs'><div class='sblefs'><img src='";
-                htm += "msg.data.iconPath";
+                if(msg.dataOne == 1){
+                    $("#wyzgz").html("我要找工作"+"<img src='../../company/images/yjts.png' />");
+                }
+                if(msg.dataOne == 2){
+                    $("#wyzgz").html("我要招人"+"<img src='../../company/images/yjts.png' />");
+                }
+                var htm = "<div class='sbtopxxs'><div class='sblefs'><img src= '";
+                if(msg.data.iconPath == "" || msg.data.iconPath == ''|| msg.data.iconPath== undefined){
+                    htm +="../../company/images/tuui.png";
+                }else{
+                    htm += msg.data.iconPath;
+                }
+
                 htm += "'/></div><div class='sbyours fbzhiuse'><div class='lylyus'>";
                 htm+=msg.data.name;
                 htm+="</div>"
 
                 var Obj = msg.data
-                if(msg.code == 0){
-                    window.location.href="/transition/go_wo_de";
-                }
                 if(msg.code == 1){
-                    htm+="<div class='dcirzs'><a href='#'>未认证</a></div><a href='#' class='fbzuysew'>发布职位</a></div></div>";
+                    htm+="<div class='dcirzs'><a href='#' onclick='RenZheng()'>点此认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
                 }
                 if(msg.code == 2){
-                    htm+="<div class='dcirzs'><a href='#'>认证中</a></div><a href='#' class='fbzuysew'>发布职位</a></div></div>";
+                    htm+="<div class='dcirzs'><a href='#'>认证中</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
                 }
                 if(msg.code == 3){
-                    htm+="<div class='dcirzs'><a href='#'>未通过，请重新认证</a></div><a href='#' class='fbzuysew'>发布职位</a></div></div>";
+                    htm+="<div class='dcirzs'><a href='#'>未通过，请重新认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
                 }
                 if(msg.code == 4){
-                    htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' class='fbzuysew'>发布职位</a></div></div>";
+                    htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
                 }
                 $("#wode").html(htm);
             }
@@ -54,13 +66,21 @@ $(document).ready(function() {
         })*/
     }
     if(zt==undefined || zt=="" || zt == '' || zt== 2){
-        var htm ="<div class='sbtopxxs bounone'><div class='sblefs'><img src='../../company/images/tuui.png'/></div><div class='sbyours fbzhiuse'><div class='lylyus'><a href='#' class='dlzces'>登录/注册</a></div></div></div>";
+        var htm ="<div class='sbtopxxs bounone'><div class='sblefs'><img src='../../company/images/tuui.png'/></div><div class='sbyours fbzhiuse'><div class='lylyus'><a href='#'onclick='zongZ();' class='dlzces'>登录/注册</a></div></div></div>";
         $("#wode").html(htm);
+        $(".WsXX").css("display","none");
     }
 })
+
+function Fbzw() {
+    window.location.href="/transition/bianji_zhiwei";
+}
 function zong() {
     $('.jinggao').show();
     setTimeout('$(".diyici").hide()',1000);
+    window.location.href="/transition/go_zhu_ce";
+}
+function zongZ() {
     window.location.href="/transition/go_zhu_ce";
 }
 function wodezhanghaoshezhi() {
@@ -130,4 +150,10 @@ function wodejianliguanli(){
     if(zt==undefined || zt=="" || zt == '' || zt== 2){
         zong();
     }
+}
+function RenZheng() {
+    window.location.href="/transition/RenZheng"
+}
+function kuaizhao() {
+    window.location.href="/transition/kuaizhao"
 }
