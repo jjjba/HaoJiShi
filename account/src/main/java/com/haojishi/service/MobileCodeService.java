@@ -1,6 +1,8 @@
 package com.haojishi.service;
 
+import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
+import com.haojishi.model.Personal;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.JuheSms;
@@ -28,7 +30,8 @@ public class MobileCodeService {
     private Environment environment;
     @Autowired
     private UserMapper userMapper;
-
+    @Autowired
+    private PersonalMapper personalMapper;
     /**
      * 用户注册输入手机号验证过是否是正确手机号
      * @param phoneNumber
@@ -89,12 +92,21 @@ public class MobileCodeService {
         Example example =new Example(User.class);
         example.createCriteria().andEqualTo("phone",phone);
         List<User> userList =userMapper.selectByExample(example);
+        Map<String,Object> map =new HashMap<>();
         if(userList.size() > 0){
-            Map<String,Object> map =new HashMap<>();
-            map.put("isRegist","1");
-            businessMessage.setData(map);
-            businessMessage.setSuccess(true);
+            Example example1 =new Example(Personal.class);
+            example1.createCriteria().andEqualTo("userId",userList.get(0).getId());
+            List<Personal> personals =personalMapper.selectByExample(example1);
+            if(personals.size() > 0){
+                map.put("isRegist","2");
+            }else {
+                map.put("isRegist","1");
+            }
+        }else {
+            map.put("isRegist","3");
         }
+        businessMessage.setData(map);
+        businessMessage.setSuccess(true);
         return businessMessage;
     }
 }

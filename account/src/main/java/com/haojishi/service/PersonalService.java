@@ -136,15 +136,11 @@ public class PersonalService {
      * 求职者注册
      *
      * @param phone
-     * @param password
-     * @param openid
      * @return
      */
-    public BusinessMessage registerPersonal(String phone,String password,String openid){
+    public BusinessMessage registerPersonal(String phone){
         BusinessMessage businessMessage =new BusinessMessage();
         User user =new User();
-        user.setOpenid(openid);
-        user.setPassword(password);
         user.setPhone(phone);
         userMapper.insertSelective(user);
         businessMessage.setMsg("注册成功");
@@ -232,41 +228,35 @@ public class PersonalService {
         RemortIP remortIP =new RemortIP();
         String address =remortIP.getAddressByIP(request);
         List<Map<String,Object>> positionType =new ArrayList<>();
-        String openid = (String) session.getAttribute("openid");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
-        List<User> users =userMapper.selectByExample(userExample);
-        if(users != null && users.size() > 0){
-            Example perExample =new Example(Personal.class);
-            perExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Personal> personals =personalMapper.selectByExample(perExample);
-            if(personals != null && personals.size() > 0){
-                String hopeJob =personals.get(0).getHopeJob();
-                String[] job =hopeJob.split(",");
-                for(int i = 0;i < job.length;i++){
-                    String job1 =job[i];
-                    Example positionExample =new Example(Position.class);
-                    positionExample.createCriteria().andEqualTo("positionName",job1);
-                    List<Position> positions =positionMapper.selectByExample(positionExample);
-                    for(int j = 0;j < positions.size();j++){
-                        String jobType =positions.get(j).getPositionType();
-                        Map<String,Object> map =new HashMap<>();
-                        map.put("positionType",jobType);
-                        map.put("address",address);
-                        positionType.add(map);
-                    }
+        int userId = (int) session.getAttribute("userId");
+
+        Example perExample =new Example(Personal.class);
+        perExample.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(perExample);
+        if(personals != null && personals.size() > 0){
+            String hopeJob =personals.get(0).getHopeJob();
+            String[] job =hopeJob.split(",");
+            for(int i = 0;i < job.length;i++){
+                String job1 =job[i];
+                Example positionExample =new Example(Position.class);
+                positionExample.createCriteria().andEqualTo("positionName",job1);
+                List<Position> positions =positionMapper.selectByExample(positionExample);
+                for(int j = 0;j < positions.size();j++){
+                    String jobType =positions.get(j).getPositionType();
+                    Map<String,Object> map =new HashMap<>();
+                    map.put("positionType",jobType);
+                    map.put("address",address);
+                    positionType.add(map);
                 }
-                businessMessage.setMsg("获取求职者分类成功");
-                businessMessage.setSuccess(true);
-                businessMessage.setData(positionType);
-            }else {
-                businessMessage.setMsg("未获取到求职者信息");
-                log.error("未获取到求职者信息");
             }
+            businessMessage.setMsg("获取求职者分类成功");
+            businessMessage.setSuccess(true);
+            businessMessage.setData(positionType);
         }else {
-            businessMessage.setMsg("未获取到用户信息");
-            log.error("未获取到用户信息");
+            businessMessage.setMsg("未获取到求职者信息");
+            log.error("未获取到求职者信息");
         }
+
         return businessMessage;
     }
 
@@ -274,7 +264,7 @@ public class PersonalService {
 
 
     /**
-     * 根据求职者openid修改信息
+     * 根据求职者id修改信息
      *
      * @param session
      * @return BusinessMessage
@@ -376,27 +366,22 @@ public class PersonalService {
     public BusinessMessage getResumeState(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =userMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                Example personalExample =new Example(Personal.class);
-                personalExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                List<Personal> personals =personalMapper.selectByExample(personalExample);
-                if(personals != null && personals.size() > 0){
-                    int state =personals.get(0).getResumeState();
-                    Map<String,Object> map =new HashMap<>();
-                    map.put("state",state);
-                    businessMessage.setData(map);
-                    businessMessage.setMsg("获取求职者简历成功");
-                    businessMessage.setSuccess(true);
-                }else {
-                    log.error("未获取到求职者信息");
-                }
+            int userId = (int) session.getAttribute("userId");
+
+            Example personalExample =new Example(Personal.class);
+            personalExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(personalExample);
+            if(personals != null && personals.size() > 0){
+                int state =personals.get(0).getResumeState();
+                Map<String,Object> map =new HashMap<>();
+                map.put("state",state);
+                businessMessage.setData(map);
+                businessMessage.setMsg("获取求职者简历成功");
+                businessMessage.setSuccess(true);
             }else {
-                log.error("未获取到用户信息");
+                log.error("未获取到求职者信息");
             }
+
         }catch (Exception e){
             log.error("获取求职者简历状态失败",e);
         }
@@ -412,25 +397,20 @@ public class PersonalService {
     public BusinessMessage hideResumeState(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =userMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                Example personalExample =new Example(Personal.class);
-                personalExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                List<Personal> personals =personalMapper.selectByExample(personalExample);
-                if(personals != null && personals.size() > 0){
-                    personals.get(0).setResumeState(2);
-                    personalMapper.updateByPrimaryKeySelective(personals.get(0));
-                    businessMessage.setMsg("隐藏求职者简历成功");
-                    businessMessage.setSuccess(true);
-                }else {
-                    log.error("未获取到求职者信息");
-                }
+            int userId = (int) session.getAttribute("userId");
+
+            Example personalExample =new Example(Personal.class);
+            personalExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(personalExample);
+            if(personals != null && personals.size() > 0){
+                personals.get(0).setResumeState(2);
+                personalMapper.updateByPrimaryKeySelective(personals.get(0));
+                businessMessage.setMsg("隐藏求职者简历成功");
+                businessMessage.setSuccess(true);
             }else {
-                log.error("未获取到用户信息");
+                log.error("未获取到求职者信息");
             }
+
         }catch (Exception e){
             log.error("隐藏求职者简历状态失败",e);
         }
@@ -446,25 +426,20 @@ public class PersonalService {
     public BusinessMessage showResumeState(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =userMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                Example personalExample =new Example(Personal.class);
-                personalExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                List<Personal> personals =personalMapper.selectByExample(personalExample);
-                if(personals != null && personals.size() > 0){
-                    personals.get(0).setResumeState(1);
-                    personalMapper.updateByPrimaryKeySelective(personals.get(0));
-                    businessMessage.setMsg("显示求职者简历成功");
-                    businessMessage.setSuccess(true);
-                }else {
-                    log.error("未获取到求职者信息");
-                }
+            int userId = (int) session.getAttribute("userId");
+
+            Example personalExample =new Example(Personal.class);
+            personalExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(personalExample);
+            if(personals != null && personals.size() > 0){
+                personals.get(0).setResumeState(1);
+                personalMapper.updateByPrimaryKeySelective(personals.get(0));
+                businessMessage.setMsg("显示求职者简历成功");
+                businessMessage.setSuccess(true);
             }else {
-                log.error("未获取到用户信息");
+                log.error("未获取到求职者信息");
             }
+
         }catch (Exception e){
             log.error("显示求职者简历状态失败",e);
         }

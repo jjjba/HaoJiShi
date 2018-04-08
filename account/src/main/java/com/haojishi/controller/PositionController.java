@@ -47,12 +47,12 @@ public class PositionController {
     /**
      * 获取同城职位信息
      *
-     * @param session
+     * @param userId
      * @return BusinessMessage - 同城所有职位信息
      */
     @RequestMapping("getPosition")
-    public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
-        return positionService.getPosition(request,session);
+    public BusinessMessage getPosition(HttpServletRequest request,Integer userId){
+        return positionService.getPosition(request,userId);
     }
 
     /**

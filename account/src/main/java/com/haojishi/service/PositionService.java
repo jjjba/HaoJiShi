@@ -49,18 +49,23 @@ public class PositionService {
     public BusinessMessage getPositionInIndex(HttpServletRequest request,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try{
-            List<Map<String,Object>> positionList =new ArrayList<>();   //意向城市 省份所有职位数据
+            List<Map<String,Object>> positionList =null;
             int userId = (int) session.getAttribute("userId");
-            businessMessage =getPositionByUserId(request,userId);
+            businessMessage =getPosition(request,userId);
             List<Map<String,Object>> position = (List<Map<String, Object>>) businessMessage.getData();
-            for(int i = 0;i < 10;i++){
-                positionList.add(position.get(i));
+            if(position.size() > 10){
+                for(int i = 0;i < 10;i++){
+                    positionList.add(position.get(i));
+                    businessMessage.setData(positionList);
+                }
+            }else {
+                businessMessage.setData(position);
             }
             businessMessage.setMsg("获取首页推荐职位成功");
+            businessMessage.setSuccess(true);
             }catch (Exception e){
             log.error("获取推荐职位错误",e);
         }
-        businessMessage.setSuccess(true);
         return businessMessage;
     }
 
@@ -192,12 +197,38 @@ public class PositionService {
     /**
      * 获取同城职位信息
      *
-     * @param session
+     * @param userId
      * @return BusinessMessage - 同城所有职位信息
      */
-    public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
-        int userId = (int) session.getAttribute("userId");
-        return getPositionByUserId(request,userId);
+    public BusinessMessage getPosition(HttpServletRequest request,Integer userId){
+        BusinessMessage businessMessage =new BusinessMessage();
+        List<Map<String,Object>> positionList =null;
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
+        if(personals != null && personals.size() > 0){
+            String city =personals.get(0).getHopeCity();
+            String[] city1=city.split(",");
+            if(city1.length == 1){
+                positionList=commonPositionMapper.getPositionByAddress01(city1[0]);
+            }else if(city1.length == 2){
+                positionList =commonPositionMapper.getPositionByAddress02(city1[0],city1[1]);
+            }else if(city1.length == 3){
+                positionList =commonPositionMapper.getPositionByAddress03(city1[0],city1[1],city1[2]);
+            }else if(city1.length == 4){
+                positionList =commonPositionMapper.getPositionByAddress04(city1[0],city1[1],city1[2],city1[3]);
+            }else if(city1.length == 5){
+                positionList =commonPositionMapper.getPositionByAddress05(city1[0],city1[1],city1[2],city1[3],city1[4]);
+            }
+        }else {
+            RemortIP remortIP =new RemortIP();
+            String address =remortIP.getAddressByIP(request);
+            positionList=commonPositionMapper.getPositionByAddress01(address);
+        }
+        businessMessage.setMsg("获取职位列表成功");
+        businessMessage.setSuccess(true);
+        businessMessage.setData(positionList);
+        return businessMessage;
     }
 
     /**
@@ -239,90 +270,89 @@ public class PositionService {
         return businessMessage;
     }
 
-    /**
-     * 根据用户id查看是否注册 以及完善求职者用户信息
-     * @param userId
-     * @return
-     */
-    public BusinessMessage getPositionByUserId(HttpServletRequest request,Integer userId){
-        BusinessMessage businessMessage =new BusinessMessage();
-        List<Map<String,Object>> positionList =new ArrayList();                //意向城市和省份所有职位数据
-        List<Map<String,Object>> position =new ArrayList<>();                  //意向城市职位数据
-        List<Map<String,Object>> positions =new ArrayList<>();
-        Example perExample = new Example(Personal.class);
-        perExample.createCriteria().andEqualTo("userId", userId);
-        //查询求职者列表是否有该求职者信息
-        List<Personal> personals = personalMapper.selectByExample(perExample);
-        if(personals != null && personals.size() > 0){
-            //有说明注册并完善信息
-            String hopeCity =personals.get(0).getHopeCity();
-            String[] city = hopeCity.split(",");
-            //意向城市职位
-            for (int i = 0; i < city.length; i++) {
-                String address =city[i];
-                List<Map<String,Object>> pos =commonPositionMapper.getPositionByAddress(address);
-                if(pos != null && pos.size() > 0){
-                    for(int j = 0;j < pos.size();j++){
-                        position.add(pos.get(j));
-                    }
-                }
-            }
-            for(int k = 0;k < position.size();k++){
-                positionList.add(position.get(k));
-            }
-            //意向城市省份职位
-            for(int i = 0;i < city.length;i++){
-                String address =city[i];
-                Example example =new Example(Region.class);
-                example.createCriteria().andEqualTo("name",address);
-                List<Region> regions =regionMapper.selectByExample(example);
-                if(regions != null && regions.size() > 0){
-                    String pid =regions.get(0).getPid();
-                    List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(pid);
-                    if(list != null && list.size() > 0){
-                        for(int j = 0;j < list.size();j++){
-                            positions.add(list.get(j));
-                        }
-                    }
-                }
-            }
-            for(int d = 0;d < positions.size();d++) {
-                if(position.contains(positions.get(d))){
-                    positions.remove(d);
-                }
-            }
-            for(int a = 0;a < positions.size();a++){
-                positionList.add(positions.get(a));
-            }
-            businessMessage.setData(positionList);
-            businessMessage.setSuccess(true);
-            businessMessage.setMsg("获取职位成功");
-        }else {
-            //没有说明是游客或者只注册未完善信息
-            RemortIP remortIP =new RemortIP();
-            String address =remortIP.getAddressByIP(request);
-            position =commonPositionMapper.getPositionByAddress(address);
-            for(int a = 0;a < position.size();a++){
-                positionList.add(position.get(a));
-            }
-            Example example = new Example(Region.class);
-            example.createCriteria().andEqualTo("name", address);
-            List<Region> regionList = regionMapper.selectByExample(example);
-            List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
-            for(int d = 0;d < list.size();d++) {
-                if(position.contains(list.get(d))){
-                    list.remove(d);
-                }
-            }
-            for(int b = 0;b < list.size();b++){
-                positionList.add(list.get(b));
-            }
-            businessMessage.setData(positionList);
-            businessMessage.setSuccess(true);
-            businessMessage.setMsg("获取职位成功");
-        }
-        return businessMessage;
-    }
+//    /**
+////     * 根据用户id查看是否注册 以及完善求职者用户信息
+////     * @param userId
+////     * @return
+////     */
+////    public BusinessMessage getPositionByUserId(HttpServletRequest request,Integer userId){
+////        BusinessMessage businessMessage =new BusinessMessage();
+////        List<Map<String,Object>> positionList =new ArrayList();                //意向城市和省份所有职位数据
+////        List<Map<String,Object>> position =new ArrayList<>();                  //意向城市职位数据
+////        List<Map<String,Object>> positions =new ArrayList<>();
+////        Example perExample = new Example(Personal.class);
+////        perExample.createCriteria().andEqualTo("userId", userId);
+////        //查询求职者列表是否有该求职者信息
+////        List<Personal> personals = personalMapper.selectByExample(perExample);
+////        if(personals != null && personals.size() > 0){
+////            //有说明注册并完善信息
+////            String hopeCity =personals.get(0).getHopeCity();
+////            String[] city = hopeCity.split(",");
+////            //意向城市职位
+////            for (int i = 0; i < city.length; i++) {
+////                String address =city[i];
+////                List<Map<String,Object>> pos =commonPositionMapper.getPositionByAddress(address);
+////                if(pos != null && pos.size() > 0){
+////                    for(int j = 0;j < pos.size();j++){
+////                        position.add(pos.get(j));
+////                    }
+////                }
+////            }
+////            for(int k = 0;k < position.size();k++){
+////                positionList.add(position.get(k));
+////            }
+////            //意向城市省份职位
+////            for(int i = 0;i < city.length;i++){
+////                String address =city[i];
+////                Example example =new Example(Region.class);
+////                example.createCriteria().andEqualTo("name",address);
+////                List<Region> regions =regionMapper.selectByExample(example);
+////                if(regions != null && regions.size() > 0){
+////                    String pid =regions.get(0).getPid();
+////                    List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(pid);
+////                    if(list != null && list.size() > 0){
+////                        for(int j = 0;j < list.size();j++){
+////                            positions.add(list.get(j));
+////                        }
+////                    }
+////                }
+////            }
+////            for(int d = 0;d < positions.size();d++) {
+////                if(position.contains(positions.get(d))){
+////                    positions.remove(d);
+////                }
+////            }
+////            for(int a = 0;a < positions.size();a++){
+////                positionList.add(positions.get(a));
+////            }
+////            businessMessage.setData(positionList);
+////            businessMessage.setSuccess(true);
+////            businessMessage.setMsg("获取职位成功");
+////        }else {
+////            //没有说明是游客或者只注册未完善信息
+////
+////            position =commonPositionMapper.getPositionByAddress(address);
+////            for(int a = 0;a < position.size();a++){
+////                positionList.add(position.get(a));
+////            }
+////            Example example = new Example(Region.class);
+////            example.createCriteria().andEqualTo("name", address);
+////            List<Region> regionList = regionMapper.selectByExample(example);
+////            List<Map<String,Object>> list =commonPositionMapper.getPositionByAddressPro(regionList.get(0).getPid());
+////            for(int d = 0;d < list.size();d++) {
+////                if(position.contains(list.get(d))){
+////                    list.remove(d);
+////                }
+////            }
+////            for(int b = 0;b < list.size();b++){
+////                positionList.add(list.get(b));
+////            }
+////            businessMessage.setData(positionList);
+////            businessMessage.setSuccess(true);
+////            businessMessage.setMsg("获取职位成功");
+////        }
+////        return businessMessage;
+////    }
 
     /**
      * 根据企业id获取职位信息

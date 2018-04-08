@@ -80,7 +80,7 @@ api:
   #支付配置
   mchUserId: 1417975802
   mchUserKey: 230948roejdsieuoids9IO23QWS923kl
-  wechat-callback-url: https://www.haojishi.net/api/pay_callback/we-chat
+  wechat-callback-url: http://wx.haojishi.net/pay_callback/we-chat
 
   #短信配置
   smstplId: 26032

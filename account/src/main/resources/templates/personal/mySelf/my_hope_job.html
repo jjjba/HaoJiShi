@@ -25,8 +25,8 @@
           th:href="@{/person/css/job_position/grbqs.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}" ></script>
-    <script type="text/javascript" src="/static/person/js/job_position/qiuzhigw.js"
-            th:src="@{/person/js/job_position/qiuzhigw.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/my_hope_job/myhopejob.js"
+            th:src="@{/person/js/my_hope_job/myhopejob.js}" ></script>
 
 </head>
 <body>
@@ -51,8 +51,6 @@
    <!--有内容时开始-->
    <div class="conthaves">
      <ul class="clearfix">
-       <li>点钟多 <a href=""><img src="/static/person/images/hongscs.png"
-                               th:src="@{/person/images/hongscs.png}" class="gbanius" /></a></li>
      </ul>
    </div>
    <!--有内容时结束-->
@@ -71,68 +69,68 @@
           <div class="fllfzuos">
             <ul>
               <li class="houvers"><a href="#">技师类</a></li>
-              <li><a href="#">管理类</a></li>
-              <li><a href="#">前厅类</a></li>
-              <li><a href="#">后勤类</a></li>
-              <li><a href="#">培训类</a></li>
+              <li class="guanli"><a href="#">管理类</a></li>
+              <li class="qingting"><a href="#">前厅类</a></li>
+              <li class="houqin"><a href="#">后勤类</a></li>
+              <li class="peixun"><a href="#">培训类</a></li>
             </ul>
           </div>
           <!--左边结束-->
           <!--右边开始-->
-             <div class="flriyous" id="jishi">
-                <a href=""><span>理疗师</span></a>
-                <a href=""><span>足疗师</span></a>
-                <a href=""><span>按摩师</span></a>
-                <a href=""><span>针灸师</span></a>
-                <a href=""><span>推拿师</span></a>
-                <a href=""><span>修脚师</span></a>
-                <a href=""><span>推油师</span></a>
-                <a href=""><span>采耳师</span></a>
-                <a href=""><span>指压师</span></a>
-                <a href=""><span>SPA师</span></a>
-                <a href=""><span>其他</span></a>
-                <a href=""><span>盲人按摩师</span></a>
-            </div>
-            <div class="flriyous" id="guanli">
-                <a href=""><span>副总经理</span></a>
-                <a href=""><span>营运经理</span></a>
-                <a href=""><span>店长助理</span></a>
-                <a href=""><span>经理助理</span></a>
-                <a href=""><span>区域经理</span></a>
-                <a href=""><span>营销总监</span></a>
-                <a href=""><span>总经理</span></a>
-                <a href=""><span>店长</span></a>
-                <a href=""><span>其他</span></a>
-            </div>
-            <div class="flriyous" id="qingting">
-                <a href=""><span>收银/吧员</span></a>
-                <a href=""><span>咨客/客服</span></a>
-                <a href=""><span>迎宾/接待</span></a>
-                <a href=""><span>客户经理</span></a>
-                <a href=""><span>大堂经理/领班</span></a>
-                <a href=""><span>销售</span></a>
-                <a href=""><span>部长</span></a>
-                <a href=""><span>其他</span></a>
-            </div>
-            <div class="flriyous" id="houqin">
-                <a href=""><span>文员</span></a>
-                <a href=""><span>采购</span></a>
-                <a href=""><span>保洁</span></a>
-                <a href=""><span>厨师</span></a>
-                <a href=""><span>保安</span></a>
-                <a href=""><span>司机</span></a>
-                <a href=""><span>服务员</span></a>
-                <a href=""><span>储备干部</span></a>
-                <a href=""><span>皮鞋美容师</span></a>
-                <a href=""><span>其他</span></a>
-            </div>
-            <div class="flriyous" id="peixun">
-                <a href=""><span>技术总监</span></a>
-                <a href=""><span>技术老师</span></a>
-                <a href=""><span>礼仪导师</span></a>
-                <a href=""><span>培训讲师</span></a>
-                <a href=""><span>其他</span></a>
 
+             <div class="flriyous" id="jishi">
+                <a href="#" th:data="理疗师" id="liliaoshi" onclick="addHopeJob('liliaoshi')"><span>理疗师</span></a>
+                <a href="#" th:data="足疗师" id="zuliaoshi" onclick="addHopeJob('zuliaoshi')"><span>足疗师</span></a>
+                <a href="#" th:data="按摩师" id="anmoshi" onclick="addHopeJob('anmoshi')"><span>按摩师</span></a>
+                <a href="#" th:data="针灸师" id="zhenjishi" onclick="addHopeJob('zhenjishi')"><span>针灸师</span></a>
+                <a href="#" th:data="推拿师" id="tuianshi" onclick="addHopeJob('tuianshi')"><span>推拿师</span></a>
+                <a href="#" th:data="修脚师" id="xiujiaoshi" onclick="addHopeJob('xiujiaoshi')"><span>修脚师</span></a>
+                <a href="#" th:data="推油师" id="tuiyoushi" onclick="addHopeJob('tuiyoushi')"><span>推油师</span></a>
+                <a href="#" th:data="采耳师" id="caiershi" onclick="addHopeJob('caiershi')"><span>采耳师</span></a>
+                <a href="#" th:data="指压师" id="zhiyashi" onclick="addHopeJob('zhiyashi')"><span>指压师</span></a>
+                <a href="#" th:data="SPA师" id="spashi" onclick="addHopeJob('spashi')"><span>SPA师</span></a>
+                <a href="#" th:data="其他" id="qitas" onclick="addHopeJob('qitas')"><span>其他</span></a>
+                <a href="#" th:data="盲人按摩师" id="mangrenanmoshi" onclick="addHopeJob('mangrenanmoshi')"><span>盲人按摩师</span></a>
+            </div>
+            <div class="flriyous" id="guanli" style="display: none">
+                <a href="#" th:data="副总经理" id="fuzongjiangli" onclick="addHopeJob('fuzongjiangli')"><span>副总经理</span></a>
+                <a href="#" th:data="营运经理" id="yingyunjingli" onclick="addHopeJob('yingyunjingli')"><span>营运经理</span></a>
+                <a href="#" th:data="总经理" id="zongjingli" onclick="addHopeJob('zongjingli')"><span>总经理</span></a>
+                <a href="#" th:data="店长助理" id="dianzhangjingli" onclick="addHopeJob('dianzhangjingli')"><span>店长助理</span></a>
+                <a href="#" th:data="经理助理" id="jinglizhuli" onclick="addHopeJob('jinglizhuli')"><span>经理助理</span></a>
+                <a href="#" th:data="店长" id="dianzhang" onclick="addHopeJob('dianzhang')"><span>店长</span></a>
+                <a href="#" th:data="区域经理" id="quyujingli" onclick="addHopeJob('quyujingli')"><span>区域经理</span></a>
+                <a href="#" th:data="营销总监" id="yingxiaozongjian" onclick="addHopeJob('yingxiaozongjian')"><span>营销总监</span></a>
+                <a href="#" th:data="其他" id="qitass" onclick="addHopeJob('qitass')"><span>其他</span></a>
+            </div>
+            <div class="flriyous" id="qingting" style="display: none">
+                <a href="#" th:data="收银吧员" id="shouyinbayuan" onclick="addHopeJob('shouyinbayuan')"><span>收银/吧员</span></a>
+                <a href="#" th:data="咨客客服" id="zikekefu" onclick="addHopeJob('zikekefu')"><span>咨客/客服</span></a>
+                <a href="#" th:data="销售" id="xiaoshou" onclick="addHopeJob('xiaoshou')"><span>销售</span></a>
+                <a href="#" th:data="迎宾接待" id="yingbinjiedai" onclick="addHopeJob('yingbinjiedai')"><span>迎宾/接待</span></a>
+                <a href="#" th:data="客户经理" id="kehujingli" onclick="addHopeJob('kehujingli')"><span>客户经理</span></a>
+                <a href="#" th:data="部长" id="buzhang" onclick="addHopeJob('buzhang')"><span>部长</span></a>
+                <a href="#" th:data="大堂经理领班" id="datangjinglilingban" onclick="addHopeJob('datangjinglilingban')"><span>大堂经理/领班</span></a>
+                <a href="#" th:data="其他" id="qitasss" onclick="addHopeJob('qitasss')"><span>其他</span></a>
+            </div>
+            <div class="flriyous" id="houqin" style="display: none">
+                <a href="#" th:data="皮鞋美容师" id="pixiemeirongshi" onclick="addHopeJob('pixiemeirongshi')"><span>皮鞋美容师</span></a>
+                <a href="#" th:data="储备干部" id="chubeiganbu" onclick="addHopeJob('chubeiganbu')"><span>储备干部</span></a>
+                <a href="#" th:data="文员" id="wenyuan" onclick="addHopeJob('wenyuan')"><span>文员</span></a>
+                <a href="#" th:data="采购" id="caigou" onclick="addHopeJob('caigou')"><span>采购</span></a>
+                <a href="#" th:data="保洁" id="baojie" onclick="addHopeJob('baojie')"><span>保洁</span></a>
+                <a href="#" th:data="厨师" id="chushi" onclick="addHopeJob('chushi')"><span>厨师</span></a>
+                <a href="#" th:data="保安" id="banan" onclick="addHopeJob('banan')"><span>保安</span></a>
+                <a href="#" th:data="司机" id="siji" onclick="addHopeJob('siji')"><span>司机</span></a>
+                <a href="#" th:data="服务员" id="fuwuyaun" onclick="addHopeJob('fuwuyaun')"><span>服务员</span></a>
+                <a href="#" th:data="其他" id="qitassss" onclick="addHopeJob('qitassss')"><span>其他</span></a>
+            </div>
+            <div class="flriyous" id="peixun" style="display: none">
+                <a href="#" th:data="技术总监" id="jishuzongjian" onclick="addHopeJob('jishuzongjian')"><span>技术总监</span></a>
+                <a href="#" th:data="技术老师" id="jishilaoshi" onclick="addHopeJob('jishilaoshi')"><span>技术老师</span></a>
+                <a href="#" th:data="其他" id="peixunqita" onclick="addHopeJob('peixunqita')"><span>其他</span></a>
+                <a href="#" th:data="礼仪导师" id="liyidaoshi" onclick="addHopeJob('liyidaoshi')"><span>礼仪导师</span></a>
+                <a href="#" th:data="培训讲师" id="peixunjiangshi" onclick="addHopeJob('peixunjiangshi')"><span>培训讲师</span></a>
             </div>
           <!--右边结束-->
         </div>
@@ -141,7 +139,7 @@
 
 
  <div class="toolbarframe02" style="display: none">不能选择重复职位</div>
- <div class="toolbarframe02" style="display: none">最多选择6个职位</div>
+ <div class="toolbarframe03" style="display: none">最多选择6个职位</div>
 </body>
 </html>
 

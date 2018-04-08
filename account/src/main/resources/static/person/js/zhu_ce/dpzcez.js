@@ -103,6 +103,10 @@ function jinru() {
                             },
                             success : function () {
                                 window.location.href="/transition/go_wan_shan_xin_xi";
+                            },
+                            error : function () {
+                                $('.zhuceshibai').show();
+                                setTimeout('$(".zhuceshibai").hide()',1000);
                             }
                         })
                     }

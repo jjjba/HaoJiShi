@@ -16,7 +16,16 @@ public class PersonalController {
 
     @Autowired
     private PersonalService personalServicel;
-
+    /**
+     * 求职者注册
+     *
+     * @param phone
+     * @return
+     */
+    @RequestMapping("registerPersonal")
+    public BusinessMessage registerPersonal(String phone){
+        return personalServicel.registerPersonal(phone);
+    }
     /**
      * 获取所有求职者信息
      *
