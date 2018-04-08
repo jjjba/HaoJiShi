@@ -26,9 +26,3 @@ function xiugaimima() {
 function shezhimima() {
     window.location.href="/transition/wo_de_she_zhi_mi_ma";
 }
-function tuiChu() {
-    $.cookie("zt", null);
-    $.cookie("phone", null);
-    $.cookie("PWD",null);
-    window.location.href="/transition/go_wo_de";
-}

@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -20,7 +20,8 @@
           th:href="@{/person/css/my_resume/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/my_resume/jianli.css"
           th:href="@{/person/css/my_resume/jianli.css}" rel="stylesheet" />
-    
+    <link type="text/css" href="/static/person/css/position_info/xiangqing.css"
+          th:href="@{/person/css/position_info/xiangqing.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}"></script>
    <!--选择职位开始-->
@@ -104,8 +105,9 @@
   <a href="#" class="bcanius" onclick="save()">保存</a>
 </div>
 <!--保存按钮结束-->
- 
- 
+
+ <div class="toolbarframe02" style="display: none">保存成功</div>
+ <div class="toolbarframe03" style="display: none">保存失败</div>
 </body>
 </html>
 

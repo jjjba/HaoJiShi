@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -16,8 +16,9 @@
     <link type="text/css" href="/static/person/css/xiangying.css"
           th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
-    
-    
+
+    <link type="text/css" href="/static/person/css/position_info/xiangqing.css"
+          th:href="@{/person/css/position_info/xiangqing.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/job_position/top.css"
           th:href="@{/person/css/job_position/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/job_position/grbqs.css"
@@ -136,6 +137,9 @@
         </div>
     
  <!--下边结束-->
+
+ <div class="toolbarframe02" style="display: none">不能选择重复职位</div>
+ <div class="toolbarframe02" style="display: none">最多选择6个职位</div>
 </body>
 </html>
 

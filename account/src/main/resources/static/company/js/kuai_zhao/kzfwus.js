@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 function goBack() {
-	window.location.href="/transition/go_wo_de"
+	window.location.href="/transition/go_company_index"
 }
 
 

@@ -114,13 +114,13 @@ function loadPersonal(){
                     '<div class="recryous">'+
                     '<div class="clearfix rcvsise">'+
                     '<div class="fl rminsii">'+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
-                    '<div class="fr ciiuss">'+item.expectMoney+'</div>'+
+                    '<div class="fr ciiuss">'+item.expect_money+'</div>'+
                     '</div>'+
-                    '<div class="xnxyusie"> '+item.jobExperience+' | '+item.state+' | '+item.address+' </div>'+
+                    '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
                     '</div>'+
                     '</div>'+
                     '<div class="pxbiuss">'+
-                    '<div class="pxlefts">'+item.hopeJob+'</div>'+
+                    '<div class="pxlefts">'+item.hope_job+'</div>'+
                     '<div class="pxyouls"><a href="#" onclick="tellPhone()" ><img src="./../company/images/biao07.png" /></a></div>'+
                     '</div>'+
                     '</div>'+

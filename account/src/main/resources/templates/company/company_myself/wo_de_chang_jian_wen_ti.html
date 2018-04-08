@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿﻿<!doctype html>
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -16,8 +16,7 @@
     
     <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/top.css" th:href="@{/company/css/wo_de_zhang_hao_she_zhi/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/cjwts.css" th:href="@{/company/css/wo_de_zhang_hao_she_zhi/cjwts.css}"  rel="stylesheet" />
-    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
-            th:src="@{/company/js/jquery-3.2.1.js}"></script>
+    
 
 </head>
 <body>
@@ -27,7 +26,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      常见问题
-     <a href="#" class="zjtous" onclick="window.location.href='/transition/go_wo_de';"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" class="zjtous"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
@@ -37,67 +36,33 @@
  <div class="cjwtisl">
    <ul>
      <li>
-      <a href="#" onclick="show('a')">
-        <div class="zbwzs01">如何通过好技狮平台招人才？</div>
+      <a href="#">
+        <div class="zbwzs01">常见问题的标题文字</div>
         <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
       </a>
      </li>
      <li>
-      <a href="#" onclick="show('b')">
-        <div class="zbwzs01">在好技狮平台可以招到人才吗？</div>
+      <a href="#">
+        <div class="zbwzs01">常见问题的标题文字</div>
         <div class="zbwzs02"><img src="/static/company/images/yjts.png"  th:src="@{/company/images/yjts.png}"/></div>
       </a>
      </li>
      <li>
-      <a href="#" onclick="show('c')">
-        <div class="zbwzs01">你们能帮我们店铺招人吗？</div>
+      <a href="#">
+        <div class="zbwzs01">常见问题的标题文字</div>
         <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
       </a>
      </li>
-       <li>
-           <a href="#"onclick="show('d')">
-               <div class="zbwzs01">好技狮可以提供技师输出服务吗？</div>
-               <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-           </a>
-       </li>
-       <li>
-           <a href="#"onclick="show('e')">
-               <div class="zbwzs01">不花钱如何最大化的提升招聘效果？</div>
-               <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-           </a>
-       </li>
-       <li>
-           <a href="#"onclick="show('f')">
-               <div class="zbwzs01">在好技狮招人才必须进行店铺认证吗？</div>
-               <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-           </a>
-       </li>
-       <li>
-           <a href="#"onclick="show('g')">
-               <div class="zbwzs01">我可以直接和求职人才电话联系吗？</div>
-               <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-           </a>
-       </li>
-       <li>
-           <a href="#"onclick="show('h')">
-               <div class="zbwzs01">如何发布或者关闭招聘职位？</div>
-               <div class="zbwzs02"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></div>
-           </a>
-       </li>
    </ul>
  </div>
  <!--内容结束-->
  
  <!--联系客服开始-->
  <div class="lxkfuis">
-   <a href="tel:15558026165"><img src="/static/company/images/lxkfs.png" th:src="@{/company/images/lxkfs.png}"/> 联系客服</a>
+   <a href="#"><img src="/static/company/images/lxkfs.png" th:src="@{/company/images/lxkfs.png}"/> 联系客服</a>
  </div>
  <!--联系客服结束-->
- <script type="text/javascript">
-     function show(abcd) {
-         window.location.href="/transition/wenti_xiangqing"+abcd;
-     }
- </script>
+ 
  
  
 

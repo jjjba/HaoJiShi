@@ -2,22 +2,30 @@ package com.haojishi.service;
 
 import com.haojishi.mapper.*;
 import com.haojishi.model.*;
+import com.haojishi.service.weChat.WechatOrderService;
 import com.haojishi.util.BusinessMessage;
-import com.haojishi.util.PhoneCheck;
+import com.haojishi.util.ClientIPUtil;
+import com.haojishi.util.GxlUtil;
+import com.haojishi.util.WxPayUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
 @Service
-public class CompanyService{
+public class CompanyService {
+
+    @Autowired
+    private WechatOrderService weChatOrderService;
 
     @Autowired
     private CompanyMapper companyMapper;
@@ -32,7 +40,7 @@ public class CompanyService{
     @Autowired
     private ResumeMapper resumeMapper;
     @Autowired
-    private PositionMapper positionMapper;
+    private Environment environment;
     /**
      * 根据企业id查询企业信息
      *
@@ -125,6 +133,58 @@ public class CompanyService{
         return  businessMessage;
     }
 
+    public BusinessMessage pay(HttpSession session, Integer money, HttpServletRequest request){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("uderId");
+            Example example =new Example(Company.class);
+            example.createCriteria().andEqualTo("userId",userId);
+            List<Company> companies =companyMapper.selectByExample(example);
+            //走微信支付
+            String body = "好技狮";
+            String detail = "";
+            String attach = "";
+            String goodsTag = "";
+            int totalFee = money * 100;
+            String createIp = ClientIPUtil.getClientIP(request);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            LocalDateTime timeStart = LocalDateTime.now();
+            LocalDateTime timeExpire = timeStart.plusMinutes(5);
+            User users = usersMapper.selectByPrimaryKey(userId);
+            String openId = users.getOpenid();
+            String appId = environment.getProperty("api.appid");
+            String mchId = environment.getProperty("api.mchUserId");
+            String apiKey = environment.getProperty("api.mchUserKey");
+            String notifyUrl = environment.getProperty("api.wechat-callback-url");
+            String uniontid = GxlUtil.createUniontid();
+
+
+            Map<String, Object> result = weChatOrderService.merchantPay(appId, mchId, body, detail, attach, uniontid, totalFee, createIp, timeStart.format(formatter), timeExpire.format(formatter), goodsTag, false, openId, apiKey, notifyUrl);
+            if (null != result) {
+                if (result.containsKey("request_tag")) {
+                }
+                if (result.containsKey("prepay_id")) {
+                    Services service = new Services();
+                    service.setMoney(money);
+                    service.setComid(companies.get(0).getId());
+                    service.setCreatedate(new Date());
+                    TreeMap<String, Object> dataMap = new TreeMap<>();
+                    dataMap.put("appId", appId);
+                    dataMap.put("timeStamp", LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8)));
+                    dataMap.put("nonceStr", WxPayUtil.getRandomUpperStringByLength(32));
+                    dataMap.put("package", "prepay_id=" + result.get("prepay_id"));
+                    dataMap.put("signType", "MD5");
+                    String paySign = WxPayUtil.createSign(dataMap, apiKey);
+                    dataMap.put("paySign", paySign);
+                    businessMessage.setData(dataMap);
+                    businessMessage.setSuccess(true);
+                }
+            }
+        } catch (Exception e) {
+            log.error("支付失败", e);
+        }
+        return businessMessage;
+    }
     /**
      * 更新企业快招服务打电话次数
      * @param session
@@ -134,23 +194,23 @@ public class CompanyService{
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =usersMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                Example comExample =new Example(Company.class);
-                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                List<Company> companies =companyMapper.selectByExample(comExample);
-                Example serExample =new Example(Services.class);
-                serExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
-                List<Services> services =servicesMapper.selectByExample(serExample);
-                services.get(0).setSurplusnumber(services.get(0).getSurplusnumber() - 1);
-                servicesMapper.updateByPrimaryKeySelective(services.get(0));
-                businessMessage.setMsg("更新企业快招打电话次数成功");
-                businessMessage.setSuccess(true);
-            }else {
-                log.error("未获取到用户信息");
-            }
+             Example userExample =new Example(User.class);
+             userExample.createCriteria().andEqualTo("openid",openid);
+             List<User> users =usersMapper.selectByExample(userExample);
+             if(users != null && users.size() > 0){
+                 Example comExample =new Example(Company.class);
+                 comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                 List<Company> companies =companyMapper.selectByExample(comExample);
+                 Example serExample =new Example(Services.class);
+                 serExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
+                 List<Services> services =servicesMapper.selectByExample(serExample);
+                 services.get(0).setSurplusnumber(services.get(0).getSurplusnumber() - 1);
+                 servicesMapper.updateByPrimaryKeySelective(services.get(0));
+                 businessMessage.setMsg("更新企业快招打电话次数成功");
+                 businessMessage.setSuccess(true);
+             }else {
+                 log.error("未获取到用户信息");
+             }
         }catch (Exception e){
             log.error("更新企业快招打电话次数失败",e);
         }
@@ -164,9 +224,9 @@ public class CompanyService{
      */
     public BusinessMessage getRenCaishoucang(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if(users !=null && users.size()>0){
             Example comExample =new Example(Company.class);
@@ -198,9 +258,9 @@ public class CompanyService{
      */
     public BusinessMessage updatePhoneNu(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             businessMessage.setData(users.get(0));
@@ -217,9 +277,9 @@ public class CompanyService{
      */
     public BusinessMessage updatePhone(String phoneNum,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             User user = users.get(0);
@@ -239,9 +299,9 @@ public class CompanyService{
      */
     public BusinessMessage setPassword(String Password,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             User user = users.get(0);
@@ -260,9 +320,9 @@ public class CompanyService{
      */
     public BusinessMessage getUser(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             businessMessage.setData(users.get(0));
@@ -278,9 +338,9 @@ public class CompanyService{
      */
     public BusinessMessage updateShenfen(int shenfen,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             User user = users.get(0);
@@ -299,9 +359,9 @@ public class CompanyService{
      */
     public BusinessMessage getJianli(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             Example comExample =new Example(Company.class);
@@ -333,9 +393,9 @@ public class CompanyService{
      */
     public BusinessMessage getCompanyOkorFalse(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Integer id = (Integer) session.getAttribute("userId");
+        String openid = (String) session.getAttribute("openid");
         Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
+        userExample.createCriteria().andEqualTo("openid",openid);
         List<User> users =usersMapper.selectByExample(userExample);
         if (users !=null && users.size()>0){
             Example comExample =new Example(Company.class);
@@ -344,7 +404,7 @@ public class CompanyService{
             businessMessage.setData(companies.get(0));
             businessMessage.setSuccess(true);
         }
-        return businessMessage;
+       return businessMessage;
     }
 
     /**
@@ -374,233 +434,5 @@ public class CompanyService{
             log.error("注册企业失败",e);
         }
         return businessMessage;
-    }
-    public BusinessMessage wodeXuanze(String phone){
-        BusinessMessage businessMessage = new BusinessMessage();
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",phone);
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users!= null && users.size()>0){
-            Example comExample =new Example(Company.class);
-            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(comExample);
-            if (companies!=null && companies.size()>0){
-                businessMessage.setData(companies.get(0));
-                businessMessage.setSuccess(true);
-            }
-        }
-        return  businessMessage;
-    }
-    /**
-     * 判断手机号 是否正确 还有数据库里面有没有
-     * @param phoneNumber
-     * @return
-     */
-    public BusinessMessage getIsPhone(String phoneNumber){
-        BusinessMessage businessMessage = new BusinessMessage();
-        Integer num = 0;
-        if (PhoneCheck.checkCellphone(phoneNumber)) {
-            num+=1;
-        }
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("phone",phoneNumber);
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users.size()==0){
-            num+=1;
-        }
-        businessMessage.setData(num);
-        businessMessage.setSuccess(true);
-        return businessMessage;
-    }
-
-    /**
-     * 企业端用户注册时候增加数据库
-     * @param Name
-     * @param dwmj
-     * @param dwmc
-     * @param dplx
-     * @param zhiwei
-     * @param dpfl
-     * @param cityname
-     * @param lat
-     * @param lng
-     * @param poiaddress
-     * @param poiname
-     * @param phone
-     * @return
-     */
-    public BusinessMessage addNewCompany(String Name,String dwmj,String dwmc,String dplx
-            ,String zhiwei,String dpfl,String cityname,String lat,String lng
-            ,String poiaddress,String poiname,String phone){
-        BusinessMessage businessMessage = new BusinessMessage();
-        Company company = new Company();
-        User user = new User();
-        user.setPhone(phone);
-        user.setType(2);
-        user.setAccountState(1);
-        usersMapper.insert(user);
-        company.setUserName(Name);
-        company.setPhone(phone);
-        company.setRegisterType(2);
-        company.setLatitude(lat);
-        company.setLongitude(lng);
-        company.setName(dwmc);
-        company.setCompanySpecial(dpfl);
-        company.setCompanyCity(cityname);
-        company.setCompanyAddr(poiaddress+poiname);
-        company.setCompanyType(dplx);
-        company.setZhiWu(zhiwei);
-        company.setMatstate(1);
-        company.setCompanydpmj(dwmj);
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-        company.setCreateTime(new Date());
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("phone",phone);
-        List<User> users =usersMapper.selectByExample(userExample);
-        int uId = users.get(0).getId();
-        company.setUserId(uId);
-        int in = companyMapper.insert(company);
-        businessMessage.setData("ok");
-        businessMessage.setSuccess(true);
-        return  businessMessage;
-    }
-
-    /**
-     * 查询手机号密码是否正确
-     * @param phone
-     * @param password
-     * @return
-     */
-    public BusinessMessage PhonePassword(String phone, String password,HttpSession session){
-        BusinessMessage businessMessage = new BusinessMessage();
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("phone",phone);
-        userExample.createCriteria().andEqualTo("password",password);
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users!= null && users.size()>0){
-            businessMessage.setData(1);
-            businessMessage.setSuccess(true);
-            session.setAttribute("phone",phone);
-            session.setAttribute("zt",1);
-        }
-        return businessMessage;
-    }
-
-    /**
-     * 登陆的入口  通过cookie 判断登录状态
-     * @param
-     * @return
-     */
-    public BusinessMessage DengLuPuanDuan(String zt,String phone,String pwd,HttpSession session){
-        BusinessMessage businessMessage = new BusinessMessage();
-        /*Object zt1 = session.getAttribute("zt");
-        Object phone1 =  session.getAttribute("phone");*/
-        if( zt!= null && phone!= null){
-            //可以登陆
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("phone",phone);
-            List<User> users =usersMapper.selectByExample(userExample);
-            if(users!= null && users.size()>0){
-                session.setAttribute("userId",users.get(0).getId());
-                businessMessage.setDataOne(users.get(0).getType());
-                log.info("已经当进去了useris-------"+users.get(0).getId());
-            }
-            Example comExample =new Example(Company.class);
-            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(comExample);
-            if(companies != null && companies.size()>0){
-                //未认证
-                if(companies.get(0).getMatstate()==1){
-                    businessMessage.setCode(1);
-                }
-                //认证中
-                if(companies.get(0).getMatstate() ==2){
-                    businessMessage.setCode(2);
-                }
-                //认证通过
-                if(companies.get(0).getMatstate() ==3){
-                    businessMessage.setCode(3);
-                }
-                //认证未通过
-                if(companies.get(0).getMatstate() ==4){
-                    businessMessage.setCode(4);
-                }
-                businessMessage.setData(companies.get(0));
-            }
-        }else {
-            //不能登陆
-            businessMessage.setData("2");
-        }
-        businessMessage.setSuccess(true);
-        return  businessMessage;
-    }
-
-    /**
-     * 职位详情预览
-     * @return
-     */
-    public BusinessMessage getCompanyAndgetZhiwei(HttpSession session){
-        BusinessMessage businessMessage = new BusinessMessage();
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users!= null && users.size()>0){
-            Example companyExample =new Example(Company.class);
-            companyExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(companyExample);
-            businessMessage.setDataOne(companies.get(0));
-            if(companies !=null && companies.size()>0){
-                Example posiExample = new Example(Position.class);
-                posiExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
-                List<Position> Positions =positionMapper.selectByExample(posiExample);
-                if(Positions != null && Positions.size()>0){
-                    businessMessage.setData(Positions.get(0));
-                }
-            }
-        }
-        businessMessage.setSuccess(true);
-        return businessMessage;
-    }
-
-    /**
-     * 增加职位信息
-     * @param zwlx
-     * @param zwmc
-     * @param yx
-     * @param jyyq
-     * @param xbyq
-     * @param nlyq
-     * @param zwfl
-     * @param zwms
-     * @return
-     */
-    public BusinessMessage AddZhiwei(String zwlx,String zwmc,String yx,String jyyq,String xbyq,String nlyq,String zwfl,String zwms,HttpSession session){
-        BusinessMessage businessMessage = new BusinessMessage();
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users!= null && users.size()>0){
-            Example companyExample =new Example(Company.class);
-            companyExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(companyExample);
-            if(companies !=null && companies.size()>0){
-                Position position = new Position();
-                position.setAge(nlyq);
-                position.setExperience(jyyq);
-                position.setPositionName(zwmc);
-                position.setPositionType(zwlx);
-                position.setMoney(yx);
-                position.setSex(xbyq);
-                position.setWelfare(zwfl);
-                position.setPositionInfo(zwms);
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-                position.setCreateTime(new Date());
-                position.setCompanyId(companies.get(0).getId());
-                int success = positionMapper.insert(position);
-                businessMessage.setData(success);
-                businessMessage.setSuccess(true);
-            }
-        }
-        return  businessMessage;
     }
 }

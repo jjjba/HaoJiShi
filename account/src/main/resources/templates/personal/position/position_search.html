@@ -17,19 +17,22 @@
           th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
     <link type="text/css" href="/static/person/css/city_search/cjwts.css"
-          th:href="@{/person/css/cjwts.css}" rel="stylesheet" />
-
-
+          th:href="@{/person/css/city_search/cjwts.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
+            th:src="@{/person/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position_search/positionSearch02.js"
+            th:src="@{/person/js/position_search/positionSearch02.js}" ></script>
 </head>
 <body>
 
 <!--搜索框开始-->
 <div class="sskuis">
     <div class="zukiiuss">
-        <div class="srii001"><input type="text" class="yupois" placeholder="请输入您感兴趣的店铺或职位" /></div>
-        <div class="youckiis"><a href="#"><img src="/static/person/images/gaunbi.png" th:src="@{/person/images/gaunbi.png}"/></a></div>
+        <div class="srii001"><input type="text" class="yupois companyName" placeholder="请输入您感兴趣的店铺或职位" /></div>
+        <div class="youckiis"><a href="#" onclick="qingchu()"><img src="/static/person/images/gaunbi.png" th:src="@{/person/images/gaunbi.png}"/></a></div>
     </div>
-    <div class="quxiaoys"><a href="#" onclick="javascript:window.history.go(-1)">取消</a></div>
+    <div class="quxiaoys cancel"><a href="#" onclick="cancel()">取消</a></div>
+    <div class="quxiaoys wancheng" style="display: none"><a href="#" onclick="wancheng()">完成</a></div>
 </div>
 <!--搜索框结束-->
 
