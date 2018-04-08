@@ -1,11 +1,8 @@
 package com.haojishi.controller;
 
-import com.haojishi.config.CookiesUtil;
 import com.haojishi.service.BannerService;
 import com.haojishi.util.BusinessMessage;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  */
 @RestController
-@RequestMapping("/banner")
+@RequestMapping("banner")
 public class BannerController {
 
     @Autowired

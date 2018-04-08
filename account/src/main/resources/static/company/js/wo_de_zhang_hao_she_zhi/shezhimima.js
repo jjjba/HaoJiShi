@@ -9,6 +9,7 @@ function shezhimima() {
                 if(msg.data == 1){
                     $('.passwordOk').show();
                     setTimeout('$(".passwordOk").hide()',1000);
+                    window.location.href="/transition/go_wo_de";
                 }else {
                     $('.passwordNo').show();
                     setTimeout('$(".passwordNo").hide()',1000);
@@ -45,6 +46,7 @@ function updatePassword() {
                                 if(msg.data == 1){
                                     $('.passwordOk').show();
                                     setTimeout('$(".passwordOk").hide()',1000);
+                                    window.location.href="/transition/go_wo_de";
                                 }else {
                                     $('.passwordNo').show();
                                     setTimeout('$(".passwordNo").hide()',1000);

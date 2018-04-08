@@ -1,0 +1,305 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>店铺端-我的-店铺认证</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+
+    <link type="text/css" href="/static/company/css/dprzss.css" th:href="@{/company/css/dprzss.css}" rel="stylesheet" />
+
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}"></script>
+    <!--上传图片开始-->
+    <link href="/static/company/css/zhu_ce_tian_xie_xin_xi/sctx.css"
+          th:href="@{/company/css/zhu_ce_tian_xie_xin_xi/sctx.css}" rel="stylesheet" type="text/css" />
+    <!--上传图片结束-->
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     店铺认证
+     <a href="#" class="zjtous" onclick="window.location.href='/transition/go_wo_de'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--最上边开始-->
+ <div class="zsbuyus">
+   应国家法规要求，您需要上传店铺营业证照，完成资质认证。
+ </div>
+ <!--最上边结束-->
+ 
+ <!--上传图片开始-->
+      <div class="sltoucs">
+                <div class="uploader blue">
+                    <input type="text" class="filename" readonly/>
+                    <a class="license">
+                        <img id="img-1" src="/static/company/images/datu.png" th:src="@{/company/images/datu.png}" />
+                    </a>
+                    <input id="file0" class="file-3" type="file" size="30" onchange="javascript:setImagePreview();" accept="image/*" capture="camera" />
+                    <input type="button" value="上传营业执照照片" class="sczzbuts" />
+                </div>
+                
+                <div class="yulan">
+                    <img src="" id="img0" >
+                    <div class="enter">
+                        <button class="btn-2 fl">取消</button>
+                        <button class="btn-3 fr">确定</button>
+                    </div>
+                </div>
+      </div>
+ <!--上传图片结束-->
+ 
+ <!--详细信息开始-->
+ <div class="xibxtqws">
+   <h1>营业执照上传规则</h1>
+   <p>
+     1.需提供清晰的执照原件照片，照片需要完整的
+看清的营业执照全部内容。<br>
+2.上传的营业执照营业期限必须在有效期之内。<br>
+3.您的店铺地址需要和营业执照地址保持一致。
+   </p>
+   <h3>认证过程遇到困难？联系客服：<span>155-5802-6165</span></h3>
+ </div>
+ <!--详细信息结束-->
+ 
+ 
+  
+<!--上传图片开始-->
+ <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/iscroll-zoom.js" th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/iscroll-zoom.js}"></script>
+ <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/hammer.js" th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/hammer.js}"></script>
+ <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/jquery.photoClip.js" th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/jquery.photoClip.js}"></script>
+ <script>
+    var obUrl = ''
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    $("#clipArea").photoClip({
+        width: 199,
+        height: 166,
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function() {
+            console.log("照片读取中");
+        },
+        loadComplete: function() {
+            console.log("照片读取完成");
+        },
+        clipFinish: function(dataURL) {
+            console.log(dataURL);
+        }
+    });
+</script>
+<script>
+    $(function(){
+$("#logox").click(function(){
+    $(".htmleaf-container").show();
+})
+        $("#clipBtn").click(function(){
+            $("#logox").empty();
+            $('#logox').append('<img src="' + imgsource + '" align="absmiddle" style=" width: 5rem;height: 4.16rem; margin-left: 1.5rem;margin-top: 1.92rem">');
+            $(".htmleaf-container").hide();
+        })
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        jQuery.divselect = function(divselectid,inputselectid) {
+            var inputselect = $(inputselectid);
+            $(divselectid+" small").click(function(){
+                $("#divselect ul").toggle();
+                $(".mask").show();
+            });
+            $(divselectid+" ul li a").click(function(){
+                var txt = $(this).text();
+                $(divselectid+" small").html(txt);
+                var value = $(this).attr("selectid");
+                inputselect.val(value);
+                $(divselectid+" ul").hide();
+                $(".mask").hide();
+                $("#divselect small").css("color","#333")
+            });
+        };
+        $.divselect("#divselect","#inputselect");
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        jQuery.divselectx = function(divselectxid,inputselectxid) {
+            var inputselectx = $(inputselectxid);
+            $(divselectxid+" small").click(function(){
+                $("#divselectx ul").toggle();
+                $(".mask").show();
+            });
+            $(divselectxid+" ul li a").click(function(){
+                var txt = $(this).text();
+                $(divselectxid+" small").html(txt);
+                var value = $(this).attr("selectidx");
+                inputselectx.val(value);
+                $(divselectxid+" ul").hide();
+                $(".mask").hide();
+                $("#divselectx small").css("color","#333")
+            });
+        };
+        $.divselectx("#divselectx","#inputselectx");
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        jQuery.divselecty = function(divselectyid,inputselectyid) {
+            var inputselecty = $(inputselectyid);
+            $(divselectyid+" small").click(function(){
+                $("#divselecty ul").toggle();
+                $(".mask").show();
+            });
+            $(divselectyid+" ul li a").click(function(){
+                var txt = $(this).text();
+                $(divselectyid+" small").html(txt);
+                var value = $(this).attr("selectyid");
+                inputselecty.val(value);
+                $(divselectyid+" ul").hide();
+                $(".mask").hide();
+                $("#divselecty small").css("color","#333")
+            });
+        };
+        $.divselecty("#divselecty","#inputselecty");
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+       $(".mask").click(function(){
+           $(".mask").hide();
+           $(".all").hide();
+       })
+        $(".right input").blur(function () {
+            if ($.trim($(this).val()) == '') {
+                $(this).addClass("place").html();
+            }
+            else {
+                $(this).removeClass("place");
+            }
+        })
+    });
+</script>
+<script>
+    $("#file0").change(function(){
+        var objUrl = getObjectURL(this.files[0]) ;
+         obUrl = objUrl;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) {
+            $("#img0").attr("src", objUrl).show();
+        }
+        else{
+            $("#img0").hide();
+        }
+    }) ;
+   function qd(){
+       var objUrl = getObjectURL(this.files[0]) ;
+       obUrl = objUrl;
+       console.log("objUrl = "+objUrl) ;
+       if (objUrl) {
+           $("#img0").attr("src", objUrl).show();
+       }
+       else{
+           $("#img0").hide();
+       }
+   }
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+</script>
+<script type="text/javascript">
+  var subUrl = "";
+    $(function (){
+        $(".file-3").bind('change',function(){
+            subUrl = $(this).val()
+            $(".yulan").show();
+            $(".file-3").val("");
+        });
+
+        $(".file-3").each(function(){
+            if($(this).val()==""){
+                $(this).parents(".uploader").find(".filename").val("");
+            }
+        });
+$(".btn-3").click(function(){
+    $("#img-1").attr("src", obUrl);
+    $(".yulan").hide();
+    $(".file-3").parents(".uploader").find(".filename").val(subUrl);
+})
+        $(".btn-2").click(function(){
+            $(".yulan").hide();
+        })
+
+    });
+</script>
+<script type="text/javascript">
+    function setImagePreview() {
+        var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
+                picture = file_head.value;
+        if (!picture.match(/.jpg|.gif|.png|.bmp/i)) return alert("您上传的图片格式不正确，请重新选择！"),
+                !1;
+        if (preview = document.getElementById("preview"), file_head.files && file_head.files[0]) preview.style.display = "block",
+                preview.style.width = "63px",
+                preview.style.height = "63px",
+                preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ? window.webkitURL.createObjectURL(file_head.files[0]) : window.URL.createObjectURL(file_head.files[0]);
+        else {
+            file_head.select(),
+                    file_head.blur(),
+                    img_txt = document.selection.createRange().text,
+                    localImag = document.getElementById("localImag"),
+                    localImag.style.width = "63px",
+                    localImag.style.height = "63px";
+            try {
+                localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+                        localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+            } catch(f) {
+                return alert("您上传的图片格式不正确，请重新选择！"),
+                        !1
+            }
+            preview.style.display = "none",
+                    document.selection.empty()
+        }
+        return document.getElementById("DivUp").style.display = "block",
+                !0
+    }
+</script>
+<!--上传图片结束-->
+ 
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

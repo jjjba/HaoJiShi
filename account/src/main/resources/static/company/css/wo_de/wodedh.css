@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{background:#f7f7f7; padding-bottom:4.5rem;}
+
+/*单行输入样式开始*/
+.dhysnrs{background:#fff; padding:0 1.2rem 0 1.2rem; margin-top:1rem;}
+  
+  .sjkyus{ border:0; background:#fff; padding:1rem 0 1rem 0; font-size:1.6rem; color:#404040;}
+  
+
+
+  
+/*单行输入样式结束*/
+
+/*多行输入样式开始*/
+.dlsryshi{ background:#fff; padding:1rem 1.2rem 1rem 1.2rem; margin-top:1rem;}
+  .srdziss{ width:100%; background:#fff; border:0; display:block; font-size:1.6rem; color:#404040; height:11rem;}
+  
+  .ysiisr{ padding-top:1rem; font-size:1.2rem; color:#9E9E9E;}
+  
+  
+  .bhxners{  font-size:1.4rem; text-align:center; color:#9E9E9E; padding-top:3rem;}
+  .bhxners a{ color:#9E9E9E;}
+
+/*多行输入样式结束*/
+
+
+
+/*温馨提示开始*/
+  .wxtsis{ padding:1.9rem 1.2rem 1.5rem 1.2rem;}
+    .wxtsis h1{ font-size:1.4rem; color:#404040; text-align:center;}
+    .wxtsis p{font-size:1.4rem; color:#9E9E9E; text-align:center; padding:1rem 0 0 0;}
+/*温馨提示结束*/
+
+.srdziss02{ width:100%; background:#fff; border:0; display:block; font-size:1.6rem; color:#404040; height:3rem;}
+
+
+
+  
+  
+  .bcanius{ position:fixed; bottom:0; left:0; width:100%; height:4.1rem;}
+  
+  .bcnois{ width:100%; height:4.1rem; display:block; border:0; background: #FF6118; font-size:1.7rem; color:#FFFFFF; text-align:center; line-height:4.1rem;}
+  
+  
+
+/*设置密码开始*/
+.wdszmms{ background:#fff; padding:0 1.2rem 0 1.2rem; display:box; display:-webkit-box; display:-moz-box;}
+  .zbsjmiss{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;}
+  .srmimas{ width:100%; padding:1rem 0 1rem 0; font-size:1.6rem; color:#333;}
+  
+  .dhhris03{ width:2.5rem; padding-top:1.2rem;}
+  
+  
+  .zwceees{ padding-top:1rem;}
+  
+  /*单选按钮开始*/
+ .regular-checkbox {
+	display: none;
+}
+.regular-checkbox + label {
+	background-color: #fff;
+	display: inline-block;
+	vertical-align:middle;
+	width:2.5rem;
+	height:1.5rem;
+	background:url(../images/yan001.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+}
+.regular-checkbox:checked + label {
+	background:url(../images/yan002.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	border: 0;
+	
+} 
+
+
+
+ .regular-checkbox02 {
+	display: none;
+}
+.regular-checkbox02 + label {
+	background-color: #fff;
+	display: inline-block;
+	vertical-align:middle;
+	width:2.5rem;
+	height:1.5rem;
+	background:url(../images/yan001.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+}
+.regular-checkbox02:checked + label {
+	background:url(../images/yan002.png) no-repeat center;
+	background-size:100% 100%;
+	-moz-background-size:100% 100%;
+	-webkit-background-size:100% 100%;
+	border: 0;
+	
+} 
+
+
+   /*单选按钮结束*/
+  
+  
+/*设置密码结束*/
+
+.btomies{ border-bottom:1px solid #ebebeb;}
+
+.xgmimss{font-size:1.6rem; color:#404040; width:6rem; padding-top:1rem;}
+  
+  
+.wjmimas{font-size:1.4rem; color:#9E9E9E; text-align:center; padding-top:2rem;}
+.wjmimas a{color:#9E9E9E;} 
+  
+  
+  
+  
+  

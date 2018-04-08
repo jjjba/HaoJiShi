@@ -15,10 +15,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-#      url: jdbc:mysql://localhost:3306/hjs?useSSL=false&characterEncoding=UTF-8
-      url: jdbc:mysql://118.190.133.194:3306/hjs?useSSL=false&characterEncoding=UTF-8
+      url: jdbc:mysql://localhost:3306/hjs?useSSL=false&characterEncoding=UTF-8
       username: root
-      password: JSH@#0629SDJU
+      password: root
       initial-size: 2
       max-active: 30
       min-idle: 2
@@ -80,8 +79,8 @@ api:
   fileImagePath: C:/HJS/smail/hjs-smail-java/web/target/classes/static/upload
   ImageSrc: http://localhost:8075/web/upload
 
-  appid: wxb363c68215a1d3f1
-  secret: 98e5dbf56fed8c9e0c5fb95f5d34ba05
+  appid: wx3e2445e709ce5350
+  secret: 7493fbb97c3441ed803f2040b31fec37
   #支付配置
   mchUserId: 1417975802
   mchUserKey: 230948roejdsieuoids9IO23QWS923kl

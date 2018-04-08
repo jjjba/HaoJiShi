@@ -39,9 +39,9 @@
 
     <!-- 查询和企业符合的求职者信息 -->
     <select id="getPersonalByCity" resultType="java.util.Map">
-        SELECT p.id,p.avatar,p.phone,p.name,p.sex,p.age,p.hope_job,p.expect_money,p.address,p.state,p.job_experience
-        FROM personal p,user u
-        WHERE p.hope_city like concat('%',#{city},'%') and u.account_state = 1 and u.id =p.user_id
+        SELECT p.id,p.avatar,p.phone,p.name,p.sex,p.age,p.hopeJob,p.expectMoney,p.address,p.state,p.jobExperience
+        FROM personal p
+        WHERE p.hope_city like ('%',#{city},'%')
         ORDER BY
         p.create_time DESC
     </select>

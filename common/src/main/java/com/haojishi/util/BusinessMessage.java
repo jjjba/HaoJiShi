@@ -14,6 +14,8 @@ public class BusinessMessage {
     private String msg = "";
     private int code = 0;
     private Object data = null;
+    private Object dataOne = null;
+    private Object dataTwo = null;
 
     public BusinessMessage(boolean success) {
         this.success = success;

@@ -15,7 +15,7 @@ $(function() {
 function loadCompanyInfo() {
     $.ajax({
         type: "POST",
-        url: "/company/getCompanyInfoByCompanyId",
+        url: "../company/getCompanyInfoByCompanyId",
         success: function (res) {
             if (res.success) {
             	$('.ztiosps').empty();
@@ -24,7 +24,7 @@ function loadCompanyInfo() {
 				var iconPath;
                 iconPath =list.iconPath;
                 if(iconPath == null || iconPath == ""){
-                    iconPath="../../person/images/icon_company_default.png";
+                    iconPath="../person/images/icon_company_default.png";
                 }
                 if(list.companySpecial == null || list.companySpecial ==""){
                     $('.xblbyos').append("该企业还没有填写相关标签~~~");
@@ -66,7 +66,7 @@ function loadCompanyInfo() {
 function loadPositionByCid() {
     $.ajax({
         type: "POST",
-        url: "/position/getPositionByCid",
+        url: "../position/getPositionByCid",
         success: function (res) {
             if (res.success) {
                 $('.position').empty();
@@ -120,5 +120,5 @@ function loadPositionByCid() {
 }
 
 function loadPositionInfo(url) {
-	window.location.href=url;
+	window.location.href=".."+url;
 }

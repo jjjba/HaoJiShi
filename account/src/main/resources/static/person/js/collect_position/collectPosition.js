@@ -7,7 +7,7 @@ $(function () {
 function loadCollectPosition() {
     $.ajax({
         type:'POST',
-        url:'/collection/selectCollectPosition',
+        url:'../collection/selectCollectPosition',
         success :function(res){
             var list =res.data;
             var id,name,company_type,company_city,company_scale,icon_path,position_name,hot,money,sex,age,experience;
@@ -89,5 +89,5 @@ function loadCollectPosition() {
 }
 
 function onBack() {
-    window.location.href="/transition/transition_goMySelf";
+    window.location.href="../transition/transition_goMySelf";
 }
