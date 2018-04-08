@@ -22,7 +22,11 @@ public class Company implements Serializable {
      * 企业用户年龄
      */
     private Integer age;
-
+    /**
+     * 店铺面积
+     */
+    @Column(name = "company_dpmj")
+    private String companydpmj;
     /**
      * 企业用户性别
      */
@@ -48,12 +52,12 @@ public class Company implements Serializable {
     /**
      * 经度
      */
-    private Double longitude;
+    private String longitude;
 
     /**
      * 纬度
      */
-    private Double latitude;
+    private String latitude;
 
     /**
      * 企业名称
@@ -269,6 +273,23 @@ public class Company implements Serializable {
     public void setAge(Integer age) {
         this.age = age;
     }
+    /**
+     * 获取店铺面积
+     *
+     * @return companydpmj
+     */
+    public String getCompanydpmj() {
+        return companydpmj;
+    }
+
+    /**
+     * 设置店铺面积
+     *
+     * @param companydpmj
+     */
+    public void setCompanydpmj(String companydpmj) {
+        this.companydpmj = companydpmj;
+    }
 
     /**
      * 获取企业用户性别
@@ -347,7 +368,7 @@ public class Company implements Serializable {
      *
      * @return longitude - 经度
      */
-    public Double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
@@ -356,7 +377,7 @@ public class Company implements Serializable {
      *
      * @param longitude 经度
      */
-    public void setLongitude(Double longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
@@ -365,7 +386,7 @@ public class Company implements Serializable {
      *
      * @return latitude - 纬度
      */
-    public Double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
@@ -374,7 +395,7 @@ public class Company implements Serializable {
      *
      * @param latitude 纬度
      */
-    public void setLatitude(Double latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 

@@ -54,8 +54,6 @@ $(document).ready(function() {
         var hopejob1 =$(this).attr("data");
         console.log("===="+hopejob)
         console.log("1111111===="+hopejob1)
-
-
     });
 
 });

@@ -14,13 +14,7 @@ $(function () {
         loadPositionByPars(city,scale,money,type);
     });
 
-    $(".city").click(function(e) {
-        city = $(e.target).attr("data");
-        console.log("city======"+city)
-        loadPositionByPars(city,scale,money,type);
-
-    });
-    $(".rmcshis").click(function(e) {
+    $(".container").click(function(e) {
         city = $(e.target).attr("data");
         console.log("city======"+city)
         loadPositionByPars(city,scale,money,type);

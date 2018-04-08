@@ -95,25 +95,21 @@ public class RedirectController {
 
         String phone ="";
         String pwd = "";
-        String zt ="";
+        String isTrue ="";
         if(state == "companyIndex" || state.equals("companyIndex")){
             Cookie[] cookies = request.getCookies();
             if (cookies!=null) {
                 for (int i = 0; i < cookies.length; i++) {
                     Cookie cookie = cookies[i];
+                    if (cookie.getName().equals("phone")) {
+                         phone=cookie.getValue();
+                    }
                     if (cookie.getName().equals("state")) {
-                        zt=cookie.getValue();
+                        isTrue=cookie.getValue();
                     }
                     if (cookie.getName().equals("pwd")) {
                         pwd=cookie.getValue();
                     }
-                    if (cookie.getName().equals("phone")) {
-                        phone=cookie.getValue();
-                    }
-                    Example userExample =new Example(User.class);
-                    userExample.createCriteria().andEqualTo("phone",phone).andEqualTo("password",pwd);
-                    List<User> users =userMapper.selectByExample(userExample);
-
                 }
             }
             return "company/companyIndex";
@@ -126,7 +122,7 @@ public class RedirectController {
                         phone=cookie.getValue();
                     }
                     if (cookie.getName().equals("state")) {
-                        zt=cookie.getValue();
+                        isTrue=cookie.getValue();
                     }
                     if (cookie.getName().equals("pwd")) {
                         pwd=cookie.getValue();

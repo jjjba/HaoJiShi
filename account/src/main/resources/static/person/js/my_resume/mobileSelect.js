@@ -167,7 +167,7 @@
 		                '<div class="fixWidth">'+
 		                    '<div class="cancel">'+ cancelText +'</div>'+
 		                    '<div class="title"></div>'+
-		                    '<div class="ensure">'+ ensureText +'</div>'+
+		                    '<div class="ensure" >'+ ensureText +'</div>'+
 		                '</div>'+
 		            '</div>'+
 		            '<div class="panel">'+
