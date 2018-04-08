@@ -65,23 +65,15 @@ pagehelper:
 # 日志配置
 logging:
   level:
-    com.haojishi: debug
+    com.xzcysoft: debug
     org.springframework: error
 
 api:
   #图片和视频存放路径
   fileImagePath: /var/tomcat/tomcat-8/webapps/image
-  ImageSrc: http://wx.haojishi.net/image
+  ImageSrc: http://118.24.109.190:443/image
 
 
   appid: wxb363c68215a1d3f1
   secret: 98e5dbf56fed8c9e0c5fb95f5d34ba05
 
-  #支付配置
-  mchUserId: 1417975802
-  mchUserKey: 230948roejdsieuoids9IO23QWS923kl
-  wechat-callback-url: https://www.haojishi.net/api/pay_callback/we-chat
-
-  #短信配置
-  smstplId: 26032
-  smsKey: dc322ebe4dc738c34b2f943e5b85de5e

@@ -20,8 +20,97 @@
     <link type="text/css" href="/static/company/css/wo_de/top.css"
           th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/xiangqing02.css" th:href="@{/company/css/xiangqing02.css}" rel="stylesheet" />
-    
-    
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script>
+        $(document).ready(function() {
+
+            $.ajax({
+                url:"/company/getCompanyAndgetZhiwei",
+                type:"POST",
+                success:function (msg) {
+                    console.log(msg);
+                   var  company = msg.dataOne;
+                    var position =msg.data;
+                    var YuLanOrXiangQing = sessionStorage.getItem("YuLanOrXiangQing");
+                    var htm = "";
+                    var htm1 = "";
+                    var htm2 = "";
+                    var htm3 ="";
+                    htm+="<div class='sbontshs'><div class='respise clearfix'><div class='fl reselefs'>";
+                    if(YuLanOrXiangQing == "yulan"){
+                        var zwlx = sessionStorage.getItem("zwlx");
+                        var zwmc = sessionStorage.getItem("zwmc");
+                        var yx = sessionStorage.getItem("yx");
+                        var jyyq = sessionStorage.getItem("jyyq");
+                        var xbyq = sessionStorage.getItem("xbyq");
+                        var nlyq = sessionStorage.getItem("nlyq");
+                        var zwfl = sessionStorage.getItem("LLLLzwfl");
+                        var zwms = sessionStorage.getItem("zwms");
+                        htm+=zwlx;
+                        htm+="</div></div><div class='gonzis'>7000-9000/月</div><div class='yaoqius'>";
+                        htm+=jyyq;
+                        htm+=" | ";
+                        htm+=nlyq;
+                        htm+=" | ";
+                        htm+=xbyq;
+                        htm+="</div><div class='daiyus'>"
+                        var zwfl1 = zwfl.substring(0,zwfl.length-1);
+                        var att = new Array();
+                        att = zwfl1.split(",");
+                        for(var i =0;i<att.length;i++){
+                            htm+="<span>";
+                            htm+=att[i];
+                            htm+="</span>"
+                        }
+                        htm+="</span>";
+                        htm2+=zwms;
+
+                    }
+                    if(YuLanOrXiangQing == "xiangqing"){
+                        htm+=position.positionType;
+                        htm+="</div></div><div class='gonzis'>7000-9000/月</div><div class='yaoqius'>";
+                        htm+=position.experience;
+                        htm+=" | ";
+                        htm+=position.age;
+                        htm+=" | ";
+                        htm+=position.sex;
+                        htm+="</div><div class='daiyus'>"
+                        var zwfl1 = position.welfare;
+                        var att = zwfl1.split(",");
+                        for(var i =0;0<att.length;i++){
+                            htm+="<span>";
+                            htm+=att[i];
+                            htm+="</span>"
+                        }
+                        htm+="</span>";
+                        htm2+=position.positionInfo;
+
+                    }
+                    //开始htm1
+                    htm1+="<div class='corpzuos'><img src='";
+                    htm1+=company.iconPath;
+                    htm1+=" '/><div class='yrzs'><img src='../../company/images/biao02.png'/></div></div><div class='corpryous'><h1>";
+                    htm1+=company.name;
+                    htm1+="</h1><p>";
+                    htm1+=company.companyType;
+                    htm1+="|";
+                    htm1+company.companydpmj;
+                    htm1+="|";
+                    htm1+="</p><img src='../../company/images/yjts.png' class='jtois' /></div>"
+                    htm3+="<a href='#'><div class='dpuzhids'><div class='dzlefs'>";
+                    htm3+=company.companyAddr;
+                    htm3+="</div><div class='dzyous'><img src='../../company/images/yjts.png' /></div></div></a>";
+                    $(".sbnecont").html(htm);
+                    $(".corpnames").html(htm1);
+                    $(".zwqxconts").html(htm2);
+                    $(".dpdz").html(htm3);
+                }
+            })
+
+
+        })
+    </script>
 
 </head>
 <body>
@@ -31,7 +120,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      职位详情
-     <a href="#" class="zjtous"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" class="zjtous" onclick="window.location.href='/transition/bianji_zhiwei'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
@@ -40,50 +129,14 @@
  
  <!--上边内容开始-->
  <div class="sbnecont">
-   <!--上开始-->
-   <div class="sbontshs">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs">SPA技师</div>
-        <div class="fr reseyous"><span class="yse01">急聘</span> <span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资开始-->
-      <div class="gonzis">7000-9000/月</div>
-      <!--工资结束-->
-      
-      <!--要求开始-->
-      <div class="yaoqius">
-        经验不限 | 35岁以下 | 仅限女
-      </div>
-      <!--要求结束-->
-      
-      <!--待遇开始-->
-      <div class="daiyus">
-        <span>包吃包住</span>
-        <span>四六分成</span>
-        <span>四六分成</span>
-      </div>
-      <!--待遇结束-->
+<!--1-->
    </div>
    <!--上结束-->
    
    <!--下开始-->
       <!--公司名称地址开始-->
         <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <img src="images/tupiaius.png" />
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1>常乐足道</h1>
-            <p>单体店 | 1500㎡ | 杭州市 上城区</p>
-            <img src="images/yjts.png" class="jtois" />
-          </div>
-          <!--右边结束-->
+          <!--2-->
         </div>
       <!--公司名称地址结束-->   
     <!--下结束-->
@@ -98,8 +151,7 @@
    <!--标题结束-->
    <!--内容开始-->
    <div class="zwqxconts">
-     1.负责为Spa客人提供专业的理疗服务。<br>
-     2.负责为Spa客人提供专业的理疗服务。
+     <!--3-->
    </div>
    <!--内容结束-->
    
@@ -109,15 +161,10 @@
  <!--店铺地址开始-->
  <div class="dpudzhis">
    <!--标题开始-->
-   <div class="zwxtits">店铺地址</div>
+   <div class="zwxtits dpdz">店铺地址</div>
    <!--标题结束-->
    <!--内容开始-->
-    <a href="#">
-      <div class="dpuzhids">
-        <div class="dzlefs">石家庄广安大街5号驿家365快捷酒店3楼</div>
-        <div class="dzyous"><img src="images/yjts.png" /></div>
-      </div>
-    </a>
+    <!--4-->
    <!--内容结束-->
  </div>
  <!--店铺地址结束-->

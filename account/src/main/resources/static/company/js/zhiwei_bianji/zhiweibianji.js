@@ -44,5 +44,26 @@ $(document).ready(function() {
     }
 })
 function yulan() {
+    sessionStorage.setItem("YuLanOrXiangQing","yulan");
     window.location.href="/transition/zhiwei_xiangqing";
+}
+function fabuZhiwei() {
+    var zwlx = sessionStorage.getItem("zwlx");
+    var zwmc = sessionStorage.getItem("zwmc");
+    var yx = sessionStorage.getItem("yx");
+    var jyyq = sessionStorage.getItem("jyyq");
+    var xbyq = sessionStorage.getItem("xbyq");
+    var nlyq = sessionStorage.getItem("nlyq");
+    var zwfl = sessionStorage.getItem("LLLLzwfl");
+    var zwms = sessionStorage.getItem("zwms");
+    $.ajax({
+        url:"/company/AddZhiwei",
+        type:"POST",
+        data:{zwlx:zwlx,zwmc:zwmc,yx:yx,jyyq:jyyq,xbyq:xbyq,nlyq:nlyq,zwfl:zwfl,zwms:zwms},
+        success:function (msg) {
+            console.log(msg);
+            window.location.href="/transition/go_wo_de";
+        }
+    })
+
 }

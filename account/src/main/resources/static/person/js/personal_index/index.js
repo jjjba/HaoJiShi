@@ -45,7 +45,7 @@ $(function() {
 function loadPositionData() {
     $.ajax({
         type: "POST",
-        url: "/position/getPositionInIndex",
+        url: "../position/getPositionInIndex",
         success: function (res) {
             if (res.success) {
                 $('.positionList').empty();
@@ -112,7 +112,7 @@ function loadPositionData() {
                         '<div class="corpnames">'+
                         '<div class="corpzuos">'+
                         '<img src="'+icon_path+'" />'+
-                        '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>'+
+                        '<div class="yrzs"><img src="../person/images/biao02.png" /></div>'+
                         '</div>'+
                         '<div class="corpryous">'+
                         '<h1>'+name+'</h1>'+
@@ -130,13 +130,13 @@ function loadPositionData() {
 
 
 function goPosition() {
-    window.location.href="/transition/transition_all_position";
+    window.location.href="../transition/transition_all_position";
 }
 
 function goMySelf() {
-    window.location.href="/transition/transition_goMySelf";
+    window.location.href="../transition/transition_goMySelf";
 }
 
 function loadPositionInfo(url) {
-    window.location.href=url;
+    window.location.href=".."+url;
 }

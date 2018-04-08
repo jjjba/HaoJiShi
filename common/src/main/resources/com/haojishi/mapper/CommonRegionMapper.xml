@@ -9,16 +9,4 @@
         </foreach>
         )
     </select>
-
-    <select id="getProvinceByCity" resultType="java.lang.String">
-        SELECT r.pId
-        FROM region r
-        WHERE r.name = #{comCity}
-    </select>
-
-    <select id="getCityBypId" resultType="java.lang.String">
-        SELECT r.name
-        FROM region r
-        WHERE r.pId = #{pId}
-    </select>
 </mapper>

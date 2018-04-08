@@ -22,7 +22,11 @@ public class Company implements Serializable {
      * 企业用户年龄
      */
     private Integer age;
-
+    /**
+     * 店铺面积
+     */
+    @Column(name = "company_dpmj")
+    private String companydpmj;
     /**
      * 企业用户性别
      */
@@ -268,6 +272,23 @@ public class Company implements Serializable {
      */
     public void setAge(Integer age) {
         this.age = age;
+    }
+    /**
+     * 获取店铺面积
+     *
+     * @return companydpmj
+     */
+    public String getCompanydpmj() {
+        return companydpmj;
+    }
+
+    /**
+     * 设置店铺面积
+     *
+     * @param companydpmj
+     */
+    public void setCompanydpmj(String companydpmj) {
+        this.companydpmj = companydpmj;
     }
 
     /**

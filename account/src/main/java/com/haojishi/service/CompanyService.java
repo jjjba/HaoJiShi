@@ -2,34 +2,22 @@ package com.haojishi.service;
 
 import com.haojishi.mapper.*;
 import com.haojishi.model.*;
-import com.haojishi.service.weChat.WechatOrderService;
 import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.PhoneCheck;
-import com.haojishi.util.ClientIPUtil;
-import com.haojishi.util.GxlUtil;
-import com.haojishi.util.WxPayUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Slf4j
 @Service
 public class CompanyService{
-
-    @Autowired
-    private WechatOrderService weChatOrderService;
 
     @Autowired
     private CompanyMapper companyMapper;
@@ -44,7 +32,7 @@ public class CompanyService{
     @Autowired
     private ResumeMapper resumeMapper;
     @Autowired
-    private Environment environment;
+    private PositionMapper positionMapper;
     /**
      * 根据企业id查询企业信息
      *
@@ -137,58 +125,6 @@ public class CompanyService{
         return  businessMessage;
     }
 
-    public BusinessMessage pay(HttpSession session, Integer money, HttpServletRequest request){
-        BusinessMessage businessMessage =new BusinessMessage();
-        try {
-            int userId = (int) session.getAttribute("uderId");
-            Example example =new Example(Company.class);
-            example.createCriteria().andEqualTo("userId",userId);
-            List<Company> companies =companyMapper.selectByExample(example);
-            //走微信支付
-            String body = "好技狮";
-            String detail = "";
-            String attach = "";
-            String goodsTag = "";
-            int totalFee = money * 100;
-            String createIp = ClientIPUtil.getClientIP(request);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
-            LocalDateTime timeStart = LocalDateTime.now();
-            LocalDateTime timeExpire = timeStart.plusMinutes(5);
-            User users = usersMapper.selectByPrimaryKey(userId);
-            String openId = users.getOpenid();
-            String appId = environment.getProperty("api.appid");
-            String mchId = environment.getProperty("api.mchUserId");
-            String apiKey = environment.getProperty("api.mchUserKey");
-            String notifyUrl = environment.getProperty("api.wechat-callback-url");
-            String uniontid = GxlUtil.createUniontid();
-
-
-            Map<String, Object> result = weChatOrderService.merchantPay(appId, mchId, body, detail, attach, uniontid, totalFee, createIp, timeStart.format(formatter), timeExpire.format(formatter), goodsTag, false, openId, apiKey, notifyUrl);
-            if (null != result) {
-                if (result.containsKey("request_tag")) {
-                }
-                if (result.containsKey("prepay_id")) {
-                    Services service = new Services();
-                    service.setMoney(money);
-                    service.setComid(companies.get(0).getId());
-                    service.setCreatedate(new Date());
-                    TreeMap<String, Object> dataMap = new TreeMap<>();
-                    dataMap.put("appId", appId);
-                    dataMap.put("timeStamp", LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(8)));
-                    dataMap.put("nonceStr", WxPayUtil.getRandomUpperStringByLength(32));
-                    dataMap.put("package", "prepay_id=" + result.get("prepay_id"));
-                    dataMap.put("signType", "MD5");
-                    String paySign = WxPayUtil.createSign(dataMap, apiKey);
-                    dataMap.put("paySign", paySign);
-                    businessMessage.setData(dataMap);
-                    businessMessage.setSuccess(true);
-                }
-            }
-        } catch (Exception e) {
-            log.error("支付失败", e);
-        }
-        return businessMessage;
-    }
     /**
      * 更新企业快招服务打电话次数
      * @param session
@@ -515,6 +451,7 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setMatstate(1);
+        company.setCompanydpmj(dwmj);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         company.setCreateTime(new Date());
         Example userExample =new Example(User.class);
@@ -566,6 +503,7 @@ public class CompanyService{
             if(users!= null && users.size()>0){
                 session.setAttribute("userId",users.get(0).getId());
                 businessMessage.setDataOne(users.get(0).getType());
+                log.info("已经当进去了useris-------"+users.get(0).getId());
             }
             Example comExample =new Example(Company.class);
             comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
@@ -594,6 +532,75 @@ public class CompanyService{
             businessMessage.setData("2");
         }
         businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+
+    /**
+     * 职位详情预览
+     * @return
+     */
+    public BusinessMessage getCompanyAndgetZhiwei(HttpSession session){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users!= null && users.size()>0){
+            Example companyExample =new Example(Company.class);
+            companyExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(companyExample);
+            businessMessage.setDataOne(companies.get(0));
+            if(companies !=null && companies.size()>0){
+                Example posiExample = new Example(Position.class);
+                posiExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
+                List<Position> Positions =positionMapper.selectByExample(posiExample);
+                if(Positions != null && Positions.size()>0){
+                    businessMessage.setData(Positions.get(0));
+                }
+            }
+        }
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
+    /**
+     * 增加职位信息
+     * @param zwlx
+     * @param zwmc
+     * @param yx
+     * @param jyyq
+     * @param xbyq
+     * @param nlyq
+     * @param zwfl
+     * @param zwms
+     * @return
+     */
+    public BusinessMessage AddZhiwei(String zwlx,String zwmc,String yx,String jyyq,String xbyq,String nlyq,String zwfl,String zwms,HttpSession session){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users!= null && users.size()>0){
+            Example companyExample =new Example(Company.class);
+            companyExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(companyExample);
+            if(companies !=null && companies.size()>0){
+                Position position = new Position();
+                position.setAge(nlyq);
+                position.setExperience(jyyq);
+                position.setPositionName(zwmc);
+                position.setPositionType(zwlx);
+                position.setMoney(yx);
+                position.setSex(xbyq);
+                position.setWelfare(zwfl);
+                position.setPositionInfo(zwms);
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                position.setCreateTime(new Date());
+                position.setCompanyId(companies.get(0).getId());
+                int success = positionMapper.insert(position);
+                businessMessage.setData(success);
+                businessMessage.setSuccess(true);
+            }
+        }
         return  businessMessage;
     }
 }

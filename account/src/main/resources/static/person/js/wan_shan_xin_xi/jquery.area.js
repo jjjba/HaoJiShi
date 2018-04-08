@@ -542,7 +542,7 @@ function selectP(p) {
 	}
 	areaList.html(areaCont);
 	$("#areaBox").scrollTop(0);
-	expressArea = province[p] + "-";
+	expressArea = province[p] + " > ";
 	$("#backUp").attr("onClick", "intProvince();").show();
 }
 
@@ -563,7 +563,7 @@ function selectC(p,c) {
 		} else if (sCity == "市辖区" || sCity == "市辖县" || sCity == "香港岛" || sCity == "九龙半岛" || sCity == "新界" || sCity == "澳门半岛" || sCity == "离岛" || sCity == "无堂区划分区域") {
 			expressArea += "";
 		} else {
-			expressArea += sCity + "-";
+			expressArea += sCity + " > ";
 		}
 	}
 	$("#backUp").attr("onClick", "selectP(" + p + ");");
