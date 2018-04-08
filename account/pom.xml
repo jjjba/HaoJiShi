@@ -1,6 +1,4 @@
 
-
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 <parent>
@@ -63,7 +61,11 @@
         <artifactId>jquery-migrate</artifactId>
         <version>3.0.0</version>
     </dependency>
-
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-devtools</artifactId>
+        <optional>true</optional> <!-- 这个需要为 true 热部署才有效 -->
+    </dependency>
     <dependency>
         <groupId>org.webjars.bower</groupId>
         <artifactId>bootstrap</artifactId>
@@ -102,7 +104,6 @@
 </dependencies>
 <build>
     <finalName>ROOT</finalName>
-
     <plugins>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -123,7 +124,6 @@
             </executions>
         </plugin>
     </plugins>
-
 </build>
 </project>
 

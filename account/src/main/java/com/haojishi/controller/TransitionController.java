@@ -6,11 +6,15 @@ import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Company;
 import com.haojishi.model.Personal;
 import com.haojishi.model.User;
+import com.haojishi.service.TransitionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -18,6 +22,7 @@ import java.util.List;
  * @author 梁闯
  * @date 2018/03/20 15.14
  */
+@Slf4j
 @Controller
 @RequestMapping("transition")
 public class TransitionController {
@@ -30,6 +35,8 @@ public class TransitionController {
 
     @Autowired
     private CompanyMapper companyMapper;
+    @Autowired
+    private TransitionService transitionService;
     /**
      * 跳转职位详情页面
      * @param session
@@ -49,18 +56,21 @@ public class TransitionController {
      */
     @RequestMapping("transition_all_position")
     public String transition_all_position(HttpSession session){
-        int userId = (int) session.getAttribute("userId");
-
-        Example perExample =new Example(Personal.class);
-        perExample.createCriteria().andEqualTo("userId",userId);
-        List<Personal> personals =personalMapper.selectByExample(perExample);
-        if(personals != null && personals.size() > 0){
-            return "personal/position/position_02";
-        }else {
-            return "personal/position/position_01";
+        String openid = (String) session.getAttribute("openid");
+        Example example =new Example(User.class);
+        example.createCriteria().andEqualTo("openid",openid);
+        List<User> userList =userMapper.selectByExample(example);
+        if(userList != null && userList.size() > 0){
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userList.get(0).getId());
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            if(personals != null && personals.size() > 0){
+                return "personal/position/position_02";
+            }else {
+                return "personal/position/position_01";
+            }
         }
-
-
+        return "personal/position/position_01";
     }
 
     /**
@@ -77,17 +87,8 @@ public class TransitionController {
      * @return
      */
     @RequestMapping("transition_goMySelf")
-    public String transition_goMySelf(HttpSession session){
-        int userId = (int) session.getAttribute("userId");
-        Example example =new Example(Personal.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        List<Personal> personals =personalMapper.selectByExample(example);
-        if(personals != null && personals.size() > 0){
-            return "personal/mySelf/mySelf";
-        }else {
-            return "personal/mySelf/mySelf_notLogin";
-        }
-
+    public String transition_goMySelf(){
+        return "personal/mySelf/mySelf";
     }
 
     /**
@@ -96,7 +97,7 @@ public class TransitionController {
      */
     @RequestMapping("transition_search")
     public String transition_search(){
-        return "personal/position/job_search";
+        return "personal/position/position_search";
     }
 
     /**
@@ -282,16 +283,7 @@ public class TransitionController {
      */
     @RequestMapping("go_wo_de")
     public String go_wo_de(HttpSession session){
-        int userId = (int) session.getAttribute("userId");
-        Example example =new Example(Company.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        List<Company> companies =companyMapper.selectByExample(example);
-        if(companies != null && companies.size() > 0){
             return "company/company_myself/wo_de";
-        }else {
-            return "company/company_myself/wo_de_wei_deng_lu";
-        }
-
     }
     /**
      * 企业端=========简历管理
@@ -403,7 +395,7 @@ public class TransitionController {
      */
     @RequestMapping("go_wan_shan_xin_xi")
     public String go_wan_shan_xin_xi(){
-        return "personal/mySelf/zhu_ce_xin_xi";
+        return "personal/mySelf/wan_shan_xin_xi";
     }
 
     /**
@@ -436,8 +428,9 @@ public class TransitionController {
      * @return
      */
     @RequestMapping("zhiweiguanlirenzhneg")
-    public String wo_de_zhiweiguanli_renzheng(){
-        return "company/company_myself/zhiweiguanli_renzheng";
+    public String zhiweiguanlirenzhneg(){
+        log.error("麻蛋--------");
+        return "company/company_myself/Company_Zw";
     }
     /**
      * 企业端账号设置 密码修改
@@ -447,64 +440,185 @@ public class TransitionController {
     public String wo_de_zhiweiguanli_weirenzheng(){
         return "company/company_myself/zhiweiguanli_weirenzheng";
     }
-
     /**
-     * 求职者端====我的意向城市
+     * 企业端填写 地址
      * @return
      */
-    @RequestMapping("go_my_hope_city")
-    public String go_my_hope_city(){
-        return "personal/mySelf/my_hope_city";
+    @RequestMapping("getAddress")
+    public String getAddress(){
+        return "company/company_myself/dianpu_Address";
     }
-
     /**
-     * 求职者端====我的意向工作
+     * 企业端填写 姓名
      * @return
      */
-    @RequestMapping("go_my_hope_job")
-    public String go_my_hope_job(){
-        return "personal/mySelf/my_hope_job";
+    @RequestMapping("BossName")
+    public String BossName(){
+        return "company/company_myself/dianpu_xingming";
     }
-
     /**
-     * 求职者端====我的基本信息
+     * 企业端填写 店铺名称
      * @return
      */
-    @RequestMapping("go_wo_de_ji_ben_xin_xi")
-    public String go_wo_de_ji_ben_xin_xi(){
-        return "personal/mySelf/wo_de_ji_ben_xin_xi";
+    @RequestMapping("dianpuName")
+    public String dianpuName(){
+        return "company/company_myself/dianpu_mingcheng";
     }
-
     /**
-     * 求职者端====曾经做过
+     * 企业端填写 店铺面积
      * @return
      */
-    @RequestMapping("go_ceng_jing_zuo_guo")
-    public String go_ceng_jing_zuo_guo(){
-        return "personal/mySelf/ceng_jing_zuo_guo";
+    @RequestMapping("dianpuMj")
+    public String dianpuMj(){
+        return "company/company_myself/dianpu_Mj";
+    }
+    /**
+     * 企业端填写 店铺面积
+     * @return
+     */
+    @RequestMapping("dpfl")
+    public String dpfl(){
+        return "company/company_myself/dianpu_fuli";
+    }
+    /**
+     * 企业端填写 店铺面积
+     * @return
+     */
+    @RequestMapping("mimadl")
+    public String mimadl(){
+        return "company/company_myself/mi_ma_denglu";
     }
 
     /**
-     * 求职者端=====填写简历信息我的求职岗位
+     * 店铺认证
+     * @return
      */
-    @RequestMapping("go_jian_li_wo_de_yi_xiang_gong_zuo")
-    public String go_jian_li_wo_de_yi_xiang_gong_zuo(){
-        return "personal/mySelf/jian_li_wo_de_yi_xiang_gong_zuo";
+    @RequestMapping("RenZheng")
+    public String RenZheng(){
+        return "company/company_myself/wo_de_DPrenzheng";
     }
 
     /**
-     * 求职者端=====填写简历信息我的意向城市
+     * 跳到哪个页面
+     * @return
      */
-    @RequestMapping("go_jian_li_wo_de_yi_xiang_cheng_shi")
-    public String go_jian_li_wo_de_yi_xiang_cheng_shi(){
-        return "personal/mySelf/jian_li_wo_de_yi_xiang_cheng_shi";
+    @RequestMapping("wenti_xiangqinga")
+    public String wenti_xiangqinga(){
+        return"company/company_myself/problem/wenti_xiangqinga";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingb")
+    public String wenti_xiangqingb(){
+        return"company/company_myself/problem/wenti_xiangqingb";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingc")
+    public String wenti_xiangqingc(){
+        return"company/company_myself/problem/wenti_xiangqingc";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingd")
+    public String wenti_xiangqingd(){
+        return"company/company_myself/problem/wenti_xiangqingd";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqinge")
+    public String wenti_xiangqinge(){
+        return"company/company_myself/problem/wenti_xiangqinge";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingf")
+    public String wenti_xiangqingf(){
+        return"company/company_myself/problem/wenti_xiangqingf";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingg")
+    public String wenti_xiangqingg(){
+        return"company/company_myself/problem/wenti_xiangqingg";
+    }
+    /**
+     * 跳到哪个页面
+     * @return
+     */
+    @RequestMapping("wenti_xiangqingh")
+    public String wenti_xiangqingh(){
+        return"company/company_myself/problem/wenti_xiangqingh";
+    }
+    /**
+     * 快招页面
+     * @return
+     */
+    @RequestMapping("kuaizhao")
+    public String kuaizhao(){
+        return"company/company_myself/kuai_zhao";
     }
 
     /**
-     * 求职者端=====填写简历信息我的标签
+     * 编辑职位界面
+     * @return
      */
-    @RequestMapping("go_jian_li_wo_de_biao_qian")
-    public String go_jian_li_wo_de_biao_qian(){
-        return "personal/mySelf/jian_li_wo_de_biao_qian";
+    @RequestMapping("bianji_zhiwei")
+    public String bianji_zhiwei(){
+        return"company/company_myself/bianji_zhiwei";
+    }
+    /**
+     * 编辑职位名称
+     * @return
+     */
+    @RequestMapping("zwmingCheng")
+    public String zwmingCheng(){
+        return"company/company_myself/zhiwei_mingcheng";
+    }
+    /**
+     * 编辑职位名称
+     * @return
+     */
+    @RequestMapping("zhiwei_fuli")
+    public String zhiwei_fuli(){
+        return"company/company_myself/zhiwei_fuli";
+    }
+    /**
+     * 编辑职位名称
+     * @return
+     */
+    @RequestMapping("zhiwei_miaoshu")
+    public String zhiwei_miaoshu(){
+        return"company/company_myself/zhiwei_miaoshu";
+    }
+
+    /**
+     * 预览职位名称
+     * @return
+     */
+    @RequestMapping("zhiwei_xiangqing")
+    public String zhiwei_xiangqing(){
+        return"company/company_myself/zhiwei_xiangqing";
+    }
+
+    /**
+     * 店铺 职位选择
+     * @return
+     */
+    @RequestMapping("dianpu_zhiweixuanze")
+    public String dianpu_zhiweixuanze(){
+        return  "company/company_myself/dianpu_zhiweixuanze";
     }
 }

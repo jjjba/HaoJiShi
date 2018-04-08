@@ -1,8 +1,5 @@
 package com.haojishi.service;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.haojishi.config.CookiesUtil;
 import com.haojishi.mapper.BannerMapper;
 import com.haojishi.model.Banner;
 import com.haojishi.util.BusinessMessage;
@@ -11,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.servlet.http.Cookie;
 import java.util.List;
 
 /**

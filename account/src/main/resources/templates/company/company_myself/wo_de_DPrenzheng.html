@@ -1,4 +1,4 @@
-﻿<!doctype html>
+﻿﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -6,66 +6,28 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>我的基本信息</title>
+<title>店铺端-我的-店铺认证</title>
 
     <!-- 公用样式 开始 -->
-    <link type="text/css" href="/static/person/css/response.css"
-          th:href="@{/person/css/response.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/person/css/public.css"
-          th:href="@{/person/css/public.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/person/css/xiangying.css"
-          th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
-    
-    
-    <link type="text/css" href="/static/person/css/wan_shan_xin_xi/top.css"
-          th:href="@{/person/css/wan_shan_xin_xi/top.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/person/css/wan_shan_xin_xi/jbxxs.css"
-          th:href="@{/person/css/wan_shan_xin_xi/jbxxs.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/person/css/position_info/xiangqing.css"
-          th:href="@{/person/css/position_info/xiangqing.css}" rel="stylesheet" />
-    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
-            th:src="@{/person/js/jquery-3.2.1.js}"></script>
-    <script type="text/javascript" src="/static/person/js/wan_shan_xin_xi/jibenxinxi.js"
-            th:src="@{/person/js/wan_shan_xin_xi/jibenxinxi.js}"></script>
-    <script type="text/javascript" src="/static/person/js/jweixin-1.2.0.js"
-            th:src="@{/person/js/jweixin-1.2.0.js}"></script>
-    <script type="text/javascript" src="/static/person/js/wan_shan_xin_xi/jquery.area.js"
-            th:src="@{/person/js/wan_shan_xin_xi/jquery.area.js}"></script>
-    <!--上传头像开始-->
-    <link href="/static/person/css/wan_shan_xin_xi/sctx.css"
-          th:href="@{/person/css/wan_shan_xin_xi/sctx.css}" rel="stylesheet" type="text/css">
-    <!--上传头像结束-->
-    
-    <!--性别开始-->
-    <script type="text/javascript">
-	  $(document).ready(function() {
-	  $('.dijis').click(function(){
-				if($('.d-guanzhu').text()=="男"){
-					$('.d-guanzhu').text("女");
-				}else{
-					$('.d-guanzhu').text("男");
-				}
-			});
-    });
-	  function goBack() {
-          window.location.href="/transition/my_resume";
-      }
-    </script>
-   <!--性别结束-->
-   <!--地区选择开始-->
-   <link rel="stylesheet" href="/static/person/css/wan_shan_xin_xi/style.css"
-         th:href="@{/person/css/wan_shan_xin_xi/style.css}" />
-   <!--地区选择结束-->
-   
-   <!--选择职位开始-->
-    <link rel="stylesheet" type="text/css" href="/static/person/css/wan_shan_xin_xi/mobileSelect.css"
-          th:href="@{/person/css/wan_shan_xin_xi/mobileSelect.css}">
-    <script src="/static/person/js/wan_shan_xin_xi/mobileSelect.js"
-            th:src="@{/person/js/wan_shan_xin_xi/mobileSelect.js}" type="text/javascript"></script>
-   <!--选择职位结束-->
-   
-   
+
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+
+    <link type="text/css" href="/static/company/css/dprzss.css" th:href="@{/company/css/dprzss.css}" rel="stylesheet" />
+
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}"></script>
+    <!--上传图片开始-->
+    <link href="/static/company/css/zhu_ce_tian_xie_xin_xi/sctx.css"
+          th:href="@{/company/css/zhu_ce_tian_xie_xin_xi/sctx.css}" rel="stylesheet" type="text/css" />
+    <!--上传图片结束-->
 </head>
 <body>
  
@@ -73,172 +35,59 @@
  <div class="topbus">
    <!--里边开始-->
    <div class="tbusinto">
-     基本信息
-     <a href="#" class="zjtous" onclick="goBack()"><img src="/static/person/images/biao04.png"
-                    th:src="@{/person/images/biao04.png}"/></a>
+     店铺认证
+     <a href="#" class="zjtous" onclick="window.location.href='/transition/go_wo_de'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
  <!--头部结束-->
  
- <!--头像开始-->
- <div class="headaits clearfix">
-   <!--左边开始-->
-   <div class="fl heaxilfs">
-     头像
-   </div>
-   <!--左边结束-->
-   
-   <!--右边开始-->
-     <div class="fr yobtouxs clearfix">
-       <!--上传头像开始-->
+ <!--最上边开始-->
+ <div class="zsbuyus">
+   应国家法规要求，您需要上传店铺营业证照，完成资质认证。
+ </div>
+ <!--最上边结束-->
+ 
+ <!--上传图片开始-->
       <div class="sltoucs">
-            <div class="uploader blue">
-                <a class="license">
-                </a>
-            </div>
+                <div class="uploader blue">
+                    <input type="text" class="filename" readonly/>
+                    <a class="license">
+                        <img id="img-1" src="/static/company/images/datu.png" th:src="@{/company/images/datu.png}" />
+                    </a>
+                    <input id="file0" class="file-3" type="file" size="30" onchange="javascript:setImagePreview();" accept="image/*" capture="camera" />
+                    <input type="button" value="上传营业执照照片" class="sczzbuts" />
+                </div>
+                
+                <div class="yulan">
+                    <img src="" id="img0" >
+                    <div class="enter">
+                        <button class="btn-2 fl">取消</button>
+                        <button class="btn-3 fr">确定</button>
+                    </div>
+                </div>
       </div>
-      <img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" class="yjtiss" />
-       <!--上传头像结束-->
-       
-       
-     </div>
-   <!--右边结束-->
+ <!--上传图片结束-->
+ 
+ <!--详细信息开始-->
+ <div class="xibxtqws">
+   <h1>营业执照上传规则</h1>
+   <p>
+     1.需提供清晰的执照原件照片，照片需要完整的
+看清的营业执照全部内容。<br>
+2.上传的营业执照营业期限必须在有效期之内。<br>
+3.您的店铺地址需要和营业执照地址保持一致。
+   </p>
+   <h3>认证过程遇到困难？联系客服：<span>155-5802-6165</span></h3>
  </div>
- <!--头像结束-->
+ <!--详细信息结束-->
  
- <!--个人信息开始-->
- <div class="grxxyis">
-   
-   <!--输入一块开始-->
-   <div class="sryikuys borxboms clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks">姓名</div>
-     <!--左边结束-->
-     <!--右边开始-->
-     <div class="fr youyss namesl">
-     </div>
-     <!--右边结束-->
-   </div>
-   <!--输入一块结束-->
-   
-   <!--性别开始-->
-   <div class="sryikuys borxboms dijis clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks">性别</div>
-     <!--左边结束-->
-     <!--右边开始-->
-     <div class="fr sexyous sexsl">
-     </div>
-     <!--右边结束-->
-   </div>
-   <!--性别结束-->
-   
-   
-   <!--输入一块开始-->
-   <div class="sryikuys clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks">年龄</div>
-     <!--左边结束-->
-     <!--右边开始-->
-     <div class="fr youyss agesl">
-     </div>
-     <!--右边结束-->
-   </div>
-   <!--输入一块结束-->
-   
- </div>
- <!--个人信息结束-->
  
- <!--联系方式开始-->
- <div class="cnouyts">
-     <!--所在地区开始-->
-     <div class="sryikuys borxboms clearfix">
-         <!--左边开始-->
-         <div class="fl zcsyks">当前所在地</div>
-         <!--左边结束-->
-
-         <!--右边开始-->
-         <div class="fr youkuiss">
-             <!--地区选择开始-->
-             <div class="xzeyosx">
-                 <section class="express-area">
-                     <a id="expressArea" href="javascript:void(0)">
-                         <dl class="addresssl">
-                         </dl>
-                     </a>
-                 </section>
-                 <!--选择地区弹层-->
-                 <section id="areaLayer" class="express-area-box">
-                     <header>
-                         <h3>选择地区</h3>
-                         <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
-                         <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-                     </header>
-                     <article id="areaBox">
-                         <ul id="areaList" class="area-list"></ul>
-                     </article>
-                 </section>
-                 <!--遮罩层-->
-                 <div id="areaMask" class="mask"></div>
-                 <script src="/static/person/js/wan_shan_xin_xi/jquery.area.js" th:src="@{/person/js/wan_shan_xin_xi/jquery.area.js}"></script>
-             </div>
-             <!--地区选择结束-->
-             <img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" class="yjtiss" />
-         </div>
-         <!--右边结束-->
-
-     </div>
-     <!--所在地区结束-->
-   
-   <!--联系方式开始-->
-   <div class="sryikuys borxboms clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks" >联系方式</div>
-     <!--左边结束-->
-     <!--右边开始-->
-     <div class="fr youyss phonesl">
-     </div>
-     <!--右边结束-->
-   </div>
-   <!--联系方式结束-->
-
-     <!--工作状态开始-->
-     <div class="sryikuys clearfix">
-         <!--左边开始-->
-         <div class="fl zcsyks">工作状态</div>
-         <!--左边结束-->
-
-         <!--右边开始-->
-         <div class="fr yogzztas">
-
-             <!--选择职位开始-->
-             <div class="xzzwis statesl">
-             </div> <img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" class="yjtiss" />
-             <!--选择职位结束-->
-
-         </div>
-         <!--右边结束-->
-
-     </div>
-     <!--工作状态结束-->
-
- </div>
- <!--联系方式结束-->
- 
-
-<!--最底部开始-->
-<div class="zduioss">
-  <a href="#" class="bcanius">保存</a>
-</div>
-<!--最底部结束-->
-
-
- 
-<!--上传头像开始-->
-<script src="/static/person/js/wan_shan_xin_xi/iscroll-zoom.js" th:src="@{/person/js/wan_shan_xin_xi/iscroll-zoom.js}"></script>
-<script src="/static/person/js/wan_shan_xin_xi/hammer.js" th:src="@{/person/js/wan_shan_xin_xi/hammer.js}"></script>
-<script src="/static/person/js/wan_shan_xin_xi/jquery.photoClip.js" th:src="@{/person/js/wan_shan_xin_xi/jquery.photoClip.js}"></script>
+  
+<!--上传图片开始-->
+ <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/iscroll-zoom.js" th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/iscroll-zoom.js}"></script>
+ <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/hammer.js" th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/hammer.js}"></script>
+ <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/jquery.photoClip.js" th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/jquery.photoClip.js}"></script>
  <script>
     var obUrl = ''
     //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
@@ -441,11 +290,8 @@ $(".btn-3").click(function(){
                 !0
     }
 </script>
-<!--上传头像结束-->
-
-
- <div class="toolbarframe02" style="display: none">保存成功</div>
- <div class="toolbarframe03" style="display: none">保存失败</div>
+<!--上传图片结束-->
+ 
  
 </body>
 </html>

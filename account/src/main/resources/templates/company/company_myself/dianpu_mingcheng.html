@@ -1,0 +1,82 @@
+﻿<!doctype html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>个人端-我的-姓名</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css"
+          th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/wodedh.css"
+          th:href="@{/company/css/wo_de/wodedh.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript">
+        function mcfanhui() {
+            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+        }
+        function mcbaocun() {
+            var dmc = $(".sjkyus").val();
+            console.log(dmc);
+            if(dmc !="" &&dmc !='' && dmc !=undefined){
+                sessionStorage.setItem("Dmmmmc",dmc);
+                window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+            }else {
+                $(".NameBwk").show();
+                setTimeout('$(".NameBwk").hide()',600);
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+       <div >店铺名称</div>
+     <a href="#" onclick="mcfanhui()" class="zjtous"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--内容开始-->
+ <div class="dhysnrs">
+   <input type="text" placeholder="真实店铺名称" class="sjkyus" />
+ </div>
+ 
+ <div class="bcanius">
+   <a href="#" class="bcnois" onclick="mcbaocun()">保存</a>
+ </div>
+ 
+ <!--内容结束-->
+
+ <div class="toolbarframe NameBwk" style="display: none">店铺名称不能为空</div>
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

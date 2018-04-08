@@ -24,15 +24,12 @@ public class IndexController {
 
     @RequestMapping("personalIndex")
     public String personalIndex(HttpSession session){
-        session.setAttribute("userId",0);
-        session.setAttribute("zt",1);
-        return "personal/personalIndex";
+        return "personal/mySelf_notLogin";
 
     }
 
     @RequestMapping("companyIndex")
     public String companyIndex(HttpSession session){
-        session.setAttribute("userId","4");   //1-17331153729   //2-15859228476
         return "company/company_index/companyIndex";
     }
 }

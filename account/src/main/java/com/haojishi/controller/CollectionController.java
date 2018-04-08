@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/collection")
+@RequestMapping("collection")
 public class CollectionController {
 
     @Autowired

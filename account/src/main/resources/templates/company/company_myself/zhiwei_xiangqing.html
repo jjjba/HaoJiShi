@@ -1,0 +1,198 @@
+﻿<!doctype html>
+<html    xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>店铺端-我的-职位管理-职位详情</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+	<!-- 公用样式 结束 -->
+
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangqing02.css" th:href="@{/company/css/xiangqing02.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script>
+        $(document).ready(function() {
+
+            $.ajax({
+                url:"/company/getCompanyAndgetZhiwei",
+                type:"POST",
+                success:function (msg) {
+                    console.log(msg);
+                   var  company = msg.dataOne;
+                    var position =msg.data;
+                    var YuLanOrXiangQing = sessionStorage.getItem("YuLanOrXiangQing");
+                    var htm = "";
+                    var htm1 = "";
+                    var htm2 = "";
+                    var htm3 ="";
+                    htm+="<div class='sbontshs'><div class='respise clearfix'><div class='fl reselefs'>";
+                    if(YuLanOrXiangQing == "yulan"){
+                        var zwlx = sessionStorage.getItem("zwlx");
+                        var zwmc = sessionStorage.getItem("zwmc");
+                        var yx = sessionStorage.getItem("yx");
+                        var jyyq = sessionStorage.getItem("jyyq");
+                        var xbyq = sessionStorage.getItem("xbyq");
+                        var nlyq = sessionStorage.getItem("nlyq");
+                        var zwfl = sessionStorage.getItem("LLLLzwfl");
+                        var zwms = sessionStorage.getItem("zwms");
+                        htm+=zwlx;
+                        htm+="</div></div><div class='gonzis'>7000-9000/月</div><div class='yaoqius'>";
+                        htm+=jyyq;
+                        htm+=" | ";
+                        htm+=nlyq;
+                        htm+=" | ";
+                        htm+=xbyq;
+                        htm+="</div><div class='daiyus'>"
+                        var zwfl1 = zwfl.substring(0,zwfl.length-1);
+                        var att = new Array();
+                        att = zwfl1.split(",");
+                        for(var i =0;i<att.length;i++){
+                            htm+="<span>";
+                            htm+=att[i];
+                            htm+="</span>"
+                        }
+                        htm+="</span>";
+                        htm2+=zwms;
+
+                    }
+                    if(YuLanOrXiangQing == "xiangqing"){
+                        htm+=position.positionType;
+                        htm+="</div></div><div class='gonzis'>7000-9000/月</div><div class='yaoqius'>";
+                        htm+=position.experience;
+                        htm+=" | ";
+                        htm+=position.age;
+                        htm+=" | ";
+                        htm+=position.sex;
+                        htm+="</div><div class='daiyus'>"
+                        var zwfl1 = position.welfare;
+                        var att = zwfl1.split(",");
+                        for(var i =0;0<att.length;i++){
+                            htm+="<span>";
+                            htm+=att[i];
+                            htm+="</span>"
+                        }
+                        htm+="</span>";
+                        htm2+=position.positionInfo;
+
+                    }
+                    //开始htm1
+                    htm1+="<div class='corpzuos'><img src='";
+                    if(company.iconPath!=null){
+                        htm1+=company.iconPath;
+                    }else{
+                        htm1+="../../company/images/tuui.png";
+                    }
+
+                    htm1+=" '/><div class='yrzs'><img src='../../company/images/biao02.png'/></div></div><div class='corpryous'><h1>";
+                    htm1+=company.name;
+                    htm1+="</h1><p>";
+                    htm1+=company.companyType;
+                    htm1+="|";
+                    htm1+company.companydpmj;
+                    htm1+="|";
+                    htm1+="</p><img src='../../company/images/yjts.png' class='jtois' /></div>"
+                    htm3+="<a href='#'><div class='dpuzhids'><div class='dzlefs'>";
+                    htm3+=company.companyAddr;
+                    htm3+="</div><div class='dzyous'><img src='../../company/images/yjts.png' /></div></div></a>";
+                    $(".sbnecont").html(htm);
+                    $(".corpnames").html(htm1);
+                    $(".zwqxconts").html(htm2);
+                    $(".dpdz").html(htm3);
+                }
+            })
+
+
+        })
+    </script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     职位详情
+     <a href="#" class="zjtous" onclick="window.location.href='/transition/bianji_zhiwei'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ 
+ <!--上边内容开始-->
+ <div class="sbnecont">
+<!--1-->
+   </div>
+   <!--上结束-->
+   
+   <!--下开始-->
+      <!--公司名称地址开始-->
+        <div class="corpnames">
+          <!--2-->
+        </div>
+      <!--公司名称地址结束-->   
+    <!--下结束-->
+
+ </div>
+ <!--上边内容结束-->
+ 
+ <!--职位详情开始-->
+ <div class="zwxqius">
+   <!--标题开始-->
+   <div class="zwxtits">职位详情</div>
+   <!--标题结束-->
+   <!--内容开始-->
+   <div class="zwqxconts">
+     <!--3-->
+   </div>
+   <!--内容结束-->
+   
+ </div>
+ <!--职位详情结束-->
+ 
+ <!--店铺地址开始-->
+ <div class="dpudzhis">
+   <!--标题开始-->
+   <div class="zwxtits dpdz">店铺地址</div>
+   <!--标题结束-->
+   <!--内容开始-->
+    <!--4-->
+   <!--内容结束-->
+ </div>
+ <!--店铺地址结束-->
+ 
+ <!--最底部开始-->
+ <div class="bcanius">
+   <a href="#" class="bcnois">分享职位，快速提升职位热度</a>
+ </div>
+ <!--最底部结束-->
+ 
+
+
+  
+
+ 
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

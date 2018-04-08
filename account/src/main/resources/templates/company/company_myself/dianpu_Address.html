@@ -1,0 +1,86 @@
+﻿<!doctype html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>企业端-填写企业信息address</title>
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/kuai_zhao/kzfwu.css"
+          th:href="@{/company/css/kuai_zhao/kzfwu.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/wodedh.css"
+          th:href="@{/company/css/wo_de/wodedh.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css"
+          th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+</head>
+<body>
+<!--头部开始-->
+<div class="topbus">
+    <!--里边开始-->
+    <div class="tbusinto">
+        店铺地址
+        <a href="#" class="zjtous" onclick="dizhifanhui()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+        <a href="#" class="qudeds srhos" onclick="Addressbaocun()">确定</a>
+        <!--<a href="http://apis.map.qq.com/ws/geocoder/v1/?location=39.984154,116.307490&output=json&key=3DSBZ-QV7HS-T7YO7-63ZYW-L4IMK-NSBJD" class="qudeds srhos">确定</a>-->
+    </div>
+    <!--里边结束-->
+</div>
+<!--头部结束-->
+<!--头部结束-->
+<iframe id="mapPage" width="100%" height="700px" frameborder=0
+        src="http://apis.map.qq.com/tools/locpicker?search=1&type=1&key=3DSBZ-QV7HS-T7YO7-63ZYW-L4IMK-NSBJD&referer=myapp">
+</iframe>
+<div class="toolbarframe NameBwk" style="display: none">店铺地址未选择</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
+<script type="text/javascript">
+    window.addEventListener('message', function(event) {
+        // 接收位置信息，用户选择确认位置点后选点组件会触发该事件，回传用户的位置信息
+        var loc = event.data;
+        if (loc && loc.module == 'locationPicker') {//防止其他应用也会向该页面post信息，需判断module是否为'locationPicker'
+            console.log('location', loc);
+            console.log()
+
+            sessionStorage.setItem("lat",loc.latlng.lat);
+            sessionStorage.setItem("lng",loc.latlng.lng);
+            sessionStorage.setItem("poiaddress",loc.poiaddress);
+            sessionStorage.setItem("poiname",loc.poiname);
+           var latlng = loc.latlng.lat+","+loc.latlng.lng;
+            $.getJSON("http://apis.map.qq.com/ws/geocoder/v1/?location="
+                +latlng+"&output=jsonp&key=3DSBZ-QV7HS-T7YO7-63ZYW-L4IMK-NSBJD&callback=?",
+                function(aaa){
+                console.log(aaa.result.address_component.city);//中国无人能敌district
+                    console.log(aaa.result.address_component.district);
+                    sessionStorage.setItem("cityname",aaa.result.address_component.city+"_"+aaa.result.address_component.district);
+            });
+        }
+    }, false);
+
+    function Addressbaocun() {
+        var address = sessionStorage.getItem("cityname");
+        if(address != '' && address !="" && address !=undefined){
+            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+        }else {
+            $(".NameBwk").show();
+            setTimeout('$(".NameBwk").hide()',600);
+        }
+    }
+    function dizhifanhui() {
+        window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+    }
+
+</script>
+</body>
+</html>

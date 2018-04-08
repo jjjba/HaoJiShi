@@ -45,8 +45,8 @@ body{ background:#f7f7f7; padding-bottom:4.5rem;}
  /*一块结束*/
  
  
- .sbtus03{ font-size:1.3rem; color:#9e9e9e; border:1px solid #9e9e9e; background:#; padding:3px 10px 3px 10px; border-radius:30px;}
- .sbtus04{ font-size:1.3rem; color:#ff5252; border:1px solid #ff5252; background:#; padding:3px 10px 3px 10px; border-radius:30px;}
+ .sbtus03{ font-size:1.3rem; color:#9e9e9e; border:1px solid #9e9e9e; padding:3px 10px 3px 10px; border-radius:30px;}
+ .sbtus04{ font-size:1.3rem; color:#ff5252; border:1px solid #ff5252; padding:3px 10px 3px 10px; border-radius:30px;}
  
  
  /*添加新职位开始*/

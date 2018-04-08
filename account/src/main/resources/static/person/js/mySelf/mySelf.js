@@ -12,7 +12,7 @@ $(function () {
 
 function loadPersonalData() {
     $.ajax({
-        url:"/personal/getPersonalInfo",
+        url:"../personal/getPersonalInfo",
         type: "POST",
         success :function (res) {
             var name,age,avatar,sex,state;
@@ -31,18 +31,13 @@ function loadPersonalData() {
             }
             avatar =per.avatar;
             if(avatar == '' || avatar == null){
-                if(per.sex == '男'){
-                    avatar="../../person/images/tupian.png";
-                }else{
-                    avatar="../../person/images/tupian02.png";
-                }
-
+                avatar="../person/images/tupian.png";
             }
             sex =per.sex;
             if(sex == '男'){
-                sex="../../person/images/biao05.png";
+                sex="../person/images/biao05.png";
             }else{
-                sex="../../person/images/biao06.png";
+                sex="../person/images/biao06.png";
             }
 
             var sbjltitis ='<div class="sbtopxxs">'+
@@ -62,7 +57,7 @@ function loadPersonalData() {
                 '<div class="ycbuyss">'+
                 '完善简历，获取更多工作机会'+
                 '</div>'+
-                '<div class="ycjtouis"><img src="../../person/images/yjts.png" /></div>'+
+                '<div class="ycjtouis"><img src="../person/images/yjts.png" /></div>'+
                 '</div>'+
                 '</a>';
             $('.sbjltitis').append(sbjltitis);
@@ -76,37 +71,37 @@ function loadPersonalData() {
 }
 
 function collectPosition() {
-    window.location.href="/transition/collect_position";
+    window.location.href="../transition/collect_position";
 }
 
 function deliveryRecords() {
-    window.location.href="/transition/delivery_records";
+    window.location.href="../transition/delivery_records";
 }
 
 function commonProblem() {
-    window.location.href="/transition/common_problem";
+    window.location.href="../transition/common_problem";
 }
 
 function accountSettings() {
-    window.location.href="/transition/account_settings";
+    window.location.href="../transition/account_settings";
 }
 
 function switchingIdentity() {
-    window.location.href="/transition/switching_identity";
+    window.location.href="../transition/switching_identity";
 }
 
 function goIndex() {
-    window.location.href="/transition/transition_goIndex";
+    window.location.href="../transition/transition_goIndex";
 }
 
 function goPosition() {
-    window.location.href="/transition/transition_all_position";
+    window.location.href="../transition/transition_all_position";
 }
 
 function loadPersonalInfo() {
-    window.location.href="/transition/my_resume";
+    window.location.href="../transition/my_resume";
 }
 
 function privacySetting() {
-    window.location.href="/transition/go_privacy_setting"
+    window.location.href="../transition/go_privacy_setting"
 }

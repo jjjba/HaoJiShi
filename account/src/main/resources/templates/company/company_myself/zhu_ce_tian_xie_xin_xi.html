@@ -1,4 +1,4 @@
-﻿﻿<!doctype html>
+﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -7,6 +7,7 @@
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>填写企业信息</title>
+
 
     <!-- 公用样式 开始 -->
     <link type="text/css" href="/static/company/css/response.css"
@@ -35,16 +36,22 @@
           th:href="@{/company/css/zhu_ce_tian_xie_xin_xi/mobileSelect.css}" />
     <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/mobileSelect.js" type="text/javascript"
             th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/mobileSelect.js}" ></script>
+    <script src="/static/company/js/tian_xie_xinxi/tianxiexinxi.js" type="text/javascript"
+            th:src="@{/company/js/tian_xie_xinxi/tianxiexinxi.js}" ></script>
+    <script type="text/javascript" src="/static/company/js/wo_de/jquery.cookie.js"
+            th:src="@{/company/js/wo_de/jquery.cookie.js}"></script>
    <!--选择职位结束-->
+
+
 </head>
 <body>
- 
+
  <!--头部开始-->
  <div class="topbus">
    <!--里边开始-->
    <div class="tbusinto">
      编辑店铺信息
-     <a href="#" class="zjtous" onclick="javascript:history.back(-1);"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}" /></a>
+     <a href="#" class="zjtous" onclick="window.location.href='/transition/go_zhu_ce'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}" /></a>
    </div>
    <!--里边结束-->
  </div>
@@ -55,64 +62,66 @@
  <div class="grxxyis">
   
    <!--输入一块开始-->
-   <a href="#">
+   <a href="#" onclick="Dname()">
    <div class="sryikuys borxboms clearfix">
      <!--左边开始-->
      <div class="fl zcsyks">您的姓名</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss cbseiis">
-       姓名 <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
+     <div class="fr youyss cbseiis xm">
+       姓名<img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
      </div>
      <!--右边结束-->
    </div>
    </a>
    <!--输入一块结束-->
-   
-   <!--输入一块开始-->
-   <div class="sryikuys clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks">您的职位</div>
-     <!--左边结束-->
-     
-     <!--右边开始-->
-     <div class="fr yogzztas">
-       
-       <!--选择职位开始-->
-       <div class="xzzwis">
-           <div id="trigger2" class="zhiiis">选择职位</div>
-            <script type="text/javascript">
-            
-                var weekdayArr2=['SPA','足疗'];
-                
-                
-                var mobileSelect2 = new MobileSelect({
-                    trigger: '#trigger2', 
-                    title: '',  
-                    wheels: [
-                                {data: weekdayArr2}
-                            ],
-                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-                    transitionEnd:function(indexArr, data){
-                        console.log(data);
-                    },
-                    callback:function(indexArr, data){
-                        console.log(data);
-                    }
-                });
-            
-            
-            </script>
-        </div> <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
-       <!--选择职位结束-->
-       
+     <!--输入一块开始-->
+     <div class="sryikuys clearfix">
+         <!--左边开始-->
+         <div class="fl zcsyks">您的职位</div>
+         <!--左边结束-->
+
+         <!--右边开始-->
+         <div class="fr yogzztas">
+
+             <!--选择职位开始-->
+             <div class="xzzwis">
+                 <div id="trigger2" class="zhiiis">选择职位</div>
+                 <script type="text/javascript">
+
+                     var weekdayArr2=['老板/投资人','店长','主管','经理','部长','大堂经理'];
+
+
+                     var mobileSelect2 = new MobileSelect({
+                         trigger: '#trigger2',
+                         title: '',
+                         wheels: [
+                             {data: weekdayArr2}
+                         ],
+                         position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                         transitionEnd:function(indexArr, data){
+                             console.log(data+"----1-----"+indexArr);
+                         },
+                         callback:function(indexArr, data){
+                             console.log(data+"----2-----"+indexArr);
+                             sessionStorage.setItem("zhiwei",data);
+                         }
+                     });
+
+
+                 </script>
+             </div> <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
+             <!--选择职位结束-->
+
+         </div>
+         <!--右边结束-->
      </div>
-     <!--右边结束-->    
-   </div>
- <!--输入一块结束-->
+     <!--输入一块结束-->
+
  
  
  </div>
+
 
 <!--上结束-->
 
@@ -158,13 +167,13 @@
  
  
    <!--输入一块开始-->
-   <a href="#">
+   <a href="#" onclick="dianpuName()">
    <div class="sryikuys borxboms clearfix">
      <!--左边开始-->
-     <div class="fl zcsyks">店铺名称</div>
+     <div class="fl zcsyks ">店铺名称</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss cbseiis">
+     <div class="fr youyss cbseiis mc ">
         <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
      </div>
      <!--右边结束-->
@@ -173,13 +182,13 @@
    <!--输入一块结束-->
    
    <!--输入一块开始-->
-   <a href="#">
+   <a href="#" onclick="dianpuMj()">
    <div class="sryikuys borxboms clearfix">
      <!--左边开始-->
      <div class="fl zcsyks">店铺面积</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss cbseiis">
+     <div class="fr youyss cbseiis mj">
         <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
      </div>
      <!--右边结束-->
@@ -191,121 +200,79 @@
 
    
 
-   <!--店铺类型开始-->
-   <div class="sryikuys borxboms clearfix">
-     <!--左边开始-->
-     <div class="fl zcsyks">店铺类型</div>
-     <!--左边结束-->
-     
-     <!--右边开始-->
-     <div class="fr yogzztas">
-       
-       <!--选择职位开始-->
-       <div class="xzzwis">
-           <div id="trigger3" class="zhiiis">店铺类型</div>
-            <script type="text/javascript">
-            
-                var weekdayArr3=['类型2','类型1'];
-                
-                
-                var mobileSelect3 = new MobileSelect({
-                    trigger: '#trigger3', 
-                    title: '',  
-                    wheels: [
-                                {data: weekdayArr3}
-                            ],
-                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-                    transitionEnd:function(indexArr, data){
-                        console.log(data);
-                    },
-                    callback:function(indexArr, data){
-                        console.log(data);
-                    }
-                });
-            
-            
-            </script>
-        </div> <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
-       <!--选择职位结束-->
-       
-     </div>
-     <!--右边结束-->    
-   </div>
- <!--店铺类型结束-->
+
 
    <!--输入一块开始-->
-   <a href="#">
+   <a href="#" onclick="dpfl()">
    <div class="sryikuys borxboms clearfix">
      <!--左边开始-->
-     <div class="fl zcsyks">店铺福利</div>
+     <div class="fl zcsyks ">店铺福利</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss zcsyks">
-        <img src="/static/company/images/yjts.png" class="yjtiss" />
+     <div class="fr youyss zcsyks cbseiis dpfl">
+        <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
      </div>
      <!--右边结束-->
    </div>
    </a>
    <!--输入一块结束-->
- 
- 
- 
-  <!--所在地区开始-->
-     <div class="sryikuys borxboms clearfix">
-         <!--左边开始-->
-         <div class="fl zcsyks">店铺地址</div>
-         <!--左边结束-->
-         
-         <!--右边开始-->
-         <div class="fr youkuiss">
-            <!--地区选择开始-->
-            <div class="xzeyosx">
-                <section class="express-area">
-                    <a id="expressArea" href="javascript:void(0)">
-                        <dl>
-                            <dd>省 > 市 > 区/县</dd>
-                        </dl>
-                    </a>
-                </section>
-                <!--选择地区弹层-->
-                <section id="areaLayer" class="express-area-box">
-                    <header>
-                        <h3>选择地区</h3>
-                        <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
-                        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
-                    </header>
-                    <article id="areaBox">
-                        <ul id="areaList" class="area-list"></ul>
-                    </article>
-                </section>
-                <!--遮罩层-->
-                <div id="areaMask" class="mask"></div>
-                <script src="/static/company/js/zhu_ce_tian_xie_xin_xi/jquery.area.js"
-                        th:src="@{/company/js/zhu_ce_tian_xie_xin_xi/jquery.area.js}"></script>
-            </div>    
-            <!--地区选择结束-->
-            <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
-         </div>
-         <!--右边结束-->
-         
-     </div>
-   <!--所在地区结束-->
-   
+
    <!--联系方式开始-->
-   <a href="#">
+   <a href="#" onclick="Address()">
    <div class="sryikuys borxboms clearfix">
      <!--左边开始-->
-     <div class="fl zcsyks zcsyks">店铺地址</div>
+     <div class="fl zcsyks zcsyks ">店铺地址</div>
      <!--左边结束-->
      <!--右边开始-->
-     <div class="fr youyss">
+     <div class="fr youyss cbseiis Dpdz" >
         <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
      </div>
      <!--右边结束-->
    </div>
    </a>
    <!--联系方式结束-->
-   
+     <!--店铺类型开始-->
+     <div class="sryikuys borxboms clearfix">
+         <!--左边开始-->
+         <div class="fl zcsyks">店铺类型</div>
+         <!--左边结束-->
+
+         <!--右边开始-->
+         <div class="fr yogzztas">
+
+             <!--选择职位开始-->
+             <div class="xzzwis">
+                 <div id="trigger3" class="zhiiis">店铺类型</div>
+                 <script type="text/javascript">
+
+                     var weekdayArr3=['社区店','足浴店','养生馆','高端会所','大型水会','其他'];
+
+
+                     var mobileSelect3 = new MobileSelect({
+                         trigger: '#trigger3',
+                         title: '',
+                         wheels: [
+                             {data: weekdayArr3}
+                         ],
+                         position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                         transitionEnd:function(indexArr, data){
+                             console.log(data);
+                         },
+                         callback:function(indexArr, data){
+                             console.log(data);
+                             sessionStorage.setItem("dplx",data);
+                         }
+                     });
+
+
+                 </script>
+             </div> <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
+             <!--选择职位结束-->
+
+         </div>
+         <!--右边结束-->
+     </div>
+     <!--店铺类型结束-->
 
    
  </div>
@@ -314,7 +281,7 @@
 
 <!--最底部开始-->
 <div class="zduioss">
-  <a href="#" class="bcanius">保存</a>
+  <a href="#" class="bcanius" onclick="xinxibaocun();">保存</a>
 </div>
 <!--最底部结束-->
 
@@ -340,7 +307,7 @@
             console.log("照片读取完成");
         },
         clipFinish: function(dataURL) {
-            console.log(dataURL);
+            console.log(dataURL+"是这-------");
         }
     });
 </script>
