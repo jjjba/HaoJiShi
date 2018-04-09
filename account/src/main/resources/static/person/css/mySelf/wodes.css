@@ -9,7 +9,7 @@ body{ background:#f7f7f7;}
   /*上开始*/
   .sbtopxxs{ border-bottom:1px dashed #ebebeb; display:box; display:-webkit-box; display:-moz-box; padding:0.3rem 0 1.2rem 0;}
      /*左开始*/
-	 .sblefs{ width:6.2rem;}
+	 .sblefs{ width:6.2rem;height:6.2rem;}
 	   .sblefs img{ width:100%; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
 	 /*左结束*/
 	 

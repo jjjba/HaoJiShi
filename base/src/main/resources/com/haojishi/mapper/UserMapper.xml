@@ -13,11 +13,12 @@
     <result column="account_state" jdbcType="INTEGER" property="accountState" />
     <result column="isShare" jdbcType="INTEGER" property="isshare" />
     <result column="subscribe" jdbcType="INTEGER" property="subscribe" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, phone, password, type, openid, account_state, isShare, subscribe
+    id, phone, password, type, openid, account_state, isShare, subscribe, create_time
   </sql>
 </mapper>

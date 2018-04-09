@@ -76,6 +76,12 @@ public class Services implements Serializable {
     @Column(name = "comPhone")
     private String comphone;
 
+    /**
+     * 订单号
+     */
+    @Column(name = "order_id")
+    private Integer orderId;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -294,6 +300,24 @@ public class Services implements Serializable {
         this.comphone = comphone == null ? null : comphone.trim();
     }
 
+    /**
+     * 获取订单号
+     *
+     * @return order_id - 订单号
+     */
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    /**
+     * 设置订单号
+     *
+     * @param orderId 订单号
+     */
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -312,6 +336,7 @@ public class Services implements Serializable {
         sb.append(", type=").append(type);
         sb.append(", comname=").append(comname);
         sb.append(", comphone=").append(comphone);
+        sb.append(", orderId=").append(orderId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

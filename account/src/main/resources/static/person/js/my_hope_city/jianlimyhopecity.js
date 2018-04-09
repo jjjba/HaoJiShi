@@ -30,14 +30,14 @@ $(function() {
 
 
     $(".fllfzuos ul li").click(function(){
-    
+
         $(".fllfzuos ul li").eq($(this).index()).addClass("houvers").siblings().removeClass('houvers');
-        });
-        $(".fllfzuos02 ul").click(function(){
-        
+    });
+    $(".fllfzuos02 ul").click(function(){
+
         $(".fllfzuos02 ul").eq($(this).index()).addClass("houvers").siblings().removeClass('houvers');
 
-        });
+    });
 });
 
 function deleteCity(cid,hopeCity) {
@@ -81,18 +81,10 @@ function getCityData(id) {
     })
 }
 function quedingbaocun() {
-    $.ajax({
-        url:"/personal/updatePersonalByPersonalId",
-        type:"POST",
-        data : {
-            hopeCity : hc.join(",")
-        },
-        success : function (res) {
-            window.location.href="/transition/my_resume";
-        }
-    })
+    sessionStorage.setItem("hopeCity",hc.join(","));
+    window.location.href="/transition/go_wan_shan_xin_xi";
 }
 function goBack() {
-    window.location.href="/transition/my_resume";
+    window.location.href="/transition/go_wan_shan_xin_xi";
 }
 

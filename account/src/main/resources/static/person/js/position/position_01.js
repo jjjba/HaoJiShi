@@ -19,31 +19,56 @@ $(function () {
     $('#jishi').click(function (e) {
         positionName =$(e.target).attr("data");
         console.log("positionName======="+positionName);
-        loadPersonalByParams(city,scale,money,positionName);
+        loadPositionByPars(city,scale,money,positionName);
     });
     $('#guanli').click(function (e) {
         positionName =$(e.target).attr("data");
         console.log("positionName======="+positionName);
-        loadPersonalByParams(city,scale,money,positionName);
+        loadPositionByPars(city,scale,money,positionName);
     });
     $('#qianting').click(function (e) {
         positionName =$(e.target).attr("data");
         console.log("positionName======="+positionName);
-        loadPersonalByParams(city,scale,money,positionName);
+        loadPositionByPars(city,scale,money,positionName);
     });
     $('#houqin').click(function (e) {
         positionName =$(e.target).attr("data");
         console.log("positionName======="+positionName);
-        loadPersonalByParams(city,scale,money,positionName);
+        loadPositionByPars(city,scale,money,positionName);
     });
     $('#peixun').click(function (e) {
         positionName =$(e.target).attr("data");
         console.log("positionName======="+positionName);
-        loadPersonalByParams(city,scale,money,positionName);
+        loadPositionByPars(city,scale,money,positionName);
+    });
+    $('.city').click(function (e) {
+        city =$(e.target).attr("data");
+        console.log("city======="+city);
+        loadPositionByPars(city,scale,money,positionName);
+    });
+    $('.rmcshis').click(function (e) {
+        city =$(e.target).attr("data");
+        console.log("city======="+city);
+        loadPositionByPars(city,scale,money,positionName);
     });
 
 });
-
+function loadPosition() {
+    $.ajax({
+        url: "/personal/getPersonalHopeJobClassification",
+        type: "POST",
+        success: function (res) {
+            if (res.success) {
+                var list = res.data;
+                var address = list[0].address;
+                if (address == null || address == "") {
+                    address = "未获取到位置"
+                }
+                $('.zcwzuis').append('当前城市：' + address);
+            }
+        }
+    })
+}
 function loadPosition() {
     // var data ={
     //     page :page,
@@ -101,6 +126,10 @@ function loadPosition() {
                     if(company_scale == null || company_scale == ""){
                         company_scale ="未填写";
                     }
+                    icon_path =item.icon_path;
+                    if(icon_path == null || icon_path == ""){
+                        icon_path="../../person/images/icon_company_default.png";
+                    }
                     var personalList1111 = "";
                     personalList1111 +=
                         '<div class="reconblock">'+
@@ -115,7 +144,7 @@ function loadPosition() {
                         '</div>'+
                         '<div class="corpnames">'+
                         '<div class="corpzuos">'+
-                        '<div class="icon"></div> '+
+                        '<img src="'+icon_path+'" /> '+
                         '<div class="yrzs"><img src="../../person/images/biao02.png" /></div>'+
                         '</div>'+
                         '<div class="corpryous">'+
@@ -125,12 +154,7 @@ function loadPosition() {
                         '</div>'+
                         '</a>'+
                         '</div>';
-                    icon_path =item.icon_path;
-                    if(icon_path == null || icon_path == ""){
-                        $('.icon').append('<img src="../../person/images/icon_company_default.png" />');
-                    }else {
-                        $('.icon').append('<img src="'+icon_path+'" />');
-                    }
+
                     $('.personalList1111').append(personalList1111);
                 });
             }

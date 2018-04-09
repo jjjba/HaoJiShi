@@ -14,13 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URLEncoder;
 
-/**
- * Created by linge on 2017/10/5.
- */
-
 
 @Controller
-@RequestMapping("/wechat")
+@RequestMapping("wechat")
 @Slf4j
 public class WechatController {
 
@@ -29,10 +25,10 @@ public class WechatController {
 
     /**
      * 访问这个时便会发起微信的网页授权
-     * @param returnUrl 发起授权是可携带的一个参数，我这里用的是下面将要用到的login()的地址，将获取到的openid传递过去
+     * @param returnUrl
      * @return
      */
-    @GetMapping("/authorize")
+    @GetMapping("authorize")
     public String authorize(@RequestParam("returnUrl") String returnUrl) {
         //设置回调地址
         String url = "http://localhost/wechat/userInfo";

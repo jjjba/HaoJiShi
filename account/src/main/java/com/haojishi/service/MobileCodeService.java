@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,13 +88,14 @@ public class MobileCodeService {
      * @param phone
      * @return BusinessMessage -
      */
-    public BusinessMessage isRegist(String phone) {
+    public BusinessMessage isRegist(String phone, HttpSession session) {
         BusinessMessage businessMessage =new BusinessMessage();
         Example example =new Example(User.class);
         example.createCriteria().andEqualTo("phone",phone);
         List<User> userList =userMapper.selectByExample(example);
         Map<String,Object> map =new HashMap<>();
         if(userList.size() > 0){
+            session.setAttribute("userId",userList.get(0).getId());
             Example example1 =new Example(Personal.class);
             example1.createCriteria().andEqualTo("userId",userList.get(0).getId());
             List<Personal> personals =personalMapper.selectByExample(example1);

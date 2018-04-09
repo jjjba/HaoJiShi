@@ -20,6 +20,25 @@
                        p.hot)
     </select>
 
+    <select id="getPositionByAddress" resultType="java.util.Map">
+        select DISTINCT * from
+        (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+        c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 1 and p.company_id in (
+        select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =1 and c.company_city like concat(#{address},'%') and p.user_id=1
+        )
+        union all
+        select p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+        c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
+        and u.account_state = 1 and c.matState =1 and p.state =1 and c.company_city in (
+        select name from region where pId in (
+        select id from region where id in (
+        select pId from region  where name in(#{address})
+        )
+        )
+        )
+        ) cap ORDER BY hot desc
+    </select>
+
     <select id="getPositionByAddress01" resultType="java.util.Map">
     select DISTINCT * from
     (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
@@ -185,7 +204,7 @@
             AND u.account_state = 1
         </where>
         ORDER BY
-        p.hot
+        p.hot desc
     </select>
 
     <select id="getPositionByParams02" resultType="java.util.Map">
@@ -209,7 +228,7 @@
             AND u.account_state = 1
         </where>
         ORDER BY
-        p.hot
+        p.hot desc
     </select>
 
     <!-- 根据用户企业用户id查询发布的职位 -->

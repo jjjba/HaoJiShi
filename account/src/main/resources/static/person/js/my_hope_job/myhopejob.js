@@ -90,3 +90,19 @@ function deleteJob(val,hopeJob) {
     $("#"+val).remove();
     hj.splice($.inArray(hopeJob,hj),1);
 }
+function quedingbaocun() {
+    $.ajax({
+        url:"/personal/updatePersonalByPersonalId",
+        type:"POST",
+        data : {
+            hopeJob : hj.toString()
+        },
+        success : function (res) {
+            window.location.href="/transition/my_resume";
+        }
+    })
+}
+
+function goBack() {
+    window.location.href="/transition/my_resume";
+}

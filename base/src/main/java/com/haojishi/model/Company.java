@@ -48,12 +48,12 @@ public class Company implements Serializable {
     /**
      * 经度
      */
-    private Double longitude;
+    private String longitude;
 
     /**
      * 纬度
      */
-    private Double latitude;
+    private String latitude;
 
     /**
      * 企业名称
@@ -93,8 +93,8 @@ public class Company implements Serializable {
     /**
      * 区
      */
-    @Column(name = "area_id")
-    private Integer areaId;
+    @Column(name = "company_area")
+    private Integer companyArea;
 
     /**
      * 店铺地址
@@ -213,6 +213,12 @@ public class Company implements Serializable {
      * 营业执照审核未通过原因 1营业执照不清晰 2不与营业执照符合
      */
     private String why;
+
+    /**
+     * 店铺面积
+     */
+    @Column(name = "company_dpmj")
+    private String companyDpmj;
 
     private static final long serialVersionUID = 1L;
 
@@ -347,7 +353,7 @@ public class Company implements Serializable {
      *
      * @return longitude - 经度
      */
-    public Double getLongitude() {
+    public String getLongitude() {
         return longitude;
     }
 
@@ -356,8 +362,8 @@ public class Company implements Serializable {
      *
      * @param longitude 经度
      */
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude == null ? null : longitude.trim();
     }
 
     /**
@@ -365,7 +371,7 @@ public class Company implements Serializable {
      *
      * @return latitude - 纬度
      */
-    public Double getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
@@ -374,8 +380,8 @@ public class Company implements Serializable {
      *
      * @param latitude 纬度
      */
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude == null ? null : latitude.trim();
     }
 
     /**
@@ -489,19 +495,19 @@ public class Company implements Serializable {
     /**
      * 获取区
      *
-     * @return area_id - 区
+     * @return company_area - 区
      */
-    public Integer getAreaId() {
-        return areaId;
+    public Integer getCompanyArea() {
+        return companyArea;
     }
 
     /**
      * 设置区
      *
-     * @param areaId 区
+     * @param companyArea 区
      */
-    public void setAreaId(Integer areaId) {
-        this.areaId = areaId;
+    public void setCompanyArea(Integer companyArea) {
+        this.companyArea = companyArea;
     }
 
     /**
@@ -864,6 +870,24 @@ public class Company implements Serializable {
         this.why = why == null ? null : why.trim();
     }
 
+    /**
+     * 获取店铺面积
+     *
+     * @return company_dpmj - 店铺面积
+     */
+    public String getCompanyDpmj() {
+        return companyDpmj;
+    }
+
+    /**
+     * 设置店铺面积
+     *
+     * @param companyDpmj 店铺面积
+     */
+    public void setCompanyDpmj(String companyDpmj) {
+        this.companyDpmj = companyDpmj == null ? null : companyDpmj.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -885,7 +909,7 @@ public class Company implements Serializable {
         sb.append(", companyCity=").append(companyCity);
         sb.append(", provinceId=").append(provinceId);
         sb.append(", cityId=").append(cityId);
-        sb.append(", areaId=").append(areaId);
+        sb.append(", companyArea=").append(companyArea);
         sb.append(", companyAddr=").append(companyAddr);
         sb.append(", companyType=").append(companyType);
         sb.append(", iconPath=").append(iconPath);
@@ -906,6 +930,7 @@ public class Company implements Serializable {
         sb.append(", positionExposureNumber=").append(positionExposureNumber);
         sb.append(", accountState=").append(accountState);
         sb.append(", why=").append(why);
+        sb.append(", companyDpmj=").append(companyDpmj);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

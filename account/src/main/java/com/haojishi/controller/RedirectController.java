@@ -25,117 +25,85 @@ import java.util.List;
  */
 @Slf4j
 @Controller
+@RequestMapping("account")
 public class RedirectController {
-
     @Autowired
     private Environment environment;
     @Autowired
     private UserMapper userMapper;
-    /**
-     * 微信网页授权流程:
-     * 1. 用户同意授权,获取 code
-     * 2. 通过 code 换取网页授权 access_token
-     * 3. 使用获取到的 access_token 和 openid 拉取用户信息
-     * @param code  用户同意授权后,获取到的code
-     * @param state 重定向状态参数
-     * @return
-     */
 
-    @RequestMapping("account")
+    @RequestMapping("redirect")
     public String wecahtLogin(@RequestParam(name = "code", required = false) String code,
                               @RequestParam(name = "state") String state, HttpSession session,HttpServletRequest request) {
         log.info("收到微信重定向跳转.");
         log.info("用户同意授权,获取code:{} , state:{}", code, state);
-
-
         //通过code换取网页授权web_access_token
-        if(code != null || !(code.equals(""))){
-            String APPID = environment.getProperty("api.appid");
-            String SECRET = environment.getProperty("api.secret");
-            String CODE = code;
-            String WebAccessToken = "";
-            String openId  = "";
-
-            //替换字符串，获得请求URL
-            String token = UserInfoUtil.getWebAccess(APPID, SECRET, CODE);
-            System.out.println("----------------------------token为："+token);
-            //通过https方式请求获得web_access_token
-            String response = HttpsUtil.httpsRequestToString(token, "GET", null);
-            JSONObject jsonObject = JSON.parseObject(response);
-            System.out.println("jsonObject------"+jsonObject);
-            if (null != jsonObject) {
-                try {
-
-                    WebAccessToken = jsonObject.getString("access_token");
-                    openId = jsonObject.getString("openid");
-                    Example userExample =new Example(User.class);
-                    userExample.createCriteria().andEqualTo("openid",openId);
-                    List<User> users =userMapper.selectByExample(userExample);
-                    if(users != null && users.size() > 0){
-                        session.setAttribute("userId",users.get(0).getId());
-                    }else {
-                        User user =new User();
-                        user.setOpenid(openId);
-                        userMapper.insertSelective(user);
-                        Example userExample1 =new Example(User.class);
-                        userExample1.createCriteria().andEqualTo("openid",openId);
-                        List<User> userList =userMapper.selectByExample(userExample1);
-                        if(userList != null && userList.size()  > 0){
-                            session.setAttribute("userId",userList.get(0).getId());
+        String code1 = (String) session.getAttribute("code");
+        if(!code.equals(code1)){
+            session.setAttribute("code",code);
+            if(code != null || !(code.equals(""))){
+                String APPID =environment.getProperty("api.appid");
+                String SECRET =environment.getProperty("api.secret");
+                String CODE = code;
+                String WebAccessToken = "";
+                String openId  = "";
+                String token = UserInfoUtil.getWebAccess(APPID,SECRET,CODE);
+                System.out.println("----------------------------token为："+token);
+                String response = HttpsUtil.httpsRequestToString(token, "GET", null);
+                JSONObject jsonObject = JSON.parseObject(response);
+                System.out.println("jsonObject------"+jsonObject);
+                if (null != jsonObject) {
+                    try {
+                        WebAccessToken = jsonObject.getString("access_token");
+                        openId = jsonObject.getString("openid");
+                        Example userExample =new Example(User.class);
+                        userExample.createCriteria().andEqualTo("openid",openId);
+                        List<User> users =userMapper.selectByExample(userExample);
+                        if(users != null && users.size() > 0){
+                            session.setAttribute("userId",users.get(0).getId());
+                            System.out.println("userId11111111111========"+users.get(0).getId());
+                        }else {
+                            User user =new User();
+                            user.setOpenid(openId);
+                            userMapper.insertSelective(user);
+                            Example userExample1 =new Example(User.class);
+                            userExample1.createCriteria().andEqualTo("openid",openId);
+                            List<User> userList =userMapper.selectByExample(userExample1);
+                            if(userList != null && userList.size()  > 0){
+                                session.setAttribute("userId",userList.get(0).getId());
+                            }
+                            System.out.println("userId2222222222222=========="+userList.get(0).getId());
                         }
+                        System.out.println("获取access_token成功-------------------------"+WebAccessToken+"----------------"+openId);
+                    } catch (JSONException e) {
+                        WebAccessToken = null;// 获取code失败
+                        System.out.println("获取WebAccessToken失败");
                     }
-                    System.out.println("获取access_token成功-------------------------"+WebAccessToken+"----------------"+openId);
-
-                } catch (JSONException e) {
-                    WebAccessToken = null;// 获取code失败
-                    System.out.println("获取WebAccessToken失败");
+                }
+                if(state == "companyIndex" || state.equals("companyIndex")){
+                    return "company/companyIndex";
+                }else {
+                    return "personal/personalIndex";
+                }
+            }else {
+                session.setAttribute("userId",1);
+                String phone ="";
+                String pwd = "";
+                String zt ="";
+                if(state == "companyIndex" || state.equals("companyIndex")){
+                    return "company/companyIndex";
+                }else {
+                    return "personal/personalIndex";
                 }
             }
-        }
-
-        String phone ="";
-        String pwd = "";
-        String zt ="";
-        if(state == "companyIndex" || state.equals("companyIndex")){
-            Cookie[] cookies = request.getCookies();
-            if (cookies!=null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    Cookie cookie = cookies[i];
-                    if (cookie.getName().equals("state")) {
-                        zt=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("pwd")) {
-                        pwd=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("phone")) {
-                        phone=cookie.getValue();
-                    }
-                    Example userExample =new Example(User.class);
-                    userExample.createCriteria().andEqualTo("phone",phone).andEqualTo("password",pwd);
-                    List<User> users =userMapper.selectByExample(userExample);
-
-                }
-            }
-            return "company/companyIndex";
         }else {
-            Cookie[] cookies = request.getCookies();
-            if (cookies!=null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    Cookie cookie = cookies[i];
-                    if (cookie.getName().equals("phone")) {
-                        phone=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("state")) {
-                        zt=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("pwd")) {
-                        pwd=cookie.getValue();
-                    }
-                }
+            if(state == "companyIndex" || state.equals("companyIndex")){
+                return "company/companyIndex";
+            }else {
+                return "personal/personalIndex";
             }
-
-            return "personal/personalIndex";
         }
+
 
     }
 }

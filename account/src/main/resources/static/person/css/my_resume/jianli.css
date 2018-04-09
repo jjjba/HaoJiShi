@@ -6,7 +6,7 @@ body{ background:#f7f7f7; padding-bottom:5rem;}
 .txuyse{ background:#fff; padding:0.7rem 1.2rem 0.5rem 1.2rem; margin-top:1rem;}
   .sbtopxxs{display:box; display:-webkit-box; display:-moz-box; padding:0.3rem 0 1.2rem 0;}
      /*左开始*/
-	 .sblefs{ width:6.2rem;}
+	 .sblefs{ width:6.2rem;height:6.2rem;}
 	   .sblefs img{ width:100%; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
 	 /*左结束*/
 	 
@@ -102,23 +102,10 @@ body{ background:#f7f7f7; padding-bottom:5rem;}
 
 .wtxyss{color:#FF476F;}
 
+.sjbiiws{ padding:1rem 0 0 0;}
 
+.tupians img{ height:5rem; margin:0 0.3rem 0 0.3rem;}
 
+.jiahaos{ padding-left:0.3rem;}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.jiahaos img{ height:5rem;}

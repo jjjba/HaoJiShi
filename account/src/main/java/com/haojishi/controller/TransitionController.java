@@ -19,7 +19,7 @@ import java.util.List;
  * @date 2018/03/20 15.14
  */
 @Controller
-@RequestMapping("/transition")
+@RequestMapping("transition")
 public class TransitionController {
 
     @Autowired
@@ -79,8 +79,10 @@ public class TransitionController {
     @RequestMapping("transition_goMySelf")
     public String transition_goMySelf(HttpSession session){
         int userId = (int) session.getAttribute("userId");
-        User user =userMapper.selectByPrimaryKey(userId);
-        if(user != null){
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
+        if(personals != null && personals.size() > 0){
             return "personal/mySelf/mySelf";
         }else {
             return "personal/mySelf/mySelf_notLogin";
@@ -94,7 +96,7 @@ public class TransitionController {
      */
     @RequestMapping("transition_search")
     public String transition_search(){
-        return "personal/position/position_search";
+        return "personal/position/job_search";
     }
 
     /**
@@ -401,7 +403,7 @@ public class TransitionController {
      */
     @RequestMapping("go_wan_shan_xin_xi")
     public String go_wan_shan_xin_xi(){
-        return "personal/mySelf/wan_shan_xin_xi";
+        return "personal/mySelf/zhu_ce_xin_xi";
     }
 
     /**
@@ -471,5 +473,38 @@ public class TransitionController {
     @RequestMapping("go_wo_de_ji_ben_xin_xi")
     public String go_wo_de_ji_ben_xin_xi(){
         return "personal/mySelf/wo_de_ji_ben_xin_xi";
+    }
+
+    /**
+     * 求职者端====曾经做过
+     * @return
+     */
+    @RequestMapping("go_ceng_jing_zuo_guo")
+    public String go_ceng_jing_zuo_guo(){
+        return "personal/mySelf/ceng_jing_zuo_guo";
+    }
+
+    /**
+     * 求职者端=====填写简历信息我的求职岗位
+     */
+    @RequestMapping("go_jian_li_wo_de_yi_xiang_gong_zuo")
+    public String go_jian_li_wo_de_yi_xiang_gong_zuo(){
+        return "personal/mySelf/jian_li_wo_de_yi_xiang_gong_zuo";
+    }
+
+    /**
+     * 求职者端=====填写简历信息我的意向城市
+     */
+    @RequestMapping("go_jian_li_wo_de_yi_xiang_cheng_shi")
+    public String go_jian_li_wo_de_yi_xiang_cheng_shi(){
+        return "personal/mySelf/jian_li_wo_de_yi_xiang_cheng_shi";
+    }
+
+    /**
+     * 求职者端=====填写简历信息我的标签
+     */
+    @RequestMapping("go_jian_li_wo_de_biao_qian")
+    public String go_jian_li_wo_de_biao_qian(){
+        return "personal/mySelf/jian_li_wo_de_biao_qian";
     }
 }

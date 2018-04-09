@@ -47,7 +47,7 @@ function loadPersonalData() {
 
             var sbjltitis ='<div class="sbtopxxs">'+
                 '<div class="sblefs">'+
-                '<img src="'+avatar+'" />'+
+                '<img src="'+avatar+'" style="width:6.2rem;height:6.2rem;"/>'+
                 '</div>'+
                 '<div class="sbyours">'+
                 '<div class="lylyus">'+name+' <span><img src="'+sex+'">'+age+'</span></div>'+

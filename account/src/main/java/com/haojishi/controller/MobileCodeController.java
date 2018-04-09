@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author 梁闯
@@ -60,8 +61,8 @@ public class MobileCodeController {
      * @return BusinessMessage -
      */
     @RequestMapping("isRegist")
-    public BusinessMessage isRegist(String phone) {
-        return mobileCodeService.isRegist(phone);
+    public BusinessMessage isRegist(String phone,HttpSession session) {
+        return mobileCodeService.isRegist(phone,session);
     }
 
 }

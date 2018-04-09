@@ -61,7 +61,8 @@ function loadUserInfo() {
             if(address == null || address == ""){
                 address ="<dd>省-市-区/县</dd>"
             }
-            $('.license').append('<img src="../../person/images/tupian.png" id="dynamicImage"/>')
+            console.log("sex==================="+sex)
+            $('.license').append('<img src="'+avatar+'" id="dynamicImage" style="width:6.2rem;height:6.2rem;"/>')
             $('.namesl').append('<input type="text" placeholder="'+name+'" class="stkius name" /><img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.sexsl').append('<div class="d-guanzhu sex">'+sex+'</div> <img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.agesl').append('<input type="text" placeholder="'+age+'" class="stkius age" /> <img src="../../person/images/yjts.png" class="yjtiss" />')
@@ -101,7 +102,7 @@ function configwx() {
             var timesta = res.time_stamp;
             var signatur = res.signa_ture;
             var appid = res.appid;
-            
+
             wx.config({
                 debug: true,
                 appId: appid,
@@ -153,5 +154,5 @@ function chooseImage() {
             });
         }
 });
-    
+
 }

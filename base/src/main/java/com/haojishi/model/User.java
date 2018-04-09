@@ -1,6 +1,7 @@
 package com.haojishi.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.*;
 
 public class User implements Serializable {
@@ -47,6 +48,12 @@ public class User implements Serializable {
      * 判断用户有没有关注公众号 0没有 1关注
      */
     private Integer subscribe;
+
+    /**
+     * openid创建时间
+     */
+    @Column(name = "create_time")
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -194,6 +201,24 @@ public class User implements Serializable {
         this.subscribe = subscribe;
     }
 
+    /**
+     * 获取openid创建时间
+     *
+     * @return create_time - openid创建时间
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    /**
+     * 设置openid创建时间
+     *
+     * @param createTime openid创建时间
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -208,6 +233,7 @@ public class User implements Serializable {
         sb.append(", accountState=").append(accountState);
         sb.append(", isshare=").append(isshare);
         sb.append(", subscribe=").append(subscribe);
+        sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

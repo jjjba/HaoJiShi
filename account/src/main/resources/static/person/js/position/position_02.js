@@ -20,7 +20,7 @@ $(function () {
         loadPositionByPars(city,scale,money,type);
 
     });
-    $(".rmcshis").click(function(e) {
+    $(".remenchengsi").click(function(e) {
         city = $(e.target).attr("data");
         console.log("city======"+city)
         loadPositionByPars(city,scale,money,type);

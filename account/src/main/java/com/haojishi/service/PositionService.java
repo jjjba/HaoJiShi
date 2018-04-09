@@ -208,22 +208,33 @@ public class PositionService {
         List<Personal> personals =personalMapper.selectByExample(example);
         if(personals != null && personals.size() > 0){
             String city =personals.get(0).getHopeCity();
-            String[] city1=city.split(",");
-            if(city1.length == 1){
-                positionList=commonPositionMapper.getPositionByAddress01(city1[0]);
-            }else if(city1.length == 2){
-                positionList =commonPositionMapper.getPositionByAddress02(city1[0],city1[1]);
-            }else if(city1.length == 3){
-                positionList =commonPositionMapper.getPositionByAddress03(city1[0],city1[1],city1[2]);
-            }else if(city1.length == 4){
-                positionList =commonPositionMapper.getPositionByAddress04(city1[0],city1[1],city1[2],city1[3]);
-            }else if(city1.length == 5){
-                positionList =commonPositionMapper.getPositionByAddress05(city1[0],city1[1],city1[2],city1[3],city1[4]);
+            if(city == null || city == "" || city .equals("")){
+                RemortIP remortIP =new RemortIP();
+                String address =remortIP.getAddressByIP(request);
+                System.out.println("address======"+address);
+                positionList=commonPositionMapper.getPositionByAddress01(address);
+            }else {
+                String[] city1=city.split(",");
+                if(city1.length == 1){
+                    positionList=commonPositionMapper.getPositionByAddress01(city1[0]);
+                }else if(city1.length == 2){
+                    positionList =commonPositionMapper.getPositionByAddress02(city1[0],city1[1]);
+                }else if(city1.length == 3){
+                    positionList =commonPositionMapper.getPositionByAddress03(city1[0],city1[1],city1[2]);
+                }else if(city1.length == 4){
+                    positionList =commonPositionMapper.getPositionByAddress04(city1[0],city1[1],city1[2],city1[3]);
+                }else if(city1.length == 5){
+                    positionList =commonPositionMapper.getPositionByAddress05(city1[0],city1[1],city1[2],city1[3],city1[4]);
+                }
             }
+
         }else {
+            System.out.println("进来未注册获取职位");
             RemortIP remortIP =new RemortIP();
             String address =remortIP.getAddressByIP(request);
+            System.out.println("address======"+address);
             positionList=commonPositionMapper.getPositionByAddress01(address);
+
         }
         businessMessage.setMsg("获取职位列表成功");
         businessMessage.setSuccess(true);

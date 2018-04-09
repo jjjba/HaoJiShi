@@ -17,12 +17,13 @@
     <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="comName" jdbcType="VARCHAR" property="comname" />
     <result column="comPhone" jdbcType="VARCHAR" property="comphone" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
     id, comId, money, createDate, startDate, endTime, phoneNumber, surplusNumber, name, 
-    type, comName, comPhone
+    type, comName, comPhone, order_id
   </sql>
 </mapper>

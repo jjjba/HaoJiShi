@@ -23,15 +23,32 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("registerPersonal")
-    public BusinessMessage registerPersonal(String phone){
-        return personalServicel.registerPersonal(phone);
+    public BusinessMessage registerPersonal(HttpSession session,String phone){
+        return personalServicel.registerPersonal(session,phone);
     }
+
     /**
-     * 获取所有求职者信息
-     *
-     * @param request
-     * @return 所有求职者信息
+     * 求职者端==========完成注册后完善信息
+     * @param name
+     * @param sex
+     * @param age
+     * @param state
+     * @param phone
+     * @param avatar
+     * @return
      */
+    @RequestMapping("perfectPersonalInfo")
+    public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
+                                               String special,String state,String phone,String avatar,String hopeJob,String hopeCity){
+        return personalServicel.perfectPersonalInfo(session, name, sex, age, gzjy, special, state, phone, avatar,hopeJob,hopeCity);
+    }
+
+        /**
+         * 获取所有求职者信息
+         *
+         * @param request
+         * @return 所有求职者信息
+         */
     @RequestMapping("getAllPersonal")
     public BusinessMessage getAllPersoanal(HttpServletRequest request,Integer page,Integer size){
         return personalServicel.getAllPersonal(request,page,size);
@@ -45,6 +62,17 @@ public class PersonalController {
     @RequestMapping("getPersonalHopeJobClassification")
     public BusinessMessage getPersonalHopeJobClassification(HttpSession session,HttpServletRequest request){
         return personalServicel.getPersonalHopeJobClassification(session,request);
+    }
+
+    /**
+     * 获取求职者期望工作分类
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("getPersonalHopePosition")
+    public BusinessMessage getPersonalHopePosition(HttpSession session){
+        return personalServicel.getPersonalHopePosition(session);
     }
 
     /**
@@ -150,6 +178,14 @@ public class PersonalController {
     }
 
     /**
+     * 退出登录
+     */
+    @RequestMapping("tuichu")
+    public BusinessMessage tuichu(HttpSession session){
+        return personalServicel.tuichu(session);
+    }
+
+    /**
      *切换求职者身份获取用户是未登陆还是未完善信息
      * @param session
      * @return
@@ -157,5 +193,15 @@ public class PersonalController {
     @RequestMapping("getPersonalState")
     public BusinessMessage getPersonalState(HttpSession session){
         return personalServicel.getPersonalState(session);
+    }
+
+    /**
+     * 求职者端=========获取用户手机密码
+     * @param session
+     * @return
+     */
+    @RequestMapping("getUserPhoneAndPWD")
+    public BusinessMessage getUserPhoneAndPWD(HttpSession session){
+        return personalServicel.getUserPhoneAndPWD(session);
     }
 }

@@ -138,13 +138,60 @@ public class PersonalService {
      * @param phone
      * @return
      */
-    public BusinessMessage registerPersonal(String phone){
+    public BusinessMessage registerPersonal(HttpSession session,String phone){
         BusinessMessage businessMessage =new BusinessMessage();
-        User user =new User();
-        user.setPhone(phone);
-        userMapper.insertSelective(user);
-        businessMessage.setMsg("注册成功");
-        businessMessage.setSuccess(true);
+        try {
+            User user =new User();
+            user.setPhone(phone);
+            userMapper.insertSelective(user);
+            Example example =new Example(User.class);
+            example.createCriteria().andEqualTo("phone",phone);
+            List<User> users =userMapper.selectByExample(example);
+            session.removeAttribute("userId");
+            session.setAttribute("userId",users.get(0).getId());
+            businessMessage.setMsg("注册成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("求职者注册失败",e);
+        }
+        return businessMessage;
+    }
+
+    /**
+     * 求职者端==========完成注册后完善信息
+     * @param name
+     * @param sex
+     * @param age
+     * @param gzjy
+     * @param state
+     * @param phone
+     * @param avatar
+     * @return
+     */
+    public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
+                                               String special,String state,String phone,String avatar,String hopeJob,String hopeCity){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (Integer) session.getAttribute("userId");
+            User user =userMapper.selectByPrimaryKey(userId);
+            Personal per =new Personal();
+            per.setSpecial(special);
+            per.setUserId(user.getId());
+            per.setAvatar(avatar);
+            per.setName(name);
+            per.setHopeJob(hopeJob);
+            per.setHopeCity(hopeCity);
+            per.setSex(sex);
+            per.setAge(age);
+            per.setJobExperience(gzjy);
+            per.setState(state);
+            per.setPhone(user.getPhone());
+            personalMapper.insertSelective(per);
+            businessMessage.setSuccess(true);
+            businessMessage.setMsg("保存求职者信息成功");
+        }catch (Exception e){
+            log.error("保存求职者失败",e);
+        }
         return businessMessage;
     }
 
@@ -187,8 +234,11 @@ public class PersonalService {
     public BusinessMessage getPersonalInfo(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         int userId = (int) session.getAttribute("userId");
-        Personal personal =personalMapper.selectByPrimaryKey(userId);
-        if(personal != null){
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
+        if(personals != null && personals.size() > 0){
+            Personal personal =personals.get(0);
             Map<String,Object> personalMap =new HashMap<>();
             personalMap.put("state",personal.getState());
             personalMap.put("sex",personal.getSex());
@@ -228,8 +278,7 @@ public class PersonalService {
         RemortIP remortIP =new RemortIP();
         String address =remortIP.getAddressByIP(request);
         List<Map<String,Object>> positionType =new ArrayList<>();
-        int userId = (int) session.getAttribute("userId");
-
+        int userId =(Integer)session.getAttribute("userId");
         Example perExample =new Example(Personal.class);
         perExample.createCriteria().andEqualTo("userId",userId);
         List<Personal> personals =personalMapper.selectByExample(perExample);
@@ -257,6 +306,42 @@ public class PersonalService {
             log.error("未获取到求职者信息");
         }
 
+        return businessMessage;
+    }
+
+    /**
+     * 退出登录
+     */
+    public BusinessMessage tuichu(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        session.removeAttribute("userId");
+        session.setAttribute("userId",0);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+    /**
+     * 获取求职者期望工作分类
+     *
+     * @param session
+     * @return
+     */
+        public BusinessMessage getPersonalHopePosition(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        int userId =(Integer)session.getAttribute("userId");
+        Example perExample =new Example(Personal.class);
+        perExample.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(perExample);
+        if(personals != null && personals.size() > 0){
+            String hopeJob =personals.get(0).getHopeJob();
+            Map<String,Object> map =new HashMap<>();
+            map.put("positions",hopeJob);
+            businessMessage.setMsg("获取求职者分类成功");
+            businessMessage.setSuccess(true);
+            businessMessage.setData(map);
+        }else {
+            businessMessage.setMsg("未获取到求职者信息");
+            log.error("未获取到求职者信息");
+        }
         return businessMessage;
     }
 
@@ -484,8 +569,10 @@ public class PersonalService {
         try {
             List<Map<String,Object>> personalList =new ArrayList();
             List<Map<String,Object>> proPersonal =new ArrayList();
-            int userId = (int) session.getAttribute("userId");
-            int zt = (int) session.getAttribute("zt");
+            String id = (String) session.getAttribute("userId");
+            String zt1 = (String) session.getAttribute("zt");
+            int userId = Integer.parseInt(id);
+            int zt = Integer.parseInt(zt1);
             String city ="";
             if(zt == 1) {
                 List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(userId);
@@ -623,23 +710,39 @@ public class PersonalService {
     public BusinessMessage getPersonalState(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         Map<String,Object> map =new HashMap<>();
-        String openid = (String) session.getAttribute("openid");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("openid",openid);
-        List<User> users =userMapper.selectByExample(userExample);
-        if(users != null && users.size() > 0) {
-            Example personalExample = new Example(Personal.class);
-            personalExample.createCriteria().andEqualTo("userId", users.get(0).getId());
-            List<Personal> personals = personalMapper.selectByExample(personalExample);
-            if (personals.get(0).getPhone() != null && personals.get(0).getPhone() != ""
-                    && !personals.get(0).getPhone().equals("") && !personals.get(0).getPhone().equals("null")) {
+        int userId = (Integer) session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        if(user != null) {
+            if(user.getPhone() != null && !user.getPhone().equals("")){
                 map.put("isRegist","2");
             }else {
                 map.put("isRegist","3");
             }
             businessMessage.setData(map);
             businessMessage.setSuccess(true);
+        }else {
+            map.put("isRegist","3");
+            businessMessage.setData(map);
+            businessMessage.setSuccess(true);
         }
         return businessMessage;
+    }
+
+    /**
+     * 求职者端=========获取用户手机密码
+     * @param session
+     * @return
+     */
+    public BusinessMessage getUserPhoneAndPWD(HttpSession session){
+        BusinessMessage bu =new BusinessMessage();
+        int userId =(Integer)session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        Map<String,Object> map =new HashMap<>();
+        map.put("phone",user.getPhone());
+        map.put("pwd",user.getPassword());
+        bu.setMsg("获取用户账号密码成功");
+        bu.setSuccess(true);
+        bu.setData(map);
+        return bu;
     }
 }

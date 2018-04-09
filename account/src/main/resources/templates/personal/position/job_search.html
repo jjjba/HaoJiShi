@@ -1,23 +1,28 @@
 ﻿<!doctype html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>个人端-搜索职位</title>
+<title>搜索职位</title>
 
     <!-- 公用样式 开始 -->
-    <link type="text/css" href="css/response.css" rel="stylesheet" />
-    <link type="text/css" href="css/public.css" rel="stylesheet" />
-    <link type="text/css" href="css/xiangying.css" rel="stylesheet" />
-	<!-- 公用样式 结束 -->
-
-
+    <link type="text/css" href="/static/person/css/response.css"
+          th:href="@{/person/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/public.css"
+          th:href="@{/person/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/xiangying.css"
+          th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
      
-     <link type="text/css" href="css/sousuozhiwei.css" rel="stylesheet" />
-     
+     <link type="text/css" href="/static/person/css/sousuozhiwei.css"
+           th:href="@{/person/css/sousuozhiwei.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
+            th:src="@{/person/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/position_search/positionSearch02.js"
+            th:src="@{/person/js/position_search/positionSearch02.js}" ></script>
 
     
 </head>
@@ -27,97 +32,30 @@
      <div class="searchis">
        <!--左边搜索框开始-->
          <div class="seahilfs">
-           <input type="text" class="srukuss" placeholder="SPA" />
-           <a href="#" class="xihsss"><img src="images/gaunbi.png" /></a>
+           <input type="text" class="srukuss companyName" placeholder="请输入您感兴趣的店铺或职位" />
+           <a href="#" class="xihsss" onclick="qingchu()"><img src="/static/person/images/gaunbi.png" th:src="@{/person/images/gaunbi.png}"/></a>
          </div>
        <!--左边搜索框结束-->
        <!--右边开始-->
-       <div class="sxaniuss">
-         <a href="#">搜索</a>
-       </div>
+         <div class="sxaniuss cancel">
+               <a href="#" onclick="cancel()">取消</a>
+         </div>
+         <div class="sxaniuss wancheng" style="display: none">
+             <a href="#" onclick="wancheng()">完成</a>
+         </div>
        <!--右边结束-->
      </div>
     <!--搜索框结束-->
 
 
 
-<div>
-    <!--一块开始-->
-    <div class="reconblock">
-      <a href="#">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs"><a href="#">SPA技师</a></div>
-        <div class="fr reseyous"><span class="yse01">急聘</span> <span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资及年限开始-->
-      <div class="wagesyears clearfix">
-        <div class="fl wayealfs"><a href="#">7000-9000/月</a></div>
-        <div class="fr wayefris"><a href="#">经验不限 | 35岁以下 | 仅限女</a></div>
-      </div>
-      <!--工资及年限结束-->
-      <!--公司名称地址开始-->
-        <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <a href="#"><img src="images/tupian01.png" /></a>
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1><a href="#">常乐足道</a></h1>
-            <p><a href="#">单体店 | 1500㎡ | 杭州市 上城区</a></p>
-          </div>
-          <!--右边结束-->
-        </div>
-      <!--公司名称地址结束-->
-      </a>
-    </div>
-    <!--一块结束-->
-    
-    
-     <!--一块开始-->
-    <div class="reconblock">
-      <a href="#">
-      <!--职位开始-->
-      <div class="respise clearfix">
-        <div class="fl reselefs"><a href="#">SPA技师</a></div>
-        <div class="fr reseyous"><span class="yse01">急聘</span> <span class="yse02">热度2599</span></div>
-      </div>
-      <!--职位结束-->
-      <!--工资及年限开始-->
-      <div class="wagesyears clearfix">
-        <div class="fl wayealfs"><a href="#">7000-9000/月</a></div>
-        <div class="fr wayefris"><a href="#">经验不限 | 35岁以下 | 仅限女</a></div>
-      </div>
-      <!--工资及年限结束-->
-      <!--公司名称地址开始-->
-        <div class="corpnames">
-          <!--左边开始-->
-          <div class="corpzuos">
-            <a href="#"><img src="images/tupian01.png" /></a>
-            <div class="yrzs"><img src="images/biao02.png" /></div>
-          </div>
-          <!--左边结束-->
-          <!--右边开始-->
-          <div class="corpryous">
-            <h1><a href="#">常乐足道</a></h1>
-            <p><a href="#">单体店 | 1500㎡ | 杭州市 上城区</a></p>
-          </div>
-          <!--右边结束-->
-        </div>
-      <!--公司名称地址结束-->
-      </a>
-    </div>
-    <!--一块结束-->
+<div class="zhiweiliebiao" style="display: none">
 </div>
 
 
 
 
-<div>
+<div class="lishijilu">
   <!--列表框开始-->
   <ul class="listbks">
     <li>按摩师</li>

@@ -1,4 +1,4 @@
-﻿﻿<!doctype html>
+﻿
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -22,20 +22,23 @@
           th:href="@{/person/css/my_resume/jianli.css}" rel="stylesheet" />
     <link type="text/css" href="/static/person/css/position_info/xiangqing.css"
           th:href="@{/person/css/position_info/xiangqing.css}" rel="stylesheet" />
+    <!--地区选择开始-->
+    <link rel="stylesheet" href="/static/person/css/wan_shan_xin_xi/style.css"
+          th:href="@{/person/css/wan_shan_xin_xi/style.css}" />
+    <!--地区选择结束-->
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" src="/static/person/js/wan_shan_xin_xi/jquery.area.js"
+            th:src="@{/person/js/wan_shan_xin_xi/jquery.area.js}"></script>
+    <script type="text/javascript" src="/static/person/js/jweixin-1.2.0.js"
+            th:src="@{/person/js/jweixin-1.2.0.js}"></script>
    <!--选择职位开始-->
     <link rel="stylesheet" type="text/css" href="/static/person/css/my_resume/mobileSelect.css"
             th:href="@{/person/css/my_resume/mobileSelect.css}">
     <script src="/static/person/js/my_resume/mobileSelect.js"
             th:src="@{/person/js/my_resume/mobileSelect.js}" type="text/javascript"></script>
    <!--选择职位结束-->
-   <!--上传多张照片开始-->
-    <script src="/static/person/js/my_resume/jquery-migrate-1.2.1.min.js"
-            th:src="@{/person/js/my_resume/jquery-migrate-1.2.1.min.js}" ></script>
-    <link href="/static/person/css/my_resume/IMGUP.css" rel="stylesheet"
-            th:href="@{/person/css/my_resume/IMGUP.css}"/>
-   <!--上传多张照片结束-->
+
     <script src="/static/person/js/my_resume/myResume.js"
             th:src="@{/person/js/my_resume/myResume.js}" ></script>
 </head>
@@ -67,12 +70,11 @@
  <div class="zwjisss" id="money">
  </div>
  <!--期望待遇结束-->
- 
- <!--资料开始-->
-  <div class="zwjisss" id="xueli">
-  </div>
- <!--资料结束-->
 
+ <!--资料开始-->
+ <div class="zwjisss cuvjdi">
+ </div>
+ <!--资料结束-->
   
   <!--个人形象开始-->
   <div class="grxxians">
@@ -87,14 +89,12 @@
     <!--副标题结束-->
     
     <!--上传多张照片开始-->
-        <div class="clearfix">
-            <div id="div_imglook" class="fl">
-                <div style="clear: both;"></div>
-            </div>
-            <div id="div_imgfile" class="fl"><img src="/static/person/images/jiatup.png" th:src="@{/person/images/jiatup.png}"/></div>
-        </div>
-        <script src="/static/person/js/my_resume/IMGUP.js"
-            th:src="@{/person/js/my_resume/IMGUP.js}"></script>
+      <div class="clearfix sjbiiws">
+          <div class="fl clearfix tupians">
+          </div>
+          <div class="fl jiahaos"><img src="/static/person/images/jiatup.png" th:src="@{/person/images/jiatup.png}" /></div>
+      </div>
+
     <!--上传多张照片结束-->    
     
   </div>
@@ -110,11 +110,3 @@
  <div class="toolbarframe03" style="display: none">保存失败</div>
 </body>
 </html>
-
-
-
-
-
-
-
-

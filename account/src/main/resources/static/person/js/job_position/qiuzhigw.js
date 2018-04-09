@@ -1,9 +1,9 @@
 // JavaScript Document
-var hj =[];
+var jp =[];
 $(document).ready(function() {
 
-    loadHopeJob();
-        $(".fllfzuos ul li").click(function(){
+loadPosition();
+$(".fllfzuos ul li").click(function(){
     
         $(".fllfzuos ul li").eq($(this).index()).addClass("houvers").siblings().removeClass('houvers');
 
@@ -49,50 +49,65 @@ $(document).ready(function() {
         $("#houqin").hide();
     });
 
-    $("#jishi").click(function(e){
-        var hopejob = $(e.target).attr("data");
-        var hopejob1 =$(this).attr("data");
-        console.log("===="+hopejob)
-        console.log("1111111===="+hopejob1)
-
-
-    });
 
 });
 function addHopeJob(val) {
-    var hopeJob =$('#'+val).attr("data");
-    if(hopeJob == hj[0] || hopeJob == hj[1] ||hopeJob == hj[2] ||hopeJob == hj[3] ||hopeJob == hj[4] ||hopeJob == hj[5]){
+    var pos =$('#'+val).attr("data");
+    if(pos == jp[0] || pos == jp[1] ||pos == jp[2] ||pos == jp[3] ||pos == jp[4] ||pos == jp[5]){
         $(".toolbarframe02").show()
         setTimeout('$(".toolbarframe02").hide()',1000);
     }else {
-        if(hj.length > 5){
+        if(jp.length > 5){
             $(".toolbarframe03").show()
             setTimeout('$(".toolbarframe03").hide()',1000);
         }else {
-            $('.clearfix').append('<li id="'+val+'">'+hopejob+' <a href="" ' +
-                'onclick="deleteJob(&quot;'+val+'&quot;,&quot;'+hopejob+'&quot;)">' +
+            $('.clearfix').append('<li id="'+val+'">'+pos+' <a href="" ' +
+                'onclick="deleteJob(&quot;'+val+'&quot;,&quot;'+pos+'&quot;)">' +
                 '<img src="../../person/images/hongscs.png" class="gbanius" /></a></li>');
-            hj.push(hopejob);
+            jp.push(pos);
         }
     }
 
 }
-function deleteJob(val,hopeJob) {
+function deleteJob(val,pos) {
     $("#"+val).remove();
-    hj.splice($.inArray(hopeJob,hj),1);
-    console.log("===="+hc)
+    jp.splice($.inArray(pos,jp),1);
+    console.log("===="+jp)
 }
 
-function loadHopeJob() {
+function loadPosition(){
     $.ajax({
-        url:'/personal/getPersonalInfo',
+        url:'/personal/getPersonalHopePosition',
         type:'POST',
         success:function (res) {
-            var job =res.data.hope_job;
-            console.log(job)
+            var job =res.data.positions;
             if(job == null || job == ""){
-                job ="";
+                var j =job.split(",");
+                for(var i = 0;i < j.length;i++){
+                    jp.push(j[i]);
+                    console.log("j[i]============"+j[i]);
+                    $('.clearfix').append('<li id="'+val+'">'+j[i]+' <a href="" ' +
+                        'onclick="deleteJob(&quot;'+val+'&quot;,&quot;'+j[i]+'&quot;)">' +
+                        '<img src="../../person/images/hongscs.png" class="gbanius" /></a></li>');
+                }
             }
         }
     })
+}
+
+function quedingbaocun() {
+    $.ajax({
+        url:"/personal/updatePersonalByPersonalId",
+        type:"POST",
+        data : {
+            hopeJob : jp.join(",")
+        },
+        success : function () {
+            window.location.href="/transition/transition_all_position";
+        }
+    })
+}
+
+function goBack() {
+    window.location.href="/transition/transition_all_position";
 }

@@ -2,7 +2,6 @@
 var clock = '';
 var nums = 60;
 var btn;
-var isPhone;
 var mobileCode;
 var isRegist;
 $(document).ready(function() {
@@ -29,42 +28,7 @@ $(document).ready(function() {
     });
 
     $(".yzxis").click(function(){
-        var phoneNumber =$('#phoneNumber').val();
-        $.ajax({
-            url:"/mobileCode/getIsPhone",
-            type:"POST",
-            data:{
-                phoneNumber : phoneNumber,
-            },
-            success : function (res) {
-                isPhone =res.data.isPhone;
-                if(isPhone != "1"){
-                    $('.yzxis').disabled = true
-                    $('.shuruzhengqueshouji').show();
-                    setTimeout('$(".shuruzhengqueshouji").hide()',1000);
-                }else {
-                    sendCode(this);
-                    var phoneNumber =$('#phoneNumber').val();
-                    console.log("phone======"+phoneNumber)
-                    $.ajax({
-                        url:"/mobileCode/code",
-                        type:"POST",
-                        data:{
-                            phone : phoneNumber,
-                        },
-                        success : function (res) {
-                            mobileCode =res.data.mobile_code;
-                            $('.zhengque').show();
-                            setTimeout('$(".zhengque").hide()',900);
-                        },
-                        error : function () {
-                            $('.huoqushibai').show();
-                            setTimeout('$(".huoqushibai").hide()',900);
-                        }
-                    })
-                }
-            }
-        });
+
 
     });
 
@@ -80,7 +44,7 @@ function jinru() {
             phoneNumber : phoneNumber,
         },
         success : function (res) {
-            isPhone =res.data.isPhone;
+            var isPhone =res.data.isPhone;
             if(isPhone != "1"){
                 $('.shuruzhengqueshouji').show();
                 setTimeout('$(".shuruzhengqueshouji").hide()',1000);
@@ -120,10 +84,48 @@ function jinru() {
 }
 
 function sendCode(thisBtn) {
-    btn = thisBtn;
-    btn.disabled = true; //将按钮置为不可点击
-    btn.value = nums+'s';
-    clock = setInterval(doLoop, 1000); //一秒执行一次
+    var phoneNumber =$('#phoneNumber').val();
+    $.ajax({
+        url:"/mobileCode/getIsPhone",
+        type:"POST",
+        data:{
+            phoneNumber : phoneNumber,
+        },
+        success : function (res) {
+            var isPhone =res.data.isPhone;
+            if(isPhone != "1"){
+                $('.yzxis').disabled = true
+                $('.shuruzhengqueshouji').show();
+                setTimeout('$(".shuruzhengqueshouji").hide()',1000);
+            }else {
+                btn = thisBtn;
+                btn.disabled = true; //将按钮置为不可点击
+                btn.value = nums+'s';
+                clock = setInterval(doLoop, 1000); //一秒执行一次
+                var phoneNumber =$('#phoneNumber').val();
+
+                $.ajax({
+                    url:"/mobileCode/code",
+                    type:"POST",
+                    data:{
+                        phone : phoneNumber,
+                    },
+                    success : function (res) {
+                        mobileCode =res.data.mobile_code;
+                        $('.zhengque').show();
+                        setTimeout('$(".zhengque").hide()',900);
+                        console.log("phone======"+phoneNumber)
+                        console.log("code =========="+mobileCode);
+                    },
+                    error : function () {
+                        $('.huoqushibai').show();
+                        setTimeout('$(".huoqushibai").hide()',900);
+                    }
+                })
+            }
+        }
+    });
+
 }
 function doLoop() {
     nums--;

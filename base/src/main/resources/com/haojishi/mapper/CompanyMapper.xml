@@ -12,15 +12,15 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="register_type" jdbcType="INTEGER" property="registerType" />
-    <result column="longitude" jdbcType="DOUBLE" property="longitude" />
-    <result column="latitude" jdbcType="DOUBLE" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="company_scale" jdbcType="VARCHAR" property="companyScale" />
     <result column="company_special" jdbcType="VARCHAR" property="companySpecial" />
     <result column="company_city" jdbcType="VARCHAR" property="companyCity" />
     <result column="province_id" jdbcType="INTEGER" property="provinceId" />
     <result column="city_id" jdbcType="INTEGER" property="cityId" />
-    <result column="area_id" jdbcType="INTEGER" property="areaId" />
+    <result column="company_area" jdbcType="INTEGER" property="companyArea" />
     <result column="company_addr" jdbcType="VARCHAR" property="companyAddr" />
     <result column="company_type" jdbcType="VARCHAR" property="companyType" />
     <result column="icon_path" jdbcType="VARCHAR" property="iconPath" />
@@ -41,15 +41,17 @@
     <result column="position_exposure_number" jdbcType="INTEGER" property="positionExposureNumber" />
     <result column="account_state" jdbcType="INTEGER" property="accountState" />
     <result column="why" jdbcType="VARCHAR" property="why" />
+    <result column="company_dpmj" jdbcType="VARCHAR" property="companyDpmj" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
     id, user_id, age, sex, phone, user_name, register_type, longitude, latitude, name, 
-    company_scale, company_special, company_city, province_id, city_id, area_id, company_addr, 
-    company_type, icon_path, zhi_wu, modify_time, position_count, company_info, company_photo, 
-    matState, create_time, license_path, last_login_time, month_visits, openid, share_number, 
-    position_number, position_see_number, position_exposure_number, account_state, why
+    company_scale, company_special, company_city, province_id, city_id, company_area, 
+    company_addr, company_type, icon_path, zhi_wu, modify_time, position_count, company_info, 
+    company_photo, matState, create_time, license_path, last_login_time, month_visits, 
+    openid, share_number, position_number, position_see_number, position_exposure_number, 
+    account_state, why, company_dpmj
   </sql>
 </mapper>

@@ -1,8 +1,7 @@
 // JavaScript Document
-var od =[];
+var hj =[];
 $(document).ready(function() {
 
-    loadHopeJob();
     $(".fllfzuos ul li").click(function(){
 
         $(".fllfzuos ul li").eq($(this).index()).addClass("houvers").siblings().removeClass('houvers');
@@ -50,59 +49,34 @@ $(document).ready(function() {
     });
 
 });
-function loadHopeJob() {
-    $.ajax({
-        url:'/personal/getPersonalInfo',
-        type:'POST',
-        success:function (res) {
-            var onceDo =res.data.onceDo;
-            if(onceDo == null || onceDo == ""){
-                var j =onceDo.split(",");
-                for(var i = 0;i < j.length;i++){
-                    od.push(j[i]);
 
-                    $('.clearfix').append('<li id="'+val+'">'+j[i]+' <a href="" ' +
-                        'onclick="deleteJob(&quot;'+val+'&quot;,&quot;'+j[i]+'&quot;)">' +
-                        '<img src="../../person/images/hongscs.png" class="gbanius" /></a></li>');                }
-            }
-        }
-    })
-}
 function addHopeJob(val) {
     var hopeJob =$('#'+val).attr("data");
-    if(hopeJob == od[0] || hopeJob == od[1] ||hopeJob == od[2] ||hopeJob == od[3] ||hopeJob == od[4] ||hopeJob == od[5]){
+    if(hopeJob == hj[0] || hopeJob == hj[1] ||hopeJob == hj[2] ||hopeJob == hj[3] ||hopeJob == hj[4] ||hopeJob == hj[5]){
         $(".toolbarframe02").show()
         setTimeout('$(".toolbarframe02").hide()',1000);
     }else {
-        if(od.length > 5){
+        if(hj.length > 5){
             $(".toolbarframe03").show()
             setTimeout('$(".toolbarframe03").hide()',1000);
         }else {
             $('.clearfix').append('<li id="'+val+'">'+hopeJob+' <a href="" ' +
                 'onclick="deleteJob(&quot;'+val+'&quot;,&quot;'+hopeJob+'&quot;)">' +
                 '<img src="../../person/images/hongscs.png" class="gbanius" /></a></li>');
-            od.push(hopeJob);
+            hj.push(hopeJob);
         }
     }
 
 }
 function deleteJob(val,hopeJob) {
     $("#"+val).remove();
-    od.splice($.inArray(hopeJob,od),1);
+    hj.splice($.inArray(hopeJob,hj),1);
 }
 function quedingbaocun() {
-    $.ajax({
-        url:"/personal/updatePersonalByPersonalId",
-        type:"POST",
-        data : {
-            onceDo : od.toString()
-        },
-        success : function (res) {
-            window.location.href="/transition/my_resume";
-        }
-    })
+    sessionStorage.setItem("hopeJob",hj.join(","));
+    window.location.href="/transition/go_wan_shan_xin_xi";
 }
 
 function goBack() {
-    window.location.href="/transition/my_resume";
+    window.location.href="/transition/go_wan_shan_xin_xi";
 }

@@ -24,31 +24,8 @@ public class IndexController {
 
     @RequestMapping("personalIndex")
     public String personalIndex(HttpSession session){
-        session.setAttribute("userId",4);
+        session.setAttribute("userId",0);
         session.setAttribute("zt",1);
-//        String openid = (String) session.getAttribute("openid");
-//        if(openid == null || openid.equals("null")){
-//            session.setAttribute("openid","22222222");   //2-15859228476    //1-17331153729
-//            return "personal/personalIndex";
-//        }else {
-//            session.removeAttribute("openid");
-//            session.setAttribute("openid",openid);
-//            Example userExample =new Example(User.class);
-//            userExample.createCriteria().andEqualTo("openid",openid);
-//            List<User> users =userMapper.selectByExample(userExample);
-//            if(users != null && users.size() > 0){
-//                Example perExample =new Example(Personal.class);
-//                perExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-//                List<Personal> personals =personalMapper.selectByExample(perExample);
-//                if(personals != null && personals.size() > 0){
-//                    return "personal/mySelf";
-//                }else {
-//                    return "personal/mySelf_notLogin";
-//                }
-//            }else {
-//                return "personal/mySelf_notLogin";
-//            }
-//        }
         return "personal/personalIndex";
 
     }
