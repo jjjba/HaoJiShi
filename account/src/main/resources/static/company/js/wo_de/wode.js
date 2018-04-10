@@ -10,6 +10,7 @@ $(document).ready(function() {
      console.log(pwd);
      var okOr = sessionStorage.getItem("ZhuCeOk");
      if(okOr == "OK"){
+
          $(".zccg").show();
          sessionStorage.setItem("ZhuCeOk","");
      }else {
