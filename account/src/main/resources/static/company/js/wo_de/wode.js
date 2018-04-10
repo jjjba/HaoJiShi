@@ -15,8 +15,8 @@ $(document).ready(function() {
      }else {
          $(".zccg").hide();
      }
-     if(phone == "" || phone =='' || phone == undefined){
-         $(".rndl").show();
+     if(phone == "" || phone =='' || phone == undefined || phone == null){
+         zong();
      }
     if(zt == 1 && (phone!= undefined && phone !=''&& phone!="" )){
         $.ajax({
@@ -30,7 +30,7 @@ $(document).ready(function() {
                 if(msg.dataOne == 2){
                     $("#wyzgz").html("我要招人"+"<img src='../../company/images/yjts.png' />");
                 }
-                var htm = "<div class='sbtopxxs'><div class='sblefs'><img src= '";
+                var htm = "<div class='sblefs'><img src= '";
                 if(msg.data.iconPath == "" || msg.data.iconPath == ''|| msg.data.iconPath== undefined){
                     htm +="../../company/images/tuui.png";
                 }else{
@@ -52,15 +52,15 @@ $(document).ready(function() {
                     htm+="<div class='dcirzs'><a href='#'>未通过，请重新认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
                 }
                 if(msg.code == 4){
-                    htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
+                    htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div>";
                 }
-                $("#wode").html(htm);
+                $(".sbtopxxs").html(htm);
             }
         })
     }
    else {
         var htm ="<div class='sbtopxxs bounone'><div class='sblefs'><img src='../../company/images/tuui.png'/></div><div class='sbyours fbzhiuse'><div class='lylyus'><a href='#'onclick='zongZ();' class='dlzces'>登录/注册</a></div></div></div>";
-        $("#wode").html(htm);
+        $(".sbtopxxs").html(htm);
         $(".WsXX").css("display","none");
     }
 })
@@ -69,9 +69,7 @@ function Fbzw() {
     window.location.href="/transition/bianji_zhiwei";
 }
 function zong() {
-    $('.jinggao').show();
-    setTimeout('$(".diyici").hide()',1000);
-    window.location.href="/transition/go_zhu_ce";
+    $(".rndl").show();
 }
 function zongZ() {
     window.location.href="/transition/go_zhu_ce";
@@ -93,10 +91,8 @@ function wodezhiweiguanli() {
             success:function (msg) {
                 console.log("开始执行-----");
                 console.log(msg.data);
-                if(msg.data.matstate ==1){
-                    window.location.href="/transition/zhiweiguanlirenzhneg";
-                }else {
-                    window.location.href="/transition/zhiweiguanliweirenzheng";
+                if(msg.data.matstate ==1 ||msg.data.matstate ==2 || msg.data.matstate ==3 || msg.data.matstate ==4 ) {
+                    window.location.href = "/transition/zhiweiguanlirenzhneg";
                 }
             }
         })
@@ -104,9 +100,10 @@ function wodezhiweiguanli() {
 
 }
 function woderencaishoucang() {
-    window.location.href="/transition/wo_de_ren_cai_shou_cang";
     if(zt != 1){
         zong();
+    }else {
+        window.location.href="/transition/wo_de_ren_cai_shou_cang";
     }
 }
 function wodechangjianwenti() {
@@ -140,8 +137,39 @@ function wodejianliguanli(){
         }
 }
 function RenZheng() {
-    window.location.href="/transition/RenZheng"
+        window.location.href="/transition/RenZheng";
 }
 function kuaizhao() {
-    window.location.href="/transition/kuaizhao"
+    window.location.href="/transition/kuaizhao";
+}
+function wanshanCompany() {
+    $.ajax({
+        url:"/company/Bjdpxx",
+        type:"POST",
+        success:function (msg) {
+            sessionStorage.setItem("xgxm",msg.data.userName);
+            console.log(msg.data.userName);
+            sessionStorage.setItem("xgzw",msg.data.zhiWu);
+            console.log(msg.data.zhiWu);
+            sessionStorage.setItem("xgLogo",msg.data.iconPath);
+            console.log(msg.data.iconPath);
+            sessionStorage.setItem("xgdpmc",msg.data.name);
+            console.log(msg.data.name);
+            sessionStorage.setItem("xgdpmj",msg.data.companyDpmj);
+            console.log(msg.data.companyDpmj);
+            sessionStorage.setItem("xgdpfl",msg.data.companySpecial);
+            console.log(msg.data.companySpecial);
+            sessionStorage.setItem("xgdpdz",msg.data.companyAddr);
+            console.log(msg.data.companyAddr);
+            sessionStorage.setItem("xgdplx",msg.data.companyType);
+            console.log(msg.data.companyType);
+            sessionStorage.setItem("xgid",msg.data.id);
+            console.log(msg.data.id);
+            sessionStorage.setItem("xggstp",msg.data.companyPhoto);
+            console.log(msg.data.companyPhoto);
+            sessionStorage.setItem("xgjj",msg.data.companyInfo);
+            console.log(msg.data.companyInfo);
+        }
+    })
+   /* window.location.href = "/transition/bianji_dianpuxinxi";*/
 }

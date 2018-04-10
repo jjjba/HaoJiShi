@@ -16,7 +16,7 @@ import java.net.URLEncoder;
 
 
 @Controller
-@RequestMapping("wechat")
+@RequestMapping("/wechat")
 @Slf4j
 public class WechatController {
 

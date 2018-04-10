@@ -9,7 +9,10 @@ $(document).ready(function() {
           var htm = "";
           if(position != null ){
               for(var i = 0;i<position.length;i++){
-                  htm+="<div class='ykuissws'><div class='sbxxuys'><div class='dybuzs01 clearfix'><div class='fl sbtus01'>";
+                  var idd= position[i].id;
+                  htm+="<div class='ykuissws'><div class='sbxxuys'><div class='dybuzs01 clearfix'><div class='fl sbtus01' onclick='go_zhiweixiangqing(&quot;";
+                  htm+=idd;
+                  htm+="&quot;)'>";
                   htm+=position[i].positionName;
                   htm+="</div>";
                   if(position[i].state ==4){
@@ -54,14 +57,19 @@ $(document).ready(function() {
                   if(position[i].state ==4){
                       htm+="<a href='#'><img src='../../company/images/iconn002.png' /> 分享</a>";
                       htm+="<a href='#'><img src='../../company/images/iconn003.png' /> 下线</a>";
-                      htm+="<a href='#'><img src='../../company/images/iconn004.png' /> 编辑</a>";
+                      htm+="<a href='#' onclick='go_zhiweixiugai(&quot;";
+                      htm+=idd;
+                      htm+="&quot;);'><img src='../../company/images/iconn004.png' /> 编辑</a>";
                   }
                   if(position[i].state == 3){
                       htm+="<a href='#'><img src='../../company/images/iconn006.png' /> 删除</a>"
                   }
                   if(position[i].state == 1 || position[i].state == 2){
-                      htm+="<a href='#'><img src='../../company/images/iconn005.png' /> 上线</a>";
-                      htm+="<a href='#'><img src='../../company/images/iconn004.png' /> 编辑</a>";
+                      htm+="<a href='#' onclick='$(&quot;.popupus&quot;).show();'><img src='../../company/images/iconn005.png' /> 上线</a>";
+                      htm+="<a href='#' onclick='go_zhiweixiugai(&quot;";
+                      htm+=idd;
+                      htm+="&quot;);'><img src='../../company/images/iconn004.png' /> 编辑</a>";
+
                   }
                   htm+="</div></div>";
 
@@ -87,7 +95,35 @@ function TccYc() {
 }
 function Qrz() {
     $(".popupus").hide();
+    sessionStorage.setItem("RENZHENG","RENZHNEG");
+    window.location.href="/transition/RenZheng";
 }
 function addZw() {
     window.location.href="/transition/bianji_zhiwei";
+}
+function go_zhiweixiangqing(id) {
+    sessionStorage.setItem("position_id",id);
+    sessionStorage.setItem("YuLanOrXiangQing","xiangqing");
+    window.location.href="/transition/zhiwei_xiangqing";
+}
+function go_zhiweixiugai(id) {
+    sessionStorage.setItem("position_id",id);
+    $.ajax({
+        url:"/company/getSelectPosition",
+        data:{position_id:id},
+        type:"POST",
+        success:function (msg) {
+            console.log(msg);
+            sessionStorage.setItem("zwlx",msg.data.positionType);
+            sessionStorage.setItem("zwmc",msg.data.positionName);
+            sessionStorage.setItem("yx",msg.data.money);
+            sessionStorage.setItem("jyyq",msg.data.experience);
+            sessionStorage.setItem("xbyq",msg.data.sex);
+            sessionStorage.setItem("nlyq",msg.data.age);
+            sessionStorage.setItem("LLLLzwfl",msg.data.welfare);
+            sessionStorage.setItem("zwms",msg.data.positionInfo);
+            window.location.href="/transition/zhiweiguanlirenzhneg_bj";
+        }
+    })
+
 }

@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.haojishi.mapper.CommonCompanyMapper;
 import com.haojishi.mapper.CompanyMapper;
 import com.haojishi.mapper.UserMapper;
-import com.haojishi.model.Company;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;

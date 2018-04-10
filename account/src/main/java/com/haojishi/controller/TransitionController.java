@@ -3,18 +3,15 @@ package com.haojishi.controller;
 import com.haojishi.mapper.CompanyMapper;
 import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
-import com.haojishi.model.Company;
 import com.haojishi.model.Personal;
 import com.haojishi.model.User;
 import com.haojishi.service.TransitionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -81,14 +78,22 @@ public class TransitionController {
     public String transition_goIndex(){
         return "personal/personalIndex";
     }
-
     /**
      * 跳转我的页面
      * @return
      */
     @RequestMapping("transition_goMySelf")
-    public String transition_goMySelf(){
-        return "personal/mySelf/mySelf";
+    public String transition_goMySelf(HttpSession session){
+        int userId = (int) session.getAttribute("userId");
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
+        if(personals != null && personals.size() > 0){
+            return "personal/mySelf/mySelf";
+        }else {
+            return "personal/mySelf/mySelf_notLogin";
+        }
+
     }
 
     /**
@@ -395,7 +400,7 @@ public class TransitionController {
      */
     @RequestMapping("go_wan_shan_xin_xi")
     public String go_wan_shan_xin_xi(){
-        return "personal/mySelf/wan_shan_xin_xi";
+        return "personal/mySelf/zhu_ce_xin_xi";
     }
 
     /**
@@ -424,12 +429,19 @@ public class TransitionController {
         return "company/company_myself/wo_de_she_zhi_mi_ma";
     }
     /**
-     * 企业端账号设置 密码修改
+     * 企业端编辑职位信息
+     * @return
+     */
+    @RequestMapping("zhiweiguanlirenzhneg_bj")
+    public String zhiweiguanlirenzhneg_bj(){
+        return "company/company_myself/position_bj/bianji_zhiwei";
+    }
+    /**
+     * 企业端编辑职位信息
      * @return
      */
     @RequestMapping("zhiweiguanlirenzhneg")
     public String zhiweiguanlirenzhneg(){
-        log.error("麻蛋--------");
         return "company/company_myself/Company_Zw";
     }
     /**
@@ -620,5 +632,83 @@ public class TransitionController {
     @RequestMapping("dianpu_zhiweixuanze")
     public String dianpu_zhiweixuanze(){
         return  "company/company_myself/dianpu_zhiweixuanze";
+    }
+
+    /**
+     * 转到店铺地址导航界面
+     * @return
+     */
+    @RequestMapping("dianpu_DaoHang")
+    public String dianpu_DaoHang(){
+        return  "company/company_myself/dianpu_DaoHang";
+    }
+    /**/
+    /**
+     * 求职者端====我的意向城市
+     * @return
+     */
+    @RequestMapping("go_my_hope_city")
+    public String go_my_hope_city(){
+        return "personal/mySelf/my_hope_city";
+    }
+
+    /**
+     * 求职者端====我的意向工作
+     * @return
+     */
+    @RequestMapping("go_my_hope_job")
+    public String go_my_hope_job(){
+        return "personal/mySelf/my_hope_job";
+    }
+
+    /**
+     * 求职者端====我的基本信息
+     * @return
+     */
+    @RequestMapping("go_wo_de_ji_ben_xin_xi")
+    public String go_wo_de_ji_ben_xin_xi(){
+        return "personal/mySelf/wo_de_ji_ben_xin_xi";
+    }
+
+    /**
+     * 求职者端====曾经做过
+     * @return
+     */
+    @RequestMapping("go_ceng_jing_zuo_guo")
+    public String go_ceng_jing_zuo_guo(){
+        return "personal/mySelf/ceng_jing_zuo_guo";
+    }
+
+    /**
+     * 求职者端=====填写简历信息我的求职岗位
+     */
+    @RequestMapping("go_jian_li_wo_de_yi_xiang_gong_zuo")
+    public String go_jian_li_wo_de_yi_xiang_gong_zuo(){
+        return "personal/mySelf/jian_li_wo_de_yi_xiang_gong_zuo";
+    }
+
+    /**
+     * 求职者端=====填写简历信息我的意向城市
+     */
+    @RequestMapping("go_jian_li_wo_de_yi_xiang_cheng_shi")
+    public String go_jian_li_wo_de_yi_xiang_cheng_shi(){
+        return "personal/mySelf/jian_li_wo_de_yi_xiang_cheng_shi";
+    }
+
+    /**
+     * 求职者端=====填写简历信息我的标签
+     */
+    @RequestMapping("go_jian_li_wo_de_biao_qian")
+    public String go_jian_li_wo_de_biao_qian(){
+        return "personal/mySelf/jian_li_wo_de_biao_qian";
+    }
+
+    /**
+     * 编辑店铺信息
+     * @return
+     */
+    @RequestMapping("bianji_dianpuxinxi")
+    public String bianji_dianpuxinxi(){
+        return "company/company_myself/bianji_dianpuxinxi";
     }
 }

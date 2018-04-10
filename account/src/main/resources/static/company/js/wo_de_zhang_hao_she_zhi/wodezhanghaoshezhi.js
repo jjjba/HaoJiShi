@@ -30,5 +30,6 @@ function tuiChu() {
     $.cookie("zt", null);
     $.cookie("phone", null);
     $.cookie("PWD",null);
+    sessionStorage.clear();
     window.location.href="/transition/go_wo_de";
 }

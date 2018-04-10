@@ -100,5 +100,15 @@ function ColorAndClick(mc) {
     ColorId = mc;
     sessionStorage.setItem("zwlx",$("#"+mc).text());
     num+=1;
-    window.location.href="/transition/bianji_zhiwei";
+
+    fhbb();
+}
+function fhbb() {
+    var id= sessionStorage.getItem("positionid");
+    if(id == null || id == undefined || id=="" || id == ''){
+        window.location.href="/transition/bianji_zhiwei";
+    }else {
+
+        window.location.href="/transition/zhiweiguanlirenzhneg_bj";
+    }
 }

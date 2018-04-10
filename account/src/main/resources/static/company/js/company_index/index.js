@@ -16,7 +16,6 @@ $(document).ready(function() {
     // });
 
 	loadCompanyBanner();
-    loadIndexModule();
     loadPersonal();
     loadUserInfo();
 	$(".wzkljgz01").click(function(){
@@ -38,7 +37,7 @@ $(document).ready(function() {
 function loadCompanyBanner() {
     $.ajax({
         type: "POST",
-        url: "../banner/getCompanyBanner",
+        url: "/banner/getCompanyBanner",
         success: function (res) {
             if (res.success) {
                 var list = res.data;
@@ -55,7 +54,7 @@ function loadCompanyBanner() {
     });
 }
 
-function loadIndexModule() {
+/*function loadIndexModule() {
     $.ajax({
         type: "POST",
         url: "/indexModule/getIndexModule",
@@ -77,7 +76,7 @@ function loadIndexModule() {
             }
         }
     });
-}
+}*/
 
 
 function loadPersonal(){
@@ -136,10 +135,11 @@ function loadUserInfo() {
         url:"/company/loadUserCompanyInfo",
         type:"POST",
         success :function (res) {
-            console.log("data============="+JSON.stringify(res.data));
-            isCollect =res.data[0].isCollect;
-            isKuaiZhao =res.data[0].isKuaiZhao;
-            isRegist =res.data[0].isRegist;
+            if(res.data != null){
+                isCollect =res.data[0].isCollect;
+                isKuaiZhao =res.data[0].isKuaiZhao;
+                isRegist =res.data[0].isRegist;
+            }
         }
     })
 }

@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public interface CommonCompanyMapper {
 
+//    List<Map<String,Object>> getCompanyByUserId(@Param("name") String name, @Param("phone") String phone);
 
     int setSeeCount(@Param("companyId") Integer companyId);
 
@@ -26,6 +27,6 @@ public interface CommonCompanyMapper {
 
     Map<String, Object> queryCompanyInfo(@Param("userId") Long userId);
 
-
+    List<Map<String,Object>> getCompanyCityByUserId(@Param("userId") Integer userId);
 
 }

@@ -70,6 +70,7 @@ public class MobileCodeService {
             request.getServletContext().setAttribute("code" + phone, mobile_code);
             Map<String,Object> map =new HashMap<>();
             map.put("mobile_code",mobile_code);
+            log.error(mobile_code+"");
             businessMessage.setMsg("发送成功");
             businessMessage.setData(map);
             businessMessage.setSuccess(true);
@@ -86,7 +87,7 @@ public class MobileCodeService {
      * 验证该手机号是否已被注册
      *
      * @param phone
-     * @return BusinessMessage -
+     * @return BusinessMessage
      */
     public BusinessMessage isRegist(String phone, HttpSession session) {
         BusinessMessage businessMessage =new BusinessMessage();

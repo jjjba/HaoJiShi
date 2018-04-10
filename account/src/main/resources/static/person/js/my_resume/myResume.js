@@ -1,4 +1,4 @@
-﻿﻿var avatarPath =[];
+﻿﻿﻿var avatarPath =[];
 var hopeMoney;
 var experience;
 var school;

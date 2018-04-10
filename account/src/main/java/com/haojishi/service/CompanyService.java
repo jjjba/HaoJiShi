@@ -451,7 +451,7 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setMatstate(1);
-        company.setCompanydpmj(dwmj);
+        company.setCompanyDpmj(dwmj);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         company.setCreateTime(new Date());
         Example userExample =new Example(User.class);
@@ -539,7 +539,8 @@ public class CompanyService{
      * 职位详情预览
      * @return
      */
-    public BusinessMessage getCompanyAndgetZhiwei(HttpSession session){
+    public BusinessMessage getCompanyAndgetZhiwei(HttpSession session,Integer position_id){
+        log.error(position_id+"shizhege ----");
         BusinessMessage businessMessage = new BusinessMessage();
         Example userExample =new Example(User.class);
         userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
@@ -551,7 +552,11 @@ public class CompanyService{
             businessMessage.setDataOne(companies.get(0));
             if(companies !=null && companies.size()>0){
                 Example posiExample = new Example(Position.class);
-                posiExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
+                if(position_id!=null){
+                    posiExample.createCriteria().andEqualTo("id",position_id);
+                }else {
+                    posiExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
+                }
                 List<Position> Positions =positionMapper.selectByExample(posiExample);
                 if(Positions != null && Positions.size()>0){
                     businessMessage.setData(Positions.get(0));
@@ -574,41 +579,50 @@ public class CompanyService{
      * @param zwms
      * @return
      */
-    public BusinessMessage AddZhiwei(String zwlx,String zwmc,String yx,String jyyq,String xbyq,String nlyq,String zwfl,String zwms,HttpSession session){
+    public BusinessMessage AddZhiwei(String zwlx,String zwmc,String yx,String jyyq,String xbyq,String nlyq,String zwfl,String zwms,Integer id,HttpSession session){
         BusinessMessage businessMessage = new BusinessMessage();
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users!= null && users.size()>0){
-            Example companyExample =new Example(Company.class);
-            companyExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(companyExample);
-            if(companies !=null && companies.size()>0){
-                Position position = new Position();
-                position.setAge(nlyq);
-                position.setExperience(jyyq);
-                position.setPositionName(zwmc);
-                position.setPositionType(zwlx);
-                position.setMoney(yx);
-                position.setSex(xbyq);
-                position.setWelfare(zwfl);
-                position.setPositionInfo(zwms);
-                position.setIsReward(2);
-                position.setRewardMoney(0);
-                position.setHot(0);
-                position.setExposureNumber(0);
-                position.setSeeNumber(0);
-                position.setShareNumber(0);
-                position.setResumeNumber(0);
-                position.setState(1);
-                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
-                position.setCreateTime(new Date());
-                position.setCompanyId(companies.get(0).getId());
-                int success = positionMapper.insert(position);
-                businessMessage.setData(success);
-                businessMessage.setSuccess(true);
+        Position position = new Position();
+        position.setAge(nlyq);
+        position.setExperience(jyyq);
+        position.setPositionName(zwmc);
+        position.setPositionType(zwlx);
+        position.setMoney(yx);
+        position.setSex(xbyq);
+        position.setWelfare(zwfl);
+        position.setPositionInfo(zwms);
+        int success =0;
+        if(id == null){
+            Example userExample =new Example(User.class);
+            userExample.createCriteria().andEqualTo("id",session.getAttribute("userId"));
+            List<User> users =usersMapper.selectByExample(userExample);
+            if(users!= null && users.size()>0){
+                Example companyExample =new Example(Company.class);
+                companyExample.createCriteria().andEqualTo("userId",users.get(0).getId());
+                List<Company> companies =companyMapper.selectByExample(companyExample);
+                if(companies !=null && companies.size()>0){
+                    position.setIsReward(2);
+                    position.setRewardMoney(0);
+                    position.setHot(0);
+                    position.setExposureNumber(0);
+                    position.setSeeNumber(0);
+                    position.setShareNumber(0);
+                    position.setResumeNumber(0);
+                    position.setState(1);
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+                    position.setCreateTime(new Date());
+                    position.setCompanyId(companies.get(0).getId());
+                    success = positionMapper.insert(position);
+
+                }
             }
+        }else{
+            position.setId(id);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+            position.setUpdateTime(new Date());
+           success = positionMapper.updateByPrimaryKeySelective(position);
         }
+        businessMessage.setData(success);
+        businessMessage.setSuccess(true);
         return  businessMessage;
     }
 
@@ -637,5 +651,39 @@ public class CompanyService{
         }
         businessMessage.setSuccess(true);
         return businessMessage;
+    }
+
+    /**
+     * 获取要修改的position
+     * @param position_id
+     * @return
+     */
+     public  BusinessMessage getSelectPosition(Integer position_id){
+        BusinessMessage businessMessage = new BusinessMessage();
+         Example posiExample =new Example(Position.class);
+         posiExample.createCriteria().andEqualTo("id",position_id);
+         List<Position> Positions =positionMapper.selectByExample(posiExample);
+         if(Positions != null && Positions.size()>0){
+             businessMessage.setData(Positions.get(0));
+         }
+         businessMessage.setSuccess(true);
+        return businessMessage;
+     }
+
+    /**
+     * 编辑店铺信息 查询店铺信息
+     * @param session
+     * @return
+     */
+    public BusinessMessage Bjdpxx(HttpSession session){
+         BusinessMessage businessMessage = new BusinessMessage();
+        Example companyExample =new Example(Company.class);
+        companyExample.createCriteria().andEqualTo("userId",session.getAttribute("userId"));
+        List<Company> companies =companyMapper.selectByExample(companyExample);
+        if(companies!=null && companies.size()>0){
+            businessMessage.setData(companies.get(0));
+            businessMessage.setSuccess(true);
+        }
+         return  businessMessage;
     }
 }

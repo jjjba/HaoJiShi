@@ -1,4 +1,4 @@
-﻿﻿<!doctype html>
+﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -16,7 +16,7 @@
     <link type="text/css" href="/static/company/css/xiangying.css"
           th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
-    
+
     <link type="text/css" href="/static/company/css/wo_de/top.css"
           th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/wo_de/wodes.css"
@@ -31,7 +31,7 @@
             th:src="@{/company/js/wo_de/wode.js}"></script>
     <script type="text/javascript" src="/static/company/js/wo_de/jquery.cookie.js"
             th:src="@{/company/js/wo_de/jquery.cookie.js}"></script>
-   
+
    <!--圆形进度开始-->
 	   <script type="text/javascript">
             $(function() {
@@ -43,11 +43,11 @@
        </script>
    <!--圆形进度结束-->
 
-   
+
 
 </head>
-<body>
- 
+<body style>
+
  <!--头部开始-->
  <div class="topbus">
    <!--里边开始-->
@@ -57,21 +57,20 @@
    <!--里边结束-->
  </div>
  <!--头部结束-->
- 
+
  <!--上边开始-->
    <div class="sbjltitis">
      <!--上开始-->
-       <div id = "wode">
+       <div class="sbtopxxs">
 
 
        </div>
 
 
-
      <!--上结束-->
 
        <!--下开始-->
-       <a href="#" style="display: block" class="WsXX">
+       <a href="#" style="display: block" class="WsXX" onclick="wanshanCompany()">
            <div class="xibkass">
 
                <!--左边圆形进度条开始-->
@@ -93,11 +92,11 @@
            </div>
        </a>
        <!--下结束-->
-     
+
    </div>
  <!--上边结束-->
- 
- 
+
+
  <!--一块开始-->
   <div class="dyikuys" onclick="kuaizhao()">
     <ul>
@@ -109,11 +108,11 @@
       <li class="clearfix">
         <a href="#" class="fl" ><img src="/static/company/images/wode10.png" th:src="@{/company/images/wode10.png}"/> 招聘简报</a>
         <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}"/></a>
-      </li>      
+      </li>
     </ul>
   </div>
  <!--一块结束-->
- 
+
  <!--一块开始-->
   <div class="dyikuys">
     <ul>
@@ -124,12 +123,12 @@
       <li class="clearfix">
         <a href="#" class="fl" onclick="wodejianliguanli()"><img src="/static/company/images/wode09.png" th:src="@{/company/images/wode09.png}" /> 简历管理</a>
         <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
-      </li>      
+      </li>
     </ul>
   </div>
  <!--一块结束-->
- 
- 
+
+
  <!--一块开始-->
   <div class="dyikuys">
     <ul>
@@ -140,12 +139,12 @@
       <li class="clearfix">
         <a href="#" class="fl" onclick="wodechangjianwenti()"><img src="/static/company/images/wode03.png" th:src="@{/company/images/wode03.png}" /> 常见问题</a>
         <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
-      </li>      
+      </li>
     </ul>
   </div>
  <!--一块结束-->
- 
- 
+
+
  <!--一块开始-->
   <div class="dyikuys">
     <ul>
@@ -156,11 +155,11 @@
       <li class="clearfix" onclick="wodeqiehuanshenfen()">
         <a href="#" class="fl" ><img src="/static/company/images/wode06.png" th:src="@{/company/images/wode06.png}" /> 切换身份</a>
         <a href="#" class="fr" id="wyzgz">我要找工作 <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
-      </li>      
+      </li>
     </ul>
   </div>
  <!--一块结束-->
- 
+
 
   <!--最底部开始-->
   <div class="footers">
@@ -216,8 +215,8 @@
              <h1>温馨提示</h1>
              <p>您还未登录,请先登录,才可以享受更多功能</p>
              <ul>
-                 <li class="wzkljgz01"><a href="#">我再看看</a></li>
-                 <li class="wzkljgz02"><a href="#">立即登陆</a></li>
+                 <li class="wzkljgz01"><a href="#" onclick="$('.rndl').hide();">我再看看</a></li>
+                 <li class="wzkljgz02"><a href="#" onclick="window.location.href='/transition/go_zhu_ce';">立即登陆</a></li>
              </ul>
          </div>
      </div>
@@ -225,7 +224,7 @@
  </div>
  <!--弹出层结束-->
 
- 
+
 </body>
 </html>
 

@@ -17,7 +17,6 @@ public class BusinessMessage {
     private Object dataOne = null;
     private Object dataTwo = null;
 
-
     public BusinessMessage(boolean success) {
         this.success = success;
     }

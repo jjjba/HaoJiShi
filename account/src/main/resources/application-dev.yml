@@ -15,9 +15,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/hjs?useSSL=false&characterEncoding=UTF-8
+      url: jdbc:mysql://118.190.133.194:3306/hjs?useSSL=false&characterEncoding=UTF-8
       username: root
-      password: root
+      password: JSH@#0629SDJU
       initial-size: 2
       max-active: 30
       min-idle: 2

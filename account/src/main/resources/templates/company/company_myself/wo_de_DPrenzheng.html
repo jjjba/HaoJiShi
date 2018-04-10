@@ -28,6 +28,15 @@
     <link href="/static/company/css/zhu_ce_tian_xie_xin_xi/sctx.css"
           th:href="@{/company/css/zhu_ce_tian_xie_xin_xi/sctx.css}" rel="stylesheet" type="text/css" />
     <!--上传图片结束-->
+    <script>
+        function DprenzhengFh(){
+            if("RENZHNEG"==sessionStorage.getItem("RENZHNEG") ){
+                window.location.href="/transition/go_wo_de";
+            }else {
+                window.location.href="/transition/zhiweiguanlirenzhneg";
+            }
+        }
+    </script>
 </head>
 <body>
  
@@ -36,7 +45,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      店铺认证
-     <a href="#" class="zjtous" onclick="window.location.href='/transition/go_wo_de'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" class="zjtous" onclick="DprenzhengFh();"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>

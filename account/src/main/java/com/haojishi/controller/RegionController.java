@@ -22,4 +22,22 @@ public class RegionController {
     public BusinessMessage getRegion(){
         return regionService.getRegion();
     }
+
+    /**
+     * 获取所有省份信息
+     * @return
+     */
+    @RequestMapping("getProvince")
+    public BusinessMessage getProvince(){
+        return regionService.getProvince();
+    }
+
+    /**
+     * 获取所有省份信息
+     * @return
+     */
+    @RequestMapping("getCityBypId")
+    public BusinessMessage getCityBypId(Integer id){
+        return regionService.getCityBypId(id);
+    }
 }

@@ -3,7 +3,6 @@ package com.haojishi.controller;
 import com.haojishi.service.MobileCodeService;
 import com.haojishi.util.BusinessMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -58,7 +57,7 @@ public class MobileCodeController {
      * 验证该手机号是否已被注册
      *
      * @param phone
-     * @return BusinessMessage -
+     * @return BusinessMessage
      */
     @RequestMapping("isRegist")
     public BusinessMessage isRegist(String phone,HttpSession session) {

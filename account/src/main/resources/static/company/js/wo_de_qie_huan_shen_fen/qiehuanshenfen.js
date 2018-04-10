@@ -44,6 +44,7 @@ function qiehuan() {
                 if(msg.data == 1){
                     $('.shenfenYes').show();
                     setTimeout('$(".shenfenYes").hide()',1000);
+                    window.location.href="/transition/go_wo_de";
                 }else{
                     $('.shenfenNo').show();
                     setTimeout('$(".shenfenNo").hide()',1000);

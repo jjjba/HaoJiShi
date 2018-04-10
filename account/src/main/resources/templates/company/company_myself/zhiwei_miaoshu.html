@@ -53,7 +53,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      编辑职位描述
-     <a href="#" class="zjtous" onclick="window.location.href='/transition/bianji_zhiwei';"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" class="zjtous" onclick="bjfh()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
@@ -84,7 +84,16 @@
  <script>
      function zwmsbaocun() {
          sessionStorage.setItem("zwms",$("#note").val());
-         window.location.href='/transition/bianji_zhiwei';
+
+        bjfh();
+     }
+     function bjfh() {
+         var id= sessionStorage.getItem("positionid");
+         if(id == null || id == undefined || id=="" || id == ''){
+             window.location.href="/transition/bianji_zhiwei";
+         }else {
+             window.location.href="/transition/zhiweiguanlirenzhneg_bj";
+         }
      }
  </script>
  

@@ -20,14 +20,24 @@
     <link type="text/css" href="/static/company/css/wo_de/top.css"
           th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/xiangqing02.css" th:href="@{/company/css/xiangqing02.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/zwglis.css" th:href="@{/company/css/zwglis.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
             th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript" src="/static/company/js/zwglu.js" th:src="@{/company/js/zwglu.js}" ></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
         $(document).ready(function() {
-
+          /* //生成access_token
+            $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential" +
+                "&appid=wx987bf4ddff238028&secret=4f796ae819127a27abd8864bc22c14e3",
+                function(aaa){
+                    console.log(aaa);
+                });*/
+        var position_id = sessionStorage.getItem("position_id");
             $.ajax({
                 url:"/company/getCompanyAndgetZhiwei",
                 type:"POST",
+                data:{position_id:position_id},
                 success:function (msg) {
                     console.log(msg);
                    var  company = msg.dataOne;
@@ -37,6 +47,10 @@
                     var htm1 = "";
                     var htm2 = "";
                     var htm3 ="";
+                    var coord= "";
+                     coord+=company.latitude;
+                     coord+=",";
+                     coord+=company.longitude;
                     htm+="<div class='sbontshs'><div class='respise clearfix'><div class='fl reselefs'>";
                     if(YuLanOrXiangQing == "yulan"){
                         var zwlx = sessionStorage.getItem("zwlx");
@@ -47,12 +61,18 @@
                         var nlyq = sessionStorage.getItem("nlyq");
                         var zwfl = sessionStorage.getItem("LLLLzwfl");
                         var zwms = sessionStorage.getItem("zwms");
-                        htm+=zwlx;
-                        htm+="</div></div><div class='gonzis'>7000-9000/月</div><div class='yaoqius'>";
-                        htm+=jyyq;
-                        htm+=" | ";
-                        htm+=nlyq;
-                        htm+=" | ";
+                        htm+=zwmc;
+                        htm+="</div></div><div class='gonzis'>";
+                        htm+=yx;
+                        htm+= "</div><div class='yaoqius'>";
+                        if(jyyq != '' && jyyq !="" && jyyq != undefined){
+                            htm+=jyyq;
+                            htm+=" | ";
+                        }
+                        if(nlyq != '' && nlyq !="" && nlyq != undefined){
+                            htm+=nlyq;
+                            htm+=" | ";
+                        }
                         htm+=xbyq;
                         htm+="</div><div class='daiyus'>"
                         var zwfl1 = zwfl.substring(0,zwfl.length-1);
@@ -68,8 +88,10 @@
 
                     }
                     if(YuLanOrXiangQing == "xiangqing"){
-                        htm+=position.positionType;
-                        htm+="</div></div><div class='gonzis'>7000-9000/月</div><div class='yaoqius'>";
+                        htm+=position.positionName;
+                        htm+="</div></div><div class='gonzis'>";
+                        htm+=position.money;
+                        htm+="</div><div class='yaoqius'>";
                         htm+=position.experience;
                         htm+=" | ";
                         htm+=position.age;
@@ -78,10 +100,10 @@
                         htm+="</div><div class='daiyus'>"
                         var zwfl1 = position.welfare;
                         var att = zwfl1.split(",");
-                        for(var i =0;0<att.length;i++){
+                        for(var i =0;i<att.length;i++){
                             htm+="<span>";
                             htm+=att[i];
-                            htm+="</span>"
+                            htm+="</span>";
                         }
                         htm+="</span>";
                         htm2+=position.positionInfo;
@@ -94,16 +116,22 @@
                     }else{
                         htm1+="../../company/images/tuui.png";
                     }
-
-                    htm1+=" '/><div class='yrzs'><img src='../../company/images/biao02.png'/></div></div><div class='corpryous'><h1>";
+                    htm1+=" '/>";
+                    if(company.matstate == 4){
+                        htm1+="<div class='yrzs'><img src='../../company/images/biao02.png'/></div>";
+                    }
+                    htm1+="</div><div class='corpryous'><h1>";
                     htm1+=company.name;
                     htm1+="</h1><p>";
                     htm1+=company.companyType;
                     htm1+="|";
                     htm1+company.companydpmj;
                     htm1+="|";
+                    htm1+= company.companyCity;
                     htm1+="</p><img src='../../company/images/yjts.png' class='jtois' /></div>"
-                    htm3+="<a href='#'><div class='dpuzhids'><div class='dzlefs'>";
+                    htm3+="<a href='#'><div class='dpuzhids' onclick='doDaoHang(&quot;";
+                    htm3+=coord;
+                    htm3+="&quot;)'><div class='dzlefs'>";
                     htm3+=company.companyAddr;
                     htm3+="</div><div class='dzyous'><img src='../../company/images/yjts.png' /></div></div></a>";
                     $(".sbnecont").html(htm);
@@ -115,6 +143,25 @@
 
 
         })
+        function BackPd() {
+            if(sessionStorage.getItem("YuLanOrXiangQing") == "yulan"){
+                window.location.href="/transition/bianji_zhiwei";
+            }
+            if(sessionStorage.getItem("YuLanOrXiangQing") == "xiangqing"){
+                window.location.href="/transition/zhiweiguanlirenzhneg";
+            }
+            if(sessionStorage.getItem("YuLanOrXiangQing_xg") == "xiugai"){
+                window.location.href="/transition/zhiweiguanlirenzhneg_bj";
+            }
+        }
+        function doDaoHang(coord) {
+            sessionStorage.setItem("coord",coord);
+            window.location.href = "/transition/dianpu_DaoHang";
+        }
+        function fenxiang() {
+            /*window.location.href = "/transition/zhiwei_fenxiang";*/
+            $(".fxinys").show();
+        }
     </script>
 
 </head>
@@ -125,7 +172,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      职位详情
-     <a href="#" class="zjtous" onclick="window.location.href='/transition/bianji_zhiwei'"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" class="zjtous" onclick="BackPd()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
@@ -176,10 +223,25 @@
  
  <!--最底部开始-->
  <div class="bcanius">
-   <a href="#" class="bcnois">分享职位，快速提升职位热度</a>
+   <a href="#" class="bcnois" onclick="fenxiang()">分享职位，快速提升职位热度</a>
  </div>
  <!--最底部结束-->
- 
+
+ <!--分享样式开始-->
+
+ <div class="fxinys" style="display: none" onclick="$('.fxinys').hide();">
+
+     <div class="yctcis">
+
+         <h2><img src="/static/company/images/fxyiss002.png" th:src="@{/company/images/fxyiss002.png}" /></h2>
+         <p>
+             点击右上角，分享到朋友圈
+             快速提升招聘效果！
+         </p>
+     </div>
+ </div>
+
+ <!--分享样式结束-->
 
 
   

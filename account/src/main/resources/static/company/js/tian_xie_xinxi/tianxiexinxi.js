@@ -29,6 +29,7 @@ $(document).ready(function() {
         $("#trigger2").html(zhiwei);
     }
     if(poiaddress !=null && poiname !=null){
+
         $(".Dpdz").html((poiaddress+poiname).substring(0,13)+"..."+"<img src='../../company/images/yjts.png' class='yjtiss' />");
     }
     if(dpfl != null){
@@ -65,16 +66,24 @@ function xinxibaocun() {
     var poiaddress = sessionStorage.getItem("poiaddress");
     var poiname = sessionStorage.getItem("poiname");
     var phone = sessionStorage.getItem("phone");
-    $.ajax({
-        url:"/company/addNewCompany",
-        type:"POST",
-        data:{Name:Name,dwmj:dwmj,dwmc:dwmc,dplx:dplx,zhiwei:zhiwei,dpfl:dpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:poiaddress,poiname:poiname,phone:phone},
-        success:function (msg) {
-            var succ = msg.data;
-            $.cookie("zt",1);
-            $.cookie("phone",phone);
-            sessionStorage.setItem("ZhuCeOk","OK");
-            window.location.href="/transition/go_wo_de";
-        }
-    })
+    if(Name!=null &&dwmj!=null &&dwmc!=null &&dplx!=null &&zhiwei!=null &&dpfl!=null &&cityname!=null
+        &&lat!=null &&lng!=null &&poiaddress!=null &&poiname!=null &&phone!=null  ){
+        $.ajax({
+            url:"/company/addNewCompany",
+            type:"POST",
+            data:{Name:Name,dwmj:dwmj,dwmc:dwmc,dplx:dplx,zhiwei:zhiwei,dpfl:dpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:poiaddress,poiname:poiname,phone:phone},
+            success:function (msg) {
+                var succ = msg.data;
+                $.cookie("zt",1);
+                $.cookie("phone",phone);
+                sessionStorage.setItem("ZhuCeOk","OK");
+                window.location.href="/transition/go_wo_de";
+            }
+        })
+    }
+    else{
+        $(".quanbubitian").show();
+        setTimeout('$(".quanbubitian").hide()',1000);
+    }
+
 }

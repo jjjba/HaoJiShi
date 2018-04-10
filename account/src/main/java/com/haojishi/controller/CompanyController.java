@@ -2,6 +2,7 @@ package com.haojishi.controller;
 
 import com.haojishi.service.CompanyService;
 import com.haojishi.util.BusinessMessage;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -188,8 +189,8 @@ public class CompanyController {
      * @return
      */
     @RequestMapping("getCompanyAndgetZhiwei")
-    public BusinessMessage getCompanyAndgetZhiwei(HttpSession session){
-        return  companyService.getCompanyAndgetZhiwei(session);
+    public BusinessMessage getCompanyAndgetZhiwei(HttpSession session,Integer position_id){
+        return  companyService.getCompanyAndgetZhiwei(session,position_id);
     }
 
     /**
@@ -197,9 +198,10 @@ public class CompanyController {
      * @return
      */
     @RequestMapping("AddZhiwei")
-    public BusinessMessage AddZhiwei(String zwlx,String zwmc,String yx,String jyyq,String xbyq,String nlyq,String zwfl,String zwms,HttpSession session){
-        return  companyService.AddZhiwei(zwlx,zwmc,yx,jyyq,xbyq,nlyq,zwfl,zwms,session);
+    public BusinessMessage AddZhiwei(String zwlx,String zwmc,String yx,String jyyq,String xbyq,String nlyq,String zwfl,String zwms,Integer id,HttpSession session){
+        return  companyService.AddZhiwei(zwlx,zwmc,yx,jyyq,xbyq,nlyq,zwfl,zwms,id,session);
     }
+
 
     //下面是没有的
    /* *//**
@@ -220,6 +222,24 @@ public class CompanyController {
     @RequestMapping("getZhiWeiALL")
     public  BusinessMessage getZhiWeiALL(HttpSession session){
         return  companyService.getZhiWeiALL(session);
+    }
+
+    /**
+     * 获取要修改的position
+     * @return
+     */
+    @RequestMapping("getSelectPosition")
+    public  BusinessMessage getSelectPosition(Integer position_id){
+        return  companyService.getSelectPosition(position_id);
+    }
+
+    /**
+     * 编辑店铺信息 查询店铺信息
+     * @return
+     */
+    @RequestMapping("Bjdpxx")
+    public BusinessMessage Bjdpxx(HttpSession session){
+        return  companyService.Bjdpxx(session);
     }
 
 }

@@ -112,7 +112,9 @@ function updatePhone() {
             url:"/company/updatePhone",
             data:{phoneNum:newPhoneNum},
             success:function (msg) {
-                if(msg.data.data == 1){
+                if(msg.data == 1){
+                    console.log(newPhoneNum);
+                    $.cookie("phone",newPhoneNum);
                     $('.updateok').show();
                     setTimeout('$(".updateok").hide()',1000);
                     window.location.href="/transition/go_wo_de";

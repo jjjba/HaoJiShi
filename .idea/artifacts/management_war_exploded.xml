@@ -139,7 +139,7 @@
           <element id="library" level="project" name="Maven: org.webjars.bower:bootstrap:3.3.7" />
           <element id="library" level="project" name="Maven: org.webjars.bower:font-awesome:4.7.0" />
           <element id="library" level="project" name="Maven: org.webjars.bower:eonasdan-bootstrap-datetimepicker:4.17.45" />
-          <element id="library" level="project" name="Maven: org.webjars.bower:moment:2.21.0" />
+          <element id="library" level="project" name="Maven: org.webjars.bower:moment:2.22.0" />
           <element id="library" level="project" name="Maven: org.webjars.bower:bootstrap-fileinput:4.4.5" />
           <element id="library" level="project" name="Maven: org.webjars.bower:momentjs:2.18.1" />
           <element id="library" level="project" name="Maven: org.json:json:20140107" />
