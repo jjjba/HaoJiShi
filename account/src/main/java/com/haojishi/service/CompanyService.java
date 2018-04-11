@@ -528,6 +528,8 @@ public class CompanyService{
                     businessMessage.setCode(4);
                 }
                 businessMessage.setData(companies.get(0));
+            }else{
+                businessMessage.setDataOne("个人用户");
             }
         }else {
             //不能登陆

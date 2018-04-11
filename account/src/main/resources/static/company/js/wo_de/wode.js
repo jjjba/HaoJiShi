@@ -24,6 +24,9 @@ $(document).ready(function() {
             type:"POST",
             data:{"zt":zt,"phone":phone,"pwd":pwd},
             success:function (msg) {
+                if(msg.dataOne == "个人用户"){
+                    window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+                }
                 if(msg.dataOne == 1){
                     $("#wyzgz").html("我要找工作"+"<img src='../../company/images/yjts.png' />");
                 }
@@ -55,6 +58,8 @@ $(document).ready(function() {
                     htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div>";
                 }
                 $(".sbtopxxs").html(htm);
+                console.log(msg.dataOne);
+
             }
         })
     }
@@ -143,5 +148,34 @@ function kuaizhao() {
     window.location.href="/transition/kuaizhao";
 }
 function wanshanCompany() {
-   window.location.href = "/transition/bianji_dianpuxinxi";
+    $.ajax({
+        url:"/company/Bjdpxx",
+        type:"POST",
+        success:function (msg) {
+            sessionStorage.setItem("xgxm",msg.data.userName);
+            console.log("1---"+msg.data.userName);
+            sessionStorage.setItem("xgzw",msg.data.zhiWu);
+            console.log("2---"+msg.data.zhiWu);
+            sessionStorage.setItem("xgLogo",msg.data.iconPath);
+            console.log("3---"+msg.data.iconPath);
+            sessionStorage.setItem("xgdpmc",msg.data.name);
+            console.log("4---"+msg.data.name);
+            sessionStorage.setItem("xgdpmj",msg.data.companyDpmj);
+            console.log("5---"+msg.data.companyDpmj);
+            sessionStorage.setItem("xgdpfl",msg.data.companySpecial);
+            console.log("6---"+msg.data.companySpecial);
+            sessionStorage.setItem("xgdpdz",msg.data.companyAddr);
+            console.log("7---"+msg.data.companyAddr);
+            sessionStorage.setItem("xgdplx",msg.data.companyType);
+            console.log("8---"+msg.data.companyType);
+            sessionStorage.setItem("xgid",msg.data.id);
+            console.log("6---"+msg.data.id);
+            sessionStorage.setItem("xggstp",msg.data.companyPhoto);
+            console.log("7---"+msg.data.companyPhoto);
+            sessionStorage.setItem("xgjj",msg.data.companyInfo);
+            console.log("8---"+msg.data.companyInfo);
+            window.location.href = "/transition/bianji_dianpuxinxi";
+        }
+    })
+
 }
