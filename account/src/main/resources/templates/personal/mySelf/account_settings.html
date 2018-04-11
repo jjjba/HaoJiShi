@@ -23,7 +23,8 @@
 
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}" ></script>
-
+    <script type="text/javascript" src="/static/person/js/personal_index/jquery.cookie.js"
+            th:src="@{/person/js/personal_index/jquery.cookie.js}"></script>
     <script type="text/javascript">
         $(function () {
             $.ajax({
@@ -36,13 +37,15 @@
                 }
             })
             $('.tcdlans').click(function () {
-                $.ajax({
-                    type:'POST',
-                    url:"/personal/tuichu",
-                    success : function () {
-                        window.location.href="/transition/transition_goMySelf";
-                    }
-                })
+                $.cookie("phone",0);
+                window.location.href="/transition/transition_goMySelf";
+                // $.ajax({
+                //     type:'POST',
+                //     url:"/personal/tuichu",
+                //     success : function () {
+                //
+                //     }
+                // })
             })
         })
         function goBack() {

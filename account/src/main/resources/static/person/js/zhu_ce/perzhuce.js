@@ -64,7 +64,7 @@ function jinru() {
                                 phone : phoneNumber,
                             },
                             success : function () {
-                                $.cookie('dlzt', "2", { expires: 10, path: '/' });
+                                $.cookie('dlzt', "1", { expires: 10, path: '/' });
                                 window.location.href="/transition/go_wan_shan_xin_xi";
                             },
                             error : function () {
