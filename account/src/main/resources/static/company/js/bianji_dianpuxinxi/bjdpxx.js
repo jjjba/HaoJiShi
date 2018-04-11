@@ -93,6 +93,10 @@ function xgdpfl() {
 }
 function xgdpmj() {
     window.location.href="/transition/xgdpmj";
+
+
+
+
 }
 function xgdpmc() {
     window.location.href="/transition/xgdpmc";
