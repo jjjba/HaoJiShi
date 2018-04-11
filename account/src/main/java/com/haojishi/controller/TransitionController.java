@@ -736,7 +736,7 @@ public class TransitionController {
     }
 
     /**
-     * 求职者端=====常见问题6
+     * 求职者端=====常见问题5
      */
     @RequestMapping("gowenti05")
     public String gowenti05(){
@@ -744,7 +744,7 @@ public class TransitionController {
     }
 
     /**
-     * 求职者端=====常见问题6
+     * 求职者端=====常见问题4
      */
     @RequestMapping("gowenti04")
     public String gowenti04(){
@@ -752,7 +752,7 @@ public class TransitionController {
     }
 
     /**
-     * 求职者端=====常见问题6
+     * 求职者端=====常见问题3
      */
     @RequestMapping("gowenti03")
     public String gowenti03(){
@@ -760,7 +760,7 @@ public class TransitionController {
     }
 
     /**
-     * 求职者端=====常见问题6
+     * 求职者端=====常见问题2
      */
     @RequestMapping("gowenti02")
     public String gowenti02(){
@@ -768,7 +768,7 @@ public class TransitionController {
     }
 
     /**
-     * 求职者端=====常见问题6
+     * 求职者端=====常见问题1
      */
     @RequestMapping("gowenti01")
     public String gowenti01(){
