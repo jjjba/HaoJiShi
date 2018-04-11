@@ -55,7 +55,7 @@
 
             sessionStorage.setItem("xglat",loc.latlng.lat);
             sessionStorage.setItem("xglng",loc.latlng.lng);
-            sessionStorage.setItem("xgpoiaddress",loc.poiaddress);
+            sessionStorage.setItem("xgdpdz",loc.poiaddress);
             sessionStorage.setItem("xgpoiname",loc.poiname);
            var latlng = loc.latlng.lat+","+loc.latlng.lng;
             $.getJSON("http://apis.map.qq.com/ws/geocoder/v1/?location="
@@ -69,7 +69,7 @@
     }, false);
 
     function Addressbaocun() {
-        var address = sessionStorage.getItem("cityname");
+        var address = sessionStorage.getItem("xgcityname");
         if(address != '' && address !="" && address !=undefined){
             window.location.href = "/transition/bianji_dianpuxinxi";
         }else {

@@ -823,4 +823,11 @@ public class TransitionController {
         return "company/company_myself/bianji_dianpuxinxi/dianpu_jianjie";
     }
 
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("dianpuYl")
+    public String dianpuYl(){return  "company/company_myself/bianji_dianpuxinxi/dianpu_xiangqing";}
+
 }

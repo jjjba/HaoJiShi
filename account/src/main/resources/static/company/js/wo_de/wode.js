@@ -189,6 +189,7 @@ function wanshanCompany() {
         url:"/company/Bjdpxx",
         type:"POST",
         success:function (msg) {
+            console.log(msg);
             sessionStorage.setItem("xgxm",msg.data.userName);
             sessionStorage.setItem("xgzw",msg.data.zhiWu);
             if(msg.data.iconPath != null && msg.data.iconPath != "" && msg.data.iconPath != ''){
@@ -200,9 +201,11 @@ function wanshanCompany() {
             sessionStorage.setItem("xgdpdz",msg.data.companyAddr);
             sessionStorage.setItem("xgdplx",msg.data.companyType);
             sessionStorage.setItem("xgid",msg.data.id);
-            if(msg.data.companyPhoto != null && msg.data.companyInfo != null){
-                sessionStorage.setItem("xggstp",msg.data.companyPhoto);
+            if( msg.data.companyInfo != null){
                 sessionStorage.setItem("xgjj",msg.data.companyInfo);
+            }
+            if(msg.data.companyPhoto != null){
+                sessionStorage.setItem("xggstp",msg.data.companyPhoto);
             }
            window.location.href = "/transition/bianji_dianpuxinxi";
         }

@@ -24,6 +24,8 @@ $(document).ready(function() {
             var xgjj = sessionStorage.getItem("xgjj");
             console.log(xgjj);
 
+            var xgcityname = sessionStorage.getItem("xgcityname");
+            var dptu = sessionStorage.getItem("dptp");
             $(".xgxm").html(xgxm);
             $("#trigger2").html(xgzw);
             if(!$.trim(xgLogog)){
@@ -45,7 +47,8 @@ $(document).ready(function() {
             if(xgjj == null || xgjj =="" || xgjj == ''){
                 $(".xgjj").html("完善店铺简介，招聘效果提升50%");
             }else {
-                $(".xgjj").html(xgjj);
+                $(".xgjj").removeClass("wtxyss");
+                $(".xgjj").html(xgjj.substring(0,13)+"...");
             }
 })
 
@@ -67,4 +70,7 @@ function xgdpmj() {
 }
 function xgdpmc() {
     window.location.href="/transition/xgdpmc";
+}
+function dianpuYl() {
+    window.location.href="/transition/dianpuYl";
 }
