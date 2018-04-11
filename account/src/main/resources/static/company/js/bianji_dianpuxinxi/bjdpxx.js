@@ -86,6 +86,7 @@ function xgdpjj() {
 }
 function xgdpdz() {
     window.location.href="/transition/xgdpdz";
+
 }
 function xgdpfl() {
     window.location.href="/transition/xgdpfl";
