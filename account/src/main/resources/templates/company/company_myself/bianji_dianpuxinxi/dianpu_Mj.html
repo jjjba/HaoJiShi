@@ -57,8 +57,8 @@
      function Mjbaocun() {
          var mj = $(".sjkyus").val();
          if(mj != "" && mj !='' && mj != undefined){
-             sessionStorage.setItem("Mj",mj+"㎡");
-             window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+             sessionStorage.setItem("xgdpmj",mj+"㎡");
+             window.location.href = "/transition/bianji_dianpuxinxi";
          }else{
              $(".mJ").show();
              setTimeout('$(".mJ").hide()',600);

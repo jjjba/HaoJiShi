@@ -53,17 +53,17 @@
             console.log('location', loc);
             console.log()
 
-            sessionStorage.setItem("lat",loc.latlng.lat);
-            sessionStorage.setItem("lng",loc.latlng.lng);
-            sessionStorage.setItem("poiaddress",loc.poiaddress);
-            sessionStorage.setItem("poiname",loc.poiname);
+            sessionStorage.setItem("xglat",loc.latlng.lat);
+            sessionStorage.setItem("xglng",loc.latlng.lng);
+            sessionStorage.setItem("xgpoiaddress",loc.poiaddress);
+            sessionStorage.setItem("xgpoiname",loc.poiname);
            var latlng = loc.latlng.lat+","+loc.latlng.lng;
             $.getJSON("http://apis.map.qq.com/ws/geocoder/v1/?location="
                 +latlng+"&output=jsonp&key=3DSBZ-QV7HS-T7YO7-63ZYW-L4IMK-NSBJD&callback=?",
                 function(aaa){
                 console.log(aaa.result.address_component.city);//中国无人能敌district
                     console.log(aaa.result.address_component.district);
-                    sessionStorage.setItem("cityname",aaa.result.address_component.city+"_"+aaa.result.address_component.district);
+                    sessionStorage.setItem("xgcityname",aaa.result.address_component.city+"_"+aaa.result.address_component.district);
             });
         }
     }, false);
@@ -71,14 +71,14 @@
     function Addressbaocun() {
         var address = sessionStorage.getItem("cityname");
         if(address != '' && address !="" && address !=undefined){
-            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+            window.location.href = "/transition/bianji_dianpuxinxi";
         }else {
             $(".NameBwk").show();
             setTimeout('$(".NameBwk").hide()',600);
         }
     }
     function dizhifanhui() {
-        window.location.href="/transition/go_wo_de";
+        window.location.href = "/transition/bianji_dianpuxinxi";
     }
 
 </script>

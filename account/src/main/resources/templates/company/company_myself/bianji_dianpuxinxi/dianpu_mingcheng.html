@@ -32,8 +32,8 @@
             var dmc = $(".sjkyus").val();
             console.log(dmc);
             if(dmc !="" &&dmc !='' && dmc !=undefined){
-                sessionStorage.setItem("Dmmmmc",dmc);
-                window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+                sessionStorage.setItem("xgdpmc",dmc);
+                window.location.href = "/transition/bianji_dianpuxinxi";
             }else {
                 $(".NameBwk").show();
                 setTimeout('$(".NameBwk").hide()',600);

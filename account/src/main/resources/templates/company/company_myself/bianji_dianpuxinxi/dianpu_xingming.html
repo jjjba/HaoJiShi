@@ -24,8 +24,6 @@
           th:href="@{/company/css/wo_de/wodedh.css}" rel="stylesheet" />
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
             th:src="@{/company/js/jquery-3.2.1.js}" ></script>
-    <script type="text/javascript" src="/static/company/js/wo_de/dianpu_xingming.js"
-            th:src="@{/company/js/wo_de/dianpu_xingming.js}" ></script>
 </head>
 <body>
  
@@ -46,11 +44,23 @@
  </div>
  
  <div class="bcanius">
-   <a href="#" onclick="baocun()" class="bcnois">保存</a>
+   <a href="#" onclick="baocunn()" class="bcnois">保存</a>
  </div>
  <div class="toolbarframe NameBwk" style="display: none">用户名不能为空</div>
  <!--内容结束-->
+<script>
+    function baocunn() {
+        var name = $("#Name").val();
+        if(name != "" && name !='' && name != undefined){
+            sessionStorage.setItem("xgxm",name);
+            window.location.href = "/transition/bianji_dianpuxinxi";
+        }else{
+            $(".NameBwk").show();
+            setTimeout('$(".NameBwk").hide()',600);
+        }
 
+    }
+</script>
  
 
  
