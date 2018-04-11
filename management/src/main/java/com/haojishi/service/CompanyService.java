@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.haojishi.mapper.CommonCompanyMapper;
 import com.haojishi.mapper.CompanyMapper;
+import com.haojishi.mapper.PositionMapper;
 import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Company;
+import com.haojishi.model.Position;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import tk.mybatis.mapper.entity.Example;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -28,7 +32,8 @@ import java.util.*;
 public class CompanyService {
     @Autowired
     private CompanyMapper companyMapper;
-
+    @Autowired
+    private PositionMapper positionMapper;
     @Autowired
     private UserMapper userMapper;
 
@@ -451,8 +456,15 @@ public class CompanyService {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             Company company =companyMapper.selectByPrimaryKey(id);
-            company.setMatstate(1);
+            company.setMatstate(3);
             companyMapper.updateByPrimaryKeySelective(company);
+            Example example =new Example(Position.class);
+            example.createCriteria().andEqualTo("companyId",company.getId());
+            List<Position> positions =positionMapper.selectByExample(example);
+            for(Position position : positions){
+                position.setState(4);
+                positionMapper.updateByPrimaryKeySelective(position);
+            }
             businessMessage.setMsg("设置审核通过操作成功");
             businessMessage.setSuccess(true);
         }catch (Exception e){
@@ -472,7 +484,7 @@ public class CompanyService {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             Company company =companyMapper.selectByPrimaryKey(id);
-            company.setMatstate(2);
+            company.setMatstate(4);
             companyMapper.updateByPrimaryKeySelective(company);
             businessMessage.setMsg("设置审核通过操作成功");
             businessMessage.setSuccess(true);
