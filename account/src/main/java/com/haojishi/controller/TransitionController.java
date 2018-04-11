@@ -774,4 +774,53 @@ public class TransitionController {
     public String gowenti01(){
         return "personal/mySelf/wentixiangqing01";
     }
+    /**
+     * 修改店铺名称
+     * @return
+     */
+    @RequestMapping("xgdpmc")
+    public String xgdpmc (){
+        return "company/company_myself/bianji_dianpuxinxi/dianpu_mingcheng";
+    }
+    /**
+     * 修改个人姓名
+     * @return
+     */
+    @RequestMapping("bjxm")
+    public String bjxm (){
+        return "company/company_myself/bianji_dianpuxinxi/dianpu_xingming";
+    }
+    /**
+     * 修改店铺面积
+     * @return
+     */
+    @RequestMapping("xgdpmj")
+    public String xgdpmj (){
+        return "company/company_myself/bianji_dianpuxinxi/dianpu_Mj";
+    }
+    /**
+     * 修改店铺福利
+     * @return
+     */
+    @RequestMapping("xgdpfl")
+    public String xgdpfl (){
+        return "company/company_myself/bianji_dianpuxinxi/dianpu_fuli";
+    }
+    /**
+     * 修改店铺地址
+     * @return
+     */
+    @RequestMapping("xgdpdz")
+    public String xgdpdz (){
+        return "company/company_myself/bianji_dianpuxinxi/dianpu_Address";
+    }
+    /**
+     * 修改店铺地址
+     * @return
+     */
+    @RequestMapping("xgdpjj")
+    public String xgdpjj (){
+        return "company/company_myself/bianji_dianpuxinxi/dianpu_jianjie";
+    }
+
 }
