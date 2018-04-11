@@ -27,11 +27,6 @@ $(document).ready(function() {
         })
     });
 
-    $(".yzxis").click(function(){
-
-
-    });
-
 });
 
 
@@ -54,9 +49,12 @@ function jinru() {
                     $('.buzhengque').show();
                     setTimeout('$(".buzhengque").hide()',1000);
                 }else {
+                    $.cookie('phone', phoneNumber, { expires: 10, path: '/' });
                     if(isRegist == "1"){
+                        $.cookie('dlzt', "1", { expires: 10, path: '/' });
                         window.location.href="/transition/go_wan_shan_xin_xi";
                     }else if(isRegist == "2"){
+                        $.cookie('dlzt', "2", { expires: 10, path: '/' });
                         window.location.href="/transition/transition_goMySelf";
                     }else if(isRegist == "3"){
                         $.ajax({
@@ -66,6 +64,7 @@ function jinru() {
                                 phone : phoneNumber,
                             },
                             success : function () {
+                                $.cookie('dlzt', "2", { expires: 10, path: '/' });
                                 window.location.href="/transition/go_wan_shan_xin_xi";
                             },
                             error : function () {
@@ -74,12 +73,10 @@ function jinru() {
                             }
                         })
                     }
-
                     }
             }
         }
     });
-
 
 }
 

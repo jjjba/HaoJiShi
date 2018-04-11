@@ -9,34 +9,47 @@ $(function () {
     });
 
     $('.bcanius').click(function(){
-        var address =$("#expressArea dl dd").html();
-        if(address == "省-市-区/县"){
-            address =null;
-        }
-        $.ajax({
-            url:"/personal/updatePersonalByPersonalId",
-            type:"POST",
-            data:{
-                name :$('.name').val(),
-                sex :$('.sex').val(),
-                state :$('.state').val(),
-                phone :$('.phone').val(),
-                age :$('.age').val(),
-                address :address,
-                avatar : avatarPath,
-            },
-            success : function () {
-                $(".toolbarframe02").show()
-                setTimeout('$(".toolbarframe02").hide()',1000);
-            },
-            error : function () {
-                $(".toolbarframe03").show()
-                setTimeout('$(".toolbarframe03").hide()',1000);
+        if($('.name').val().length > 6){
+            $(".xingmingzishu").show()
+            setTimeout('$(".xingmingzishu").hide()',1000);
+        }else {
+            if(parseInt($('.age').val()) < 18 || parseInt($('.age').val()) >60){
+                $(".nianlingsuishu").show()
+                setTimeout('$(".nianlingsuishu").hide()',1000);
+            }else {
+                var address =$("#expressArea dl dd").html();
+                if(address == "省-市-区/县"){
+                    address =null;
+                }
+                $.ajax({
+                    url:"/personal/updatePersonalByPersonalId",
+                    type:"POST",
+                    data:{
+                        name :$('.name').val(),
+                        sex :$('.sex').val(),
+                        state :$('.state').val(),
+                        phone :$('.phone').val(),
+                        age :$('.age').val(),
+                        address :address,
+                        avatar : avatarPath,
+                    },
+                    success : function () {
+                        $(".toolbarframe02").show()
+                        setTimeout('$(".toolbarframe02").hide()',1000);
+                    },
+                    error : function () {
+                        $(".toolbarframe03").show()
+                        setTimeout('$(".toolbarframe03").hide()',1000);
 
+                    }
+
+
+                })
             }
-        })
 
-    });
+        }
+    })
+
 });
 function loadUserInfo() {
     $.ajax({
@@ -63,11 +76,11 @@ function loadUserInfo() {
             }
             console.log("sex==================="+sex)
             $('.license').append('<img src="'+avatar+'" id="dynamicImage" style="width:6.2rem;height:6.2rem;"/>')
-            $('.namesl').append('<input type="text" placeholder="'+name+'" class="stkius name" /><img src="../../person/images/yjts.png" class="yjtiss" />')
+            $('.namesl').append('<input type="text" class="stkius name" value="'+name+'" /><img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.sexsl').append('<div class="d-guanzhu sex">'+sex+'</div> <img src="../../person/images/yjts.png" class="yjtiss" />')
-            $('.agesl').append('<input type="text" placeholder="'+age+'" class="stkius age" /> <img src="../../person/images/yjts.png" class="yjtiss" />')
+            $('.agesl').append('<input type="text" class="stkius age" value="'+age+'" onkeyup="this.value=this.value.replace(/\\D/g,\'\')" onafterpaste="this.value=this.value.replace(/\\D/g,\'\')"/> <img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.addresssl').append('<dd>'+address+'</dd>')
-            $('.phonesl').append('<input type="text" placeholder="'+phone+'" class="stkius phone" /> <img src="../../person/images/yjts.png" class="yjtiss" />')
+            // $('.phonesl').append('<input type="text" value="'+phone+'" class="stkius phone" /> <img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.statesl').append('<div id="trigger1" class="zhiiis">'+state+'</div>' +
                 '                 <script type="text/javascript">' +
                 '                     var weekdayArr=["离职-随时到岗","在职-考虑状态","离职-需要准备"];' +

@@ -31,6 +31,5 @@ public class BusinessMessage {
         BusinessMessage message = fail(msg);
         message.setCode(code);
         return message;
-
     }
 }

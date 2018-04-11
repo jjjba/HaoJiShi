@@ -16,31 +16,6 @@ $(function () {
         console.log("scale======"+scale)
         loadPositionByPars(city,scale,money,positionName);
     });
-    $('#jishi').click(function (e) {
-        positionName =$(e.target).attr("data");
-        console.log("positionName======="+positionName);
-        loadPositionByPars(city,scale,money,positionName);
-    });
-    $('#guanli').click(function (e) {
-        positionName =$(e.target).attr("data");
-        console.log("positionName======="+positionName);
-        loadPositionByPars(city,scale,money,positionName);
-    });
-    $('#qianting').click(function (e) {
-        positionName =$(e.target).attr("data");
-        console.log("positionName======="+positionName);
-        loadPositionByPars(city,scale,money,positionName);
-    });
-    $('#houqin').click(function (e) {
-        positionName =$(e.target).attr("data");
-        console.log("positionName======="+positionName);
-        loadPositionByPars(city,scale,money,positionName);
-    });
-    $('#peixun').click(function (e) {
-        positionName =$(e.target).attr("data");
-        console.log("positionName======="+positionName);
-        loadPositionByPars(city,scale,money,positionName);
-    });
     $('.city').click(function (e) {
         city =$(e.target).attr("data");
         console.log("city======="+city);
@@ -165,7 +140,10 @@ function loadPosition() {
 
     })
 }
-
+function addHopeJob(val) {
+    positionName =$('#'+val).attr("data");
+    loadPositionByPars(city,scale,money,positionName);
+}
 function loadPositionByPars(city,scale,money,positionName) {
     console.log("scale======"+scale)
     console.log("money======"+money)
@@ -175,6 +153,7 @@ function loadPositionByPars(city,scale,money,positionName) {
         scale : scale,
         positionName : positionName,
         city : city,
+
     }
     $.ajax({
         url:"/position/getPositionByParams02",
@@ -322,7 +301,9 @@ function loadRegionData() {
         }
     })
 }
-
+function loadPositionInfo(url) {
+    window.location.href=url;
+}
 function transition_search() {
     window.location.href="/transition/transition_search";
 }

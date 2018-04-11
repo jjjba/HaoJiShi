@@ -1,7 +1,7 @@
 // JavaScript Document
 function shiqu() {
     var phoneNumber =$('#phoneNumber').val();
-    if(phoneNumber =="" || phoneNumber =='' || phoneNumber==undefined){
+    if(phoneNumber =="" || phoneNumber =='' || phoneNumber==undefined || phoneNumber.length >11){
         $('.alera').show();
         setTimeout('$(".alera").hide()',1000);
         $("#hqyzm").attr("class","");
@@ -18,7 +18,7 @@ function shiqu() {
             success : function (msg) {
                 var OkorFalse = msg.data;
                 console.log(OkorFalse);
-                if(OkorFalse == 2 || OkorFalse == 1){
+                if((OkorFalse == 2 || OkorFalse == 1) && msg.dataOne !="false"){
                     $("#hqyzm").attr("class","yzxis");
                     $("#hqyzm").val("获取验证码");
                     sessionStorage.setItem("zhuCeOrDl",OkorFalse);

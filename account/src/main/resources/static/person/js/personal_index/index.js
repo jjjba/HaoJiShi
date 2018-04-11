@@ -2,8 +2,29 @@
 $(function() {
 
 	// loadPersonalBanner();
+    var phone =$.cookie('phone');
+    if(phone != null){
+        $.ajax({
+            url:"/personal/setuserId",
+            type:"POST",
+            data:{phone : phone},
+            success : function () {
+                loadPositionData();
+            }
+        })
+    }else{
+        $.ajax({
+            url:"/personal/setuserId",
+            type:"POST",
+            data:{phone : 0},
+            success : function () {
+                loadPositionData();
+            }
+        })
+    }
 
-	loadPositionData();
+
+
     
 	$(".wzkljgz01").click(function(){
 		

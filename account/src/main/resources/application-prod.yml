@@ -74,8 +74,8 @@ api:
   ImageSrc: http://wx.haojishi.net/image
 
 
-  appid: wx987bf4ddff238028
-  secret: 4f796ae819127a27abd8864bc22c14e3
+  appid: wxb363c68215a1d3f1
+  secret: 98e5dbf56fed8c9e0c5fb95f5d34ba05
 
   #支付配置
   mchUserId: 1417975802

@@ -63,7 +63,7 @@ public class PositionService {
             }
             businessMessage.setMsg("获取首页推荐职位成功");
             businessMessage.setSuccess(true);
-            }catch (Exception e){
+        }catch (Exception e){
             log.error("获取推荐职位错误",e);
         }
         return businessMessage;
@@ -210,9 +210,15 @@ public class PositionService {
             String city =personals.get(0).getHopeCity();
             if(city == null || city == "" || city .equals("")){
                 RemortIP remortIP =new RemortIP();
-                String address =remortIP.getAddressByIP(request);
-                System.out.println("address======"+address);
-                positionList=commonPositionMapper.getPositionByAddress01(address);
+                String ip =remortIP.getIpAddr(request);
+                try {
+                    String address =remortIP.getAddresses(ip,"utf-8");
+                    System.out.println("address=================="+address);
+                    positionList=commonPositionMapper.getPositionByAddress01(address);
+                }catch (Exception e){
+                    log.error("获取IP地址失败",e);
+                }
+
             }else {
                 String[] city1=city.split(",");
                 if(city1.length == 1){
@@ -231,9 +237,14 @@ public class PositionService {
         }else {
             System.out.println("进来未注册获取职位");
             RemortIP remortIP =new RemortIP();
-            String address =remortIP.getAddressByIP(request);
-            System.out.println("address======"+address);
-            positionList=commonPositionMapper.getPositionByAddress01(address);
+            String ip =remortIP.getIpAddr(request);
+            try {
+                String address =remortIP.getAddresses(ip,"utf-8");
+                positionList=commonPositionMapper.getPositionByAddress01(address);
+                System.out.println("address===================="+address);
+            }catch (Exception e){
+                log.error("获取IP地址失败",e);
+            }
 
         }
         businessMessage.setMsg("获取职位列表成功");
@@ -272,7 +283,7 @@ public class PositionService {
      * @return
      */
     public BusinessMessage getPositionByParams02(String positionName,
-                                               String city,String money,String scale){
+                                                 String city,String money,String scale){
         BusinessMessage businessMessage =new BusinessMessage();
         List<Map<String,Object>> position =commonPositionMapper.getPositionByParams02(city, positionName, money, scale);
         businessMessage.setMsg("获取职位成功");

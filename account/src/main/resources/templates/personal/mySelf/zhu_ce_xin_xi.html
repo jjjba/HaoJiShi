@@ -1,4 +1,4 @@
-﻿﻿<!doctype html>
+﻿<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
@@ -94,8 +94,8 @@
                </div>
                
                 <div class="uploader blue yobwis02">
-                    <a class="license">
-                        <img src="../../person/images/tupian.png" />
+                    <a class="license" onclick="sahngchaun()">
+                        <img src="../../person/images/tupian.png" style="height: 5rem;width: 5rem" id="dynamicImage" />
                     </a>
                 </div>
 
@@ -340,15 +340,17 @@
   <a href="#" class="bcanius">创建微简历</a>
 </div>
 <!--最底部结束-->
- <div class="toolbarframe xingmingxinxi" style="display: none">请填写姓名信息!!</div>
- <div class="toolbarframe xingbiexinxi" style="display: none">请填写性别信息!!</div>
- <div class="toolbarframe nianlingxinxi" style="display: none">请填写年龄信息!!</div>
- <div class="toolbarframe gongzuojingyan" style="display: none">请填写工作经验信息!!</div>
- <div class="toolbarframe qiuzhizhegangwei" style="display: none">请填写求职者岗位信息!!</div>
- <div class="toolbarframe yixiangchenshi" style="display: none">请填写意向城市信息!!</div>
- <div class="toolbarframe gerenyoushi" style="display: none">请填写个人优势信息!!</div>
- <div class="toolbarframe gongzuozhuangtai" style="display: none">请填写当前工作状态!!</div>
- <div class="toolbarframe baocunshibai" style="display: none">保存失败,请您再次尝试!!</div>
+ <div class="toolbarframe02 xingmingxinxi" style="display: none">请填写姓名信息!!</div>
+ <div class="toolbarframe02 xingbiexinxi" style="display: none">请填写性别信息!!</div>
+ <div class="toolbarframe02 nianlingxinxi" style="display: none">请填写年龄信息!!</div>
+ <div class="toolbarframe02 gongzuojingyan" style="display: none">请填写工作经验信息!!</div>
+ <div class="toolbarframe02 qiuzhizhegangwei" style="display: none">请填写求职者岗位信息!!</div>
+ <div class="toolbarframe02 yixiangchenshi" style="display: none">请填写意向城市信息!!</div>
+ <div class="toolbarframe02 gerenyoushi" style="display: none">请填写个人优势信息!!</div>
+ <div class="toolbarframe02 gongzuozhuangtai" style="display: none">请填写当前工作状态!!</div>
+ <div class="toolbarframe02 baocunshibai" style="display: none">保存失败,请您再次尝试!!</div>
+ <div class="toolbarframe04 xingmingzishu" style="display: none">姓名最多6个字</div>
+ <div class="toolbarframe10 nianlingsuishu" style="display: none">年龄只能在18-60岁之间</div>
  
 </body>
 </html>

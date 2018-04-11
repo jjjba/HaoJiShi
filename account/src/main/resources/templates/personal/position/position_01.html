@@ -6,7 +6,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <title>好技狮·您的好助手</title>
+    <title>好技师·个人端</title>
 
     <!-- 公用样式 开始 -->
     <link type="text/css" href="/static/person/css/response.css"
@@ -94,12 +94,12 @@
   <div class="rmcshis">
     <h2>热门城市</h2>
     <p>
-      <a href="#">北京</a>
-      <a href="#">上海</a>
-      <a href="#">石家庄</a>
-      <a href="#">重庆</a>
-      <a href="#">成都</a>
-      <a href="#">苏州</a>
+      <a href="#" data="北京" onclick="">北京</a>
+      <a href="#" data="上海">上海</a>
+      <a href="#" data="石家庄">石家庄</a>
+      <a href="#" data="重庆">重庆</a>
+      <a href="#" data="成都">成都</a>
+      <a href="#" data="苏州">苏州</a>
     </p>
   </div>
   <!--热门城市结束-->
@@ -291,60 +291,64 @@
           </div>
           <!--左边结束-->
           <!--右边开始-->
-          <div class="flriyous" id="jishi">
-            <a href="#" data="理疗师"><span>理疗师</span></a>
-            <a href="#" data="足疗师"><span>足疗师</span></a>
-            <a href="#" data="按摩师"><span>按摩师</span></a>
-            <a href="#" data="针灸师"><span>针灸师</span></a>
-            <a href="#" data="推拿师"><span>推拿师</span></a>
-            <a href="#" data="修脚师"><span>修脚师</span></a>
-            <a href="#" data="推油师"><span>推油师</span></a>
-            <a href="#" data="采耳师"><span>采耳师</span></a>
-            <a href="#" data="指压师"><span>指压师</span></a>
-            <a href="#" data="SPA师"><span>SPA师</span></a>
-            <a href="#" data="盲人按摩师"><span>盲人按摩师</span></a>
-            <a href="#" data="其他"><span>其他</span></a>
-          </div>
-          <div class="flriyous" id="guanli" style="display: none">
-            <a href="#" data="副总经理"><span>副总经理</span></a>
-            <a href="#" data="营运经理"><span>营运经理</span></a>
-            <a href="#" data="总经理"><span>总经理</span></a>
-            <a href="#" data="店长助理"><span>店长助理</span></a>
-            <a href="#" data="经理助理"><span>经理助理</span></a>
-            <a href="#" data="店长"><span>店长</span></a>
-            <a href="#" data="区域经理"><span>区域经理</span></a>
-            <a href="#" data="营销总监"><span>营销总监</span></a>
-            <a href="#" data="其他"><span>其他</span></a>
-          </div>
-          <div class="flriyous" id="qianting" style="display: none">
-            <a href="#" data="大堂经理/领班"><span>大堂经理/领班</span></a>
-            <a href="#" data="收银/吧员"><span>收银/吧员</span></a>
-            <a href="#" data="咨客/客服"><span>咨客/客服</span></a>
-            <a href="#" data="迎宾/接待"><span>迎宾/接待</span></a>
-            <a href="#" data="客户经理"><span>客户经理</span></a>
-            <a href="#" data="销售"><span>销售</span></a>
-            <a href="#" data="部长"><span>部长</span></a>
-            <a href="#" data="其他"><span>其他</span></a>
-          </div>
-          <div class="flriyous" id="houqin" style="display: none">
-            <a href="#" data="皮鞋美容师"><span>皮鞋美容师</span></a>
-            <a href="#" data="储备干部"><span>储备干部</span></a>
-            <a href="#" data="文员"><span>文员</span></a>
-            <a href="#" data="服务员"><span>服务员</span></a>
-            <a href="#" data="采购"><span>采购</span></a>
-            <a href="#" data="保洁"><span>保洁</span></a>
-            <a href="#" data="厨师"><span>厨师</span></a>
-            <a href="#" data="保安"><span>保安</span></a>
-            <a href="#" data="司机"><span>司机</span></a>
-            <a href="#" data="其他"><span>其他</span></a>
-          </div>
-          <div class="flriyous" id="peixun" style="display: none">
-            <a href="#" data="技术总监"><span>技术总监</span></a>
-            <a href="#" data="技术老师"><span>技术老师</span></a>
-            <a href="#" data="其他"><span>其他</span></a>
-            <a href="#" data="礼仪导师"><span>礼仪导师</span></a>
-            <a href="#" data="培训讲师"><span>培训讲师</span></a>
-          </div>
+
+            <div class="flriyous">
+              <div class="flriyous" id="jishi">
+                <a href="#" th:data="理疗师" id="liliaoshi" onclick="addHopeJob('liliaoshi')"><span>理疗师</span></a>
+                <a href="#" th:data="足疗师" id="zuliaoshi" onclick="addHopeJob('zuliaoshi')"><span>足疗师</span></a>
+                <a href="#" th:data="按摩师" id="anmoshi" onclick="addHopeJob('anmoshi')"><span>按摩师</span></a>
+                <a href="#" th:data="针灸师" id="zhenjishi" onclick="addHopeJob('zhenjishi')"><span>针灸师</span></a>
+                <a href="#" th:data="推拿师" id="tuianshi" onclick="addHopeJob('tuianshi')"><span>推拿师</span></a>
+                <a href="#" th:data="修脚师" id="xiujiaoshi" onclick="addHopeJob('xiujiaoshi')"><span>修脚师</span></a>
+                <a href="#" th:data="推油师" id="tuiyoushi" onclick="addHopeJob('tuiyoushi')"><span>推油师</span></a>
+                <a href="#" th:data="采耳师" id="caiershi" onclick="addHopeJob('caiershi')"><span>采耳师</span></a>
+                <a href="#" th:data="指压师" id="zhiyashi" onclick="addHopeJob('zhiyashi')"><span>指压师</span></a>
+                <a href="#" th:data="SPA师" id="spashi" onclick="addHopeJob('spashi')"><span>SPA师</span></a>
+                <a href="#" th:data="其他" id="qitas" onclick="addHopeJob('qitas')"><span>其他</span></a>
+                <a href="#" th:data="盲人按摩师" id="mangrenanmoshi" onclick="addHopeJob('mangrenanmoshi')"><span>盲人按摩师</span></a>
+              </div>
+              <div class="flriyous" id="guanli" style="display: none">
+                <a href="#" th:data="副总经理" id="fuzongjiangli" onclick="addHopeJob('fuzongjiangli')"><span>副总经理</span></a>
+                <a href="#" th:data="营运经理" id="yingyunjingli" onclick="addHopeJob('yingyunjingli')"><span>营运经理</span></a>
+                <a href="#" th:data="总经理" id="zongjingli" onclick="addHopeJob('zongjingli')"><span>总经理</span></a>
+                <a href="#" th:data="店长助理" id="dianzhangjingli" onclick="addHopeJob('dianzhangjingli')"><span>店长助理</span></a>
+                <a href="#" th:data="经理助理" id="jinglizhuli" onclick="addHopeJob('jinglizhuli')"><span>经理助理</span></a>
+                <a href="#" th:data="店长" id="dianzhang" onclick="addHopeJob('dianzhang')"><span>店长</span></a>
+                <a href="#" th:data="区域经理" id="quyujingli" onclick="addHopeJob('quyujingli')"><span>区域经理</span></a>
+                <a href="#" th:data="营销总监" id="yingxiaozongjian" onclick="addHopeJob('yingxiaozongjian')"><span>营销总监</span></a>
+                <a href="#" th:data="其他" id="qitass" onclick="addHopeJob('qitass')"><span>其他</span></a>
+              </div>
+              <div class="flriyous" id="qingting" style="display: none">
+                <a href="#" th:data="收银吧员" id="shouyinbayuan" onclick="addHopeJob('shouyinbayuan')"><span>收银/吧员</span></a>
+                <a href="#" th:data="咨客客服" id="zikekefu" onclick="addHopeJob('zikekefu')"><span>咨客/客服</span></a>
+                <a href="#" th:data="销售" id="xiaoshou" onclick="addHopeJob('xiaoshou')"><span>销售</span></a>
+                <a href="#" th:data="迎宾接待" id="yingbinjiedai" onclick="addHopeJob('yingbinjiedai')"><span>迎宾/接待</span></a>
+                <a href="#" th:data="客户经理" id="kehujingli" onclick="addHopeJob('kehujingli')"><span>客户经理</span></a>
+                <a href="#" th:data="部长" id="buzhang" onclick="addHopeJob('buzhang')"><span>部长</span></a>
+                <a href="#" th:data="大堂经理领班" id="datangjinglilingban" onclick="addHopeJob('datangjinglilingban')"><span>大堂经理/领班</span></a>
+                <a href="#" th:data="其他" id="qitasss" onclick="addHopeJob('qitasss')"><span>其他</span></a>
+              </div>
+              <div class="flriyous" id="houqin" style="display: none">
+                <a href="#" th:data="皮鞋美容师" id="pixiemeirongshi" onclick="addHopeJob('pixiemeirongshi')"><span>皮鞋美容师</span></a>
+                <a href="#" th:data="储备干部" id="chubeiganbu" onclick="addHopeJob('chubeiganbu')"><span>储备干部</span></a>
+                <a href="#" th:data="文员" id="wenyuan" onclick="addHopeJob('wenyuan')"><span>文员</span></a>
+                <a href="#" th:data="采购" id="caigou" onclick="addHopeJob('caigou')"><span>采购</span></a>
+                <a href="#" th:data="保洁" id="baojie" onclick="addHopeJob('baojie')"><span>保洁</span></a>
+                <a href="#" th:data="厨师" id="chushi" onclick="addHopeJob('chushi')"><span>厨师</span></a>
+                <a href="#" th:data="保安" id="banan" onclick="addHopeJob('banan')"><span>保安</span></a>
+                <a href="#" th:data="司机" id="siji" onclick="addHopeJob('siji')"><span>司机</span></a>
+                <a href="#" th:data="服务员" id="fuwuyaun" onclick="addHopeJob('fuwuyaun')"><span>服务员</span></a>
+                <a href="#" th:data="其他" id="qitassss" onclick="addHopeJob('qitassss')"><span>其他</span></a>
+              </div>
+              <div class="flriyous" id="peixun" style="display: none">
+                <a href="#" th:data="技术总监" id="jishuzongjian" onclick="addHopeJob('jishuzongjian')"><span>技术总监</span></a>
+                <a href="#" th:data="技术老师" id="jishilaoshi" onclick="addHopeJob('jishilaoshi')"><span>技术老师</span></a>
+                <a href="#" th:data="其他" id="peixunqita" onclick="addHopeJob('peixunqita')"><span>其他</span></a>
+                <a href="#" th:data="礼仪导师" id="liyidaoshi" onclick="addHopeJob('liyidaoshi')"><span>礼仪导师</span></a>
+                <a href="#" th:data="培训讲师" id="peixunjiangshi" onclick="addHopeJob('peixunjiangshi')"><span>培训讲师</span></a>
+              </div>
+
+            </div>
           <!--右边结束-->
         </div>
     </div>

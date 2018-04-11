@@ -177,6 +177,11 @@ public class PersonalController {
         return personalServicel.getPersonalByParams(positionName, sex, age);
     }
 
+
+
+
+
+
     /**
      * 退出登录
      */
@@ -203,5 +208,24 @@ public class PersonalController {
     @RequestMapping("getUserPhoneAndPWD")
     public BusinessMessage getUserPhoneAndPWD(HttpSession session){
         return personalServicel.getUserPhoneAndPWD(session);
+    }
+    /**
+     * 求职者端=========修改求职者手机号
+     * @param session
+     * @return
+     */
+    @RequestMapping("updatePhone")
+    public BusinessMessage updatePhone(HttpSession session,String phoneNum){
+        return personalServicel.updatePhone(session,phoneNum);
+    }
+
+    /**
+     * 求职者端=========进首页判断是否已经登陆
+     * @param phone
+     * @return
+     */
+    @RequestMapping("setuserId")
+    public BusinessMessage setuserId(HttpSession session,String phone){
+        return personalServicel.setuserId(session, phone);
     }
 }

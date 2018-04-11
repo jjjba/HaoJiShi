@@ -401,6 +401,8 @@ public class CompanyService{
         Integer num = 0;
         if (PhoneCheck.checkCellphone(phoneNumber)) {
             num+=1;
+        }else{
+            businessMessage.setDataOne("false");
         }
         Example userExample =new Example(User.class);
         userExample.createCriteria().andEqualTo("phone",phoneNumber);

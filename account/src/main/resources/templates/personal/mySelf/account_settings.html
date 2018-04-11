@@ -1,5 +1,4 @@
-﻿﻿﻿﻿<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+﻿<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -49,6 +48,12 @@
         function goBack() {
             window.location.href="/transition/transition_goMySelf";
         }
+        function xiugaishoujihao() {
+            window.location.href="/transition/wo_de_xiu_gai_shou_ji_hao1";
+        }
+        function xiugaimima() {
+            window.location.href="/transition/wo_de_xiu_gai_mi_ma1";
+        }
     </script>
 
 </head>
@@ -69,13 +74,13 @@
   <div class="xgsjhoma">
     <ul>
       <li>
-        <a href="#" class="clearfix">
+        <a href="#" class="clearfix" onclick="xiugaishoujihao()">
           <div class="fl zbiuus01">修改手机</div>
           <div class="fr zbiuus02 phoneees"></div>
         </a>
       </li>
       <li>
-        <a href="#" class="clearfix">
+        <a href="#" class="clearfix" onclick="xiugaimima()">
           <div class="fl zbiuus01">修改密码</div>
           <div class="fr zbiuus02"><img src="/static/person/images/yjts.png" th:src="@{/person/images/yjts.png}" /></div>
         </a>

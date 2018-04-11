@@ -1,4 +1,4 @@
-﻿﻿﻿var avatarPath =[];
+﻿var avatarPath =[];
 var hopeMoney;
 var experience;
 var school;
@@ -47,29 +47,45 @@ function loadPersonalInfo() {
                     }
 
                     special =item.special;
-                    if(special == null || special == ""){
-                        special ="未填写";
-                    }
                     expect_money =item.expect_money;
-                    if(expect_money == null || expect_money == ""){
-                        expect_money ="未填写";
-                    }
-                    hope_job =item.hope_job;
-                    if(hope_job == null || hope_job == ""){
-                        hope_job ="未填写";
-                    }
-                    hope_city =item.hope_city;
-                    if(hope_city == null || hope_city == ""){
-                        hope_city ="未填写";
-                    }
                     job_experience =item.job_experience;
-                    if(job_experience == null || job_experience == ""){
-                        job_experience ="未填写";
-                    }
+                    hope_city =item.hope_city;
                     recordSchool =item.recordSchool;
                     mySelfInfo =item.mySelfInfo;
                     onceDo =item.onceDo;
                     myHometown =item.myHometown;
+                    hope_job =item.hope_job;
+                    if(onceDo != null && onceDo != "") {
+                        if(onceDo.toString().length > 15){
+                            onceDo =onceDo.toString().substring(0,15)+"...";
+                        }
+                    }
+                    if(hope_city != null && hope_city != "") {
+                        if(hope_city.toString().length > 15){
+                            hope_city =hope_city.toString().substring(0,15)+"...";
+                        }
+                    }
+                    if(hope_job != null && hope_job != "") {
+                        if(hope_job.toString().length > 15){
+                            hope_job =hope_job.toString().substring(0,15)+"...";
+                        }
+                    }
+                    if(special != null && special != "") {
+                        if(special.toString().length > 15){
+                            special =special.toString().substring(0,15)+"...";
+                        }
+                    }
+                    if(mySelfInfo != null && mySelfInfo != "") {
+                        if(mySelfInfo.toString().length > 15){
+                            mySelfInfo =mySelfInfo.toString().substring(0,15)+"...";
+                        }
+                    }
+
+
+
+
+
+
 
                     var txuyse = '<div class="sbtopxxs">'+
                         '<div class="sblefs">' +
@@ -85,7 +101,7 @@ function loadPersonalInfo() {
                         '</div>';
                     $('.txuyse').append(txuyse);
 
-                var myselfInfo ='<div class="zwjisss">'+
+                var ziwodejieho ='<div class="zwjisss">'+
                     '<a href="#" onclick="loadMySelfInfo()">'+
                     '<div class="stopsis">'+
                     '<div class="zuoius01">自我介绍</div>'+
@@ -97,24 +113,27 @@ function loadPersonalInfo() {
                     '<a href="#" onclick="loadSpecial()">'+
                     '<div class="sryikuys clearfix">'+
                     '<div class="fl zcsyks">个人标签</div>'+
-                    '<div class="fr youyss">'+
-                    '<img src="../../person/images/yjts.png" class="yjtiss" />'+
+                    '<div class="fr youyss zhiiis wdoaioqian">'+
+                    special+'<img src="../../person/images/yjts.png" class="yjtiss" />'+
                     '</div>'+
                     '</div>'+
                     '</a>'+
                     '</div>';
-                $('.myselfInfo').append(myselfInfo);
+                $('.ziwodejieho').append(ziwodejieho);
                 if(mySelfInfo == null || mySelfInfo == ""){
                     $('.wodejieshao').show();
                     $('.ziwojieshao').hide();
+                }
+                if(special == null || special == ""){
+                    $('.wdoaioqian').html("未选择").addClass("wtxyss");
                 }
                     var money ='<div class="sryikuys borxboms clearfix">'+
                         '<div class="fl zcsyks">期望薪资</div>'+
                         '<div class="fr yogzztas">'+
                         '<div class="xzzwis">'+
-                        '<div id="trigger1" class="zhiiis">'+expect_money+'</div>'+
+                        '<div id="trigger1" class="zhiiis wodegonzi">'+expect_money+'</div>'+
                         '<script type="text/javascript">\n' +
-                        '                var weekdayArr=[\'3000元以下/月\',\'3000-5000/月\',\'5000-8000/月\',\'8000-12000/月\',\'12000-15000/月\',\'15000以上/月\'];\n' +
+                        '                var weekdayArr=[\'3000元以下/月\',\'3000-5000元/月\',\'5000-8000元/月\',\'8000-12000元/月\',\'12000-15000元/月\',\'15000以上元/月\'];\n' +
                         '                var mobileSelect1 = new MobileSelect({\n' +
                         '                    trigger: \'#trigger1\', \n' +
                         '                    title: \'\',  \n' +
@@ -138,7 +157,7 @@ function loadPersonalInfo() {
                         '<div class="fl zcsyks">求职岗位</div>'+
                         '<div class="fr yogzztas">'+
                         '<div class="xzzwis">'+
-                        '<div id="trigger2" class="zhiiis">'+hope_job+'</div>'+
+                        '<div class="zhiiis wodegongzuoganwei">'+hope_job+'</div>'+
                         '</div> <img src="../../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div>'+
@@ -146,7 +165,7 @@ function loadPersonalInfo() {
                         '<a href="#" onclick="goMyHopeCity()">'+
                         '<div class="sryikuys borxboms clearfix">'+
                         '<div class="fl zcsyks">意向城市</div>'+
-                        '<div class="fr youkuiss">'+
+                        '<div class="fr youkuiss woyaogongzuochenghsi">'+
                         hope_city+' <img src="../../person/images/yjts.png" class="yjtiss" />'+
                         '</div>'+
                         '</div>'+
@@ -155,7 +174,7 @@ function loadPersonalInfo() {
                         '<div class="fl zcsyks">工作经验</div>'+
                         '<div class="fr yogzztas">'+
                         '<div class="xzzwis">'+
-                        '<div id="trigger3" class="zhiiis">'+job_experience+'</div>'+
+                        '<div id="trigger3" class="zhiiis gongzuojingyan">'+job_experience+'</div>'+
                         '<script type="text/javascript">\n' +
                         '                var weekdayArr3=[\'不足1年经验\',\'1年经验以上\',\'3年经验以上\',\'5年经验以上\',\'8年经验以上\',\'10年经验以上\'];\n' +
                         '                var mobileSelect1 = new MobileSelect({\n' +
@@ -177,19 +196,42 @@ function loadPersonalInfo() {
                         '</div>'+
                         '</div>';
                     $('#money').append(money);
+                    if(job_experience == null || job_experience == ""){
+                        $('.gongzuojingyan').html("未选择").addClass("wtxyss");
+                    }
+                    if(expect_money == null || expect_money == ""){
+                        $('.wodegonzi').html("未选择").addClass("wtxyss");
+                    }
+                    hope_job =item.hope_job;
+                    if(hope_job == null || hope_job == ""){
+                        $('.wodegongzuoganwei').html("未选择").addClass("wtxyss");
+                    }
+                    hope_city =item.hope_city;
+                    if(hope_city == null || hope_city == ""){
+                        $('.woyaogongzuochenghsi').html("未选择").addClass("wtxyss");
+                    }
                     var cuvjdi=
-                        '<div class="sryikuys clearfix auiagv">\n' +
-                        '         <div class="fl zcsyks afage">最高学历</div>\n' +
-                        '     <div class="fr yogzztas aaegaef" style="display: none">\n' +
+                        '<div class="sryikuys clearfix">\n' +
+                        '     <!--左边开始-->\n' +
+                        '     <div class="fl zcsyks">最高学历</div>\n' +
+                        '     <!--左边结束-->\n' +
+                        '     \n' +
+                        '     <!--右边开始-->\n' +
+                        '     <div class="fr yogzztas">\n' +
+                        '       \n' +
+                        '       <!--选择职位开始-->\n' +
                         '       <div class="xzzwis">\n' +
-                        '           <div id="trigger5" class="zhiiis wtxyss">未填写</div>\n' +
+                        '           <div id="trigger4" class="zhiiis zuigoaxueli">'+recordSchool+'</div>\n' +
                         '            <script type="text/javascript">\n' +
-                        '                var weekdayArr5=["幼儿园","小学","初中","中专","高中","大专","本科","硕士研究生","博士研究生"];\n' +
-                        '                var mobileSelect2 = new MobileSelect({\n' +
-                        '                    trigger: \'#trigger5\', \n' +
+                        '            \n' +
+                        '                var weekdayArr4=["幼儿园","小学","初中","中专","高中","大专","本科","硕士研究生","博士研究生"];\n' +
+                        '                \n' +
+                        '                \n' +
+                        '                var mobileSelect1 = new MobileSelect({\n' +
+                        '                    trigger: \'#trigger4\', \n' +
                         '                    title: \'\',  \n' +
                         '                    wheels: [\n' +
-                        '                                {data: weekdayArr5}\n' +
+                        '                                {data: weekdayArr4}\n' +
                         '                            ],\n' +
                         '                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0\n' +
                         '                    transitionEnd:function(indexArr, data){\n' +
@@ -199,54 +241,52 @@ function loadPersonalInfo() {
                         '                        console.log(data);\n' +
                         '                    }\n' +
                         '                });\n' +
+                        '            \n' +
+                        '            \n' +
                         '            </script>\n' +
                         '        </div> <img src="../../person/images/yjts.png" class="yjtiss" />\n' +
+                        '       <!--选择职位结束-->\n' +
+                        '       \n' +
                         '     </div>\n' +
-
+                        '     <!--右边结束-->\n' +
+                        '     \n' +
                         '   </div>\n' +
-                        '         <div class="fr yogzztas afavaae">\n' +
-                        '             <div class="xzzwis">\n' +
-                        '                 <div id="trigger4" class="zhiiis zuigoaxueli">'+recordSchool+'</div>\n' +
-                        '                 <script type="text/javascript">\n' +
-                        '                     var weekdayArr4=["幼儿园","小学","初中","中专","高中","大专","本科","硕士研究生","博士研究生"];\n' +
-                        '                     var mobileSelect1 = new MobileSelect({\n' +
-                        '                         trigger: \'#trigger4\',\n' +
-                        '                         title: \'\',\n' +
-                        '                         wheels: [\n' +
-                        '                             {data: weekdayArr4}\n' +
-                        '                         ],\n' +
-                        '                         position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0\n' +
-                        '                         transitionEnd:function(indexArr, data){\n' +
-                        '                             console.log(data);\n' +
-                        '                         },\n' +
-                        '                         callback:function(indexArr, data){\n' +
-                        '                             console.log(data);\n' +
-                        '                         }\n' +
-                        '                     });\n' +
-                        '                 </script>\n' +
-                        '             </div> <img src="../../person/images/yjts.png" class="yjtiss" />\n' +
-                        '         </div>\n' +
+                        '   <!--最高学历结束-->\n' +
+                        '   \n' +
+                        '   <!--曾经做过开始-->\n' +
+                        '   <a href="#" onclick="gocengjingzuoguo()">\n' +
+                        '     <div class="sryikuys borxboms clearfix">\n' +
+                        '         <!--左边开始-->\n' +
+                        '         <div class="fl zcsyks">曾经做过</div>\n' +
+                        '         <div class="fr yogzztas">' +
+                        '               <div class="xzzwis">' +
+                        '<div id="trigger4" class="zhiiis cengjingzuoguos">'+onceDo+'</div>' +
+                        '               </div><img src="../../person/images/yjts.png" class="yjtiss" />' +
+                        '         </div>' +
+                        '         \n' +
+                        // '         <!--右边开始-->\n' +
+                        // '         <div class="fr youkuiss cengjingzuoguos">\n' +
+                        // '         </div>\n' +
+                        // '         <!--右边结束-->\n' +
+                        '         \n' +
                         '     </div>\n' +
-
-                        '     <a href="#" onclick="gocengjingzuoguo()" class="asaeevd">\n' +
-                        '         <div class="sryikuys borxboms clearfix">\n' +
-                        '             <!--左边开始-->\n' +
-                        '             <div class="fl zcsyks">曾经做过</div>\n' +
-                        '             <div class="fr youkuiss cnengjingzuoguo" >\n' +
-                        onceDo+'            <img src="images/yjts.png" class="yjtiss" />\n' +
-                        '             </div>\n' +
-                        '         </div>\n' +
-                        '     </a>\n' +
-
-
-                        '     <div class="sryikuys borxboms clearfix aveavgaeg">\n' +
+                        '   </a>\n' +
+                        '   <!--曾经做过结束-->\n' +
+                        '   \n' +
+                        '   <!--我的家乡开始-->\n' +
+                        '   <a href="#">\n' +
+                        '     <div class="sryikuys clearfix">\n' +
+                        '         <!--左边开始-->\n' +
                         '         <div class="fl zcsyks">我的家乡</div>\n' +
+                        '         <!--左边结束-->\n' +
+                        '         \n' +
+                        '         <!--右边开始-->\n' +
                         '         <div class="fr youkuiss">\n' +
-                        '             <div class="xzeyosx">\n' +
+                        '        <div class="xzeyosx">\n' +
                         '                 <section class="express-area">\n' +
-                        '                     <a id="expressArea" href="javascript:void(0)">\n' +
+                        '                     <a id="expressArea" href="javascript:void(0)" class="woejaxaing">\n' +
                         '                         <dl>\n' +
-                        '                            <dd class="wtxyss">'+myHometown+'</dd>\n' +
+                        '                            <dd>'+myHometown+'</dd>\n' +
                         '                         </dl>\n' +
                         '                     </a>\n' +
                         '                 </section>\n' +
@@ -265,23 +305,21 @@ function loadPersonalInfo() {
                         '             </div>\n' +
                         '             <img src="../../person/images/yjts.png" class="yjtiss" />\n' +
                         '         </div>\n' +
-                        '     </div>';
-
-                if(recordSchool == null || recordSchool == ""){
-                    $('.aaegaef').show();
-                    $('.afavaae').hide();
-                }
-                if(onceDo == null || onceDo == ""){
-                    $('.asaeevd').show();
-                    $('.wocengjafn').hide();
-                }
-                if(myHometown == null || myHometown == ""){
-                    $('.qwqwtqf').show();
-                    $('.aveavgaeg').hide();
-                }
+                        '         <!--右边结束-->\n' +
+                        '         \n' +
+                        '     </div>\n' +
+                        '   </a>\n';
 
                 $('.cuvjdi').append(cuvjdi);
-
+                if(recordSchool == null || recordSchool == ""){
+                    $('.zuigoaxueli').html("未选择").addClass("wtxyss");
+                }
+                if(onceDo == null || onceDo == ""){
+                    $('.cengjingzuoguos').html("未选择").addClass("wtxyss");
+                }
+                if(myHometown == null || myHometown == ""){
+                    $('.woejaxaing').html("未选择").addClass("wtxyss");
+                }
             }
         }
     });

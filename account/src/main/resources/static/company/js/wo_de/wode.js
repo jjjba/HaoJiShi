@@ -10,7 +10,6 @@ $(document).ready(function() {
      console.log(pwd);
      var okOr = sessionStorage.getItem("ZhuCeOk");
      if(okOr == "OK"){
-
          $(".zccg").show();
          sessionStorage.setItem("ZhuCeOk","");
      }else {
@@ -144,33 +143,5 @@ function kuaizhao() {
     window.location.href="/transition/kuaizhao";
 }
 function wanshanCompany() {
-    $.ajax({
-        url:"/company/Bjdpxx",
-        type:"POST",
-        success:function (msg) {
-            sessionStorage.setItem("xgxm",msg.data.userName);
-            console.log(msg.data.userName);
-            sessionStorage.setItem("xgzw",msg.data.zhiWu);
-            console.log(msg.data.zhiWu);
-            sessionStorage.setItem("xgLogo",msg.data.iconPath);
-            console.log(msg.data.iconPath);
-            sessionStorage.setItem("xgdpmc",msg.data.name);
-            console.log(msg.data.name);
-            sessionStorage.setItem("xgdpmj",msg.data.companyDpmj);
-            console.log(msg.data.companyDpmj);
-            sessionStorage.setItem("xgdpfl",msg.data.companySpecial);
-            console.log(msg.data.companySpecial);
-            sessionStorage.setItem("xgdpdz",msg.data.companyAddr);
-            console.log(msg.data.companyAddr);
-            sessionStorage.setItem("xgdplx",msg.data.companyType);
-            console.log(msg.data.companyType);
-            sessionStorage.setItem("xgid",msg.data.id);
-            console.log(msg.data.id);
-            sessionStorage.setItem("xggstp",msg.data.companyPhoto);
-            console.log(msg.data.companyPhoto);
-            sessionStorage.setItem("xgjj",msg.data.companyInfo);
-            console.log(msg.data.companyInfo);
-        }
-    })
-   /* window.location.href = "/transition/bianji_dianpuxinxi";*/
+   window.location.href = "/transition/bianji_dianpuxinxi";
 }

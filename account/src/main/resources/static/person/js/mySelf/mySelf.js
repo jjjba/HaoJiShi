@@ -45,12 +45,13 @@ function loadPersonalData() {
                 sex="../../person/images/biao06.png";
             }
 
+
             var sbjltitis ='<div class="sbtopxxs">'+
                 '<div class="sblefs">'+
                 '<img src="'+avatar+'" style="width:6.2rem;height:6.2rem;"/>'+
                 '</div>'+
                 '<div class="sbyours">'+
-                '<div class="lylyus">'+name+' <span><img src="'+sex+'">'+age+'</span></div>'+
+                '<div class="woemignzi">'+name+' <span><img src="'+sex+'">'+age+'</span></div>'+ //class="lylyus"
                 '<div class="grxhzls">'+state+'</div>'+
                 '</div>'+
                 '</div>'+
@@ -66,7 +67,11 @@ function loadPersonalData() {
                 '</div>'+
                 '</a>';
             $('.sbjltitis').append(sbjltitis);
-
+            if(sex == '../../person/images/biao05.png'){
+                $('.woemignzi').addClass("lylyus");
+            }else{
+                $('.woemignzi').addClass("lylyus02");
+            }
         },
         error :function (res) {
 

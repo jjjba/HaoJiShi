@@ -711,4 +711,67 @@ public class TransitionController {
     public String bianji_dianpuxinxi(){
         return "company/company_myself/bianji_dianpuxinxi";
     }
+    /**
+     * 求职者端=====修改手机号
+     */
+    @RequestMapping("wo_de_xiu_gai_shou_ji_hao1")
+    public String wo_de_xiu_gai_shou_ji_hao1(){
+        return "personal/mySelf/wo_de_xiu_gai_shou_ji_hao";
+    }
+
+    /**
+     * 求职者端=====修改手机号
+     */
+    @RequestMapping("wo_de_xiu_gai_mi_ma1")
+    public String wo_de_xiu_gai_mi_ma1(){
+        return "personal/mySelf/wo_de_xiu_gai_mi_ma";
+    }
+
+    /**
+     * 求职者端=====常见问题6
+     */
+    @RequestMapping("gowenti06")
+    public String gowenti06(){
+        return "personal/mySelf/wentixiangqing06";
+    }
+
+    /**
+     * 求职者端=====常见问题6
+     */
+    @RequestMapping("gowenti05")
+    public String gowenti05(){
+        return "personal/mySelf/wentixiangqing05";
+    }
+
+    /**
+     * 求职者端=====常见问题6
+     */
+    @RequestMapping("gowenti04")
+    public String gowenti04(){
+        return "personal/mySelf/wentixiangqing04";
+    }
+
+    /**
+     * 求职者端=====常见问题6
+     */
+    @RequestMapping("gowenti03")
+    public String gowenti03(){
+        return "personal/mySelf/wentixiangqing03";
+    }
+
+    /**
+     * 求职者端=====常见问题6
+     */
+    @RequestMapping("gowenti02")
+    public String gowenti02(){
+        return "personal/mySelf/wentixiangqing02";
+    }
+
+    /**
+     * 求职者端=====常见问题6
+     */
+    @RequestMapping("gowenti01")
+    public String gowenti01(){
+        return "personal/mySelf/wentixiangqing01";
+    }
 }

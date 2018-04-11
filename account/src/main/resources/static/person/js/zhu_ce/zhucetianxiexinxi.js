@@ -24,10 +24,10 @@ $(function () {
         $('.xingbie').append(sex);
     }
     if(age == null || age == ""){
-        $('.nianliangas').append('<input type="text" placeholder="请输入年龄" class="stkius nianling" /> <img src="../../person/images/yjts.png"\n' +
+        $('.nianliangas').append('<input type="text" placeholder="请输入年龄" class="stkius nianling" onkeyup="this.value=this.value.replace(/\\D/g,\'\')" onafterpaste="this.value=this.value.replace(/\\D/g,\'\')"/> <img src="../../person/images/yjts.png"\n' +
             '                                                                                class="yjtiss" />')
     }else {
-        $('.nianliangas').append('<input type="text" placeholder="请输入年龄" class="stkius nianling" value="'+age+'" /> <img src="../../person/images/yjts.png"\n' +
+        $('.nianliangas').append('<input type="text" placeholder="请输入年龄" class="stkius nianling" value="'+age+'" onkeyup="this.value=this.value.replace(/\\D/g,\'\')" onafterpaste="this.value=this.value.replace(/\\D/g,\'\')" /> <img src="../../person/images/yjts.png"\n' +
             '                                                                                class="yjtiss" />')
     }
     if(gzjy == null || gzjy == ""){
@@ -38,17 +38,30 @@ $(function () {
     if(hopeJob == null || hopeJob == ""){
         $('.woqiuzhifia').append('请选择求职岗位<img src="../../person/images/yjts.png" class="yjtiss" />')
     }else {
-        $('.woqiuzhifia').append(hopeJob+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        if(hopeJob.length > 15){
+            $('.woqiuzhifia').append(hopeJob.substring(0,15)+"..."+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        }else {
+            $('.woqiuzhifia').append(hopeJob+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        }
+
     }
     if(hopeCity == null || hopeCity == ""){
         $('.avjahb').append('请选择意向城市<img src="../../person/images/yjts.png" class="yjtiss" />')
     }else {
-        $('.avjahb').append(hopeCity+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        if(hopeCity.length > 15){
+            $('.avjahb').append(hopeCity.substring(0,15)+"..."+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        }else {
+            $('.avjahb').append(hopeCity+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        }
     }
     if(special == null || special == ""){
         $('.gerfngj').append('请选择个人优势<img src="../../person/images/yjts.png" class="yjtiss" />')
     }else {
-        $('.gerfngj').append(special+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        if(special.length > 15){
+            $('.gerfngj').append(special.substring(0,15)+"..."+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        }else {
+            $('.gerfngj').append(special+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+        }
     }
     if(state == null || state == ""){
         $('.gongzuozhuangtai').append('请选择工作状态')
@@ -123,33 +136,48 @@ $(function () {
             gzjy != null && gzjy != ""&& gzjy != "请选择工作经验" && state != null && state != "" && state != "请选择工作状态"
             && hopeCity != null && hopeCity != "" && hopeCity != "请选择意向城市" && hopeJob != null && hopeJob != "" && hopeJob != "请选择求职岗位"
             && special != null && special != "" && special != "请选择个人优势"){
-            $.ajax({
-                url:"/personal/perfectPersonalInfo",
-                type:"POST",
-                data:{
-                    hopeCity : hopeCity,
-                    hopeJob : hopeJob,
-                    special : special,
-                    name : name,
-                    sex : sex,
-                    state : state,
-                    age : age,
-                    gzjy :gzjy,
-                    avatar : avatarPath,
-                },
-                success : function () {
-                    window.location.href="/transition/transition_goMySelf";
-                },
-                error : function () {
-                    $(".baocunshibai").show()
-                    setTimeout('$(".baocunshibai").hide()',1000);
+            if(name.length > 6){
+                $(".xingmingzishu").show()
+                setTimeout('$(".xingmingzishu").hide()',1000);
+            }else {
+                if(parseInt(age) < 18 || parseInt(age) >60){
+                    $(".nianlingsuishu").show()
+                    setTimeout('$(".nianlingsuishu").hide()',1000);
+                }else {
+                    $.ajax({
+                        url:"/personal/perfectPersonalInfo",
+                        type:"POST",
+                        data:{
+                            hopeCity : hopeCity,
+                            hopeJob : hopeJob,
+                            special : special,
+                            name : name,
+                            sex : sex,
+                            state : state,
+                            age : age,
+                            gzjy :gzjy,
+                            avatar : avatarPath,
+                        },
+                        success : function () {
+                            window.location.href="/transition/transition_goMySelf";
+                        },
+                        error : function () {
+                            $(".baocunshibai").show()
+                            setTimeout('$(".baocunshibai").hide()',1000);
 
+                        }
+                    })
                 }
-            })
+
+            }
+
         }
 
     });
 });
+function sahngchaun() {
+    chooseImage();
+}
 function configwx() {
     var url = window.location.href;
     $.ajax({

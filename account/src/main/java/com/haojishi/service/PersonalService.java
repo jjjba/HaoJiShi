@@ -743,4 +743,51 @@ public class PersonalService {
         bu.setData(map);
         return bu;
     }
+    /**
+     * 求职者端=========进首页判断是否已经登陆
+     * @param phone
+     * @return
+     */
+    public BusinessMessage setuserId(HttpSession session,String phone){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            Example example =new Example(User.class);
+            example.createCriteria().andEqualTo("phone",phone);
+            List<User> users =userMapper.selectByExample(example);
+            if(users != null && users.size() > 0){
+                session.setAttribute("userId",users.get(0).getId());
+            }else {
+                session.setAttribute("userId",0);
+            }
+        }catch (Exception e){
+            log.error("判断求职者是否登陆失败",e);
+        }
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
+
+
+
+    /**
+     * 求职者端=========修改求职者手机号
+     * @param session
+     * @return
+     */
+    public BusinessMessage updatePhone(HttpSession session,String phoneNum){
+        BusinessMessage bu =new BusinessMessage();
+        int userId =(Integer)session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
+        user.setPhone(phoneNum);
+        userMapper.updateByPrimaryKeySelective(user);
+        personals.get(0).setPhone(phoneNum);
+        personalMapper.updateByPrimaryKeySelective(personals.get(0));
+        bu.setMsg("修改用户手机号成功");
+        bu.setSuccess(true);
+        return bu;
+    }
+
 }

@@ -54,7 +54,7 @@ function loadCollectPosition() {
                     experience ="未填写";
                 }
 
-                var reconblock ='<a href="#">'+
+                var reconblock ='<a href="#" onclick="loadPositionInfo(\'/transition/transition_position_info?id='+id+'\')">'+
                     '<div class="respise clearfix">'+
                     '<div class="fl reselefs">'+position_name+'</div>'+
                     '<div class="fr reseyous"><span class="yse01">急聘</span> <span class="yse02">'+hot+'</span></div>'+
@@ -90,4 +90,7 @@ function loadCollectPosition() {
 
 function onBack() {
     window.location.href="/transition/transition_goMySelf";
+}
+function loadPositionInfo(url) {
+    window.location.href=url;
 }
