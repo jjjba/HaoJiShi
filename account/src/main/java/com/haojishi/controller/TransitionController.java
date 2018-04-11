@@ -156,7 +156,15 @@ public class TransitionController {
     public String job_position(){
         return "personal/position/job_position";
     }
-
+    /**
+     * 企业端========我的页面
+     *
+     * @return
+     */
+    @RequestMapping("go_wo_de")
+    public String go_wo_de(HttpSession session){
+        return "company/company_myself/wo_de";
+    }
     /**
      * 跳转企业公司详情页面
      *

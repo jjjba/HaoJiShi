@@ -783,9 +783,12 @@ public class PersonalService {
             Example example =new Example(User.class);
             example.createCriteria().andEqualTo("phone",phone);
             List<User> users =userMapper.selectByExample(example);
+            Map<String,Object> map =new HashMap<>();
             if(users != null && users.size() > 0){
+                map.put("isRegist","1");
                 session.setAttribute("userId",users.get(0).getId());
             }else {
+                map.put("isRegist","3");
                 session.setAttribute("userId",0);
             }
         }catch (Exception e){
@@ -793,6 +796,5 @@ public class PersonalService {
         }
         businessMessage.setSuccess(true);
         return businessMessage;
-
     }
 }

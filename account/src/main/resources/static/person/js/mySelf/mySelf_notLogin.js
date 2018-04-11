@@ -7,13 +7,23 @@ $(function () {
         $.ajax({
             url:"",
             type:"",
-            data:{},
+            data:{ phone : phone},
             success : function () {
                 
             }
         })
 
+    }else {
+        $.ajax({
+            url:"",
+            type:"",
+            data:{phone : 0},
+            success : function () {
+
+            }
+        })
     }
+
     $.ajax({
         url:"/personal/getPersonalState",
         type: "POST",
