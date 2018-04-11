@@ -785,6 +785,8 @@ public class PersonalService {
             List<User> users =userMapper.selectByExample(example);
             Map<String,Object> map =new HashMap<>();
             if(users != null && users.size() > 0){
+                Example example1 =new Example(Personal.class);
+//                example1.createCriteria().andEqualTo("userId",users.get(0))
                 map.put("isRegist","1");
                 session.setAttribute("userId",users.get(0).getId());
             }else {
