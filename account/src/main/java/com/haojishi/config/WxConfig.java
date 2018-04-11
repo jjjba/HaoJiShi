@@ -28,8 +28,8 @@ import java.util.UUID;
 public class WxConfig {
     @Autowired
     private Environment environment;
-    private static String appid = "wxb363c68215a1d3f1";
-    private static String secret ="98e5dbf56fed8c9e0c5fb95f5d34ba05";
+    private static String appid = "wx987bf4ddff238028";
+    private static String secret ="4f796ae819127a27abd8864bc22c14e3";
     private static String path = "/var/tomcat/tomcat-8/webapps/image";
     private static String ImageSrc = "http://wx.haojishi.net/image/";
     public static String getToken() {

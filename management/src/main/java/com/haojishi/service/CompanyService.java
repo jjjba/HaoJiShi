@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.haojishi.mapper.CommonCompanyMapper;
 import com.haojishi.mapper.CompanyMapper;
 import com.haojishi.mapper.UserMapper;
+import com.haojishi.model.Company;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -221,7 +222,7 @@ public class CompanyService {
                 stringObjectHashMap.put("icon",company.getIconPath());
                 stringObjectHashMap.put("province_id",company.getProvinceId());
                 stringObjectHashMap.put("city_id",company.getCityId());
-                stringObjectHashMap.put("area_id",company.getAreaId());
+               /* stringObjectHashMap.put("area_id",company.getAreaId());*/
 //                stringObjectHashMap.put("company_id",companyList.get(0).getId());
 
                 message.setData(stringObjectHashMap);
@@ -288,7 +289,7 @@ public class CompanyService {
                 company.setCompanySpecial(company_special_str);
                 company.setProvinceId(province);
                 company.setCityId(city);
-                company.setAreaId(area);
+                /*company.setAreaId(area);*/
                 company.setCompanyInfo(company_info);
                 company.setIconPath(iconName);
                 company.setCompanyAddr(company_addr);

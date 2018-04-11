@@ -1,4 +1,9 @@
+var icon;
 $(document).ready(function() {
+    setTimeout('configwx()', 100);
+    $('.license02').click(function () {
+        chooseImage();
+    })
     var Name = sessionStorage.getItem("Name");
     var dwmj =sessionStorage.getItem("Mj");
     var dwmc =sessionStorage.getItem("Dmmmmc");
@@ -59,7 +64,7 @@ function dpfl() {
     window.location.href="/transition/dpfl";
 }
 function xinxibaocun() {
-    var num = 0;
+    console.log("kaishi ");
     var Name = sessionStorage.getItem("Name");
     var dwmj =sessionStorage.getItem("Mj");
     var dwmc =sessionStorage.getItem("Dmmmmc");
@@ -72,14 +77,11 @@ function xinxibaocun() {
     var poiaddress = sessionStorage.getItem("poiaddress");
     var poiname = sessionStorage.getItem("poiname");
     var phone = sessionStorage.getItem("phone");
-    if(Name!=null && dwmj!=null &&dwmc!=null && dplx!=null && zhiwei!=null &&dpfl!=null &&cityname!=null && poiaddress!=null && poiname!=null){
-        num = 7;
-    }
     if(num == 7){
         $.ajax({
             url:"/company/addNewCompany",
             type:"POST",
-            data:{Name:Name,dwmj:dwmj,dwmc:dwmc,dplx:dplx,zhiwei:zhiwei,dpfl:dpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:poiaddress,poiname:poiname,phone:phone},
+            data:{Name:Name,dwmj:dwmj,dwmc:dwmc,dplx:dplx,zhiwei:zhiwei,dpfl:dpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:poiaddress,poiname:poiname,phone:phone,icon:icon},
             success:function (msg) {
                 var succ = msg.data;
                 $.cookie("zt",1);
@@ -92,5 +94,87 @@ function xinxibaocun() {
         $(".quanbubitian").show();
         setTimeout('$(".quanbubitian").hide()',1000);
     }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function configwx() {
+    var url = window.location.href;
+    $.ajax({
+        url: "/weChat/getSignInfo",
+        type: "GET",
+        data: {
+            "url": url
+        },
+        success: function (res) {
+            var nonce_str = res.nonce_str;
+            var timesta = res.time_stamp;
+            var signatur = res.signa_ture;
+            var appid = res.appid;
+
+            wx.config({
+                debug: true,
+                appId: appid,
+                timestamp: timesta,
+                nonceStr: nonce_str,
+                signature: signatur,
+                jsApiList: [
+                    'chooseImage',
+                    'previewImage',
+                    'uploadImage',
+                    'downloadImage',
+                    'getLocalImgData'
+                ]
+            });
+        }
+    });
+}
+function chooseImage() {
+    var images = {
+        localId: [],
+        serverId: [],
+        imgbase64: []
+    };
+    wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {
+            images.localId = res.localIds;
+            wx.uploadImage({
+                localId: images.localId[0],
+                isShowProgressTips: 1,
+                success: function (res) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/weChat/uploadWeiXinImg",
+                        data: {
+                            mediaId: res.serverId
+                        },
+                        success: function (res) {
+                            icon =res.data.imgUrl;
+                            $('#dynamicImage').hide();
+                            $('.license02').append('<img src="'+icon+'"/>')
+                        }
+                    });
+                }
+            });
+        }
+    });
 
 }

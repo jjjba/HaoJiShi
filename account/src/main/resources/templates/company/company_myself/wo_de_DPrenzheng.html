@@ -24,6 +24,8 @@
 
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
             th:src="@{/company/js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" src="/static/company/js/dprenzheng.js"
+            th:src="@{/company/js/dprenzheng.js}"></script>
     <!--上传图片开始-->
     <link href="/static/company/css/zhu_ce_tian_xie_xin_xi/sctx.css"
           th:href="@{/company/css/zhu_ce_tian_xie_xin_xi/sctx.css}" rel="stylesheet" type="text/css" />
@@ -60,20 +62,11 @@
  <!--上传图片开始-->
       <div class="sltoucs">
                 <div class="uploader blue">
-                    <input type="text" class="filename" readonly/>
                     <a class="license">
-                        <img id="img-1" src="/static/company/images/datu.png" th:src="@{/company/images/datu.png}" />
+                        <img id="dynamicImage" src="/static/company/images/datu.png" th:src="@{/company/images/datu.png}" />
                     </a>
-                    <input id="file0" class="file-3" type="file" size="30" onchange="javascript:setImagePreview();" accept="image/*" capture="camera" />
-                    <input type="button" value="上传营业执照照片" class="sczzbuts" />
-                </div>
-                
-                <div class="yulan">
-                    <img src="" id="img0" >
-                    <div class="enter">
-                        <button class="btn-2 fl">取消</button>
-                        <button class="btn-3 fr">确定</button>
-                    </div>
+                    <input type="button" value="上传营业执照照片" class="sczzbuts shangchaunzhaopian" />
+                    <input type="button" value="提交审核材料" class="sczzbuts tijiaotupian" style="display: none" />
                 </div>
       </div>
  <!--上传图片结束-->
