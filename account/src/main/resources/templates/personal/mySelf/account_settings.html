@@ -37,15 +37,15 @@
                 }
             })
             $('.tcdlans').click(function () {
-                $.cookie("phone",0);
-                window.location.href="/transition/transition_goMySelf";
-                // $.ajax({
-                //     type:'POST',
-                //     url:"/personal/tuichu",
-                //     success : function () {
-                //
-                //     }
-                // })
+                $.cookie('phone', 0, { path: '/' });
+
+                $.ajax({
+                    type:'POST',
+                    url:"/personal/tuichu",
+                    success : function () {
+                        window.location.href="/transition/transition_goMySelf";
+                    }
+                })
             })
         })
         function goBack() {

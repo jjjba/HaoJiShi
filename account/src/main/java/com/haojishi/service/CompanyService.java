@@ -690,4 +690,33 @@ public class CompanyService{
         }
          return  businessMessage;
     }
+
+    /**
+     * 编辑店铺信息 查询店铺信息
+     * @param phone
+     * @return
+     */
+    public BusinessMessage getPersonalState(String phone){
+        BusinessMessage businessMessage =new BusinessMessage();
+        Example example =new Example(User.class);
+        example.createCriteria().andEqualTo("phone",phone);
+        List<User> users =usersMapper.selectByExample(example);
+        Map<String,Object> map =new HashMap<>();
+        if(users != null && users.size() > 0){
+
+            Example example1 =new Example(Company.class);
+            example1.createCriteria().andEqualTo("userId",users.get(0).getId());
+            List<Company> companies =companyMapper.selectByExample(example1);
+            if(companies != null && companies.size() > 0){
+                map.put("isRegist","1");
+            }else {
+                map.put("isRegist","2");
+            }
+        }else {
+            map.put("isRegist","3");
+        }
+        businessMessage.setData(map);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
 }
