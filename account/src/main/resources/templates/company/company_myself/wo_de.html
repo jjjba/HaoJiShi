@@ -40,6 +40,9 @@
                     $(this).addClass('progressbar-' + num);
                 });
             });
+            function gopersonal() {
+               window.location.href="/transition/go_wan_shan_xin_xi"
+            }
        </script>
    <!--圆形进度结束-->
 
@@ -152,8 +155,8 @@
         <a href="#" onclick="wodezhanghaoshezhi()" class="fl"><img src="/static/company/images/wode05.png" th:src="@{/company/images/wode05.png}" /> 账号设置</a>
         <a href="#" class="fr"><img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
       </li>
-      <li class="clearfix" onclick="wodeqiehuanshenfen()">
-        <a href="#" class="fl" ><img src="/static/company/images/wode06.png" th:src="@{/company/images/wode06.png}" /> 切换身份</a>
+      <li class="clearfix">
+        <a href="#" class="fl" onclick="gopersonal()"><img src="/static/company/images/wode06.png" th:src="@{/company/images/wode06.png}" /> 切换身份</a>
         <a href="#" class="fr" id="wyzgz">我要找工作 <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" /></a>
       </li>
     </ul>

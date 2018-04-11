@@ -1,5 +1,30 @@
 var avatarPath;
 $(function () {
+
+    var phone =$.cookie("phone");
+    console.log("phone================="+phone)
+    if(phone != null || phone != "" || phone != undefined) {
+        $.ajax({
+            url: "/company/getPersonalState",
+            type: "POST",
+            data: {phone: phone},
+            success: function (res) {
+                var isRegist = res.isRegist;
+                if (isRegist == "1") {
+                    window.location.href = "/transition/transition_goMySelf"
+                } else  {
+                    loadData();
+                }
+            }
+        })
+
+
+    }else {
+        loadData();
+    }
+});
+
+function loadData() {
     setTimeout('configwx()', 100);
 
     var hopeCity =sessionStorage.getItem("hopeCity");
@@ -10,7 +35,6 @@ $(function () {
     var age =sessionStorage.getItem("age");
     var state =sessionStorage.getItem("state");
     var gzjy =sessionStorage.getItem("gzjy");
-
     if(name == null || name == ""){
         $('.namemingzi').append('<input type="text" placeholder="请输入姓名" class="stkius xingming" /> <img src="../../person/images/yjts.png"\n' +
             '                                                                                 class="yjtiss" />')
@@ -174,7 +198,8 @@ $(function () {
         }
 
     });
-});
+
+}
 function sahngchaun() {
     chooseImage();
 }

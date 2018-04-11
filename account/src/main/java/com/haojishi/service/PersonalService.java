@@ -779,15 +779,21 @@ public class PersonalService {
      */
     public BusinessMessage setuserId(HttpSession session,String phone){
         BusinessMessage businessMessage =new BusinessMessage();
+        Map<String,Object> map =new HashMap<>();
         try {
             Example example =new Example(User.class);
             example.createCriteria().andEqualTo("phone",phone);
             List<User> users =userMapper.selectByExample(example);
-            Map<String,Object> map =new HashMap<>();
+
             if(users != null && users.size() > 0){
                 Example example1 =new Example(Personal.class);
-//                example1.createCriteria().andEqualTo("userId",users.get(0))
-                map.put("isRegist","1");
+                example1.createCriteria().andEqualTo("userId",users.get(0).getId());
+                List<Personal> personals =personalMapper.selectByExample(example1);
+                if(personals != null && personals.size() > 0){
+                    map.put("isRegist","1");
+                }else {
+                    map.put("isRegist","2");
+                }
                 session.setAttribute("userId",users.get(0).getId());
             }else {
                 map.put("isRegist","3");
@@ -796,6 +802,7 @@ public class PersonalService {
         }catch (Exception e){
             log.error("判断求职者是否登陆失败",e);
         }
+        businessMessage.setData(map);
         businessMessage.setSuccess(true);
         return businessMessage;
     }

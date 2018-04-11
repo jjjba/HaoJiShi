@@ -108,6 +108,15 @@ public class CompanyController {
         return  companyService.updateShenfen(shenfen,session);
     }
     /**
+     * 编辑店铺信息 查询店铺信息
+     * @param phone
+     * @return
+     */
+    @RequestMapping("getPersonalState")
+    public BusinessMessage getPersonalState(String phone){
+        return companyService.getPersonalState(phone);
+    }
+    /**
      * 得到收到的简历（简历管理）
      * @return
      */

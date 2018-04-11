@@ -1,5 +1,28 @@
 var icon;
 $(document).ready(function() {
+
+    var phone =$.cookie("phone");
+    console.log("phone================="+phone)
+    if(phone != null || phone != "" || phone != undefined) {
+        $.ajax({
+            url: "/company/setuserId",
+            type: "POST",
+            data: {phone: phone},
+            success: function (res) {
+                var isRegist = res.isRegist;
+                if (isRegist == "1") {
+                    window.location.href = "/transition/transition_goMySelf"
+                } else  {
+                    loadData();
+                }
+            }
+        })
+    }else {
+        loadData();
+    }
+})
+
+function loadData() {
     setTimeout('configwx()', 100);
     $('.license02').click(function () {
         chooseImage();
@@ -46,8 +69,7 @@ $(document).ready(function() {
         num++;
         $(".dpfl").html(dpfl.substring(0,15)+"..."+"<img src='../../company/images/yjts.png' class='yjtiss'/>");
     }
-})
-
+}
 function Address() {
     window.location.href="/transition/getAddress";
 }

@@ -257,13 +257,11 @@ public class PositionService {
                     positionList =commonPositionMapper.getPositionByAddress05(city1[0],city1[1],city1[2],city1[3],city1[4],city);
                 }
             }
-
         }else {
             System.out.println("进来未注册获取职位");
             String address =RemortIP.getAddressByIP(request);
             System.out.println("address==========="+address);
             positionList=commonPositionMapper.getPositionByAddress01(address,address);
-
         }
         businessMessage.setMsg("获取职位列表成功");
         businessMessage.setSuccess(true);
