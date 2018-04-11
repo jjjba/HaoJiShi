@@ -97,7 +97,7 @@ function accountSettings() {
 }
 
 function switchingIdentity() {
-    window.location.href="/transition/switching_identity";
+    window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
 }
 
 function goIndex() {

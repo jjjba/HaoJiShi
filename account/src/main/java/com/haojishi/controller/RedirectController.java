@@ -55,7 +55,7 @@ public class RedirectController {
             String CODE = code;
             String WebAccessToken = "";
             String openId  = "";
-
+            String headimgurl ="";
             //替换字符串，获得请求URL
             String token = UserInfoUtil.getWebAccess(APPID, SECRET, CODE);
             System.out.println("----------------------------token为："+token);
@@ -65,9 +65,9 @@ public class RedirectController {
             System.out.println("jsonObject------"+jsonObject);
             if (null != jsonObject) {
                 try {
-
                     WebAccessToken = jsonObject.getString("access_token");
                     openId = jsonObject.getString("openid");
+                    headimgurl =jsonObject.getString("headimgurl");
                     Example userExample =new Example(User.class);
                     userExample.createCriteria().andEqualTo("openid",openId);
                     List<User> users =userMapper.selectByExample(userExample);
@@ -76,6 +76,7 @@ public class RedirectController {
                     }else {
                         User user =new User();
                         user.setOpenid(openId);
+//                        user.set
                         userMapper.insertSelective(user);
                         Example userExample1 =new Example(User.class);
                         userExample1.createCriteria().andEqualTo("openid",openId);
@@ -91,50 +92,17 @@ public class RedirectController {
                     System.out.println("获取WebAccessToken失败");
                 }
             }
-        }
-
-        String phone ="";
-        String pwd = "";
-        String zt ="";
-        if(state == "companyIndex" || state.equals("companyIndex")){
-            Cookie[] cookies = request.getCookies();
-            if (cookies!=null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    Cookie cookie = cookies[i];
-                    if (cookie.getName().equals("state")) {
-                        zt=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("pwd")) {
-                        pwd=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("phone")) {
-                        phone=cookie.getValue();
-                    }
-                    Example userExample =new Example(User.class);
-                    userExample.createCriteria().andEqualTo("phone",phone).andEqualTo("password",pwd);
-                    List<User> users =userMapper.selectByExample(userExample);
-
-                }
+            if(state == "companyIndex" || state.equals("companyIndex")){
+                return "company/companyIndex";
+            }else {
+                return "personal/personalIndex";
             }
-            return "company/companyIndex";
         }else {
-            Cookie[] cookies = request.getCookies();
-            if (cookies!=null) {
-                for (int i = 0; i < cookies.length; i++) {
-                    Cookie cookie = cookies[i];
-                    if (cookie.getName().equals("phone")) {
-                        phone=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("state")) {
-                        zt=cookie.getValue();
-                    }
-                    if (cookie.getName().equals("pwd")) {
-                        pwd=cookie.getValue();
-                    }
-                }
+            if(state == "companyIndex" || state.equals("companyIndex")){
+                return "company/companyIndex";
+            }else {
+                return "personal/personalIndex";
             }
-
-            return "personal/personalIndex";
         }
 
     }
