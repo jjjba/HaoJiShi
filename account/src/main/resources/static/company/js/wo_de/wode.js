@@ -25,41 +25,45 @@ $(document).ready(function() {
             data:{"zt":zt,"phone":phone,"pwd":pwd},
             success:function (msg) {
                 if(msg.dataOne == "个人用户"){
-                    window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
-                }
-                if(msg.dataOne == 1){
-                    $("#wyzgz").html("我要找工作"+"<img src='../../company/images/yjts.png' />");
-                }
-                if(msg.dataOne == 2){
-                    $("#wyzgz").html("我要招人"+"<img src='../../company/images/yjts.png' />");
-                }
-                var htm = "<div class='sblefs'><img src= '";
-                if(msg.data.iconPath == "" || msg.data.iconPath == ''|| msg.data.iconPath== undefined){
-                    htm +="../../company/images/tuui.png";
-                }else{
-                    htm += msg.data.iconPath;
-                }
+                    var htm ="<div class='sbtopxxs bounone'><div class='sblefs'><img src='../../company/images/tuui.png'/></div><div class='sbyours fbzhiuse'><div class='lylyus'><a href='#'onclick='wanshan();' class='dlzces'>请完善信息</a></div></div></div>";
+                    $(".WsXX").css("display","none");
+                    $(".sbtopxxs").html(htm);
+                    $("#bjbj").text("个人用户");
+                }else {
 
-                htm += "'/></div><div class='sbyours fbzhiuse'><div class='lylyus'>";
-                htm+=msg.data.name;
-                htm+="</div>"
+                    if(msg.dataOne == 1){
+                        $("#wyzgz").html("我要找工作"+"<img src='../../company/images/yjts.png' />");
+                    }
+                    if(msg.dataOne == 2){
+                        $("#wyzgz").html("我要招人"+"<img src='../../company/images/yjts.png' />");
+                    }
+                    var htm = "<div class='sblefs'><img src= '";
+                    if(msg.data.iconPath == "" || msg.data.iconPath == ''|| msg.data.iconPath== undefined){
+                        htm +="../../company/images/tuui.png";
+                    }else{
+                        htm += msg.data.iconPath;
+                    }
 
-                var Obj = msg.data
-                if(msg.code == 1){
-                    htm+="<div class='dcirzs'><a href='#' onclick='RenZheng()'>点此认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
-                }
-                if(msg.code == 2){
-                    htm+="<div class='dcirzs'><a href='#'>认证中</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
-                }
-                if(msg.code == 3){
-                    htm+="<div class='dcirzs'><a href='#'>未通过，请重新认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
-                }
-                if(msg.code == 4){
-                    htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div>";
-                }
-                $(".sbtopxxs").html(htm);
-                console.log(msg.dataOne);
+                    htm += "'/></div><div class='sbyours fbzhiuse'><div class='lylyus'>";
+                    htm+=msg.data.name;
+                    htm+="</div>"
 
+                    var Obj = msg.data
+                    if(msg.code == 1){
+                        htm+="<div class='dcirzs'><a href='#' onclick='RenZheng()'>点此认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
+                    }
+                    if(msg.code == 2){
+                        htm+="<div class='dcirzs'><a href='#'>认证中</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
+                    }
+                    if(msg.code == 3){
+                        htm+="<div class='dcirzs'><a href='#'>未通过，请重新认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div></div>";
+                    }
+                    if(msg.code == 4){
+                        htm+="<div class='dcirzs yrziis'><a href='#'>已认证</a></div><a href='#' onclick='Fbzw()' class='fbzuysew'>发布职位</a></div>";
+                    }
+                    $(".sbtopxxs").html(htm);
+                    console.log(msg.dataOne);
+                }
             }
         })
     }
@@ -79,36 +83,53 @@ function zong() {
 function zongZ() {
     window.location.href="/transition/go_zhu_ce";
 }
+function wanshan() {
+    window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
+}
 function wodezhanghaoshezhi() {
     if(zt != 1){
         zong();
     }else {
-        window.location.href = "/transition/wo_de_zhang_hao_she_zhi";
+        if($("#bjbj").text()=="个人用户"){
+            wanshan();
+        }else {
+            window.location.href = "/transition/wo_de_zhang_hao_she_zhi";
+        }
+
     }
 }
 function wodezhiweiguanli() {
     if(zt != 1){
         zong();
     }else {
-        $.ajax({
-            url:"/company/getCompanyOkorFalse",
-            type:"POST",
-            success:function (msg) {
-                console.log("开始执行-----");
-                console.log(msg.data);
-                if(msg.data.matstate ==1 ||msg.data.matstate ==2 || msg.data.matstate ==3 || msg.data.matstate ==4 ) {
-                    window.location.href = "/transition/zhiweiguanlirenzhneg";
+        if($("#bjbj").text()=="个人用户"){
+            wanshan();
+        }else {
+            $.ajax({
+                url: "/company/getCompanyOkorFalse",
+                type: "POST",
+                success: function (msg) {
+                    console.log("开始执行-----");
+                    console.log(msg.data);
+                    if (msg.data.matstate == 1 || msg.data.matstate == 2 || msg.data.matstate == 3 || msg.data.matstate == 4) {
+                        window.location.href = "/transition/zhiweiguanlirenzhneg";
+                    }
                 }
-            }
-        })
-    }
+            })
+        }
+        }
+
 
 }
 function woderencaishoucang() {
     if(zt != 1){
         zong();
     }else {
-        window.location.href="/transition/wo_de_ren_cai_shou_cang";
+        if($("#bjbj").text()=="个人用户"){
+            wanshan();
+        }else {
+            window.location.href = "/transition/wo_de_ren_cai_shou_cang";
+        }
     }
 }
 function wodechangjianwenti() {
@@ -116,11 +137,19 @@ function wodechangjianwenti() {
     if(zt != 1){
         zong();
     }else {
-        window.location.href="/transition/wo_de_chang_jian_wen_ti";
+        if($("#bjbj").text()=="个人用户"){
+            wanshan();
+        }else {
+            window.location.href = "/transition/wo_de_chang_jian_wen_ti";
+        }
     }
 }
 function gotozhiwei() {
-        window.location.href="/transition/go_qiu_zhi_zhe";
+    if($("#bjbj").text()=="个人用户"){
+        wanshan();
+    }else {
+        window.location.href = "/transition/go_qiu_zhi_zhe";
+    }
 
 }
 function gotoshouye() {
@@ -130,7 +159,11 @@ function wodeqiehuanshenfen(){
     if(zt != 1){
         zong();
     }else {
-        window.location.href="/transition/wo_de_qie_huan_shen_fen";
+        if($("#bjbj").text()=="个人用户"){
+            wanshan();
+        }else {
+            window.location.href = "/transition/wo_de_qie_huan_shen_fen";
+        }
     }
 }
 
@@ -138,7 +171,11 @@ function wodejianliguanli(){
         if(zt != 1){
             zong();
         }else {
-            window.location.href="/transition/wo_de_jian_li_guan_li";
+            if($("#bjbj").text()=="个人用户"){
+                wanshan();
+            }else {
+                window.location.href = "/transition/wo_de_jian_li_guan_li";
+            }
         }
 }
 function RenZheng() {

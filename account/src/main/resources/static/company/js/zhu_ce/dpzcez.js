@@ -75,7 +75,6 @@ function jinru() {
         if(zhuCeOrDl == 1){
             $.cookie("zt",1);
             $.cookie("phone",phoneNumber);
-            $.cookie("PWD","");
             window.location.href="/transition/go_wo_de";
         }
         if(zhuCeOrDl ==2){

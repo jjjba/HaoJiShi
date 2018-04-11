@@ -1,19 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="management:war exploded">
-    <output-path>$PROJECT_DIR$/management/target/manage</output-path>
+    <output-path>$PROJECT_DIR$/out/artifacts/management_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="management" />
         </element>
         <element id="directory" name="lib">
-          <element id="archive" name="common-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="common" />
-          </element>
           <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.16.18" />
-          <element id="archive" name="base-1.0-SNAPSHOT.jar">
-            <element id="module-output" name="base" />
-          </element>
           <element id="library" level="project" name="Maven: org.mybatis.generator:mybatis-generator-core:1.3.5" />
           <element id="library" level="project" name="Maven: org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-jdbc:1.5.6.RELEASE" />
@@ -34,7 +28,6 @@
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.44" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:1.5.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-tomcat:1.5.6.RELEASE" />
-          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:8.5.16" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-el:8.5.16" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-websocket:8.5.16" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-validator:5.3.5.Final" />
@@ -55,8 +48,9 @@
           <element id="library" level="project" name="Maven: org.apache.commons:commons-pool2:2.4.2" />
           <element id="library" level="project" name="Maven: com.alibaba:druid-spring-boot-starter:1.1.3" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.3" />
+          <element id="library" level="module" name="Maven: com.alibaba:jconsole:1.8.0" module-name="management" />
+          <element id="library" level="module" name="Maven: com.alibaba:tools:1.8.0" module-name="management" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:1.5.6.RELEASE" />
-          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.57" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:fluent-hc:4.5.3" />
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpclient:4.5.3" />
@@ -147,9 +141,6 @@
           <element id="library" level="project" name="Maven: net.minidev:accessors-smart:1.2" />
           <element id="library" level="project" name="Maven: org.ow2.asm:asm:5.0.4" />
         </element>
-      </element>
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/management/target/manage/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="management/web/Web" />
     </root>
