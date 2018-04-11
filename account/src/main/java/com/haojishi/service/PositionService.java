@@ -49,9 +49,9 @@ public class PositionService {
     public BusinessMessage getPositionInIndex(HttpServletRequest request,HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try{
-            List<Map<String,Object>> positionList =null;
+            List<Map<String,Object>> positionList =new ArrayList<>();
             int userId = (int) session.getAttribute("userId");
-            businessMessage =getPosition(request,userId);
+            businessMessage =getPositions(request,userId);
             List<Map<String,Object>> position = (List<Map<String, Object>>) businessMessage.getData();
             if(position.size() > 10){
                 for(int i = 0;i < 10;i++){
@@ -63,19 +63,28 @@ public class PositionService {
             }
             businessMessage.setMsg("获取首页推荐职位成功");
             businessMessage.setSuccess(true);
-        }catch (Exception e){
+            }catch (Exception e){
             log.error("获取推荐职位错误",e);
         }
         return businessMessage;
     }
-
+    /**
+     * 个人端首页推荐职位
+     *
+     * @param session
+     * @return
+     */
+    public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
+        int userId =(Integer)session.getAttribute("userId");
+        return getPositions(request,userId);
+    }
     /**
      * 详情页数据获取
      *
      * @param session
      * @return BusinessMessage - 相关职位信息
      */
-    public BusinessMessage getPositionById(HttpSession session){
+    public BusinessMessage getPositionById(HttpSession session,HttpRequest request){
         BusinessMessage businessMessage =new BusinessMessage();
         List<Map<String,Object>> positionList =new ArrayList<>();
         Map<String,Object> map =new HashMap<>();
@@ -83,6 +92,9 @@ public class PositionService {
             int id = (int) session.getAttribute("positionId");
             int userId = (int) session.getAttribute("userId");
             User user =userMapper.selectByPrimaryKey(userId);
+
+            Position position =positionMapper.selectByPrimaryKey(id);
+            Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
             if(user != null){
                 Example perExample =new Example(Personal.class);
                 perExample.createCriteria().andEqualTo("userId",userId);
@@ -100,9 +112,6 @@ public class PositionService {
                     if(collectPositions != null && collectPositions.size() > 0){
                         map.put("isCollect","1");
                     }
-
-                    Position position =positionMapper.selectByPrimaryKey(id);
-                    Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
 
                     //设置热度以及访问量
                     position.setHot(position.getHot() + 10);
@@ -130,8 +139,6 @@ public class PositionService {
                     String phone =user.getPhone();
                     if(phone != null && phone != "" && !phone.equals("") && !phone.equals("null")){
                         map.put("isRegist","2");
-                        Position position =positionMapper.selectByPrimaryKey(id);
-                        Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
                         //设置热度以及访问量
                         position.setHot(position.getHot() + 10);
                         position.setSeeNumber(position.getSeeNumber() + 1);
@@ -156,8 +163,7 @@ public class PositionService {
                         positionList.add(map);
                     }else {
                         map.put("isRegist","3");
-                        Position position =positionMapper.selectByPrimaryKey(id);
-                        Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
+
                         //设置热度以及访问量
                         position.setHot(position.getHot() + 10);
                         position.setSeeNumber(position.getSeeNumber() + 1);
@@ -182,11 +188,36 @@ public class PositionService {
                         positionList.add(map);
                     }
                 }
-                businessMessage.setData(positionList);
                 businessMessage.setSuccess(true);
+                businessMessage.setData(positionList);
                 businessMessage.setMsg("获取职位信息成功");
             }else {
-                log.error("未获取到用户信息,获取用户信息失败");
+                map.put("isRegist","3");
+                //设置热度以及访问量
+                position.setHot(position.getHot() + 10);
+                position.setSeeNumber(position.getSeeNumber() + 1);
+                positionMapper.updateByPrimaryKeySelective(position);
+                //设置返回数据
+                map.put("cid",company.getId());
+                map.put("phone",company.getPhone());
+                map.put("company_addr",company.getCompanyAddr());
+                map.put("name",company.getName());
+                map.put("id",position.getId());
+                map.put("position_info",position.getPositionInfo());
+                map.put("company_city",company.getCompanyCity());
+                map.put("position_name",position.getPositionName());
+                map.put("hot",position.getHot());
+                map.put("money",position.getMoney());
+                map.put("experience",position.getExperience());
+                map.put("age",position.getAge());
+                map.put("sex",position.getSex());
+                map.put("icon_path",company.getIconPath());
+                map.put("company_type",company.getCompanyType());
+                map.put("company_scale",company.getCompanyScale());
+                positionList.add(map);
+                businessMessage.setSuccess(true);
+                businessMessage.setData(positionList);
+                businessMessage.setMsg("获取职位信息成功");
             }
         }catch (Exception e){
             log.error("获取职位信息失败",e);
@@ -200,51 +231,38 @@ public class PositionService {
      * @param userId
      * @return BusinessMessage - 同城所有职位信息
      */
-    public BusinessMessage getPosition(HttpServletRequest request,Integer userId){
+    public BusinessMessage getPositions(HttpServletRequest request,Integer userId){
         BusinessMessage businessMessage =new BusinessMessage();
-        List<Map<String,Object>> positionList =null;
+        List<Map<String,Object>> positionList = new ArrayList<>();
         Example example =new Example(Personal.class);
         example.createCriteria().andEqualTo("userId",userId);
         List<Personal> personals =personalMapper.selectByExample(example);
         if(personals != null && personals.size() > 0){
             String city =personals.get(0).getHopeCity();
             if(city == null || city == "" || city .equals("")){
-                RemortIP remortIP =new RemortIP();
-                String ip =remortIP.getIpAddr(request);
-                try {
-                    String address =remortIP.getAddresses(ip,"utf-8");
-                    System.out.println("address=================="+address);
-                    positionList=commonPositionMapper.getPositionByAddress01(address);
-                }catch (Exception e){
-                    log.error("获取IP地址失败",e);
-                }
-
+                String address =RemortIP.getAddressByIP(request);
+                System.out.println("address======"+address);
+                positionList=commonPositionMapper.getPositionByAddress01(address,address);
             }else {
                 String[] city1=city.split(",");
                 if(city1.length == 1){
-                    positionList=commonPositionMapper.getPositionByAddress01(city1[0]);
+                    positionList=commonPositionMapper.getPositionByAddress01(city1[0],city);
                 }else if(city1.length == 2){
-                    positionList =commonPositionMapper.getPositionByAddress02(city1[0],city1[1]);
+                    positionList =commonPositionMapper.getPositionByAddress02(city1[0],city1[1],city);
                 }else if(city1.length == 3){
-                    positionList =commonPositionMapper.getPositionByAddress03(city1[0],city1[1],city1[2]);
+                    positionList =commonPositionMapper.getPositionByAddress03(city1[0],city1[1],city1[2],city);
                 }else if(city1.length == 4){
-                    positionList =commonPositionMapper.getPositionByAddress04(city1[0],city1[1],city1[2],city1[3]);
+                    positionList =commonPositionMapper.getPositionByAddress04(city1[0],city1[1],city1[2],city1[3],city);
                 }else if(city1.length == 5){
-                    positionList =commonPositionMapper.getPositionByAddress05(city1[0],city1[1],city1[2],city1[3],city1[4]);
+                    positionList =commonPositionMapper.getPositionByAddress05(city1[0],city1[1],city1[2],city1[3],city1[4],city);
                 }
             }
 
         }else {
             System.out.println("进来未注册获取职位");
-            RemortIP remortIP =new RemortIP();
-            String ip =remortIP.getIpAddr(request);
-            try {
-                String address =remortIP.getAddresses(ip,"utf-8");
-                positionList=commonPositionMapper.getPositionByAddress01(address);
-                System.out.println("address===================="+address);
-            }catch (Exception e){
-                log.error("获取IP地址失败",e);
-            }
+            String address =RemortIP.getAddressByIP(request);
+            System.out.println("address==========="+address);
+            positionList=commonPositionMapper.getPositionByAddress01(address,address);
 
         }
         businessMessage.setMsg("获取职位列表成功");
@@ -283,7 +301,7 @@ public class PositionService {
      * @return
      */
     public BusinessMessage getPositionByParams02(String positionName,
-                                                 String city,String money,String scale){
+                                               String city,String money,String scale){
         BusinessMessage businessMessage =new BusinessMessage();
         List<Map<String,Object>> position =commonPositionMapper.getPositionByParams02(city, positionName, money, scale);
         businessMessage.setMsg("获取职位成功");

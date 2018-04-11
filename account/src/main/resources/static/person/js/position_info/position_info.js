@@ -257,6 +257,7 @@ function yingpin() {
             success : function (res) {
                 $(".toolbarframe04").show();
                 setTimeout('$(".toolbarframe04").hide()',900);
+                $('.')
             },
 
             error : function (res) {
@@ -272,7 +273,7 @@ function loadCompanyInfo(url) {
 }
 
 function goBack() {
-    window.history.back()
+    window.history.back(-1)
 }
 
 

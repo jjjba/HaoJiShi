@@ -32,4 +32,6 @@ public class BusinessMessage {
         message.setCode(code);
         return message;
     }
+
+
 }

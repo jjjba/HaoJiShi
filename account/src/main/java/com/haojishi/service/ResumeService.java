@@ -53,16 +53,19 @@ public class ResumeService {
             Example personalExample =new Example(Personal.class);
             personalExample.createCriteria().andEqualTo("userId",userId);
             List<Personal> personals =personalMapper.selectByExample(personalExample);
+
             if(personals != null && personals.size() > 0){
                 //增加简历
+                Position position =positionMapper.selectByPrimaryKey(pid);
+                Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
+
                 Resume resume =new Resume();
+                resume.setCompanyId(company.getId());
                 resume.setPersonalId(personals.get(0).getId());
                 resume.setCreateTime(new Date());
                 resume.setPositionId(pid);
                 resumeMapper.insertSelective(resume);
                 //设置企业表简历数量
-                Position position =positionMapper.selectByPrimaryKey(pid);
-                Company company =companyMapper.selectByPrimaryKey(position.getCompanyId());
                 company.setPositionCount(company.getPositionCount()+1);
                 companyMapper.updateByPrimaryKeySelective(company);
                 businessMessage.setMsg("应聘职位成功");
@@ -122,6 +125,7 @@ public class ResumeService {
             List<Personal> personals =personalMapper.selectByExample(perExample);
             Example resumeExample =new Example(Resume.class);
             resumeExample.createCriteria().andEqualTo("personalId",personals.get(0).getId());
+            resumeExample.setOrderByClause("create_time desc");
             List<Resume> resumes =resumeMapper.selectByExample(resumeExample);
             List<Map<String,Object>> resumeList =new ArrayList<>();
             for(int i = 0;i < resumes.size();i++){

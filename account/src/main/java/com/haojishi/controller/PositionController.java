@@ -4,6 +4,7 @@ import com.haojishi.model.Position;
 import com.haojishi.service.PositionService;
 import com.haojishi.util.BusinessMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,19 +41,19 @@ public class PositionController {
      * @return BusinessMessage - 相关职位信息
      */
     @RequestMapping("getPositionById")
-    public BusinessMessage getPositionById(HttpSession session){
-        return positionService.getPositionById(session);
+    public BusinessMessage getPositionById(HttpSession session,HttpRequest request){
+        return positionService.getPositionById(session,request);
     }
 
     /**
      * 获取同城职位信息
      *
-     * @param userId
+     * @param session
      * @return BusinessMessage - 同城所有职位信息
      */
     @RequestMapping("getPosition")
-    public BusinessMessage getPosition(HttpServletRequest request,Integer userId){
-        return positionService.getPosition(request,userId);
+    public BusinessMessage getPosition(HttpServletRequest request,HttpSession session){
+        return positionService.getPosition(request,session);
     }
 
     /**

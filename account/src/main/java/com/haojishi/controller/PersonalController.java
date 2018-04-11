@@ -177,11 +177,6 @@ public class PersonalController {
         return personalServicel.getPersonalByParams(positionName, sex, age);
     }
 
-
-
-
-
-
     /**
      * 退出登录
      */
@@ -215,8 +210,8 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("updatePhone")
-    public BusinessMessage updatePhone(HttpSession session,String phoneNum){
-        return personalServicel.updatePhone(session,phoneNum);
+    public BusinessMessage updatePhone(HttpSession session,String phoneNum,String pwd){
+        return personalServicel.updatePhone(session,phoneNum,pwd);
     }
 
     /**

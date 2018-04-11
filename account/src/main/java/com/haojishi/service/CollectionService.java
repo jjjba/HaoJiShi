@@ -42,9 +42,12 @@ public class CollectionService {
         BusinessMessage businessMessage =new BusinessMessage();
         int userId = (int) session.getAttribute("userId");
         User user =userMapper.selectByPrimaryKey(userId);
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
         CollectPosition collectPosition =new CollectPosition();
         collectPosition.setCreateTime(new Date());
-        collectPosition.setPersonalId(userId);
+        collectPosition.setPersonalId(personals.get(0).getId());
         collectPosition.setPositionId((Integer) session.getAttribute("positionId"));
         collectPositionMapper.insertSelective(collectPosition);
         businessMessage.setData(collectPosition);

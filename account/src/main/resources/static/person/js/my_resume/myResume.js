@@ -235,10 +235,10 @@ function loadPersonalInfo() {
                         '                            ],\n' +
                         '                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0\n' +
                         '                    transitionEnd:function(indexArr, data){\n' +
-                        '                        console.log(data);\n' +
+                        '                        $(".zuigoaxueli").html(data).remove("wtxyss");' +
                         '                    },\n' +
                         '                    callback:function(indexArr, data){\n' +
-                        '                        console.log(data);\n' +
+                        '                        $(".zuigoaxueli").html(data).remove("wtxyss");\n' +
                         '                    }\n' +
                         '                });\n' +
                         '            \n' +

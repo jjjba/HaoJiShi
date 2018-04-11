@@ -24,8 +24,8 @@ public class IndexController {
 
     @RequestMapping("personalIndex")
     public String personalIndex(HttpSession session){
-        session.setAttribute("userId",0);
-        session.setAttribute("zt",1);
+//        session.setAttribute("userId",0);
+//        session.setAttribute("zt",1);
         return "personal/personalIndex";
     }
 

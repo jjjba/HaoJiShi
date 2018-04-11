@@ -78,6 +78,19 @@ body{ background:#fff;}
 
 .toolbarframe{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.7rem; width:16rem; height:5rem; line-height:5rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-2.5rem; margin-left:-8rem;}
 
+.toolbarframe02{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.7rem; width:20rem; height:5rem; line-height:5rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-2.5rem; margin-left:-10rem;}
+
+
+.toolbarframe03{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.7rem; width:23rem; height:5rem; line-height:5rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-2.5rem; margin-left:-10.5rem;}
+
+
+.toolbarframe10{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.8rem; width:17rem; height:4rem; line-height:4rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-1.5rem; margin-left:-6rem;}
+
+.toolbarframe04{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.8rem; width:12rem; height:4rem; line-height:4rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-1.5rem; margin-left:-4rem;}
+
+
+
+
 
 
 

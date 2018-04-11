@@ -7,6 +7,9 @@ $(function () {
             success : function (res) {
                 $('.reconblock').empty();
                 var list =res.data;
+                if(list == null || list == ""  || list == undefined){
+                    $('.ksjsis').show();
+                }else {
                 var positionName,age,experience,money,sex,name,companyCity,companyScale,companyType,iconPath,phone,createDate
                     ,tellPhoneNumber,positionId;
                 $.each(list, function (index, item) {
@@ -77,7 +80,7 @@ $(function () {
                         '</div>';
                     $('.toudijianli').append(toudijianli);
                 });
-
+                }
 
             }
         })

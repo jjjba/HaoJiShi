@@ -50,22 +50,22 @@ function updatePassword() {
             setTimeout('$(".newPasswordFalse").hide()',1000);
         }else{
             $.ajax({
-                url:"/company/getUser",
+                url:"/personal/getUserPhoneAndPWD",
                 type:"POST",
                 success:function (msg) {
-                    if(msg.data.password == oldPassword){
+                    if(msg.data.pwd == oldPassword){
                         $.ajax({
-                            url:"/company/setPassword",
+                            url:"/personal/updatePhone",
                             type:"POST",
-                            data:{Password:newPassword},
+                            data:{pwd:newPassword},
                             success:function (msg) {
-                                if(msg.data == 1){
-                                    $('.passwordOk').show();
-                                    setTimeout('$(".passwordOk").hide()',1000);
-                                }else {
-                                    $('.passwordNo').show();
-                                    setTimeout('$(".passwordNo").hide()',1000);
-                                }
+                                $('.passwordOk').show();
+                                setTimeout('$(".passwordOk").hide()',1000);
+                            },
+                            error : function () {
+                                $('.passwordNo').show();
+                                setTimeout('$(".passwordNo").hide()',1000);
+
                             }
                         })
                     }else {

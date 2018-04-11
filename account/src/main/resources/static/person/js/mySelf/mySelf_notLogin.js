@@ -1,6 +1,19 @@
 var isRegist;
 
 $(function () {
+
+    var phone =$.Cookie("phone");
+    if(phone == null || phone == "" || phone == undefined){
+        $.ajax({
+            url:"",
+            type:"",
+            data:{},
+            success : function () {
+                
+            }
+        })
+
+    }
     $.ajax({
         url:"/personal/getPersonalState",
         type: "POST",

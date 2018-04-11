@@ -569,11 +569,13 @@ public class PersonalService {
         try {
             List<Map<String,Object>> personalList =new ArrayList();
             List<Map<String,Object>> proPersonal =new ArrayList();
-            Integer id = (Integer) session.getAttribute("userId");
-            Integer zt1 = (Integer) session.getAttribute("zt");
+            String id = (String) session.getAttribute("userId");
+            String zt1 = (String) session.getAttribute("zt");
+            int userId = Integer.parseInt(id);
+            int zt = Integer.parseInt(zt1);
             String city ="";
-            if(zt1 == 1) {
-                List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(id);
+            if(zt == 1) {
+                List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(userId);
                 String companyCity1 = (String) companyCity.get(0).get("company_city");
                 city=companyCity1.substring(0, companyCity1.indexOf("-"));
             }else {
@@ -743,6 +745,33 @@ public class PersonalService {
         bu.setData(map);
         return bu;
     }
+
+    /**
+     * 求职者端=========修改求职者手机号
+     * @param session
+     * @return
+     */
+    public BusinessMessage updatePhone(HttpSession session,String phoneNum,String pwd){
+        BusinessMessage bu =new BusinessMessage();
+        int userId =(Integer)session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        Example example =new Example(Personal.class);
+        example.createCriteria().andEqualTo("userId",userId);
+        List<Personal> personals =personalMapper.selectByExample(example);
+        if(phoneNum != null && phoneNum != ""){
+            user.setPhone(phoneNum);
+        }
+        if(pwd != null && pwd != ""){
+            user.setPassword(pwd);
+        }
+        userMapper.updateByPrimaryKeySelective(user);
+        personals.get(0).setPhone(phoneNum);
+        personalMapper.updateByPrimaryKeySelective(personals.get(0));
+        bu.setMsg("修改用户手机号密码成功");
+        bu.setSuccess(true);
+        return bu;
+    }
+
     /**
      * 求职者端=========进首页判断是否已经登陆
      * @param phone
@@ -764,30 +793,6 @@ public class PersonalService {
         }
         businessMessage.setSuccess(true);
         return businessMessage;
+
     }
-
-
-
-
-    /**
-     * 求职者端=========修改求职者手机号
-     * @param session
-     * @return
-     */
-    public BusinessMessage updatePhone(HttpSession session,String phoneNum){
-        BusinessMessage bu =new BusinessMessage();
-        int userId =(Integer)session.getAttribute("userId");
-        User user =userMapper.selectByPrimaryKey(userId);
-        Example example =new Example(Personal.class);
-        example.createCriteria().andEqualTo("userId",userId);
-        List<Personal> personals =personalMapper.selectByExample(example);
-        user.setPhone(phoneNum);
-        userMapper.updateByPrimaryKeySelective(user);
-        personals.get(0).setPhone(phoneNum);
-        personalMapper.updateByPrimaryKeySelective(personals.get(0));
-        bu.setMsg("修改用户手机号成功");
-        bu.setSuccess(true);
-        return bu;
-    }
-
 }

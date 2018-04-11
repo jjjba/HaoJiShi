@@ -78,7 +78,8 @@ function addHopeJob(val) {
             $(".toolbarframe03").show()
             setTimeout('$(".toolbarframe03").hide()',1000);
         }else {
-            $('.clearfix').append('<li id="'+val+'">'+hopeJob+' <a href="" ' +
+            console.log("val====="+val)
+            $('.clearfix').append('<li class="'+val+'">'+hopeJob+' <a href="" ' +
                 'onclick="deleteJob(&quot;'+val+'&quot;,&quot;'+hopeJob+'&quot;)">' +
                 '<img src="../../person/images/hongscs.png" class="gbanius" /></a></li>');
             od.push(hopeJob);
@@ -87,7 +88,7 @@ function addHopeJob(val) {
 
 }
 function deleteJob(val,hopeJob) {
-    $("#"+val).remove();
+    $("."+val).hide();
     od.splice($.inArray(hopeJob,od),1);
 }
 function quedingbaocun() {
@@ -97,7 +98,7 @@ function quedingbaocun() {
         data : {
             onceDo : od.toString()
         },
-        success : function (res) {
+        success : function () {
             window.location.href="/transition/my_resume";
         }
     })
