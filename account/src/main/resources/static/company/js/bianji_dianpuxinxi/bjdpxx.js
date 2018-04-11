@@ -26,7 +26,7 @@ $(document).ready(function() {
 
             $(".xgxm").html(xgxm);
             $("#trigger2").html(xgzw);
-            if(xgLogog == null || xgLogog =='' || xgLogog ==""){
+            if(!$.trim(xgLogog)){
                 var htm="上传店铺logo，提升企业形象 ";
                 htm+="<img src='../../company/images/yjts.png' class='yjtiss' />";
                 $(".xgLogog").html(htm);
@@ -37,15 +37,15 @@ $(document).ready(function() {
                 $(".xgLogog").html(htm);
             }
             $(".xgdpmc").html(xgdpmc);
-            $(".xgdpmj").html(msg.data.companyDpmj);
-            $(".xgdpfl").html((msg.data.companySpecial).substring(0,13)+"...");
-            $(".xgdpdz").html((msg.data.companyAddr).substring(0,13)+"...");
-            $("#trigger3").html(msg.data.companyType);
+            $(".xgdpmj").html(xgdpmj);
+            $(".xgdpfl").html(xgdpfl.substring(0,13)+"...");
+            $(".xgdpdz").html(xgdpdz.substring(0,13)+"...");
+            $("#trigger3").html(xgdplx);
 
-            if(msg.data.companyInfo == null || msg.data.companyInfo =="" || msg.data.companyInfo == ''){
+            if(xgjj == null || xgjj =="" || xgjj == ''){
                 $(".xgjj").html("完善店铺简介，招聘效果提升50%");
             }else {
-                $(".xgjj").html(msg.data.companyInfo);
+                $(".xgjj").html(xgjj);
             }
 })
 
