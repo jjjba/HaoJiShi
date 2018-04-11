@@ -1,4 +1,9 @@
+var icon;
 $(document).ready(function() {
+    setTimeout('configwx()', 100);
+    $('.license02').click(function () {
+        chooseImage();
+    })
     var Name = sessionStorage.getItem("Name");
     var dwmj =sessionStorage.getItem("Mj");
     var dwmc =sessionStorage.getItem("Dmmmmc");
@@ -71,8 +76,12 @@ function xinxibaocun() {
     var lng = sessionStorage.getItem("lng");
     var poiaddress = sessionStorage.getItem("poiaddress");
     var poiname = sessionStorage.getItem("poiname");
+
     var phone = sessionStorage.getItem("phone");
-    if(Name!=null && dwmj!=null &&dwmc!=null && dplx!=null && zhiwei!=null &&dpfl!=null &&cityname!=null && poiaddress!=null && poiname!=null){
+    if(phone == null && $.cookie("zt") == 1 && $.cookie("phone")!= null){
+        phone = $.cookie("phone");
+    }
+    if(Name!=null && dwmj!=null &&dwmc!=null && dplx!=null && zhiwei!=null &&dpfl!=null &&cityname!=null && poiaddress!=null && poiname!=null && phone !=null){
         num = 7;
     }
     if(num == 7){
@@ -92,5 +101,86 @@ function xinxibaocun() {
         $(".quanbubitian").show();
         setTimeout('$(".quanbubitian").hide()',1000);
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function configwx() {
+    var url = window.location.href;
+    $.ajax({
+        url: "/weChat/getSignInfo",
+        type: "GET",
+        data: {
+            "url": url
+        },
+        success: function (res) {
+            var nonce_str = res.nonce_str;
+            var timesta = res.time_stamp;
+            var signatur = res.signa_ture;
+            var appid = res.appid;
+
+            wx.config({
+                debug: true,
+                appId: appid,
+                timestamp: timesta,
+                nonceStr: nonce_str,
+                signature: signatur,
+                jsApiList: [
+                    'chooseImage',
+                    'previewImage',
+                    'uploadImage',
+                    'downloadImage',
+                    'getLocalImgData'
+                ]
+            });
+        }
+    });
+}
+function chooseImage() {
+    var images = {
+        localId: [],
+        serverId: [],
+        imgbase64: []
+    };
+    wx.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'],
+        sourceType: ['album', 'camera'],
+        success: function (res) {
+            images.localId = res.localIds;
+            wx.uploadImage({
+                localId: images.localId[0],
+                isShowProgressTips: 1,
+                success: function (res) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/weChat/uploadWeiXinImg",
+                        data: {
+                            mediaId: res.serverId
+                        },
+                        success: function (res) {
+                            icon =res.data.imgUrl;
+                            $('#dynamicImage').hide();
+                            $('.license02').append('<img src="'+icon+'"/>')
+                        }
+                    });
+                }
+            });
+        }
+    });
 
 }

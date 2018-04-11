@@ -4,10 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.haojishi.mapper.CommonCompanyMapper;
 import com.haojishi.mapper.CompanyMapper;
-import com.haojishi.mapper.PositionMapper;
 import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Company;
-import com.haojishi.model.Position;
 import com.haojishi.model.User;
 import com.haojishi.util.BusinessMessage;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +14,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-import tk.mybatis.mapper.entity.Example;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -32,8 +28,6 @@ import java.util.*;
 public class CompanyService {
     @Autowired
     private CompanyMapper companyMapper;
-    @Autowired
-    private PositionMapper positionMapper;
 
     @Autowired
     private UserMapper userMapper;
@@ -228,7 +222,7 @@ public class CompanyService {
                 stringObjectHashMap.put("icon",company.getIconPath());
                 stringObjectHashMap.put("province_id",company.getProvinceId());
                 stringObjectHashMap.put("city_id",company.getCityId());
-//                stringObjectHashMap.put("area_id",company.getAreaId());
+               /* stringObjectHashMap.put("area_id",company.getAreaId());*/
 //                stringObjectHashMap.put("company_id",companyList.get(0).getId());
 
                 message.setData(stringObjectHashMap);
@@ -295,7 +289,7 @@ public class CompanyService {
                 company.setCompanySpecial(company_special_str);
                 company.setProvinceId(province);
                 company.setCityId(city);
-//                company.setAreaId(area);
+                /*company.setAreaId(area);*/
                 company.setCompanyInfo(company_info);
                 company.setIconPath(iconName);
                 company.setCompanyAddr(company_addr);
@@ -457,15 +451,8 @@ public class CompanyService {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             Company company =companyMapper.selectByPrimaryKey(id);
-            company.setMatstate(3);
+            company.setMatstate(1);
             companyMapper.updateByPrimaryKeySelective(company);
-            Example example =new Example(Position.class);
-            example.createCriteria().andEqualTo("companyId",company.getId());
-            List<Position> positions =positionMapper.selectByExample(example);
-            for(Position position : positions){
-                position.setState(4);
-                positionMapper.updateByPrimaryKeySelective(position);
-            }
             businessMessage.setMsg("设置审核通过操作成功");
             businessMessage.setSuccess(true);
         }catch (Exception e){
@@ -485,7 +472,7 @@ public class CompanyService {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             Company company =companyMapper.selectByPrimaryKey(id);
-            company.setMatstate(4);
+            company.setMatstate(2);
             companyMapper.updateByPrimaryKeySelective(company);
             businessMessage.setMsg("设置审核通过操作成功");
             businessMessage.setSuccess(true);
