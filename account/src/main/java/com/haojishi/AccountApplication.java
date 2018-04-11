@@ -10,7 +10,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @MapperScan("com.haojishi.mapper")
 public class AccountApplication {
-	//测试下看能不能下载下来11111111111111
+	//测试下看能不能下载下来1111111111111
 	public static void main(String[] args) {
 		SpringApplication.run(AccountApplication.class, args);
 	}
