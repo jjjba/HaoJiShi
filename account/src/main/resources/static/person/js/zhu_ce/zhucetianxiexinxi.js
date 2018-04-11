@@ -259,9 +259,10 @@ function chooseImage() {
                             mediaId: res.serverId
                         },
                         success: function (res) {
-                            avatarPath =res.data.imgUrl;
+                            $('.license').empty();
+                            avatarPath =res.data.imgxUrl;
                             $('#dynamicImage').hide();
-                            $('.license').append('<img src="'+avatarPath+'"/>')
+                            $('.license').append('<img src="'+avatarPath+'" style="height: 5rem;width: 5rem"/>')
                         }
                     });
                 }
