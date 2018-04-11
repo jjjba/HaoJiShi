@@ -31,16 +31,6 @@ public class RedirectController {
     private Environment environment;
     @Autowired
     private UserMapper userMapper;
-    /**
-     * 微信网页授权流程:
-     * 1. 用户同意授权,获取 code
-     * 2. 通过 code 换取网页授权 access_token
-     * 3. 使用获取到的 access_token 和 openid 拉取用户信息
-     * @param code  用户同意授权后,获取到的code
-     * @param state 重定向状态参数
-     * @return
-     */
-
     @RequestMapping("account")
     public String wecahtLogin(@RequestParam(name = "code", required = false) String code,
                               @RequestParam(name = "state") String state, HttpSession session,HttpServletRequest request) {
@@ -76,7 +66,7 @@ public class RedirectController {
                     }else {
                         User user =new User();
                         user.setOpenid(openId);
-//                        user.set
+                        user.setAvatar(headimgurl);
                         userMapper.insertSelective(user);
                         Example userExample1 =new Example(User.class);
                         userExample1.createCriteria().andEqualTo("openid",openId);

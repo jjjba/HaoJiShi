@@ -729,6 +729,22 @@ public class PersonalService {
     }
 
     /**
+     * 获取用户头像
+     * @param session
+     * @return
+     */
+    public BusinessMessage getUserAvatar(HttpSession session){
+        BusinessMessage businessMessage =new BusinessMessage();
+        int userId = (int) session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        Map<String,Object> map =new HashMap<>();
+        map.put("avatar",user.getAvatar());
+        businessMessage.setData(map);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
+    /**
      * 求职者端=========获取用户手机密码
      * @param session
      * @return

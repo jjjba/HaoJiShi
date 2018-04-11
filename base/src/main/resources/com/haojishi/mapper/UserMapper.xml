@@ -14,11 +14,13 @@
     <result column="isShare" jdbcType="INTEGER" property="isshare" />
     <result column="subscribe" jdbcType="INTEGER" property="subscribe" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    id, phone, password, type, openid, account_state, isShare, subscribe, create_time
+    id, phone, password, type, openid, account_state, isShare, subscribe, create_time, 
+    avatar
   </sql>
 </mapper>

@@ -71,7 +71,7 @@ logging:
 api:
   #图片和视频存放路径
   fileImagePath: /var/tomcat/tomcat-8/webapps/image
-  ImageSrc: http://wx.haojishi.net/image
+  ImageSrc: http://wx.haojishi.net/image/
 
 
   appid: wx987bf4ddff238028

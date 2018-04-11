@@ -55,6 +55,11 @@ public class User implements Serializable {
     @Column(name = "create_time")
     private Date createTime;
 
+    /**
+     * 用户头像
+     */
+    private String avatar;
+
     private static final long serialVersionUID = 1L;
 
     /**
@@ -219,6 +224,24 @@ public class User implements Serializable {
         this.createTime = createTime;
     }
 
+    /**
+     * 获取用户头像
+     *
+     * @return avatar - 用户头像
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * 设置用户头像
+     *
+     * @param avatar 用户头像
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -234,6 +257,7 @@ public class User implements Serializable {
         sb.append(", isshare=").append(isshare);
         sb.append(", subscribe=").append(subscribe);
         sb.append(", createTime=").append(createTime);
+        sb.append(", avatar=").append(avatar);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

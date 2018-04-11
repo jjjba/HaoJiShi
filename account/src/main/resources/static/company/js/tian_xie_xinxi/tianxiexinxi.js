@@ -176,9 +176,10 @@ function chooseImage() {
                             mediaId: res.serverId
                         },
                         success: function (res) {
+                            $('.license02').empty();
                             icon =res.data.imgUrl;
                             $('#dynamicImage').hide();
-                            $('.license02').append('<img src="'+icon+'"/>')
+                            $('.license02').append('<img src="'+icon+'" style="width: 4.6rem;height: 4.6rem"/>')
                         }
                     });
                 }
