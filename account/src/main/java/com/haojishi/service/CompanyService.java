@@ -433,7 +433,7 @@ public class CompanyService{
      */
     public BusinessMessage addNewCompany(String Name,String dwmj,String dwmc,String dplx
             ,String zhiwei,String dpfl,String cityname,String lat,String lng
-            ,String poiaddress,String poiname,String phone){
+            ,String poiaddress,String poiname,String phone,String sheng,String shi,String qu){
         BusinessMessage businessMessage = new BusinessMessage();
         Company company = new Company();
         User user = new User();
@@ -453,6 +453,10 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setMatstate(1);
+        //增加省市区
+        company.setProvince(sheng);
+        company.setCity(shi);
+        company.setArea(qu);
         company.setCompanyDpmj(dwmj);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         company.setCreateTime(new Date());
@@ -658,11 +662,15 @@ public class CompanyService{
                     position.setSeeNumber(0);
                     position.setShareNumber(0);
                     position.setResumeNumber(0);
-                    position.setState(1);
+                    if(companies.get(0).getMatstate() != 4){
+                        position.setState(1);
+                    }else {
+                        position.setState(4);
+                    }
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
                     position.setCreateTime(new Date());
                     position.setCompanyId(companies.get(0).getId());
-                    success = positionMapper.insert(position);
+                    success =  positionMapper.insert(position);
 
                 }
             }
@@ -789,6 +797,61 @@ public class CompanyService{
                 businessMessage.setSuccess(true);
             }
         }
+        return  businessMessage;
+    }
+
+    /***
+     * 下线操作
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage xiaxian_id(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Position position = new Position();
+        position.setId(id);
+        position.setState(2);
+        businessMessage.setData(positionMapper.updateByPrimaryKeySelective(position));
+        businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+    /***
+     * 删除操作
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage shanchu_id(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Position position = new Position();
+        position.setId(id);
+        businessMessage.setData(positionMapper.deleteByPrimaryKey(position));
+        businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+    /***
+     * 删除操作
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage shangxian_id(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer idd = (Integer) session.getAttribute("userId");
+        Example example1 =new Example(Company.class);
+        example1.createCriteria().andEqualTo("userId",idd);
+        List<Company> companies =companyMapper.selectByExample(example1);
+        if(companies!=null && companies.size()>0){
+            if(companies.get(0).getMatstate()!=4){
+                businessMessage.setData(0);//不允许
+            }else{
+                Position position = new Position();
+                position.setId(id);
+                position.setState(4);
+                businessMessage.setData(positionMapper.updateByPrimaryKeySelective(position));
+            }
+        }
+        businessMessage.setSuccess(true);
         return  businessMessage;
     }
 }

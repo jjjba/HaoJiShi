@@ -79,6 +79,10 @@ function xinxibaocun() {
     var lng = sessionStorage.getItem("lng");
     var poiaddress = sessionStorage.getItem("poiaddress");
     var poiname = sessionStorage.getItem("poiname");
+    //梁闯要求 后加的省市区
+    var sheng = sessionStorage.getItem("sheng");
+    var shi = sessionStorage.getItem("shi");
+    var qu = sessionStorage.getItem("qu");
 
     var phone = sessionStorage.getItem("phone");
     if(phone == null && $.cookie("zt") == 1 && $.cookie("phone")!= null){
@@ -91,7 +95,7 @@ function xinxibaocun() {
         $.ajax({
             url:"/company/addNewCompany",
             type:"POST",
-            data:{Name:Name,dwmj:dwmj,dwmc:dwmc,dplx:dplx,zhiwei:zhiwei,dpfl:dpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:poiaddress,poiname:poiname,phone:phone},
+            data:{Name:Name,dwmj:dwmj,dwmc:dwmc,dplx:dplx,zhiwei:zhiwei,dpfl:dpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:poiaddress,poiname:poiname,phone:phone,sheng:sheng,shi:shi,qu:qu},
             success:function (msg) {
                 var succ = msg.data;
                 $.cookie("zt",1);

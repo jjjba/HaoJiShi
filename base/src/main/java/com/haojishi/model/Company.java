@@ -81,20 +81,20 @@ public class Company implements Serializable {
     /**
      * 省
      */
-    @Column(name = "province_id")
-    private Integer provinceId;
+    @Column(name = "province")
+    private String province;
 
     /**
      * 市
      */
-    @Column(name = "city_id")
-    private Integer cityId;
+    @Column(name = "city")
+    private String city;
 
     /**
      * 区
      */
-    @Column(name = "company_area")
-    private Integer companyArea;
+    @Column(name = "area")
+    private String Area;
 
     /**
      * 店铺地址
@@ -461,44 +461,44 @@ public class Company implements Serializable {
      *
      * @return province_id - 省
      */
-    public Integer getProvinceId() {
-        return provinceId;
+    public String getProvince() {
+        return province;
     }
 
     /**
      * 设置省
      *
-     * @param provinceId 省
+     * @param province 省
      */
-    public void setProvinceId(Integer provinceId) {
-        this.provinceId = provinceId;
+    public void setProvince(String province) {
+        this.province = province;
     }
 
     /**
      * 获取市
      *
-     * @return city_id - 市
+     * @return city  市
      */
-    public Integer getCityId() {
-        return cityId;
+    public String getCity() {
+        return city;
     }
 
     /**
      * 设置市
      *
-     * @param cityId 市
+     * @param city 市
      */
-    public void setCityId(Integer cityId) {
-        this.cityId = cityId;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     /**
      * 获取区
      *
-     * @return company_area - 区
+     * @return company - 区
      */
-    public Integer getCompanyArea() {
-        return companyArea;
+    public String getArea() {
+        return Area;
     }
 
     /**
@@ -506,8 +506,8 @@ public class Company implements Serializable {
      *
      * @param companyArea 区
      */
-    public void setCompanyArea(Integer companyArea) {
-        this.companyArea = companyArea;
+    public void setArea(String companyArea) {
+        this.Area = Area;
     }
 
     /**
@@ -907,9 +907,9 @@ public class Company implements Serializable {
         sb.append(", companyScale=").append(companyScale);
         sb.append(", companySpecial=").append(companySpecial);
         sb.append(", companyCity=").append(companyCity);
-        sb.append(", provinceId=").append(provinceId);
-        sb.append(", cityId=").append(cityId);
-        sb.append(", companyArea=").append(companyArea);
+        sb.append(", provinceId=").append(province);
+        sb.append(", cityId=").append(city);
+        sb.append(", companyArea=").append(Area);
         sb.append(", companyAddr=").append(companyAddr);
         sb.append(", companyType=").append(companyType);
         sb.append(", iconPath=").append(iconPath);

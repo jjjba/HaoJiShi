@@ -61,9 +61,14 @@
             $.getJSON("http://apis.map.qq.com/ws/geocoder/v1/?location="
                 +latlng+"&output=jsonp&key=3DSBZ-QV7HS-T7YO7-63ZYW-L4IMK-NSBJD&callback=?",
                 function(aaa){
+                console.log(aaa);
+                console.log(aaa.result.address_component.province);
                 console.log(aaa.result.address_component.city);//中国无人能敌district
-                    console.log(aaa.result.address_component.district);
-                    sessionStorage.setItem("cityname",aaa.result.address_component.city+"_"+aaa.result.address_component.district);
+                console.log(aaa.result.address_component.district);
+                sessionStorage.setItem("sheng",aaa.result.address_component.province);
+                    sessionStorage.setItem("shi",aaa.result.address_component.city);
+                    sessionStorage.setItem("qu",aaa.result.address_component.district);
+                sessionStorage.setItem("cityname",aaa.result.address_component.city+"_"+aaa.result.address_component.district);
             });
         }
     }, false);

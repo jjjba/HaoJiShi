@@ -47,7 +47,7 @@ public class RemortIP {
     public static String getAddressByIP(HttpServletRequest request) { //
         String ip =getIpAddr(request);
         String address ="";
-        if(ip.equals("127.0.0.1")){
+        if(ip.equals("127.0.0.1") || ip.equals("192.168.0.107")){
             address ="石家庄市";
         }else {
             String url ="http://ip.taobao.com/service/getIpInfo.php?ip="+ip;

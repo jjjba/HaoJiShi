@@ -120,13 +120,12 @@ function loadPersonal(){
                     '</div>'+
                     '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
                     '</div>'+
-                    '</div>'+
+                    '</div></a>'+
                     '<div class="pxbiuss">'+
                     '<div class="pxlefts">'+item.hope_job+'</div>'+
-                    '<div class="pxyouls"><img src="./../company/images/biao07.png" /></div>'+
+                    '<div class="pxyouls"><img src="./../company/images/biao07.png" onclick="puanduan(&quot;'+item.id+'&quot;)"/></div>'+
                     '</div>'+
-                    '</div>'+
-                    '</a>';
+                    '</div>';
                 $('.personalList').append(personalList);
             });
         }
@@ -229,4 +228,15 @@ function gowode() {
 
 function gozixun() {
     window.location.href="/transition/go_zi_xun_yue_lan";
+}
+
+function puanduan(id) {
+    console.log(id);
+    var phone = $.cookie("phone");
+    var zt = $.cookie("zt");
+    if(phone !=null && zt == 1){
+
+    }else{
+
+    }
 }

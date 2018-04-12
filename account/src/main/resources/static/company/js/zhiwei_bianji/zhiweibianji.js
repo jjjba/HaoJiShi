@@ -27,7 +27,7 @@ $(document).ready(function() {
         $("#trigger1").html("请选择");
     }
     if(zwmc !="" && zwmc !='' && zwmc !=undefined){
-        $("#zwmc").html(zwlx+"("+zwmc+")");
+        $("#zwmc").html(zwmc+"可选择");
         num++;
     }else {
         if(zwlx !="" && zwlx !='' && zwlx !=undefined && (zwmc =="" || zwmc =='' || zwmc ==undefined)){

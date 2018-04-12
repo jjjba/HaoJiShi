@@ -157,8 +157,8 @@ public class CompanyController {
     @RequestMapping("addNewCompany")
     public BusinessMessage addNewCompany(String Name,String dwmj,String dwmc,String dplx
             ,String zhiwei,String dpfl,String cityname,String lat,String lng
-            ,String poiaddress,String poiname,String phone){
-        return  companyService.addNewCompany(Name,dwmj,dwmc,dplx,zhiwei,dpfl,cityname,lat,lng,poiaddress,poiname,phone);
+            ,String poiaddress,String poiname,String phone,String sheng,String shi,String qu){
+        return  companyService.addNewCompany(Name,dwmj,dwmc,dplx,zhiwei,dpfl,cityname,lat,lng,poiaddress,poiname,phone,sheng,shi,qu);
     }
 
     /**
@@ -284,6 +284,31 @@ public class CompanyController {
     @RequestMapping("shenhezhaopian")
     public BusinessMessage shenhezhaopian(HttpSession session,String license){
         return  companyService.addCompanyRenZhengZhaoPian(session,license);
+    }
+
+    /**
+     * 下线操作
+     * @return
+     */
+    @RequestMapping("xiaxian_id")
+    public BusinessMessage xiaxian_id(HttpSession session,Integer id){
+        return  companyService.xiaxian_id(session,id);
+    }
+    /**
+     * 删除操作
+     * @return
+     */
+    @RequestMapping("shanchu_id")
+    public BusinessMessage shanchu_id(HttpSession session,Integer id){
+        return  companyService.shanchu_id(session,id);
+    }
+    /**
+     * 上线操作
+     * @return
+     */
+    @RequestMapping("shangxian_id")
+    public BusinessMessage shangxian_id(HttpSession session,Integer id){
+        return  companyService.shangxian_id(session,id);
     }
 }
 

@@ -65,29 +65,6 @@
        <!--选择职位开始-->
        <div class="xzzwis">
            <div id="trigger1" class="zhiiis" onclick="xuanzezhiwei()">技师</div>
-            <!--<script type="text/javascript">
-            
-                var weekdayArr=['技师类','管理类','前厅类','后勤类','培训类'];
-                
-                
-                var mobileSelect1 = new MobileSelect({
-                    trigger: '#trigger1', 
-                    title: '',  
-                    wheels: [
-                                {data: weekdayArr}
-                            ],
-                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
-                    transitionEnd:function(indexArr, data){
-                        console.log(data);
-                    },
-                    callback:function(indexArr, data){
-                        console.log(data);
-                        sessionStorage.setItem("zwlx",data);
-                    }
-                });
-            
-            
-            </script>-->
         </div> <img src="/static/company/images/yjts.png" th:src="@{/company/images/yjts.png}" class="yjtiss" />
        <!--选择职位结束-->
        
@@ -126,8 +103,8 @@
        <div class="xzzwis">
            <div id="trigger2" class="zhiiis">5000-8000/月</div>
             <script type="text/javascript">
-            
-                var weekdayArr2=['6000','5000','8000'];
+
+                var weekdayArr2=['面议','3000元以下','3000-5000/月','5000-8000/月','8000-10000/月','10000-15000/月','15000-20000/月','20000元以上/月'];
                 
                 
                 var mobileSelect2 = new MobileSelect({
