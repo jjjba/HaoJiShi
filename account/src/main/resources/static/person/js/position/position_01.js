@@ -28,22 +28,7 @@ $(function () {
     });
 
 });
-function loadPosition() {
-    $.ajax({
-        url: "/personal/getPersonalHopeJobClassification",
-        type: "POST",
-        success: function (res) {
-            if (res.success) {
-                var list = res.data;
-                var address = list[0].address;
-                if (address == null || address == "") {
-                    address = "未获取到位置"
-                }
-                $('.zcwzuis').append('当前城市：' + address);
-            }
-        }
-    })
-}
+
 function loadPosition() {
     // var data ={
     //     page :page,
@@ -57,12 +42,16 @@ function loadPosition() {
             if (res.success) {
                 $('.personalList1111').empty();
                 var list = res.data;
-                var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
+                var id, area,city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
                 $.each(list, function (index, item) {
                     id = item.id;
-                    company_city =item.company_city;
-                    if(company_city == null || company_city == ""){
-                        company_city ="未填写";
+                    city =item.city;
+                    if(city == null || city == ""){
+                        city ="未填写";
+                    }
+                    area =item.area;
+                    if(area == null || area == ""){
+                        area ="未填写";
                     }
                     position_name =item.position_name;
                     if(position_name == null || position_name == ""){
@@ -124,7 +113,7 @@ function loadPosition() {
                         '</div>'+
                         '<div class="corpryous">'+
                         '<h1>'+name+'</h1>'+
-                        '<p>'+company_type+' | '+company_scale+' | '+company_city+'</p>'+
+                        '<p>'+company_type+' | '+company_scale+' | '+city+'-'+area+'</p>'+
                         '</div>'+
                         '</div>'+
                         '</a>'+
@@ -151,7 +140,7 @@ function loadPositionByPars(city,scale,money,positionName) {
     var data ={
         money : money,
         scale : scale,
-        positionName : positionName,
+        positionType : positionName,
         city : city,
 
     }
@@ -162,12 +151,16 @@ function loadPositionByPars(city,scale,money,positionName) {
         success : function (res) {
             $('.personalList1111').empty();
             var list =res.data;
-            var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
+            var id, area,city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
             $.each(list, function (index, item) {
                 id = item.id;
-                company_city =item.company_city;
-                if(company_city == null || company_city == ""){
-                    company_city ="未填写";
+                city =item.city;
+                if(city == null || city == ""){
+                    city ="未填写";
+                }
+                area =item.area;
+                if(area == null || area == ""){
+                    area ="未填写";
                 }
                 position_name =item.position_name;
                 if(position_name == null || position_name == ""){
@@ -228,7 +221,7 @@ function loadPositionByPars(city,scale,money,positionName) {
                     '</div>'+
                     '<div class="corpryous">'+
                     '<h1>'+name+'</h1>'+
-                    '<p>'+company_type+' | '+company_scale+' | '+company_city+'</p>'+
+                    '<p>'+company_type+' | '+company_scale+' | '+city+'-'+area+'</p>'+
                     '</div>'+
                     '</div>'+
                     '</a>'+

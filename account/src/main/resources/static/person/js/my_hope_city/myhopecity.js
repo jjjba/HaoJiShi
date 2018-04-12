@@ -82,7 +82,7 @@ function getCityData(id) {
 }
 function quedingbaocun() {
     $.ajax({
-        url:"/personal/updatePersonalByPersonalId",
+        url:"/personal/updatePersonalHopeCity",
         type:"POST",
         data : {
             hopeCity : hc.join(",")

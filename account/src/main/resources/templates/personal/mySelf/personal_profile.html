@@ -59,7 +59,7 @@
         $(".bcnois").click(function(e) {
             console.log($('#note').val());
             $.ajax({
-                url:"/personal/updatePersonalByPersonalId",
+                url:"/personal/updatePersonalMyselfInfo",
                 type:"POST",
                 data:{
                     myselfInfo : $('#note').val()

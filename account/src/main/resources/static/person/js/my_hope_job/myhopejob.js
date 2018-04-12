@@ -92,7 +92,7 @@ function deleteJob(val,hopeJob) {
 }
 function quedingbaocun() {
     $.ajax({
-        url:"/personal/updatePersonalByPersonalId",
+        url:"/personal/updatePersonalHopeJob",
         type:"POST",
         data : {
             hopeJob : hj.toString()

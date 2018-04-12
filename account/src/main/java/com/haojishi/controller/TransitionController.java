@@ -1,17 +1,16 @@
 package com.haojishi.controller;
 
-import com.haojishi.mapper.CompanyMapper;
 import com.haojishi.mapper.PersonalMapper;
 import com.haojishi.mapper.UserMapper;
 import com.haojishi.model.Personal;
 import com.haojishi.model.User;
-import com.haojishi.service.TransitionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -30,10 +29,6 @@ public class TransitionController {
     @Autowired
     private PersonalMapper personalMapper;
 
-    @Autowired
-    private CompanyMapper companyMapper;
-    @Autowired
-    private TransitionService transitionService;
     /**
      * 跳转职位详情页面
      * @param session
@@ -41,10 +36,11 @@ public class TransitionController {
      * @return
      */
     @RequestMapping("transition_position_info")
-    public String transition_position_info(HttpSession session,Integer id){
+    public String transition_position_info(HttpSession session, HttpServletRequest request){
+        String id =request.getParameter("id");
         session.removeAttribute("positionId");
         session.setAttribute("positionId",id);
-        return "/personal/position_info";
+        return "/personal/zhiweiInfo";
     }
 
     /**
@@ -102,7 +98,7 @@ public class TransitionController {
      */
     @RequestMapping("transition_search")
     public String transition_search(){
-        return "personal/position/position_search";
+        return "personal/position/job_search";
     }
 
     /**
@@ -139,15 +135,6 @@ public class TransitionController {
     @RequestMapping("account_settings")
     public String account_settings(){
         return "personal/mySelf/account_settings";
-    }
-
-    /**
-     * 跳转切换身份页面
-     * @return
-     */
-    @RequestMapping("switching_identity")
-    public String switching_identity(){
-        return "personal/mySelf/switching_identity";
     }
 
     /**
@@ -829,7 +816,6 @@ public class TransitionController {
      */
     @RequestMapping("dianpuYl")
     public String dianpuYl(){return  "company/company_myself/bianji_dianpuxinxi/dianpu_xiangqing";}
-
 
 
 }

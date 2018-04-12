@@ -257,7 +257,6 @@ function yingpin() {
             success : function (res) {
                 $(".toolbarframe04").show();
                 setTimeout('$(".toolbarframe04").hide()',900);
-                $('.')
             },
 
             error : function (res) {

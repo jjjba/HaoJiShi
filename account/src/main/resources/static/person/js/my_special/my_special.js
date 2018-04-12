@@ -43,7 +43,7 @@ function deleteSpecial(val,special) {
 }
 function quedingbaocun() {
     $.ajax({
-        url:"/personal/updatePersonalByPersonalId",
+        url:"/personal/updatePersonalSpecial",
         type:"POST",
         data : {
             special : sp.toString()

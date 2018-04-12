@@ -1,14 +1,11 @@
 package com.haojishi.controller;
 
-import com.haojishi.model.Position;
 import com.haojishi.service.PositionService;
 import com.haojishi.util.BusinessMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -75,16 +72,16 @@ public class PositionController {
     /**
      * 求职者端02 求职者页面条件查询
      *
-     * @param positionName
+     * @param positionType
      * @param city
      * @param money
      * @param scale
      * @return
      */
     @RequestMapping("getPositionByParams02")
-    public BusinessMessage getPositionByParams02(String positionName,
+    public BusinessMessage getPositionByParams02(String positionType,
                                                  String city,String money,String scale){
-        return positionService.getPositionByParams02(positionName, city, money, scale);
+        return positionService.getPositionByParams02(positionType, city, money, scale);
     }
 
     /**

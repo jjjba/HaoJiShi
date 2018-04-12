@@ -292,16 +292,16 @@ public class PositionService {
     /**
      * 求职者端02 求职者页面条件查询
      *
-     * @param positionName
+     * @param positionType
      * @param city
      * @param money
      * @param scale
      * @return
      */
-    public BusinessMessage getPositionByParams02(String positionName,
+    public BusinessMessage getPositionByParams02(String positionType,
                                                String city,String money,String scale){
         BusinessMessage businessMessage =new BusinessMessage();
-        List<Map<String,Object>> position =commonPositionMapper.getPositionByParams02(city, positionName, money, scale);
+        List<Map<String,Object>> position =commonPositionMapper.getPositionByParams02(city, positionType, money, scale);
         businessMessage.setMsg("获取职位成功");
         businessMessage.setData(position);
         businessMessage.setSuccess(true);

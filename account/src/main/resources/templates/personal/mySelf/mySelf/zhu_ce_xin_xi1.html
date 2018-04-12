@@ -1,0 +1,581 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>个人端-注册后录入信息-个人</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/person/css/response.css"
+          th:href="@{/person/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/public.css"
+          th:href="@{/person/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/xiangying.css"
+          th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+
+    <link type="text/css" href="/static/person/css/wan_shan_xin_xi/top.css"
+          th:href="@{/person/css/wan_shan_xin_xi/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/wan_shan_xin_xi/jbxxs.css"
+          th:href="@{/person/css/wan_shan_xin_xi/jbxxs.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/wan_shan_xin_xi/denglu.css"
+          th:href="@{/person/css/wan_shan_xin_xi/denglu.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
+            th:src="@{/person/js/jquery-3.2.1.js}" ></script>
+    <!--<script type="text/javascript" src="/static/person/js/zhu_ce/zhucetianxiexinxi.js"-->
+            <!--th:src="@{/person/js/zhu_ce/zhucetianxiexinxi.js}" ></script>-->
+
+
+    <!--上传头像开始-->
+
+    <link href="/static/person/css/wan_shan_xin_xi/sctx.css"
+          th:href="@{/person/css/wan_shan_xin_xi/sctx.css}" rel="stylesheet" type="text/css">
+
+    <!--上传头像结束-->
+
+    <!--性别开始-->
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            $('.dijis').click(function(){
+                if($('.d-guanzhu').text()=="男"){
+                    $('.d-guanzhu').text("女");
+                }else{
+                    $('.d-guanzhu').text("男");
+                }
+            });
+
+        });
+
+    </script>
+    <!--性别结束-->
+
+    <!--地区选择开始-->
+    <link rel="stylesheet" href="/static/person/css/wan_shan_xin_xi/style.css"
+          th:href="@{/person/css/wan_shan_xin_xi/style.css}" />
+    <!--地区选择结束-->
+
+    <!--选择职位开始-->
+    <link rel="stylesheet" type="text/css" href="/static/person/css/mobileSelect.css" th:href="@{/person/css/mobileSelect.css}">
+    <script src="/static/person/js/wan_shan_xin_xi/mobileSelect.js" type="text/javascript" th:src="@{/person/js/wan_shan_xin_xi/mobileSelect.js}"></script>
+    <!--选择职位结束-->
+
+
+</head>
+<body>
+
+<!--头部开始-->
+<div class="topbus">
+    <!--里边开始-->
+    <div class="tbusinto">
+        编辑个人信息
+        <a href="#" class="zjtous"><img src="images/biao04.png" /></a>
+    </div>
+    <!--里边结束-->
+</div>
+<!--头部结束-->
+
+
+<!--标题开始-->
+<div class="btioss borxboms">
+    创建一份微简历，全国各地足浴行业好工作触手可及！
+</div>
+<!--标题结束-->
+
+<!--头像开始-->
+<div class="headaits marnosse clearfix">
+    <!--左边开始-->
+    <div class="fl heaxilfs">
+        头像
+    </div>
+    <!--左边结束-->
+
+    <!--右边开始-->
+    <div class="fr yobtouxs clearfix">
+        <!--上传头像开始-->
+        <div class="sltoucs">
+            <div class="yobwis">
+                非必填<br>
+                上传后受欢迎程度提升20%
+            </div>
+
+            <div class="uploader blue yobwis02">
+                <input type="text" class="filename" readonly/>
+                <a class="license">
+                    <img id="img-1" src="images/tupian.png" />
+                </a>
+                <input id="file0" class="file-3" type="file" size="30" onchange="javascript:setImagePreview();" accept="image/*" capture="camera" />
+            </div>
+
+            <div class="yulan">
+                <img src="" id="img0" >
+                <div class="enter">
+                    <button class="btn-2 fl">取消</button>
+                    <button class="btn-3 fr">确定</button>
+                </div>
+            </div>
+        </div>
+        <img src="images/yjts.png" class="yjtiss" />
+        <!--上传头像结束-->
+
+
+    </div>
+    <!--右边结束-->
+</div>
+<!--头像结束-->
+
+<!--个人信息开始-->
+<div class="grxxyis">
+
+    <!--输入一块开始-->
+    <a href="#">
+        <div class="sryikuys borxboms clearfix">
+            <!--左边开始-->
+            <div class="fl zcsyks">姓名</div>
+            <!--左边结束-->
+            <!--右边开始-->
+            <div class="fr youyss xmiyuys">
+                李雨乐 <img src="images/yjts.png" class="yjtiss" />
+            </div>
+            <!--右边结束-->
+        </div>
+    </a>
+    <!--输入一块结束-->
+
+    <!--性别开始-->
+    <div class="sryikuys borxboms dijis clearfix">
+        <!--左边开始-->
+        <div class="fl zcsyks">性别</div>
+        <!--左边结束-->
+        <!--右边开始-->
+        <div class="fr sexyous">
+            <div class="d-guanzhu">男</div> <img src="images/yjts.png" class="yjtiss" />
+        </div>
+        <!--右边结束-->
+    </div>
+    <!--性别结束-->
+
+
+    <!--输入一块开始-->
+    <a href="#">
+        <div class="sryikuys clearfix">
+            <!--左边开始-->
+            <div class="fl zcsyks">年龄</div>
+            <!--左边结束-->
+            <!--右边开始-->
+            <div class="fr youyss xmiyuys">
+                20 <img src="images/yjts.png" class="yjtiss" />
+            </div>
+            <!--右边结束-->
+        </div>
+    </a>
+    <!--输入一块结束-->
+
+</div>
+<!--个人信息结束-->
+
+<!--联系方式开始-->
+<div class="cnouyts">
+
+
+    <!--工作经验开始-->
+    <div class="sryikuys borxboms clearfix">
+        <!--左边开始-->
+        <div class="fl zcsyks">工作经验</div>
+        <!--左边结束-->
+
+        <!--右边开始-->
+        <div class="fr yogzztas">
+
+            <!--选择职位开始-->
+            <div class="xzzwis">
+                <div id="trigger3" class="zhiiis">请选择工作经验</div>
+                <script type="text/javascript">
+
+                    var weekdayArr3=['1年','1年-2年','3年'];
+
+
+                    var mobileSelect3 = new MobileSelect({
+                        trigger: '#trigger3',
+                        title: '',
+                        wheels: [
+                            {data: weekdayArr3}
+                        ],
+                        position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                        transitionEnd:function(indexArr, data){
+                            console.log(data);
+                        },
+                        callback:function(indexArr, data){
+                            console.log(data);
+                        }
+                    });
+
+
+                </script>
+            </div> <img src="images/yjts.png" class="yjtiss" />
+            <!--选择职位结束-->
+
+        </div>
+        <!--右边结束-->
+
+    </div>
+    <!--工作经验结束-->
+
+
+    <!--求职岗位开始-->
+    <a href="#">
+        <div class="sryikuys borxboms clearfix">
+            <!--左边开始-->
+            <div class="fl zcsyks">求职岗位</div>
+            <!--左边结束-->
+
+            <!--右边开始-->
+            <div class="fr yogzztas xmiyuys">
+
+                SPA <img src="images/yjts.png" class="yjtiss" />
+
+            </div>
+            <!--右边结束-->
+
+        </div>
+    </a>
+    <!--求职岗位结束-->
+
+
+
+
+
+    <!--所在地区开始-->
+    <div class="sryikuys borxboms clearfix">
+        <!--左边开始-->
+        <div class="fl zcsyks">意向城市</div>
+        <!--左边结束-->
+
+        <!--右边开始-->
+        <div class="fr youkuiss">
+            <!--地区选择开始-->
+            <div class="xzeyosx">
+                <section class="express-area">
+                    <a id="expressArea" href="javascript:void(0)">
+                        <dl>
+                            <dd>省 > 市 > 区/县</dd>
+                        </dl>
+                    </a>
+                </section>
+                <!--选择地区弹层-->
+                <section id="areaLayer" class="express-area-box">
+                    <header>
+                        <h3>选择地区</h3>
+                        <a id="backUp" class="back" href="javascript:void(0)" title="返回"></a>
+                        <a id="closeArea" class="close" href="javascript:void(0)" title="关闭"></a>
+                    </header>
+                    <article id="areaBox">
+                        <ul id="areaList" class="area-list"></ul>
+                    </article>
+                </section>
+                <!--遮罩层-->
+                <div id="areaMask" class="mask"></div>
+                <script src="js/jquery.area.js"></script>
+            </div>
+            <!--地区选择结束-->
+            <img src="images/yjts.png" class="yjtiss" />
+        </div>
+        <!--右边结束-->
+
+    </div>
+    <!--所在地区结束-->
+
+
+</div>
+<!--联系方式结束-->
+
+<!--下开始-->
+<div class="cnouyts">
+
+    <!--个人优势开始-->
+    <a href="#">
+        <div class="sryikuys borxboms clearfix">
+            <!--左边开始-->
+            <div class="fl zcsyks">个人优势</div>
+            <!--左边结束-->
+            <!--右边开始-->
+            <div class="fr youyss xmiyuys">
+                吃苦耐劳 <img src="images/yjts.png" class="yjtiss" />
+            </div>
+            <!--右边结束-->
+        </div>
+    </a>
+    <!--个人优势结束-->
+
+    <!--工作状态开始-->
+    <div class="sryikuys clearfix">
+        <!--左边开始-->
+        <div class="fl zcsyks">工作状态</div>
+        <!--左边结束-->
+
+        <!--右边开始-->
+        <div class="fr yogzztas">
+
+            <!--选择职位开始-->
+            <div class="xzzwis">
+                <div id="trigger1" class="zhiiis">在职，考虑机会</div>
+                <script type="text/javascript">
+
+                    var weekdayArr=['在职','在职，考虑机会','离职正在找工作'];
+
+
+                    var mobileSelect1 = new MobileSelect({
+                        trigger: '#trigger1',
+                        title: '',
+                        wheels: [
+                            {data: weekdayArr}
+                        ],
+                        position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0
+                        transitionEnd:function(indexArr, data){
+                            console.log(data);
+                        },
+                        callback:function(indexArr, data){
+                            console.log(data);
+                        }
+                    });
+
+
+                </script>
+            </div> <img src="images/yjts.png" class="yjtiss" />
+            <!--选择职位结束-->
+
+        </div>
+        <!--右边结束-->
+
+    </div>
+    <!--工作状态结束-->
+
+</div>
+<!--下结束-->
+
+
+<!--最底部开始-->
+<div class="zduioss">
+    <a href="#" class="bcanius">创建微简历</a>
+</div>
+<!--最底部结束-->
+
+
+
+<!--上传头像开始-->
+<script src="js/iscroll-zoom.js"></script>
+<script src="js/hammer.js"></script>
+<script src="js/jquery.photoClip.js"></script>
+<script>
+    var obUrl = ''
+    //document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+    $("#clipArea").photoClip({
+        width: 199,
+        height: 166,
+        file: "#file",
+        view: "#view",
+        ok: "#clipBtn",
+        loadStart: function() {
+            console.log("照片读取中");
+        },
+        loadComplete: function() {
+            console.log("照片读取完成");
+        },
+        clipFinish: function(dataURL) {
+            console.log(dataURL);
+        }
+    });
+</script>
+<script>
+    $(function(){
+        $("#logox").click(function(){
+            $(".htmleaf-container").show();
+        })
+        $("#clipBtn").click(function(){
+            $("#logox").empty();
+            $('#logox').append('<img src="' + imgsource + '" align="absmiddle" style=" width: 5rem;height: 4.16rem; margin-left: 1.5rem;margin-top: 1.92rem">');
+            $(".htmleaf-container").hide();
+        })
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        jQuery.divselect = function(divselectid,inputselectid) {
+            var inputselect = $(inputselectid);
+            $(divselectid+" small").click(function(){
+                $("#divselect ul").toggle();
+                $(".mask").show();
+            });
+            $(divselectid+" ul li a").click(function(){
+                var txt = $(this).text();
+                $(divselectid+" small").html(txt);
+                var value = $(this).attr("selectid");
+                inputselect.val(value);
+                $(divselectid+" ul").hide();
+                $(".mask").hide();
+                $("#divselect small").css("color","#333")
+            });
+        };
+        $.divselect("#divselect","#inputselect");
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        jQuery.divselectx = function(divselectxid,inputselectxid) {
+            var inputselectx = $(inputselectxid);
+            $(divselectxid+" small").click(function(){
+                $("#divselectx ul").toggle();
+                $(".mask").show();
+            });
+            $(divselectxid+" ul li a").click(function(){
+                var txt = $(this).text();
+                $(divselectxid+" small").html(txt);
+                var value = $(this).attr("selectidx");
+                inputselectx.val(value);
+                $(divselectxid+" ul").hide();
+                $(".mask").hide();
+                $("#divselectx small").css("color","#333")
+            });
+        };
+        $.divselectx("#divselectx","#inputselectx");
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        jQuery.divselecty = function(divselectyid,inputselectyid) {
+            var inputselecty = $(inputselectyid);
+            $(divselectyid+" small").click(function(){
+                $("#divselecty ul").toggle();
+                $(".mask").show();
+            });
+            $(divselectyid+" ul li a").click(function(){
+                var txt = $(this).text();
+                $(divselectyid+" small").html(txt);
+                var value = $(this).attr("selectyid");
+                inputselecty.val(value);
+                $(divselectyid+" ul").hide();
+                $(".mask").hide();
+                $("#divselecty small").css("color","#333")
+            });
+        };
+        $.divselecty("#divselecty","#inputselecty");
+    });
+</script>
+<script type="text/javascript">
+    $(function(){
+        $(".mask").click(function(){
+            $(".mask").hide();
+            $(".all").hide();
+        })
+        $(".right input").blur(function () {
+            if ($.trim($(this).val()) == '') {
+                $(this).addClass("place").html();
+            }
+            else {
+                $(this).removeClass("place");
+            }
+        })
+    });
+</script>
+<script>
+    $("#file0").change(function(){
+        var objUrl = getObjectURL(this.files[0]) ;
+        obUrl = objUrl;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) {
+            $("#img0").attr("src", objUrl).show();
+        }
+        else{
+            $("#img0").hide();
+        }
+    }) ;
+    function qd(){
+        var objUrl = getObjectURL(this.files[0]) ;
+        obUrl = objUrl;
+        console.log("objUrl = "+objUrl) ;
+        if (objUrl) {
+            $("#img0").attr("src", objUrl).show();
+        }
+        else{
+            $("#img0").hide();
+        }
+    }
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+</script>
+<script type="text/javascript">
+    var subUrl = "";
+    $(function (){
+        $(".file-3").bind('change',function(){
+            subUrl = $(this).val()
+            $(".yulan").show();
+            $(".file-3").val("");
+        });
+
+        $(".file-3").each(function(){
+            if($(this).val()==""){
+                $(this).parents(".uploader").find(".filename").val("");
+            }
+        });
+        $(".btn-3").click(function(){
+            $("#img-1").attr("src", obUrl);
+            $(".yulan").hide();
+            $(".file-3").parents(".uploader").find(".filename").val(subUrl);
+        })
+        $(".btn-2").click(function(){
+            $(".yulan").hide();
+        })
+
+    });
+</script>
+<script type="text/javascript">
+    function setImagePreview() {
+        var preview, img_txt, localImag, file_head = document.getElementById("file_head"),
+            picture = file_head.value;
+        if (!picture.match(/.jpg|.gif|.png|.bmp/i)) return alert("您上传的图片格式不正确，请重新选择！"),
+            !1;
+        if (preview = document.getElementById("preview"), file_head.files && file_head.files[0]) preview.style.display = "block",
+            preview.style.width = "63px",
+            preview.style.height = "63px",
+            preview.src = window.navigator.userAgent.indexOf("Chrome") >= 1 || window.navigator.userAgent.indexOf("Safari") >= 1 ? window.webkitURL.createObjectURL(file_head.files[0]) : window.URL.createObjectURL(file_head.files[0]);
+        else {
+            file_head.select(),
+                file_head.blur(),
+                img_txt = document.selection.createRange().text,
+                localImag = document.getElementById("localImag"),
+                localImag.style.width = "63px",
+                localImag.style.height = "63px";
+            try {
+                localImag.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)",
+                    localImag.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = img_txt
+            } catch(f) {
+                return alert("您上传的图片格式不正确，请重新选择！"),
+                    !1
+            }
+            preview.style.display = "none",
+                document.selection.empty()
+        }
+        return document.getElementById("DivUp").style.display = "block",
+            !0
+    }
+</script>
+<!--上传头像结束-->
+
+
+
+
+</body>
+</html>

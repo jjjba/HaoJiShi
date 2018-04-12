@@ -92,14 +92,77 @@ public class PersonalController {
      * @return BusinessMessage
      */
     @RequestMapping("updatePersonalByPersonalId")
-    public BusinessMessage updatePersonalByPersonalId(HttpSession session, String address, String hopeCity, Integer age, String sex,
-                                                          String hopeJob, String expectMoney, String jobExperience, String myHometown,
-                                                          String myselfInfo, String special, String recordSchool, String name, String onceDo,
+    public BusinessMessage updatePersonalByPersonalId(HttpSession session, String address,  Integer age, String sex,
+                                                           String expectMoney, String jobExperience,
+                                                           String recordSchool, String name,
                                                           String phone, String state, String photo, String avatar){
-        return personalServicel.updatePersonalByPersonalId(session, address, hopeCity, age, sex, hopeJob, expectMoney, jobExperience,
-                myHometown, myselfInfo, special, recordSchool, name, onceDo, phone, state, photo, avatar);
+        return personalServicel.updatePersonalByPersonalId(session, address,  age, sex,  expectMoney, jobExperience
+                , recordSchool, name, phone, state, photo, avatar);
     }
 
+    /**
+     * 根据求职者id修改求职者标签
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalHopeCity")
+    public BusinessMessage updatePersonalHopeCity(HttpSession session, String hopeCity){
+        return personalServicel.updatePersonalHopeCity(session, hopeCity);
+    }
+    /**
+     * 根据求职者id修改求职者标签
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalMyhome")
+    public BusinessMessage updatePersonalMyhome(HttpSession session, String myHometown){
+        return personalServicel.updatePersonalMyhome(session, myHometown);
+    }
+
+    /**
+     * 根据求职者id修改求职者个人介绍
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalMyselfInfo")
+    public BusinessMessage updatePersonalMyselfInfo(HttpSession session, String myselfInfo){
+        return personalServicel.updatePersonalMyselfInfo(session, myselfInfo);
+    }
+
+    /**
+     * 根据求职者id修改求职者标签
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalSpecial")
+    public BusinessMessage updatePersonalSpecial(HttpSession session, String special){
+        return personalServicel.updatePersonalSpecial(session, special);
+    }
+    /**
+     * 根据求职者id修改求职者意向工作
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalHopeJob")
+    public BusinessMessage updatePersonalHopeJob(HttpSession session, String hopeJob){
+        return personalServicel.updatePersonalHopeJob(session, hopeJob);
+    }
+
+    /**
+     * 根据求职者id修改曾经做过
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    @RequestMapping("updatePersonalOnceDo")
+    public BusinessMessage updatePersonalOnceDo(HttpSession session, String onceDo){
+        return personalServicel.updatePersonalOnceDo(session, onceDo);
+    }
     /**
      * 获取求职者简历状态
      *

@@ -53,6 +53,7 @@ function loadPersonalInfo() {
                     recordSchool =item.recordSchool;
                     mySelfInfo =item.mySelfInfo;
                     onceDo =item.onceDo;
+                    console.log("onceDo================================="+onceDo)
                     myHometown =item.myHometown;
                     hope_job =item.hope_job;
                     if(onceDo != null && onceDo != "") {
@@ -81,7 +82,7 @@ function loadPersonalInfo() {
                         }
                     }
                     if(onceDo != null && onceDo != ""){
-                        $('.cengjingzuoguos').removeClass("wtxyss");
+                        $('.cengjingzuoguos').removeClass("wtxyss").addClass("zhiiis");
                     }
                     if(photo == null || photo == ""){
                         $('.fbits').addClass("wtxyss");
@@ -227,7 +228,7 @@ function loadPersonalInfo() {
                         '           <div id="trigger4" class="zhiiis zuigoaxueli">'+recordSchool+'</div>\n' +
                         '            <script type="text/javascript">\n' +
                         '            \n' +
-                        '                var weekdayArr4=["幼儿园","小学","初中","中专","高中","大专","本科","硕士研究生","博士研究生"];\n' +
+                        '                var weekdayArr4=["初中以下","初中","中专/高中","大专及以上"];\n' +
                         '                \n' +
                         '                \n' +
                         '                var mobileSelect1 = new MobileSelect({\n' +
@@ -238,10 +239,10 @@ function loadPersonalInfo() {
                         '                            ],\n' +
                         '                    position:[2], //初始化定位 打开时默认选中的哪个 如果不填默认为0\n' +
                         '                    transitionEnd:function(indexArr, data){\n' +
-                        '                        $(".zuigoaxueli").html(data).remove("wtxyss");' +
+                        '                        $(".zuigoaxueli").html(data).removeClass("wtxyss").addClass("zhiiis");' +
                         '                    },\n' +
                         '                    callback:function(indexArr, data){\n' +
-                        '                        $(".zuigoaxueli").html(data).remove("wtxyss");\n' +
+                        '                        $(".zuigoaxueli").html(data).removeClass("wtxyss").addClass("zhiiis");\n' +
                         '                    }\n' +
                         '                });\n' +
                         '            \n' +
@@ -327,7 +328,8 @@ function loadPersonalInfo() {
                     var photos =photo.split(",");
                     for(var i = 0;i < photos.length;i++){
                         avatarPath.push(photos[i]);
-                        $('.tupians').append('<a href="#" class="'+photos[i]+'" onclick="delectphoto('+photos[i]+')"><img src="'+photos[i]+'" style="height: 5rem;width: 5rem;"/></a>');
+                        var cl =photos[i].toString().substring(28,38);
+                        $('.tupians').append('<a href="#" class="'+cl+'" onclick="delectphoto('+cl+','+photos[i]+')"><img src="'+photos[i]+'" style="height: 5rem;width: 5rem;"/></a>');
                     }
 
                 }
@@ -335,9 +337,9 @@ function loadPersonalInfo() {
         }
     });
 }
-function delectphoto(val) {
+function delectphoto(val,pho) {
     $("."+val).remove();
-    avatarPath.splice($.inArray(val,avatarPath),1);
+    avatarPath.splice($.inArray(pho,avatarPath),1);
 }
 function gocengjingzuoguo() {
     window.location.href="/transition/go_ceng_jing_zuo_guo";
