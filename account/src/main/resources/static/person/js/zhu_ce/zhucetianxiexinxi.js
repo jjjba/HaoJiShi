@@ -35,6 +35,8 @@ function loadData() {
     })
     if(avatarPath == null || avatarPath == ""){
         $('.license').append('<img src="../../person/images/tupian.png" style="height: 5rem;width: 5rem" id="dynamicImage" />')
+    }else {
+        $('.license').append('<img src="'+avatarPath+'" style="height: 5rem;width: 5rem" id="dynamicImage" />')
     }
     var hopeCity =sessionStorage.getItem("hopeCity");
     var hopeJob =sessionStorage.getItem("hopeJob");
@@ -44,6 +46,7 @@ function loadData() {
     var age =sessionStorage.getItem("age");
     var state =sessionStorage.getItem("state");
     var gzjy =sessionStorage.getItem("gzjy");
+    var qwxz =sessionStorage.getItem("qwxz");
     if(name == null || name == ""){
         $('.namemingzi').append('<input type="text" placeholder="请输入姓名" class="stkius xingming" /> <img src="../../person/images/yjts.png"\n' +
             '                                                                                 class="yjtiss" />')
@@ -77,6 +80,11 @@ function loadData() {
             $('.woqiuzhifia').append(hopeJob+'<img src="../../person/images/yjts.png" class="yjtiss" />')
         }
 
+    }
+    if(qwxz == null || qwxz == ""){
+        $('.qiwangxinzi').append('请选择期望薪资<img src="../../person/images/yjts.png" class="yjtiss" />')
+    }else {
+            $('.qiwangxinzi').append(qwxz+'<img src="../../person/images/yjts.png" class="yjtiss" />')
     }
     if(hopeCity == null || hopeCity == ""){
         $('.avjahb').append('请选择意向城市<img src="../../person/images/yjts.png" class="yjtiss" />')
@@ -119,6 +127,7 @@ function loadData() {
         var age =sessionStorage.getItem("age");
         var state =sessionStorage.getItem("state");
         var gzjy =sessionStorage.getItem("gzjy");
+        var qwxz =sessionStorage.getItem("qwxz");
 
         console.log("name===="+name)
         console.log("sex====="+sex)
@@ -135,6 +144,10 @@ function loadData() {
         if(hopeJob == "" || hopeJob == null || hopeJob == "请选择求职岗位"){
             $(".qiuzhizhegangwei").show()
             setTimeout('$(".qiuzhizhegangwei").hide()',1000);
+        }
+        if(qwxz == "" || qwxz == null || qwxz == "请选择期望薪资"){
+            $(".qiwanginzi").show()
+            setTimeout('$(".qiwanginzi").hide()',1000);
         }
         if(gzjy == "" || gzjy == null || gzjy == "请选择工作经验"){
             $(".gongzuojingyan").show()
@@ -168,7 +181,7 @@ function loadData() {
         if(name != null && name != "" && sex != null && sex != "" && sex != "请选择性别" && age != null && age != "" &&
             gzjy != null && gzjy != ""&& gzjy != "请选择工作经验" && state != null && state != "" && state != "请选择工作状态"
             && hopeCity != null && hopeCity != "" && hopeCity != "请选择意向城市" && hopeJob != null && hopeJob != "" && hopeJob != "请选择求职岗位"
-            && special != null && special != "" && special != "请选择个人优势"){
+            && special != null && special != "" && special != "请选择个人优势" && qwxz == "" && qwxz == null && qwxz == "请选择期望薪资"){
             if(name.length > 6){
                 $(".xingmingzishu").show()
                 setTimeout('$(".xingmingzishu").hide()',1000);
@@ -190,6 +203,7 @@ function loadData() {
                             age : age,
                             gzjy :gzjy,
                             avatar : avatarPath,
+                            expectMoney : qwxz,
                         },
                         success : function () {
                             window.location.href="/transition/transition_goMySelf";
@@ -227,7 +241,7 @@ function configwx() {
             var appid = res.appid;
 
             wx.config({
-                debug: true,
+                debug: false,
                 appId: appid,
                 timestamp: timesta,
                 nonceStr: nonce_str,
@@ -270,8 +284,8 @@ function chooseImage() {
                         success: function (res) {
                             $('.license').empty();
                             avatarPath =res.data.imgxUrl;
-                            $('#dynamicImage').hide();
-                            $('.license').append('<img src="'+avatarPath+'" style="height: 5rem;width: 5rem"/>')
+                            // $('#dynamicImage').hide();
+                            $('.license').append('<img src="'+avatarPath+'" style="height: 4.6rem;width: 4.6rem"/>')
                         }
                     });
                 }

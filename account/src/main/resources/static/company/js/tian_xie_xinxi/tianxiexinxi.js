@@ -182,7 +182,7 @@ function chooseImage() {
                         success: function (res) {
                             $('.license02').empty();
                             icon =res.data.imgUrl;
-                            $('#dynamicImage').hide();
+                            // $('#dynamicImage').hide();
                             $('.license02').append('<img src="'+icon+'" style="width: 4.6rem;height: 4.6rem"/>')
                         }
                     });

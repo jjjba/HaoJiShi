@@ -75,7 +75,7 @@ function loadUserInfo() {
                 address ="<dd>省-市-区/县</dd>"
             }
             console.log("sex==================="+sex)
-            $('.license').append('<img src="'+avatar+'" id="dynamicImage" style="width:6.2rem;height:6.2rem;"/>')
+            $('.license').append('<img src="'+avatar+'" id="dynamicImage" style="width:5rem;height:5rem;"/>')
             $('.namesl').append('<input type="text" class="stkius name" value="'+name+'" /><img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.sexsl').append('<div class="d-guanzhu sex">'+sex+'</div> <img src="../../person/images/yjts.png" class="yjtiss" />')
             $('.agesl').append('<input type="text" class="stkius age" value="'+age+'" onkeyup="this.value=this.value.replace(/\\D/g,\'\')" onafterpaste="this.value=this.value.replace(/\\D/g,\'\')"/> <img src="../../person/images/yjts.png" class="yjtiss" />')
@@ -117,7 +117,7 @@ function configwx() {
             var appid = res.appid;
 
             wx.config({
-                debug: true,
+                debug: false,
                 appId: appid,
                 timestamp: timesta,
                 nonceStr: nonce_str,
@@ -158,9 +158,10 @@ function chooseImage() {
                             mediaId: res.serverId
                         },
                         success: function (res) {
+                            $('.license').empty();
                             avatarPath =res.data.imgUrl;
-                            $('#dynamicImage').hide();
-                            $('.license').append('<img src="'+avatarPath+'"/>')
+                            // $('#dynamicImage').hide();
+                            $('.license').append('<img src="'+avatarPath+'" style="width: 5rem;height: 5rem"/>')
                         }
                     });
                 }
