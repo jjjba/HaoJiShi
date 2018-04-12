@@ -72,11 +72,11 @@ function chooseImage() {
                             mediaId: res.serverId
                         },
                         success: function (res) {
+                            $('.license').empty();
                             license =res.data.imgUrl;
-                            $('#dynamicImage').hide();
                             $('.shangchaunzhaopian').hide();
                             $('.tijiaotupian').show();
-                            $('.license').append('<img src="'+license+'"/>')
+                            $('.license').append('<img src="'+license+'" style="height: 17.5rem;width: 24.75rem"/>')
                         }
                     });
                 }

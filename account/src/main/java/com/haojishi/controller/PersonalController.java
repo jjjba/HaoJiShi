@@ -213,7 +213,15 @@ public class PersonalController {
     public BusinessMessage updatePhone(HttpSession session,String phoneNum,String pwd){
         return personalServicel.updatePhone(session,phoneNum,pwd);
     }
-
+    /**
+     * 获取用户头像
+     * @param session
+     * @return
+     */
+    @RequestMapping("getUserAvatar")
+    public BusinessMessage getUserAvatar(HttpSession session){
+        return personalServicel.getUserAvatar(session);
+    }
     /**
      * 求职者端=========进首页判断是否已经登陆
      * @param phone

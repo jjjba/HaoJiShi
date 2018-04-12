@@ -5,7 +5,7 @@ $(function () {
     console.log("phone================="+phone)
     if(phone != null || phone != "" || phone != undefined) {
         $.ajax({
-            url: "/company/getPersonalState",
+            url: "/personal/setuserId",
             type: "POST",
             data: {phone: phone},
             success: function (res) {
@@ -26,7 +26,16 @@ $(function () {
 
 function loadData() {
     setTimeout('configwx()', 100);
-
+    $.ajax({
+        url:"/personal/getUserAvatar",
+        type:"POST",
+        success : function (res) {
+            avatarPath =res.avatar;
+        }
+    })
+    if(avatarPath == null || avatarPath == ""){
+        $('.license').append('<img src="../../person/images/tupian.png" style="height: 5rem;width: 5rem" id="dynamicImage" />')
+    }
     var hopeCity =sessionStorage.getItem("hopeCity");
     var hopeJob =sessionStorage.getItem("hopeJob");
     var special =sessionStorage.getItem("special");
