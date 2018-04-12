@@ -12,16 +12,7 @@ $(function () {
                 license : license
             },
             success :function (res) {
-
-
-
-
-
-
-
-
-
-
+                window.location.href="/transition/go_wo_de";
             },
         })
     });

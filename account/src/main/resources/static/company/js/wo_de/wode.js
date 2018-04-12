@@ -207,6 +207,8 @@ function wanshanCompany() {
             if(msg.data.companyPhoto != null){
                 sessionStorage.setItem("xggstp",msg.data.companyPhoto);
             }
+            sessionStorage.setItem("xglat",msg.data.latitude);
+            sessionStorage.setItem("xglnt",msg.data.longitude);
            window.location.href = "/transition/bianji_dianpuxinxi";
         }
     })

@@ -468,6 +468,53 @@ public class CompanyService{
     }
 
     /**
+     * 更新店铺信息
+     * @param Name
+     * @param dwmj
+     * @param dwmc
+     * @param dplx
+     * @param zhiwei
+     * @param dpfl
+     * @param cityname
+     * @param lat
+     * @param lng
+     * @param poiaddress
+     * @param poiname
+     * @param xgLogog
+     * @param xgid
+     * @param xggstp
+     * @param xgjj
+     * @return
+     */
+    public  BusinessMessage UpdateNewCompany(String Name,String dwmj,String dwmc,String dplx
+            ,String zhiwei,String dpfl,String cityname,String lat,String lng
+            ,String poiaddress,String poiname,String xgLogog,Integer xgid,String xggstp,String xgjj){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Company company = new Company();
+        company.setUserName(Name);
+        company.setLatitude(lat);
+        company.setLongitude(lng);
+        company.setName(dwmc);
+        company.setCompanySpecial(dpfl);
+        company.setCompanyCity(cityname);
+        company.setCompanyAddr(poiaddress+poiname);
+        company.setCompanyType(dplx);
+        company.setZhiWu(zhiwei);
+        company.setCompanyDpmj(dwmj);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        company.setModifyTime(new Date());
+        company.setCompanyPhoto(xggstp);
+        company.setIconPath(xgLogog);
+        company.setCompanyInfo(xgjj);
+        company.setId(xgid);
+        int i = companyMapper.updateByPrimaryKey(company);
+        businessMessage.setData(i);
+        businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+
+
+    /**
      * 查询手机号密码是否正确
      * @param phone
      * @param password
@@ -718,5 +765,30 @@ public class CompanyService{
         businessMessage.setData(map);
         businessMessage.setSuccess(true);
         return businessMessage;
+    }
+
+    /**
+     * 保存企业的营业执照照片
+     * @return
+     */
+    public BusinessMessage addCompanyRenZhengZhaoPian(HttpSession session,String license){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer id = (Integer) session.getAttribute("userId");
+        Example example1 =new Example(Company.class);
+        example1.createCriteria().andEqualTo("userId",id);
+        List<Company> companies =companyMapper.selectByExample(example1);
+        if(companies!=null && companies.size()>0){
+            Company company = new Company();
+            company.setLicensePath(license);
+            company.setId(companies.get(0).getId());
+            int j = companyMapper.updateByPrimaryKeySelective(company);
+            if(j == 1){
+                company.setMatstate(2);
+                 int two = companyMapper.updateByPrimaryKeySelective(company);
+                businessMessage.setData(j);
+                businessMessage.setSuccess(true);
+            }
+        }
+        return  businessMessage;
     }
 }

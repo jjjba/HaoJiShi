@@ -74,3 +74,30 @@ function xgdpmc() {
 function dianpuYl() {
     window.location.href="/transition/dianpuYl";
 }
+//保存数据
+function dianpuBc() {
+
+    var xgxm = sessionStorage.getItem("xgxm"); //姓名
+    var xgzw = sessionStorage.getItem("xgzw");//职位
+    var xgLogog = sessionStorage.getItem("xgLogo");//头像地址
+    var xgdpmc = sessionStorage.getItem("xgdpmc");//店铺名称
+    var xgdpmj = sessionStorage.getItem("xgdpmj");//店铺面积
+    var xgdpfl = sessionStorage.getItem("xgdpfl");//店铺福利
+    var xgdpdzDa = sessionStorage.getItem("xgdpdz");//店铺地址大
+    var xgpoiname = sessionStorage.getItem("xgpoiname");//店铺地址小
+    var xgdplx = sessionStorage.getItem("xgdplx");//店铺类型
+    var xgid = sessionStorage.getItem("xgid");//主键id
+    var xggstp = sessionStorage.getItem("xggstp");//图片（以逗号分隔）
+    var xgjj = sessionStorage.getItem("xgjj");//简介
+    var lat = sessionStorage.getItem("xglat");//精度
+    var lng = sessionStorage.getItem("xglng");//纬度
+    var cityname = sessionStorage.getItem("xgcityname");//城市名称 例如：河北_石家庄
+    $.ajax({
+        url:"",
+        data:{Name:xgxm,dwmj:xgdpmj,dwmc:xgdpmc,dplx:xgdplx,zhiwei:xgzw,dpfl:xgdpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:xgdpdzDa,poiname:xgpoiname,xgLogog:xgLogog,xgid:xgid,xggstp:xggstp,xgjj:xgjj},
+        type:"POST",
+        success:function (msg) {
+
+        }
+    })
+}

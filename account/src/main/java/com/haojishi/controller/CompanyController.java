@@ -251,5 +251,39 @@ public class CompanyController {
         return  companyService.Bjdpxx(session);
     }
 
+    /**
+     * 更新店铺信息
+     * @param Name
+     * @param dwmj
+     * @param dwmc
+     * @param dplx
+     * @param zhiwei
+     * @param dpfl
+     * @param cityname
+     * @param lat
+     * @param lng
+     * @param poiaddress
+     * @param poiname
+     * @param xgLogog
+     * @param xgid
+     * @param xggstp
+     * @param xgjj
+     * @return
+     */
+    @RequestMapping("UpdateNewCompany")
+    public  BusinessMessage UpdateNewCompany(String Name,String dwmj,String dwmc,String dplx
+            ,String zhiwei,String dpfl,String cityname,String lat,String lng
+            ,String poiaddress,String poiname,String xgLogog,Integer xgid,String xggstp,String xgjj){
+        return companyService.UpdateNewCompany(Name,dwmj,dwmc,dplx,zhiwei,dpfl,cityname,lat,lng,poiaddress,poiname,xgLogog,xgid,xggstp,xgjj);
+    }
+
+    /**
+     * 保存企业的营业执照照片
+     * @return
+     */
+    @RequestMapping("shenhezhaopian")
+    public BusinessMessage shenhezhaopian(HttpSession session,String license){
+        return  companyService.addCompanyRenZhengZhaoPian(session,license);
+    }
 }
 

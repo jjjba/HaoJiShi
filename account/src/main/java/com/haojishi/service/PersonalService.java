@@ -56,6 +56,8 @@ public class PersonalService {
     private CommonRegionMapper commonRegionMapper;
     @Autowired
     private CommonCompanyMapper commonCompanyMapper;
+    @Autowired
+    private UserMapper usersMapper;
 
     /*public static String Cookis(){
         Cookie[] cookies = getCookies();
@@ -538,11 +540,18 @@ public class PersonalService {
      * @param session
      * @return
      */
-    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session){
+    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session,String phone){
         BusinessMessage businessMessage =new BusinessMessage();
+        Example userExample =new Example(User.class);
+        userExample.createCriteria().andEqualTo("phone",phone);
+        List<User> users =usersMapper.selectByExample(userExample);
+        if(users!= null && users.size()>0){
+            session.setAttribute("userId",users.get(0).getId());
+            session.setAttribute("zt","1");
+        }
         try {
             List<Map<String,Object>> personalList =new ArrayList();
-            List<Map<String,Object>> list = (List<Map<String, Object>>) getPersonal(request, session).getData();
+            List<Map<String,Object>> list = (List<Map<String, Object>>) getPersonal(request, session,phone).getData();
             if(list.size() > 10){
                 for(int i = 0;i < 10;i++){
                     personalList.add(list.get(i));
@@ -564,20 +573,20 @@ public class PersonalService {
      *
      * @return
      */
-    public BusinessMessage getPersonal(HttpServletRequest request,HttpSession session){
+    public BusinessMessage getPersonal(HttpServletRequest request,HttpSession session,String phone){
         BusinessMessage businessMessage =new BusinessMessage();
+
         try {
             List<Map<String,Object>> personalList =new ArrayList();
             List<Map<String,Object>> proPersonal =new ArrayList();
-            String id = (String) session.getAttribute("userId");
-            String zt1 = (String) session.getAttribute("zt");
-            int userId = Integer.parseInt(id);
-            int zt = Integer.parseInt(zt1);
+
+            Integer id = (Integer) session.getAttribute("userId");
+            String zt = (String) session.getAttribute("zt");
             String city ="";
-            if(zt == 1) {
-                List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(userId);
+            if("1".equals(zt)) {
+                List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(id);
                 String companyCity1 = (String) companyCity.get(0).get("company_city");
-                city=companyCity1.substring(0, companyCity1.indexOf("-"));
+                city=companyCity1.substring(0, companyCity1.indexOf("_"));
             }else {
                 RemortIP remortIP =new RemortIP();
                 city =remortIP.getAddressByIP(request);

@@ -15,9 +15,9 @@ $(document).ready(function() {
     //     calculateHeight:true
     // });
 
-	loadCompanyBanner();
+	/*loadCompanyBanner();*/
     loadPersonal();
-    loadUserInfo();
+   /* loadUserInfo();*/
 	$(".wzkljgz01").click(function(){
 		$(".popupus").hide();
 		});
@@ -80,10 +80,13 @@ function loadCompanyBanner() {
 
 
 function loadPersonal(){
+    var phone = $.cookie("phone");
     $.ajax({
         url:"/personal/getIndexPersonal",
         type:"POST",
+        data:{phone:phone},
         success : function (res) {
+            console.log(res);
             $('.personal').empty();
             var list =res.data;
             var avatar,sex;

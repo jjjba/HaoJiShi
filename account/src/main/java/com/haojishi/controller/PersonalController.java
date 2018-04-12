@@ -141,8 +141,8 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("getIndexPersonal")
-    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session){
-        return personalServicel.getIndexPersonal(request,session);
+    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session,String phone){
+        return personalServicel.getIndexPersonal(request,session,phone);
     }
 
     /**
@@ -161,8 +161,8 @@ public class PersonalController {
      * @return
      */
     @RequestMapping("getPersonal")
-    public BusinessMessage getPersonal(HttpServletRequest request,HttpSession session){
-        return personalServicel.getPersonal(request, session);
+    public BusinessMessage getPersonal(HttpServletRequest request,HttpSession session,String phone){
+        return personalServicel.getPersonal(request, session,phone);
     }
 
     /**

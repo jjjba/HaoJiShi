@@ -15,7 +15,7 @@
           th:href="@{/company/css/public.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/xiangying.css"
           th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
-
+    <link type="text/css" href="/static/company/css/zwglis.css" th:href="@{/company/css/zwglis.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/wo_de/top.css"
           th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
     <link type="text/css" href="/static/company/css/dpxqs.css" th:href="@{/company/css/dpxqs.css}" rel="stylesheet" />
@@ -135,12 +135,12 @@
      <div class="made scrollbox" id="horizontal">
         <div class="madegame" id="ho">
             <ul class="clearfix" id="lightgallery">
+            <!-- <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
              <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
              <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
              <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
              <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
+             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>-->
             </ul>
         </div> 
      </div>
@@ -164,7 +164,7 @@
  
  <!--分享店铺信息开始-->
  <div class="fxdpxs">
-   <a href="#" class="fxlijise">分享店铺信息</a>
+   <a href="#" class="fxlijise" onclick="$('.fxinys').show();">分享店铺信息</a>
  </div>
  <!--分享店铺信息结束-->
  
@@ -175,9 +175,24 @@
 
 <script>
 	lightGallery(document.getElementById('lightgallery'));
+
 </script>
 <!--图片放大结束-->
+ <!--分享样式开始-->
 
+ <div class="fxinys" style="display: none" onclick="$('.fxinys').hide();">
+
+     <div class="yctcis">
+
+         <h2><img src="/static/company/images/fxyiss002.png" th:src="@{/company/images/fxyiss002.png}" /></h2>
+         <p>
+             点击右上角，分享到朋友圈
+             快速提升招聘效果！
+         </p>
+     </div>
+ </div>
+
+ <!--分享样式结束-->
  
 </body>
 </html>
