@@ -4,8 +4,8 @@ $(function () {
 
 
     $('.progressbar').each(function(index, el) {
-        var num = $(this).find('span').text();
-        $(this).addClass('progressbar-' + num);
+        var num = $('.progressbar').find('span').text();
+        $('.progressbar').addClass('progressbar-' + num);
     });
 
 });

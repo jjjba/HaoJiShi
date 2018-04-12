@@ -83,13 +83,13 @@ public class RedirectController {
                 }
             }
             if(state == "companyIndex" || state.equals("companyIndex")){
-                return "company/companyIndex";
+                return "company/company_index/companyIndex";
             }else {
                 return "personal/personalIndex";
             }
         }else {
             if(state == "companyIndex" || state.equals("companyIndex")){
-                return "company/companyIndex";
+                return "company/company_index/companyIndex";
             }else {
                 return "personal/personalIndex";
             }

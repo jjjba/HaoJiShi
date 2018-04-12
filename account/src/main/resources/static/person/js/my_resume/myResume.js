@@ -25,7 +25,7 @@ function loadPersonalInfo() {
                 var item = res.data;
                 var id, name, age, sex, avatar, state, mySelfInfo, special, expect_money, hope_job, hope_city, job_experience,
                     recordSchool, onceDo, myHometown, photo;
-
+                    photo =item.photo;
                     id = item.id;
                     name =item.name;
                     age =item.age;
@@ -80,13 +80,14 @@ function loadPersonalInfo() {
                             mySelfInfo =mySelfInfo.toString().substring(0,15)+"...";
                         }
                     }
-
-
-
-
-
-
-
+                    if(onceDo != null && onceDo != ""){
+                        $('.cengjingzuoguos').removeClass("wtxyss");
+                    }
+                    if(photo == null || photo == ""){
+                        $('.fbits').addClass("wtxyss");
+                    }else {
+                        $('.fbits').html("温馨提示:点击照片即可删除照片呦🙂").removeClass("wtxyss");
+                    }
                     var txuyse = '<div class="sbtopxxs">'+
                         '<div class="sblefs">' +
                         '<img src="'+avatar+'" style="width:6.2rem;height:6.2rem;"/>' +
@@ -126,6 +127,8 @@ function loadPersonalInfo() {
                 }
                 if(special == null || special == ""){
                     $('.wdoaioqian').html("未选择").addClass("wtxyss");
+                }else {
+                    $('.wdoaioqian').removeClass("wtxyss");
                 }
                     var money ='<div class="sryikuys borxboms clearfix">'+
                         '<div class="fl zcsyks">期望薪资</div>'+
@@ -320,9 +323,21 @@ function loadPersonalInfo() {
                 if(myHometown == null || myHometown == ""){
                     $('.woejaxaing').html("未选择").addClass("wtxyss");
                 }
+                if(photo != null && photo != ""){
+                    var photos =photo.split(",");
+                    for(var i = 0;i < photos.length;i++){
+                        avatarPath.push(photos[i]);
+                        $('.tupians').append('<a href="#" class="'+photos[i]+'" onclick="delectphoto('+photos[i]+')"><img src="'+photos[i]+'" style="height: 5rem;width: 5rem;"/></a>');
+                    }
+
+                }
             }
         }
     });
+}
+function delectphoto(val) {
+    $("."+val).remove();
+    avatarPath.splice($.inArray(val,avatarPath),1);
 }
 function gocengjingzuoguo() {
     window.location.href="/transition/go_ceng_jing_zuo_guo";
@@ -347,7 +362,7 @@ function save() {
             recordSchool : school,
             jobExperience :experience,
             expectMoney : hopeMoney,
-            avatar : avatarPath.join(","),
+            photo : avatarPath.join(","),
         },
         success : function (res) {
             $(".toolbarframe02").show()
@@ -400,7 +415,7 @@ function configwx() {
             var appid = res.appid;
 
             wx.config({
-                debug: true,
+                debug: false,
                 appId: appid,
                 timestamp: timesta,
                 nonceStr: nonce_str,
@@ -443,7 +458,7 @@ function chooseImage() {
                             },
                             success: function (res) {
                                 var imgUrl =res.data.imgUrl;
-                                $('.tupians').append('<img src="'+imgUrl+'" />');
+                                $('.tupians').append('<a href="#" onclick="delectphoto('+imgUrl+')"><img src="'+imgUrl+'" style="height: 5rem;width: 5rem;"/></a>');
                                 avatarPath.push(imgUrl);
                             }
                         });

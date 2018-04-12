@@ -53,21 +53,21 @@ public class TransitionController {
      */
     @RequestMapping("transition_all_position")
     public String transition_all_position(HttpSession session){
-        String openid = (String) session.getAttribute("openid");
-        Example example =new Example(User.class);
-        example.createCriteria().andEqualTo("openid",openid);
-        List<User> userList =userMapper.selectByExample(example);
-        if(userList != null && userList.size() > 0){
+        int userId = (Integer) session.getAttribute("userId");
+        User user =userMapper.selectByPrimaryKey(userId);
+        if(user != null){
             Example perExample =new Example(Personal.class);
-            perExample.createCriteria().andEqualTo("userId",userList.get(0).getId());
+            perExample.createCriteria().andEqualTo("userId",userId);
             List<Personal> personals =personalMapper.selectByExample(perExample);
             if(personals != null && personals.size() > 0){
                 return "personal/position/position_02";
             }else {
                 return "personal/position/position_01";
             }
+        }else {
+            return "personal/position/position_01";
         }
-        return "personal/position/position_01";
+
     }
 
     /**
@@ -829,5 +829,7 @@ public class TransitionController {
      */
     @RequestMapping("dianpuYl")
     public String dianpuYl(){return  "company/company_myself/bianji_dianpuxinxi/dianpu_xiangqing";}
+
+
 
 }

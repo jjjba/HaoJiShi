@@ -574,7 +574,7 @@ function selectD(p,c,d) {
 	clockArea();
 	expressArea += district[p][c][d];
 	$("#expressArea dl dd").html(expressArea);
-    $('.woejaxaing').html(expressArea).remove("wtxyss");
+    $('.woejaxaing').html(expressArea).removeClass("wtxyss");
 }
 
 /*关闭省市区选项*/

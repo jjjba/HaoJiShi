@@ -39,8 +39,8 @@ public class PersonalController {
      */
     @RequestMapping("perfectPersonalInfo")
     public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
-                                               String special,String state,String phone,String avatar,String hopeJob,String hopeCity){
-        return personalServicel.perfectPersonalInfo(session, name, sex, age, gzjy, special, state, phone, avatar,hopeJob,hopeCity);
+                                               String special,String state,String phone,String avatar,String hopeJob,String hopeCity,String expectMoney){
+        return personalServicel.perfectPersonalInfo(session, name, sex, age, gzjy, special, state, phone, avatar,hopeJob,hopeCity,expectMoney);
     }
 
         /**

@@ -1,7 +1,7 @@
 // JavaScript Document
 $(function() {
 
-	// loadPersonalBanner();
+	loadPersonalBanner();
     var phone =$.cookie('phone');
     if(phone != null){
         $.ajax({
@@ -40,27 +40,27 @@ $(function() {
 	
 });
 
-// function loadPersonalBanner() {
-//     $.ajax({
-//         type: "POST",
-//         url: "/banner/getPersonalBanner",
-//         success: function (res) {
-//             if (res.success) {
-//                 var list = res.data;
-//                 var id, url;
-//                 $.each(list, function (index, item) {
-//                     id = item.id;
-//                     url =item.url;
-//                     if(url == null || url == ""){
-//                         url ="#";
-//                     }
-//                     $('.swiper-wrapper').append('<div class="swiper-slide"><a href="'+url+'"><img src="'+item.imageUrl+'" /></a></div>');
-//                 });
-//
-//             }
-//         }
-//     });
-// }
+function loadPersonalBanner() {
+    $.ajax({
+        type: "POST",
+        url: "/banner/getPersonalBanner",
+        success: function (res) {
+            if (res.success) {
+                var list = res.data;
+                var id, url;
+                $.each(list, function (index, item) {
+                    id = item.id;
+                    url =item.url;
+                    if(url == null || url == "" || url == "未设置"){
+                        url ="#";
+                    }
+                    $('.banner').append('<div class="swiper-slide"><a href="'+url+'"><img src="'+item.imageUrl+'" /></a></div>');
+                });
+
+            }
+        }
+    });
+}
 
 
 function loadPositionData() {

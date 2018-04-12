@@ -50,20 +50,20 @@ function loadPosition() {
         type:"POST",
         success : function (res) {
             if(res.success){
-                var list =res.data;
-                var address =list[0].address;
+                var address =res.address;
                 if(address == null || address == "") {
                     address = "未获取到位置"
                 }
                 $('.zcwzuis').append('当前城市：'+address);
-                var positionType;
-                $.each(list, function (index, item) {
-                    positionType =item.positionType;
-                    if(positionType == null || positionType == "") {
-                        positionType = "您还没有选择分类呦"
+                if(res.positionType != null && res.positionType !=""){
+                    var hopeJobs =res.positionType.split(",");
+                    for(var i = 0;i<hopeJobs.length;i++){
+                        $('#positionType').append('<li><a href="#" data="'+hopeJobs[i]+'">'+hopeJobs+'</a></li>');
                     }
-                    $('#positionType').append('<li><a href="#" data="'+positionType+'">'+positionType+'</a></li>');
-                })
+                }else {
+                    $('#positionType').append('您还没有分类呦😔');
+                }
+
             }
         }
     })
