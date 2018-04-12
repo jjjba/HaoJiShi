@@ -95,7 +95,7 @@ function TccYc() {
 }
 function Qrz() {
     $(".popupus").hide();
-    sessionStorage.setItem("RENZHENG","RENZHNEG");
+    sessionStorage.setItem("RZ","123");
     window.location.href="/transition/RenZheng";
 }
 function addZw() {
