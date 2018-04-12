@@ -507,7 +507,7 @@ public class CompanyService{
         company.setIconPath(xgLogog);
         company.setCompanyInfo(xgjj);
         company.setId(xgid);
-        int i = companyMapper.updateByPrimaryKey(company);
+        int i = companyMapper.updateByPrimaryKeySelective(company);
         businessMessage.setData(i);
         businessMessage.setSuccess(true);
         return  businessMessage;
