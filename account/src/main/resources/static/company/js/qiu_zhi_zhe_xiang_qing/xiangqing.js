@@ -43,6 +43,7 @@ function shoucang() {
 }
 
 //打电话
+
 function telPhone() {
     var kfsc = sessionStorage.getItem("kfsc");
     console.log(kfsc);
