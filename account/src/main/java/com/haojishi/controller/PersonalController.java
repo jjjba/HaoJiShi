@@ -40,7 +40,7 @@ public class PersonalController {
     @RequestMapping("perfectPersonalInfo")
     public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
                                                String special,String state,String phone,String avatar,String hopeJob,String hopeCity,String expectMoney){
-        return personalServicel.perfectPersonalInfo(session, name, sex, age, gzjy, special, state, phone, avatar,hopeJob,hopeCity,expectMoney);
+        return personalServicel.perfectPersonalInfo(session, name,sex,age,gzjy, special,state,phone,avatar,hopeJob,hopeCity);
     }
 
         /**
@@ -151,8 +151,8 @@ public class PersonalController {
      * @return BusinessMessage - 求职者简历
      */
     @RequestMapping("getPersonalInfoById")
-    public BusinessMessage getPersonalInfoById(HttpSession session){
-        return personalServicel.getPersonalInfoById(session);
+    public BusinessMessage getPersonalInfoById(HttpSession session,Integer id){
+        return personalServicel.getPersonalInfoById(session,id);
     }
 
     /**
@@ -231,4 +231,5 @@ public class PersonalController {
     public BusinessMessage setuserId(HttpSession session,String phone){
         return personalServicel.setuserId(session, phone);
     }
+
 }

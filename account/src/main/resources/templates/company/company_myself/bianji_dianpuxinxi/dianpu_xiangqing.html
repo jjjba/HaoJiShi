@@ -35,7 +35,6 @@
 					axis:"x",
 					advanced:{autoExpandHorizontalScroll:true}
 				});
-		
 			});
 		})(jQuery);
 	</script>
@@ -82,7 +81,7 @@
    <!--里边开始-->
    <div class="tbusinto">
      店铺详情
-     <a href="#" class="zjtous"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" onclick="window.location.href='/transition/bianji_dianpuxinxi'" class="zjtous"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
    </div>
    <!--里边结束-->
  </div>
@@ -135,12 +134,7 @@
      <div class="made scrollbox" id="horizontal">
         <div class="madegame" id="ho">
             <ul class="clearfix" id="lightgallery">
-            <!-- <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>
-             <li data-src="images/dputu01.png"><img src="images/dputu01.png" /></li>-->
+
             </ul>
         </div> 
      </div>
@@ -155,7 +149,9 @@
  <!--在招职位结束-->
  
  <!--一块开始-->
- <div class="zhiweiList"> </div>
+ <div id="zhiweiList">
+
+ </div>
 
  <!--一块结束-->
  

@@ -171,8 +171,7 @@ public class PersonalService {
      * @return
      */
     public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
-                                               String special,String state,String phone,String avatar,String hopeJob,
-                                               String hopeCity,String expectMoney){
+                                               String special,String state,String phone,String avatar,String hopeJob,String hopeCity){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             int userId = (Integer) session.getAttribute("userId");
@@ -189,7 +188,6 @@ public class PersonalService {
             per.setJobExperience(gzjy);
             per.setState(state);
             per.setPhone(user.getPhone());
-            per.setExpectMoney(expectMoney);
             personalMapper.insertSelective(per);
             businessMessage.setSuccess(true);
             businessMessage.setMsg("保存求职者信息成功");
@@ -281,18 +279,30 @@ public class PersonalService {
         BusinessMessage businessMessage =new BusinessMessage();
         RemortIP remortIP =new RemortIP();
         String address =remortIP.getAddressByIP(request);
+        List<Map<String,Object>> positionType =new ArrayList<>();
         int userId =(Integer)session.getAttribute("userId");
         Example perExample =new Example(Personal.class);
         perExample.createCriteria().andEqualTo("userId",userId);
         List<Personal> personals =personalMapper.selectByExample(perExample);
         if(personals != null && personals.size() > 0){
             String hopeJob =personals.get(0).getHopeJob();
-            Map<String,Object> map =new HashMap<>();
-            map.put("positionType",hopeJob);
-            map.put("address",address);
+            String[] job =hopeJob.split(",");
+            for(int i = 0;i < job.length;i++){
+                String job1 =job[i];
+                Example positionExample =new Example(Position.class);
+                positionExample.createCriteria().andEqualTo("positionName",job1);
+                List<Position> positions =positionMapper.selectByExample(positionExample);
+                for(int j = 0;j < positions.size();j++){
+                    String jobType =positions.get(j).getPositionType();
+                    Map<String,Object> map =new HashMap<>();
+                    map.put("positionType",jobType);
+                    map.put("address",address);
+                    positionType.add(map);
+                }
+            }
             businessMessage.setMsg("获取求职者分类成功");
             businessMessage.setSuccess(true);
-            businessMessage.setData(map);
+            businessMessage.setData(positionType);
         }else {
             businessMessage.setMsg("未获取到求职者信息");
             log.error("未获取到求职者信息");
@@ -571,7 +581,7 @@ public class PersonalService {
                 List<User> users =usersMapper.selectByExample(userExample);
                 if(users != null && users.size()>0){
                     List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(users.get(0).getId());
-                    String companyCity1 = (String) companyCity.get(0).get("company_city");
+                    String companyCity1 = (String) companyCity.get(0).get("city");
                     city=companyCity1.substring(0, companyCity1.indexOf("_"));
                 }
             }else {
@@ -618,10 +628,9 @@ public class PersonalService {
      *
      * @return BusinessMessage - 求职者简历
      */
-    public BusinessMessage getPersonalInfoById(HttpSession session){
+    public BusinessMessage getPersonalInfoById(HttpSession session,Integer id){
         BusinessMessage businessMessage =new BusinessMessage();
-        int personalId = (int) session.getAttribute("personalId");
-        Personal personal =personalMapper.selectByPrimaryKey(personalId);
+        Personal personal =personalMapper.selectByPrimaryKey(id);
         if(personal != null){
             Map<String,Object> personalMap =new HashMap<>();
             personalMap.put("state",personal.getState());

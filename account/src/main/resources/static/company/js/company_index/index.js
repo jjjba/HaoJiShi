@@ -5,17 +5,6 @@ var isKuaiZhao;//是否开通快招服务  1开通并且未到期 2开通已到�
 var phone;  //求职者手机号
 $(document).ready(function() {
 
-    // var mySwiper = new Swiper('.scroll-container',{
-    //     pagination: '.pagination',
-    //     autoplay:3000,
-    //     loop:true,
-    //     grabCursor: true,
-    //     paginationClickable: true,
-    //     cssHeight:false,
-    //     calculateHeight:true
-    // });
-
-	/*loadCompanyBanner();*/
     loadPersonal();
    /* loadUserInfo();*/
 	$(".wzkljgz01").click(function(){
@@ -53,43 +42,17 @@ function loadCompanyBanner() {
         }
     });
 }
-
-/*function loadIndexModule() {
-    $.ajax({
-        type: "POST",
-        url: "/indexModule/getIndexModule",
-        success: function (res) {
-            if (res.success) {
-                var list = res.data;
-                if(list.length == 2){
-                    $('#twoIndexModule').show()
-                    $.each(list, function (index, item) {
-                        $('#first').append('<li class="fl"><a href="'+item.url+'"><img src="'+item.imageUrl+'" /></a></li>');
-                    })
-                }else if(list.length == 4){
-                    $('#fourIndexModule').show()
-                    $('#one').append('<li class="fl"><a href="'+list[0].url+'"><img src="'+list[0].imageUrl+'" /></a></li>');
-                    $('#one').append('<li class="fl"><a href="'+list[1].url+'"><img src="'+list[1].imageUrl+'" /></a></li>');
-                    $('#two').append('<li class="fl"><a href="'+list[2].url+'"><img src="'+list[2].imageUrl+'" /></a></li>');
-                    $('#two').append('<li class="fl"><a href="'+list[3].url+'"><img src="'+list[3].imageUrl+'" /></a></li>');
-                }
-            }
-        }
-    });
-}*/
-
-
 function loadPersonal(){
     var phone = $.cookie("phone");
     $.ajax({
-        url:"/personal/getIndexPersonal",
+        url:"/company/getIndexPersonal",
         type:"POST",
         data:{phone:phone},
         success : function (res) {
             console.log(res);
             $('.personal').empty();
             var list =res.data;
-            var avatar,sex;
+            var avatar,sex,cla;
             $.each(list, function (index, item) {
                 avatar =item.avatar;
                 phone =item.phone;
@@ -104,10 +67,12 @@ function loadPersonal(){
                 sex =item.sex;
                 if(sex == "男"){
                     sex ="../../company/images/biao05.png"
+                    cla = "<div class=\"fl rminsii\">";
                 }else {
                     sex ="../../company/images/biao06.png"
+                    cla = "<div class=\"fl rminsii02\">";
                 }
-                var personalList ='<a href="#" onclick="loadPersonalInfoById(\'/transition/go_qiu_zhi_zhe_xiang_qing?id='+item.id+'\')" >'+
+                var personalList ='<a href="#" onclick="loadPersonalInfoById(&quot;'+item.id+'&quot;)" >'+
                     '<div class="rcxinxis">'+
                     '<div class="rcktops">'+
                     '<div class="reclefs">'+
@@ -115,7 +80,7 @@ function loadPersonal(){
                     '</div>'+
                     '<div class="recryous">'+
                     '<div class="clearfix rcvsise">'+
-                    '<div class="fl rminsii">'+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
+                    cla+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
                     '<div class="fr ciiuss">'+item.expectMoney+'</div>'+
                     '</div>'+
                     '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
@@ -127,6 +92,24 @@ function loadPersonal(){
                     '</div>'+
                     '</div>';
                 $('.personalList').append(personalList);
+                /*var die="";
+                if(item.mySelfInfo.recordSchool !=null){
+                    die+="最高学历：";
+                    die+=item.mySelfInfo.recordSchool;
+                    die+="<br>"
+                }
+                if(item.mySelfInfo.onceDo !=null){
+                    die+="曾经做过：";
+                    die+=item.mySelfInfo.onceDo;
+                    die+="<br>"
+                }
+                if(item.mySelfInfo.myHometown!=null){
+                    die+="他的家乡：";
+                    die+=item.mySelfInfo.myHometown;
+                }
+                if(diea != "" && diea !=''){
+
+                }*/
             });
         }
     })
@@ -202,8 +185,11 @@ function tellPhone() {
 }
 
 
-function loadPersonalInfoById(url) {
-    window.location.href=url;
+function loadPersonalInfoById(id) {
+    console.log(id);
+    sessionStorage.setItem("where","sy");
+    sessionStorage.setItem("po_id",id);
+    window.location.href="/transition/go_qiu_zhi_zhe_xiang_qing";
 }
 
 function gokuaizhao() {

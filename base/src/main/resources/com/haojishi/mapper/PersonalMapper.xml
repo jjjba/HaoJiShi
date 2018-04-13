@@ -45,4 +45,8 @@
     hope_job, hope_city, last_login_time, photos, resume_state, account_state, record_school, 
     once_do, my_hometown, myself_info, resume_number, openid
   </sql>
+
+  <select id="phoneNumber" parameterType="java.lang.String" resultType="java.util.Map">
+    ${sql}
+  </select>
 </mapper>

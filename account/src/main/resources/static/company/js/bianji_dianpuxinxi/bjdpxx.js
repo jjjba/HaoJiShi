@@ -28,7 +28,7 @@ $(document).ready(function() {
             var dptu = sessionStorage.getItem("dptp");
             $(".xgxm").html(xgxm);
             $("#trigger2").html(xgzw);
-            if(!$.trim(xgLogog)){
+            if(xgLogog== null){
                 var htm="上传店铺logo，提升企业形象 ";
                 htm+="<img src='../../company/images/yjts.png' class='yjtiss' />";
                 $(".xgLogog").html(htm);
@@ -93,11 +93,11 @@ function dianpuBc() {
     var lng = sessionStorage.getItem("xglng");//纬度
     var cityname = sessionStorage.getItem("xgcityname");//城市名称 例如：河北_石家庄
     $.ajax({
-        url:"",
+        url:"/company/UpdateNewCompany",
         data:{Name:xgxm,dwmj:xgdpmj,dwmc:xgdpmc,dplx:xgdplx,zhiwei:xgzw,dpfl:xgdpfl,cityname:cityname,lat:lat,lng:lng,poiaddress:xgdpdzDa,poiname:xgpoiname,xgLogog:xgLogog,xgid:xgid,xggstp:xggstp,xgjj:xgjj},
         type:"POST",
         success:function (msg) {
-
+            window.location.href="/transition/go_wo_de";
         }
     })
 }

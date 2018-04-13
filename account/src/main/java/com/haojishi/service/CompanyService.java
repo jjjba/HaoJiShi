@@ -4,9 +4,11 @@ import com.haojishi.mapper.*;
 import com.haojishi.model.*;
 import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.PhoneCheck;
+import com.haojishi.util.RemortIP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.Cookie;
@@ -33,6 +35,10 @@ public class CompanyService{
     private ResumeMapper resumeMapper;
     @Autowired
     private PositionMapper positionMapper;
+    @Autowired
+    private RegionMapper regionMapper;
+    @Autowired
+    private EntrustMapper entrustMapper;
     /**
      * 根据企业id查询企业信息
      *
@@ -58,6 +64,26 @@ public class CompanyService{
      * @param session
      * @return
      */
+    public BusinessMessage loadUserCompanyInfo(HttpSession session,String phone){
+        BusinessMessage businessMessage =new BusinessMessage();
+        String sql = "SELECT c.* FROM USER u,company c WHERE 1= 1 AND  u.`id` = c.`user_id` AND u.`phone`='"+phone+"'";
+        List<Map<String, Object>> company = companyMapper.selectCompany(sql);
+        System.out.print(company);
+        if(company!= null){
+            //现在是有信息的
+                businessMessage.setData(4); //完善过信息 可以收藏
+                session.setAttribute("companyyy_id",company.get(0).get("id")); //把company id 放进session 里
+        }else{
+            businessMessage.setData(2);//代表个人进入企业端  在company 没有信息
+        }
+        return  businessMessage;
+    }
+
+  /*  *//**
+     * 判断用户是否是企业用户以及是否符合打电话以及是否收藏
+     * @param session
+     * @return
+     *//*
     public BusinessMessage loadUserCompanyInfo(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
@@ -123,7 +149,7 @@ public class CompanyService{
             log.error("获取企业用户信息失败",e);
         }
         return  businessMessage;
-    }
+    }*/
 
     /**
      * 更新企业快招服务打电话次数
@@ -453,6 +479,7 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setMatstate(1);
+        company.setCompanyScale(dwmj);
         //增加省市区
         company.setProvince(sheng);
         company.setCity(shi);
@@ -505,6 +532,7 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setCompanyDpmj(dwmj);
+        company.setCompanyScale(dwmj);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         company.setModifyTime(new Date());
         company.setCompanyPhoto(xggstp);
@@ -854,4 +882,146 @@ public class CompanyService{
         businessMessage.setSuccess(true);
         return  businessMessage;
     }
+
+    /**
+     * 获取首页推荐人才数据
+      * @param session
+     * @param phone
+     * @return
+     */
+    public BusinessMessage getIndexPersonal(HttpSession session,String phone,HttpServletRequest request){
+        BusinessMessage businessMessage = new BusinessMessage();
+        //先行判断 是登陆用户  还是 游客状态
+        String city = null ;
+        if(phone == null){
+            RemortIP remortIP =new RemortIP();
+            city =remortIP.getAddressByIP(request);
+        }else{
+            List<Map<String, Object>> company= companyMapper.selectCompany("SELECT * FROM company c,USER u WHERE c.`user_id` = u.`id` AND  u.`phone` = "+phone);
+            if(company != null ){
+                city = (String)company.get(0).get("city");
+            }
+        }
+        List<Map<String, Object>> regionlist = regionMapper.executeSql("SELECT two.* FROM region ONE,region two WHERE two.`pId` = one.`pId` AND one.NAME = '"+city+"'");
+        StringBuffer sf = new StringBuffer();
+        sf.append( "SELECT  distinct * FROM personal WHERE  1= 1 ");
+        if(regionlist!= null){
+            for(int i =0;i<regionlist.size();i++){
+                if(i!=0){
+                    sf.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                }else {
+                    sf.append(" and  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                }
+            }
+            if(regionlist.size()>10){
+                sf.append(" limit 10");
+            }
+        }
+        log.error(sf.toString());
+        List<Map<String, Object>>list = companyMapper.executeSql(sf.toString());
+        businessMessage.setData(list);
+        businessMessage.setSuccess(true);
+
+
+        return  businessMessage;
+    }
+
+    /**
+     * 收藏简历
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage shoucangJL(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer com_id = (Integer) session.getAttribute("companyyy_id");
+        CollectPersonal collectPersonal = new CollectPersonal();
+        collectPersonal.setCompanyId(com_id);
+        collectPersonal.setPersonalId(id);
+        collectPersonal.setCreateTime(new Date());
+        int succes = collectPersonalMapper.insert(collectPersonal);
+        businessMessage.setSuccess(true);
+        businessMessage.setData(succes);
+        return  businessMessage;
+    }
+    /**
+     * 收藏简历
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage quxaioJL(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer com_id = (Integer) session.getAttribute("companyyy_id");
+        String sql= "DELETE FROM collect_personal  WHERE company_id = '";
+        sql+=com_id;
+        sql+="' AND personal_id = '";
+        sql+=id;
+        sql+="'";
+        int i =collectPersonalMapper.deleCompany(sql);
+        businessMessage.setSuccess(true);
+        businessMessage.setData(i);
+        return  businessMessage;
+    }
+    /**
+     * 判断简历
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage PDJL(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer com_id = (Integer) session.getAttribute("companyyy_id");
+        String sql= "select * FROM collect_personal  WHERE company_id = '";
+        sql+=com_id;
+        sql+="' AND personal_id = '";
+        sql+=id;
+        sql+="'";
+        List<Map<String,Object>> list  =collectPersonalMapper.PuanDuanQx(sql);
+        if(list != null && list.size()>0){
+            businessMessage.setData(1);
+        }else {
+            businessMessage.setData(2);
+        }
+        businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+    /**
+     * 判断简历
+     * @param session
+     * @param id
+     * @return
+     */
+    public BusinessMessage PDJyMy(HttpSession session,Integer id){
+        BusinessMessage businessMessage = new BusinessMessage();
+        Integer com_id = (Integer) session.getAttribute("companyyy_id");
+        String sql= "SELECT * FROM entrust WHERE company_id = '";
+        sql+=com_id;
+        sql+="' ORDER BY end_date DESC";
+        List<Map<String,Object>> list  = entrustMapper.CompanyJy(sql);
+        System.out.print(list);
+        if(list != null && list.size()>0){
+            Date date = (Date) list.get(0).get("end_date");
+            Date date1 = new Date();
+            int i = date1.compareTo(date);
+            if( i < 0){
+                System.out.print("这个是true  表示还没有过期");
+                String phoneSQL = "SELECT * FROM personal WHERE id  = '"+id+"'";
+
+                List<Map<String,Object>> phoneNumber = personalMapper.phoneNumber(phoneSQL);
+                System.out.print(phoneNumber);
+                businessMessage.setDataOne(phoneNumber.get(0).get("phone"));
+                businessMessage.setData(1);
+                System.out.print("这个是true  表示还没有过期");
+            }else {
+                System.out.print("这个是false  表示已经过期");
+                businessMessage.setData(3);
+            }
+        }else {
+            businessMessage.setData(2);//2代表没有支付过 开通过业务
+        }
+        businessMessage.setSuccess(true);
+        return  businessMessage;
+    }
+
 }

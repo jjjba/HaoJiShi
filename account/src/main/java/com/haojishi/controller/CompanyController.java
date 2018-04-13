@@ -35,8 +35,8 @@ public class CompanyController {
      * @return
      */
     @RequestMapping("loadUserCompanyInfo")
-    public BusinessMessage loadUserCompanyInfo(HttpSession session){
-        return companyService.loadUserCompanyInfo(session);
+    public BusinessMessage loadUserCompanyInfo(HttpSession session,String phone){
+        return companyService.loadUserCompanyInfo(session,phone);
     }
 
     /**
@@ -309,6 +309,55 @@ public class CompanyController {
     @RequestMapping("shangxian_id")
     public BusinessMessage shangxian_id(HttpSession session,Integer id){
         return  companyService.shangxian_id(session,id);
+    }
+
+    /**
+     * company获取首页信息
+     * @return
+     */
+    @RequestMapping("getIndexPersonal")
+    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session,String phone){
+        return  companyService.getIndexPersonal(session,phone,request);
+    }
+
+    /**
+     * 收藏简历
+     * @param session
+     * @param id
+     * @return
+     */
+    @RequestMapping("shoucangJL")
+    public BusinessMessage shoucangJL(HttpSession session,Integer id){
+        return  companyService.shoucangJL(session,id);
+    }
+    /**
+     * 收藏简历
+     * @param session
+     * @param id
+     * @return
+     */
+    @RequestMapping("quxiaoJL")
+    public BusinessMessage quxiaoJL(HttpSession session,Integer id){
+        return  companyService.quxaioJL(session,id);
+    }
+    /**
+     * 判断简历是否收藏
+     * @param session
+     * @param id
+     * @return
+     */
+    @RequestMapping("PDJL")
+    public BusinessMessage PDJL(HttpSession session,Integer id){
+        return  companyService.PDJL(session,id);
+    }
+
+    /**
+     * 判断交易 是否有过  还有是否过期
+     * @return
+     */
+    @RequestMapping("PDJyMy")
+    public BusinessMessage PDJyMy(HttpSession session,Integer id){
+        return  companyService.PDJyMy(session,id);
     }
 }
 

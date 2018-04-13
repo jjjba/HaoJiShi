@@ -16,4 +16,10 @@
     -->
     id, company_id, personal_id, create_time
   </sql>
+  <delete id="deleCompany" parameterType="java.lang.String" >
+    ${sql}
+  </delete>
+  <select id="PuanDuanQx" parameterType="java.lang.String" resultType="java.util.Map">
+    ${sql}
+  </select>
 </mapper>

@@ -3,108 +3,140 @@
  * @author 梁闯
  * @date 2018/03/28 22.46
  */
-var isRegist;//判断是否登陆
-
-var isCollect;//是否已经收藏该求职者 1收藏该求职者 2未收藏该求职者
-
-var isKuaiZhao;//是否开通快招服务  1开通并且未到期 2开通已到期 3未开通
-
-var phone;  //求职者手机号
   $(function() {
       loadPersonalInfo();
       loadUserInfo();
-
-   	  $(".toolbarframe").hide();
-	  $(".toolbarframe02").hide();
-      $(".toolbarframe03").hide();
-      $(".toolbarframe04").hide();
-      $(".toolbarframe04").hide();
-      $(".toolbarframe04").hide();
-   
-  $('.d-btn').click(function(){
-  	if(isRegist == "2"){
-  		$('#wanshanshoucang').show();
-        $("#zaikanwanshanshoucang").click(function(){
-            $("#wanshanshoucang").hide();
-        });
-        $("#likewanshanshoucang").click(function(){
-            $("#wanshanshoucang").hide();
-            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
-        });
-	}else if(isRegist == "3"){
-        $('#denglushoucang').show();
-        $("#zaikandenglushoucang").click(function(){
-            $("#denglushoucang").hide();
-        });
-        $("#likedenglushoucang").click(function(){
-            window.location.href="/transition/go_zhu_ce";
-        });
-	}else {
-        if($(this).text()=="收藏"){
-        	$.ajax({
-				url:"/collection/collectPersonal",
-				type:"POST",
-				success : function (res) {
-                    $('.scnass').html("<i></i>已收藏").addClass("curs");
+      puanDuanSOrBs();
+})
+//收藏
+function shoucang() {
+    var kfsc = sessionStorage.getItem("kfsc");
+    console.log(kfsc);
+    if(kfsc ==1){
+        $("#denglushoucang").show();
+    }
+    if(kfsc ==2){
+        $("#wanshanshoucang1").show();
+    }
+    if(kfsc ==3){
+        $("#wanshanshoucang").show();
+    }
+    if(kfsc ==4){
+        var po_id = sessionStorage.getItem("po_id");
+        $.ajax({
+            url:"/company/shoucangJL",
+            data:{id:po_id},
+            success:function (msg) {
+                if(msg.data == 1){
                     $(".toolbarframe").show();
-                    setTimeout('$(".toolbarframe").hide()',900);
-                },
-				error :function (res) {
-                    $('.scnass').html("<i></i>收藏").removeClass("curs");
+                    setTimeout('$(".toolbarframe").hide()',1000);
+                    $(".scnass").addClass("curs");
+                    $(".scnass").attr("onclick","quxiao()")
+                    $(".scnass").html("<i></i>已收藏");
+                }else{
                     $(".toolbarframe03").show();
-                    setTimeout('$(".toolbarframe03").hide()',900);
+                    setTimeout('$(".toolbarframe03").hide()',1000);
                 }
-			})
-        }else{
-            $.ajax({
-                url:"/collection/cancelCollectPersonal",
-                type:"POST",
-                success : function (res) {
-                    $('.scnass').html("<i></i>收藏").removeClass("curs");
-                    $(".toolbarframe02").show();
-                    setTimeout('$(".toolbarframe02").hide()',900);
-                },
-                error :function (res) {
-                    $('.scnass').html("<i></i>已收藏").addClass("curs");
-                    $(".toolbarframe04").show();
-                    setTimeout('$(".toolbarframe04").hide()',900);
+            }
+        })
+    }
+}
+//打电话
+function telPhone() {
+    var kfsc = sessionStorage.getItem("kfsc");
+    console.log(kfsc);
+    if(kfsc ==1){
+        $("#dengludianhua").show();
+    }
+    if(kfsc ==2){
+        $("#wanshandianhua1").show();
+    }
+    if(kfsc ==4){
+        var po_id = sessionStorage.getItem("po_id");
+        $.ajax({
+            url: "/company/PDJyMy",
+            data:{id:po_id},
+            success: function (msg) {
+                if(msg.data == 1){
+                    //正常开通
+                    if(msg.dataOne != null){
+                        $("#lianxiPhone").attr("href","tel:"+msg.dataOne);
+                        $("#lianxiPhone").click();
+                    }
                 }
-            })
-            $(this).html("<i></i>收藏").removeClass("curs");
-            $(".toolbarframe").hide();
-            $(".toolbarframe02").show();
-            setTimeout('$(".toolbarframe02").hide()',900);
+                if(msg.data ==2){
+                    //未开通
+                    $("#weikaitong").show();
+                }
+                if(msg.data ==3){
+                    //已经过期了
+                    $("#yijingguoqi").show();
+                }
+            }
+        })
+    }
+}
+function quxiao() {
+    var po_id = sessionStorage.getItem("po_id");
+    $.ajax({
+        url:"/company/quxiaoJL",
+        data:{id:po_id},
+        success:function (msg) {
+            if(msg.data == 1){
+                $(".toolbarframe02").show();
+                setTimeout('$(".toolbarframe02").hide()',1000);
+                $(".scnass").removeClass("curs");
+                $(".scnass").attr("onclick","shoucang()")
+                $(".scnass").html("<i></i>收藏");
+            }else{
+                $(".toolbarframe04").show();
+                setTimeout('$(".toolbarframe04").hide()',1000);
+            }
         }
-	}
-			});
-   
-   // $(".scnass").click(function(){
-	//    $(".xianyin01").show();
-	//    });
-   //
-   // $(".wyypins").click(function(){
-	//
-	//    $(".xianyin02").show();
-	//    });
-	//
-	//    $(".wzkljgz01,.wzkljgz02").click(function(){
-	//
-	//
-	// 	   $(".popupus").hide();
-	//
-	// 	   });
-		 
-      });
+    })
+}
+
+//判断收藏还是不收藏
+function puanDuanSOrBs() {
+    var po_id = sessionStorage.getItem("po_id");
+    $.ajax({
+        url:"/company/PDJL",
+        data:{id:po_id},
+        success:function (msg) {
+            if(msg.data == 1){
+                $(".scnass").addClass("curs");
+                $(".scnass").attr("onclick","quxiao()")
+                $(".scnass").html("<i></i>已收藏");
+            }
+        }
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
 
 function loadPersonalInfo() {
+    var id = sessionStorage.getItem("po_id");
+    console.log("id是"+"-------------"+id);
 	$.ajax({
 		url:"/personal/getPersonalInfoById",
 		type:"POST",
+        data:{id:id},
 		success : function (res) {
+		    console.log(res);
 			var list =res.data;
 			phone =list.phone;
 			var sex =list.sex;
 			var avatar =list.avatar;
+			var spa="";
 			if(avatar == null || avatar == ""){
                 if(sex == "男"){
                     avatar = "../../company/images/tupian01.png"
@@ -117,6 +149,15 @@ function loadPersonalInfo() {
 			}else {
 				sex = "../../company/images/biao06.png"
 			}
+			if(list.special != null){
+                var att = new Array();
+                att = (list.special).split(",");
+                for(var i =0;i<att.length;i++){
+                    spa+="<span>";
+                    spa+=att[i];
+                    spa+="</span>"
+                }
+            }
 			var grzlyuis='<div class="sbuiys">'+
 				'<div class="sbxtlfs">'+
                 '<div class="lylyus02">'+list.name+' <span><img src="'+sex+'">'+list.age+'</span></div>'+
@@ -127,7 +168,7 @@ function loadPersonalInfo() {
                 '</div>'+
                 '</div>'+
                 '<div class="xbyouyis">'+
-                '<span>吃苦耐劳</span>'+
+                spa+
                 '</div>'+
                 '</div>';
 			$('.grzlyuis').append(grzlyuis);
@@ -139,45 +180,53 @@ function loadPersonalInfo() {
                 '</div>';
             $('.zwxqius').append(zwxqius);
             if(list.mySelfInfo != null && list.mySelfInfo != ""){
-            	$('#mySelfInfo').show();
                 $('#myself').append(list.mySelfInfo);
+			}else {
+                $("#myself").append("这厮比较懒，自我介绍都不做···");
+            }
+			if(list.recordSchool!=null&& list.recordSchool!=""){
+                $('#xiangxiziliao').append('最高学历：'+list.recordSchool+'<br>');
 			}
-			if(list.myHometown!=null&&myHometown!=""&&list.recordSchool!=null&&recordSchool!=""&&list.onceDo!=null&&list.onceDo!=""){
-                $('#ziliao').show();
-                $('#xiangxiziliao').append('最高学历：'+list.recordSchool+'<br>' +
-                    '曾经做过：'+list.onceDo+'<br>' +
-                    '他的家乡：'+list.myHometown);
-			}
+			if(list.onceDo!=null&& list.onceDo!=""){
+                $('#xiangxiziliao').append('曾经做过：'+list.onceDo+'<br>');
+            }
+            if(list.myHometown!=null&&list.myHometown!=""){
+                $('#xiangxiziliao').append('他的家乡：'+list.myHometown);
+            }
+            if(list.myHometown ==null && list.onceDo == null && list.recordSchool==null){
+                $("#xiangxiziliao").append("这厮比较懒，也没有填···");
+            }
 			if(list.photo != null && list.photo != ""){
-            	$('#photoes').show();
             	var photos =list.photo.split(",");
             	for(var i = 0;i < photos.length;i++){
             		$('#lightgallery').append('<li data-src="'+photos[i]+'"><img src="'+photos[i]+'" /></li>')
 				}
-			}
+			}else{
+                $("#lightgallery").append("这厮不爱美，么地照片啊···");
+            }
         }
 	})
 }
 
 function loadUserInfo() {
-	$.ajax({
-		url:"/company/loadUserCompanyInfo",
-		type:"POST",
-		success :function (res) {
-            console.log("data============="+JSON.stringify(res.data));
-            isCollect =res.data[0].isCollect;
-            isKuaiZhao =res.data[0].isKuaiZhao;
-            isRegist =res.data[0].isRegist;
-            console.log("isCollect============="+isCollect);
-            console.log("isKuaiZhao============"+isKuaiZhao);
-            console.log("isRegist=============="+isRegist);
-            if(isCollect == "1"){
-                $('.scnass').html("<i></i>已收藏").addClass("curs");
-			}else {
-            	$('.scnass').show();
-			}
+    var zt = $.cookie("zt");
+    var phone = $.cookie("phone");
+    if(zt==null && phone == null){
+        sessionStorage.setItem("kfsc",1);//可否收藏  1 代表游客登录 未登录
+    }else {
+        if(phone != null){
+            $.ajax({
+                url:"/company/loadUserCompanyInfo",
+                type:"POST",
+                data:{phone:phone},
+                success :function (res) {
+                sessionStorage.setItem("kfsc",res.data);
+            }
+        })
         }
-	})
+
+    }
+
 }
 
 function tellPhone() {
@@ -237,7 +286,13 @@ function tellPhone() {
 
 }
 function goBack() {
-    window.location.href="/transition/go_qiu_zhi_zhe";
+    var wher = sessionStorage.getItem("where");
+    if(wher == "sy"){
+        window.location ="/account/companyIndex";
+    }
+    if(wher == "zc"){
+        window.location.href="/transition/go_qiu_zhi_zhe";
+    }
 }
 	  
 

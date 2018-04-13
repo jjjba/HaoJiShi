@@ -54,4 +54,11 @@
     openid, share_number, position_number, position_see_number, position_exposure_number, 
     account_state, why, company_dpmj
   </sql>
+  <select id="executeSql" parameterType="java.lang.String" resultType="java.util.Map">
+    ${sql}
+  </select>
+  <select id="selectCompany" parameterType="java.lang.String" resultType="java.util.Map">
+    ${sql}
+  </select>
+
 </mapper>

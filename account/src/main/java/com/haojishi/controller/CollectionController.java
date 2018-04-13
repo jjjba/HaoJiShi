@@ -66,4 +66,5 @@ public class CollectionController {
     public BusinessMessage cancelCollectPersonal(HttpSession session){
         return collectionService.cancelCollectPersonal(session);
     }
+
 }

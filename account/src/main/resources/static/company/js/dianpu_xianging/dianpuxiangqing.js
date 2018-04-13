@@ -76,10 +76,26 @@ $(document).ready(function() {
         url: "/company/getZhiWeiALL",
         type: "POST",
         success: function (msg) {
-            console.log(msg);
-            var company = msg.data;
             var position = msg.dataOne;
-            console.log(msg);
+            if(position !=null){
+                var htm9 = "";
+                for(var i =0;i<position.length;i++){
+                    htm9+="<a href='#' class='kuisis'><div class='libjyos'><div class='lzuliuys'><h2>";
+                    htm9+=position[i].positionType;
+                    htm9+="</h2><p>";
+                    htm9+=position[i].money;
+                    htm9+="</p></div><div class='yomiyyys'>";
+                    htm9+=position[i].experience;
+                    htm9+="|";
+                    htm9+=position[i].age;
+                    htm9+="|";
+                    htm9+=position[i].sex;
+                    htm9+="<img src='../company/images/yjts.png' class='jyousso' /></div></div></a>";
+                }
+                console.log(htm9);
+                $("#zhiweiList").html(htm9);
+            }
+            console.log(msg)
         }
     })
 })
