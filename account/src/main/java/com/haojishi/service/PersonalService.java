@@ -59,81 +59,6 @@ public class PersonalService {
     @Autowired
     private UserMapper usersMapper;
 
-    /*public static String Cookis(){
-        Cookie[] cookies = getCookies();
-        if(cookies != null && cookies.length>0){
-
-        }else{
-
-        }
-        return null;
-    }*/
-
-    /**
-     *
-     * @param code
-     * @return BusinessMessage - 存储用户信息
-     */
-    public BusinessMessage login(String code) {
-        log.debug("进入用户登陆接口 ：code = [" + code + "]");
-        BusinessMessage businessMessage = new BusinessMessage();
-        try {
-            // 请求微信服务器
-            String result = Request.Post("https://api.weixin.qq.com/sns/jscode2session")
-                    .bodyForm(Form.form()
-                            .add("appid", environment.getProperty("api.appid"))
-                            .add("secret", environment.getProperty("api.secret"))
-                            .add("js_code", code)
-                            .add("grant_type", "authorization_code")
-                            .build(), StandardCharsets.UTF_8)
-                    .execute().returnContent().asString(StandardCharsets.UTF_8);
-            // 检测微信服务器返回信息
-            if (StringUtils.isEmpty(result)) {
-                businessMessage.setMsg("微信服务器返回信息为空，请重试");
-            } else {
-                JSONObject json = JSON.parseObject(result);
-                // 检测是否包含错误信息
-                if (json.containsKey("errcode")) {
-                    businessMessage.setData(json);
-                } else {
-                    //创建用户
-                    String openId = json.getString("openid");
-                    String sessionKey = json.getString("session_key");
-                    if (StringUtils.isEmpty(openId) || StringUtils.isEmpty(sessionKey)) {
-                        businessMessage.setMsg("解析微信服务器数据失败，请重试");
-                    } else {
-                        Map<String, Object> map = new HashMap<>();
-                        Example example = new Example(User.class);
-                        example.createCriteria().andEqualTo("openid", openId);
-                        List<User> users = userMapper.selectByExample(example);
-                        if (users != null && users.size() > 0) {
-                            User user = users.get(0);
-                            map.put("openId", openId);
-                            map.put("id", user.getId());
-                            map.put("sessionKey", sessionKey);
-                            map.put("type", user.getType());
-                            businessMessage.setData(map);
-                        } else {
-                            User user = new User();
-                            user.setOpenid(openId);
-//                            user.setCreateTime(new Date());
-                            userMapper.insertSelective(user);
-                            map.put("openId", openId);
-                            map.put("id", user.getId());
-                            map.put("sessionKey", sessionKey);
-                            businessMessage.setData(map);
-                        }
-                    }
-                }
-            }
-            businessMessage.setSuccess(true);
-        } catch (Exception e) {
-            log.error("登录失败", e);
-            businessMessage.setMsg("登录失败");
-        }
-        return businessMessage;
-    }
-
     /**
      * 求职者注册
      *
@@ -171,7 +96,8 @@ public class PersonalService {
      * @return
      */
     public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
-                                               String special,String state,String phone,String avatar,String hopeJob,String hopeCity){
+                                               String special,String state,String phone,String avatar,String hopeJob,
+                                               String hopeCity,String expectMoney){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             int userId = (Integer) session.getAttribute("userId");
@@ -188,6 +114,7 @@ public class PersonalService {
             per.setJobExperience(gzjy);
             per.setState(state);
             per.setPhone(user.getPhone());
+            per.setExpectMoney(expectMoney);
             personalMapper.insertSelective(per);
             businessMessage.setSuccess(true);
             businessMessage.setMsg("保存求职者信息成功");
@@ -277,32 +204,19 @@ public class PersonalService {
      */
     public BusinessMessage getPersonalHopeJobClassification(HttpSession session,HttpServletRequest request){
         BusinessMessage businessMessage =new BusinessMessage();
-        RemortIP remortIP =new RemortIP();
-        String address =remortIP.getAddressByIP(request);
-        List<Map<String,Object>> positionType =new ArrayList<>();
+        String address =RemortIP.getAddressByIP(request);
         int userId =(Integer)session.getAttribute("userId");
         Example perExample =new Example(Personal.class);
         perExample.createCriteria().andEqualTo("userId",userId);
         List<Personal> personals =personalMapper.selectByExample(perExample);
         if(personals != null && personals.size() > 0){
             String hopeJob =personals.get(0).getHopeJob();
-            String[] job =hopeJob.split(",");
-            for(int i = 0;i < job.length;i++){
-                String job1 =job[i];
-                Example positionExample =new Example(Position.class);
-                positionExample.createCriteria().andEqualTo("positionName",job1);
-                List<Position> positions =positionMapper.selectByExample(positionExample);
-                for(int j = 0;j < positions.size();j++){
-                    String jobType =positions.get(j).getPositionType();
-                    Map<String,Object> map =new HashMap<>();
-                    map.put("positionType",jobType);
-                    map.put("address",address);
-                    positionType.add(map);
-                }
-            }
+            Map<String,Object> map =new HashMap<>();
+            map.put("positionType",hopeJob);
+            map.put("address",address);
             businessMessage.setMsg("获取求职者分类成功");
             businessMessage.setSuccess(true);
-            businessMessage.setData(positionType);
+            businessMessage.setData(map);
         }else {
             businessMessage.setMsg("未获取到求职者信息");
             log.error("未获取到求职者信息");
@@ -356,9 +270,9 @@ public class PersonalService {
      * @param session
      * @return BusinessMessage
      */
-    public BusinessMessage updatePersonalByPersonalId(HttpSession session, String address, String hopeCity, Integer age, String sex,
-                                                          String hopeJob, String expectMoney, String jobExperience, String myHometown,
-                                                          String myselfInfo, String special, String recordSchool, String name, String onceDo,
+    public BusinessMessage updatePersonalByPersonalId(HttpSession session, String address, Integer age, String sex,
+                                                          String expectMoney, String jobExperience,
+                                                      String recordSchool, String name,
                                                           String phone, String state,String photo, String avatar){
         BusinessMessage businessMessage =new BusinessMessage();
         try {
@@ -380,27 +294,14 @@ public class PersonalService {
                 if(age != null){
                     personal.setAge(age);
                 }
-                if(hopeCity != null && hopeCity !=""){
-                    personal.setHopeCity(hopeCity);
-                }
-                if(hopeJob != null && hopeJob !=""){
-                    personal.setHopeJob(hopeJob);
-                }
+
                 if(expectMoney != null && expectMoney !=""){
                     personal.setExpectMoney(expectMoney);
                 }
                 if(jobExperience != null && jobExperience !=""){
                     personal.setJobExperience(jobExperience);
                 }
-                if(myHometown != null && myHometown !=""){
-                    personal.setMyHometown(myHometown);
-                }
-                if(myselfInfo != null && myselfInfo !=""){
-                    personal.setMyselfInfo(myselfInfo);
-                }
-                if(special != null && special !=""){
-                    personal.setSpecial(special);
-                }
+
                 if(sex != null && sex !=""){
                     personal.setSex(sex);
                 }
@@ -409,9 +310,6 @@ public class PersonalService {
                 }
                 if(name != null && name !=""){
                     personal.setName(name);
-                }
-                if(onceDo != null && onceDo !=""){
-                    personal.setOnceDo(onceDo);
                 }
                 if(phone != null && phone !=""){
                     personal.setPhone(phone);
@@ -423,8 +321,150 @@ public class PersonalService {
                 personalMapper.updateByPrimaryKeySelective(personal);
                 businessMessage.setMsg("修改求职者信息成功");
                 businessMessage.setSuccess(true);
-
-
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
+        return businessMessage;
+    }
+    /**
+     * 根据求职者id修改求职者标签
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalHopeCity(HttpSession session, String hopeCity){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Personal personal =personals.get(0);
+            personal.setHopeCity(hopeCity);
+            personal.setUpdateTime(new Date());
+            personalMapper.updateByPrimaryKeySelective(personal);
+            businessMessage.setMsg("修改求职者信息成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
+        return businessMessage;
+    }
+    /**
+     * 根据求职者id修改求职者标签
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalMyhome(HttpSession session, String myHometown){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Personal personal =personals.get(0);
+            personal.setMyHometown(myHometown);
+            personal.setUpdateTime(new Date());
+            personalMapper.updateByPrimaryKeySelective(personal);
+            businessMessage.setMsg("修改求职者信息成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
+        return businessMessage;
+    }
+    /**
+     * 根据求职者id修改求职者标签
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalSpecial(HttpSession session, String special){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Personal personal =personals.get(0);
+            personal.setSpecial(special);
+            personal.setUpdateTime(new Date());
+            personalMapper.updateByPrimaryKeySelective(personal);
+            businessMessage.setMsg("修改求职者信息成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
+        return businessMessage;
+    }
+    /**
+     * 根据求职者id修改求职者个人介绍
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalMyselfInfo(HttpSession session, String myselfInfo){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Personal personal =personals.get(0);
+            personal.setMyselfInfo(myselfInfo);
+            personal.setUpdateTime(new Date());
+            personalMapper.updateByPrimaryKeySelective(personal);
+            businessMessage.setMsg("修改求职者信息成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
+        return businessMessage;
+    }
+    /**
+     * 根据求职者id修改求职者意向工作
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalHopeJob(HttpSession session, String hopeJob){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Personal personal =personals.get(0);
+            personal.setHopeJob(hopeJob);
+            personal.setUpdateTime(new Date());
+            personalMapper.updateByPrimaryKeySelective(personal);
+            businessMessage.setMsg("修改求职者信息成功");
+            businessMessage.setSuccess(true);
+        }catch (Exception e){
+            log.error("修改求职者信息错误",e);
+        }
+        return businessMessage;
+    }
+    /**
+     * 根据求职者id修改曾经做过
+     *
+     * @param session
+     * @return BusinessMessage
+     */
+    public BusinessMessage updatePersonalOnceDo(HttpSession session, String onceDo){
+        BusinessMessage businessMessage =new BusinessMessage();
+        try {
+            int userId = (int) session.getAttribute("userId");
+            Example perExample =new Example(Personal.class);
+            perExample.createCriteria().andEqualTo("userId",userId);
+            List<Personal> personals =personalMapper.selectByExample(perExample);
+            Personal personal =personals.get(0);
+            personal.setOnceDo(onceDo);
+            personal.setUpdateTime(new Date());
+            personalMapper.updateByPrimaryKeySelective(personal);
+            businessMessage.setMsg("修改求职者信息成功");
+            businessMessage.setSuccess(true);
         }catch (Exception e){
             log.error("修改求职者信息错误",e);
         }
@@ -581,7 +621,7 @@ public class PersonalService {
                 List<User> users =usersMapper.selectByExample(userExample);
                 if(users != null && users.size()>0){
                     List<Map<String,Object>> companyCity = commonCompanyMapper.getCompanyCityByUserId(users.get(0).getId());
-                    String companyCity1 = (String) companyCity.get(0).get("city");
+                    String companyCity1 = (String) companyCity.get(0).get("company_city");
                     city=companyCity1.substring(0, companyCity1.indexOf("_"));
                 }
             }else {
@@ -628,9 +668,10 @@ public class PersonalService {
      *
      * @return BusinessMessage - 求职者简历
      */
-    public BusinessMessage getPersonalInfoById(HttpSession session,Integer id){
+    public BusinessMessage getPersonalInfoById(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
-        Personal personal =personalMapper.selectByPrimaryKey(id);
+        int personalId = (int) session.getAttribute("personalId");
+        Personal personal =personalMapper.selectByPrimaryKey(personalId);
         if(personal != null){
             Map<String,Object> personalMap =new HashMap<>();
             personalMap.put("state",personal.getState());

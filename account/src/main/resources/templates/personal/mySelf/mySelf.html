@@ -25,11 +25,22 @@
     <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
             th:src="@{/person/js/jquery-3.2.1.js}" ></script>
 
-    <script type="text/javascript" src="/static/person/js/mySelf/yctcs.js"
-            th:src="@{/person/js/mySelf/yctcs.js}" ></script>
     <script type="text/javascript" src="/static/person/js/mySelf/mySelf.js"
             th:src="@{/person/js/mySelf/mySelf.js}" ></script>
+    <!--圆形进度开始-->
+    <script type="text/javascript">
 
+        $(function() {
+            $('.progressbar').each(function(index, el) {
+                var num = $(this).find('span').html();
+                console.log("num==========="+num)
+                $(this).addClass('progressbar-' + num);
+            });
+        });
+    </script>
+    <script type="text/javascript" src="/static/person/js/mySelf/yctcs.js"
+            th:src="@{/person/js/mySelf/yctcs.js}" ></script>
+    <!--圆形进度结束-->
 </head>
 <body>
 
@@ -45,6 +56,43 @@
 
 <!--上边开始-->
 <div class="sbjltitis">
+    <!--上开始-->
+    <div class="sbtopxxs">
+        <!--左开始-->
+        <div class="sblefs">
+
+        </div>
+        <!--左结束-->
+        <!--右开始-->
+        <div class="sbyours">
+        </div>
+        <!--右结束-->
+    </div>
+    <!--上结束-->
+
+    <!--下开始-->
+    <a href="#" onclick="loadPersonalInfo()">
+        <div class="xibkass">
+
+            <!--左边圆形进度条开始-->
+            <div class="progressbar">
+                <span></span>%
+            </div>
+            <!--左边圆形进度条结束-->
+
+            <!--右边开始-->
+            <div class="ycbuyss">
+                完善简历，获取更多工作机会
+            </div>
+            <!--右边结束-->
+
+            <!--右箭头开始-->
+            <div class="ycjtouis"><img src="../../person/images/yjts.png" /></div>
+            <!--右箭头结束-->
+
+        </div>
+    </a>
+    <!--下结束-->
 </div>
 <!--上边结束-->
 

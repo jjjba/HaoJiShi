@@ -1,5 +1,5 @@
 # 开发环境 dev 生产环境 prod
 spring:
   profiles:
-    active: prod
+    active: dev
 

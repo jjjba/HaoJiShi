@@ -41,91 +41,91 @@
     </select>
 
     <select id="getPositionByAddress01" resultType="java.util.Map">
-    select DISTINCT * from
-    (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-    c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 1 and p.company_id in (
-    select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =1 and locate(c.company_city,#{city})>0 and p.user_id=1
-    )
-    union all
-    select p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-    c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
-    and u.account_state = 1 and c.matState =1 and p.state =1 and c.company_city in (
-    select name from region where pId in (
-    select id from region where id in (
-    select pId from region  where name in(#{hopeCity})
-    )
-    )
-    )
-    ) cap ORDER BY hot desc
+        select DISTINCT * from
+            (SELECT p.id,c.city,c.area, p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 4 and p.company_id in (
+                select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =4 and locate(c.city,#{city}) >0 and p.user_id=1
+            )
+             union all
+             select p.id,c.city,c.area,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
+                                                                                              and u.account_state = 1 and c.matState =4 and p.state =4 and c.city in (
+                 select name from region where pId in (
+                     select id from region where id in (
+                         select pId from region  where name in(#{hopeCity})
+                     )
+                 )
+             )
+            ) cap ORDER BY hot desc
 </select>
 
     <select id="getPositionByAddress02" resultType="java.util.Map">
         select DISTINCT * from
-        (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 1 and p.company_id in (
-        select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =1 and locate(c.company_city,#{city})>0 and p.user_id=1
-        )
-        union all
-        select p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
-        and u.account_state = 1 and c.matState =1 and p.state =1 and c.company_city in (
-        select name from region where pId in (
-        select id from region where id in (
-        select pId from region  where name in(#{hopeCity1},#{hopeCity2})
-        )
-        )
-        )
-        ) cap ORDER BY hot desc
+            (SELECT p.id,c.city,c.area, p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 4 and p.company_id in (
+                select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =4 and locate(c.city,#{city}) >0 and p.user_id=1
+            )
+             union all
+             select p.id,c.city,c.area,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
+                                                                                              and u.account_state = 1 and c.matState =4 and p.state =4 and c.city in (
+                 select name from region where pId in (
+                     select id from region where id in (
+                         select pId from region  where name in(#{hopeCity1},#{hopeCity2})
+                     )
+                 )
+             )
+            ) cap ORDER BY hot desc
     </select>
 
     <select id="getPositionByAddress03" resultType="java.util.Map">
         select DISTINCT * from
-        (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 1 and p.company_id in (
-        select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =1 and locate(c.company_city,#{city})>0 and p.user_id=1
-        )
-        union all
-        select p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
-        and u.account_state = 1 and c.matState =1 and p.state =1 and c.company_city in (
-        select name from region where pId in (
-        select id from region where id in (
-        select pId from region  where name in(#{hopeCity1},#{hopeCity2},#{hopeCity3})
-        )
-        )
-        )
-        ) cap ORDER BY hot desc
+            (SELECT p.id,c.city,c.area, p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 4 and p.company_id in (
+                select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =4 and locate(c.city,#{city}) >0 and p.user_id=1
+            )
+             union all
+             select p.id,c.city,c.area,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
+                                                                                              and u.account_state = 1 and c.matState =4 and p.state =4 and c.city in (
+                 select name from region where pId in (
+                     select id from region where id in (
+                         select pId from region  where name in(#{hopeCity1},#{hopeCity2},#{hopeCity3})
+                     )
+                 )
+             )
+            ) cap ORDER BY hot desc
     </select>
 
     <select id="getPositionByAddress04" resultType="java.util.Map">
         select DISTINCT * from
-        (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 1 and p.company_id in (
-        select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =1 and locate(c.company_city,#{city})>0 and p.user_id=1
-        )
-        union all
-        select p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
-        and u.account_state = 1 and c.matState =1 and p.state =1 and c.company_city in (
-        select name from region where pId in (
-        select id from region where id in (
-        select pId from region  where name in(#{hopeCity1},#{hopeCity2},#{hopeCity3},#{hopeCity4})
-        )
-        )
-        )
-        ) cap ORDER BY hot desc
+            (SELECT p.id,c.city,c.area, p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 4 and p.company_id in (
+                select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =4 and locate(c.city,#{city}) >0 and p.user_id=1
+            )
+             union all
+             select p.id,c.city,c.area,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+                 c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
+                                                                                              and u.account_state = 1 and c.matState =4 and p.state =4 and c.city in (
+                 select name from region where pId in (
+                     select id from region where id in (
+                         select pId from region  where name in(#{hopeCity1},#{hopeCity2},#{hopeCity3},#{hopeCity4})
+                     )
+                 )
+             )
+            ) cap ORDER BY hot desc
     </select>
 
     <select id="getPositionByAddress05" resultType="java.util.Map">
         select DISTINCT * from
-        (SELECT p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
-        c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 1 and p.company_id in (
-        select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =1 and locate(c.company_city,#{city}) >0 and p.user_id=1
+        (SELECT p.id,c.city,c.area, p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+        c.name,c.company_type,c.company_scale from position p,company c where c.id =p.company_id and p.state = 4 and p.company_id in (
+        select c.id from company c,personal p,user u where c.user_id = u.id and u.account_state = 1 and c.matState =4 and locate(c.city,#{city}) >0 and p.user_id=1
         )
         union all
-        select p.id,c.company_city,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
+        select p.id,c.city,c.area,p.position_name,p.hot,p.money,p.experience,p.age,p.sex,c.icon_path,
         c.name,c.company_type,c.company_scale from position p,company c,user u where u.id =c.user_id and c.id =p.company_id
-        and u.account_state = 1 and c.matState =1 and p.state =1 and c.company_city in (
+        and u.account_state = 1 and c.matState =4 and p.state =4 and c.city in (
         select name from region where pId in (
         select id from region where id in (
         select pId from region  where name in(#{hopeCity1},#{hopeCity2},#{hopeCity3},#{hopeCity4},#{hopeCity5})
@@ -189,7 +189,7 @@
         c.name,c.company_type,c.company_scale
         FROM position p,company c,user u
         <where>
-            p.company_id =c.id AND c.user_id =u.id and p.state = 1 and c.matState = 1
+            p.company_id =c.id AND c.user_id =u.id and p.state = 4 and c.matState = 4
             <if test="money != '' and money != null">
                 AND p.money = #{money}
             </if>
@@ -213,15 +213,15 @@
         c.name,c.company_type,c.company_scale
         FROM position p,company c,user u
         <where>
-            p.company_id =c.id AND c.user_id =u.id and p.state = 1 and c.matState = 1
+            p.company_id =c.id AND c.user_id =u.id and p.state = 4 and c.matState = 4
             <if test="money != '' and money != null">
                 AND p.money = '${money}'
             </if>
             <if test="scale != '' and scale != null">
                 AND p.company_scale = #{scale}
             </if>
-            <if test="positionName != '' and positionName != null">
-                AND p.position_name = #{positionName}
+            <if test="positionType != '' and positionType != null">
+                AND p.position_type = #{positionType}
             </if>
             <if test="city != '' and city != null">
                 AND c.company_city like concat(#{city},'%')
@@ -247,7 +247,7 @@
 
         from company c,user u,position p
 
-        where c.user_id = u.id and c.id = p.company_id and u.account_state = 1 and c.matState = 1 and p.state = 1
+        where c.user_id = u.id and c.id = p.company_id and u.account_state = 1 and c.matState = 4 and p.state = 4
 
             <if test="name != '' and name != null">
                 AND p.position_name like concat('%',#{name},'%')
@@ -261,10 +261,10 @@
 
         from position p,company c
 
-        where p.company_id = c.id and p.state = 1 and p.company_id in
+        where p.company_id = c.id and p.state = 4 and p.company_id in
 
         (
-        select c.id from company c,user u where c.matState = 1 and u.account_state = 1 and u.id = c.user_id
+        select c.id from company c,user u where c.matState = 4 and u.account_state = 1 and u.id = c.user_id
 
         <if test="name != '' and name != null">
             AND c.name like concat('%',#{name},'%')

@@ -97,7 +97,7 @@ function loadPosition(){
 
 function quedingbaocun() {
     $.ajax({
-        url:"/personal/updatePersonalByPersonalId",
+        url:"/personal/updatePersonalHopeJob",
         type:"POST",
         data : {
             hopeJob : jp.join(",")

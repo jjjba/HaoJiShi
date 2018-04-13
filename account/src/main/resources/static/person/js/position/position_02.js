@@ -5,7 +5,7 @@ var type;
 var city;
 $(function () {
     loadRegionData();
-    loadPosition()
+    loadPosition();
 
 
     $("#positionType").click(function(e) {
@@ -50,18 +50,18 @@ function loadPosition() {
         type:"POST",
         success : function (res) {
             if(res.success){
-                var address =res.address;
+                var address =res.data.address;
                 if(address == null || address == "") {
                     address = "未获取到位置"
                 }
                 $('.zcwzuis').append('当前城市：'+address);
-                if(res.positionType != null && res.positionType !=""){
-                    var hopeJobs =res.positionType.split(",");
+                if(res.data.positionType != null && res.data.positionType !=""){
+                    var hopeJobs =res.data.positionType.split(",");
                     for(var i = 0;i<hopeJobs.length;i++){
-                        $('#positionType').append('<li><a href="#" data="'+hopeJobs[i]+'">'+hopeJobs+'</a></li>');
+                        $('#positionType').append('<li><a href="#" data="'+hopeJobs[i]+'">'+hopeJobs[i]+'</a></li>');
                     }
                 }else {
-                    $('#positionType').append('您还没有分类呦😔');
+                    $('#positionType').append('<li><a href="#">您还没有分类呦😔</a></li>');
                 }
 
             }
@@ -80,10 +80,11 @@ function loadPosition() {
             if (res.success) {
                 $('.positionList').empty();
                 var list = res.data;
-                var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
+                var id, area,city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
                 $.each(list, function (index, item) {
                     id = item.id;
-                    company_city = item.company_city;
+                    city = item.city;
+                    area = item.area;
                     position_name = item.position_name;
                     money = item.money;
                     experience = item.experience;
@@ -119,7 +120,7 @@ function loadPosition() {
                         '          </div>\n' +
                         '          <div class="corpryous">\n' +
                         '            <h1>'+name+'</h1>\n' +
-                        '            <p>'+company_type+' | '+company_scale+' | '+company_city+'</p>\n' +
+                        '            <p>'+company_type+' | '+company_scale+' | '+city+'-'+area+'</p>\n' +
                         '          </div>\n' +
                         '        </div>\n' +
                         '      </a>\n' +
@@ -153,10 +154,11 @@ function loadPositionByPars(city,scale,money,type) {
         success : function (res) {
             $('.positionList').empty();
             var list =res.data;
-            var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
+            var id, area,city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
             $.each(list, function (index, item) {
                 id = item.id;
-                company_city = item.company_city;
+                city = item.city;
+                area = item.area;
                 position_name = item.position_name;
                 money = item.money;
                 experience = item.experience;
@@ -193,7 +195,7 @@ function loadPositionByPars(city,scale,money,type) {
                     '</div>'+
                     '<div class="corpryous">'+
                     '<h1>'+name+'</h1>'+
-                    '<p>'+company_type+' | '+company_scale+' | '+company_city+'</p>'+
+                    '<p>'+company_type+' | '+company_scale+' | '+city+'-'+area+'</p>'+
                     '</div>'+
                     '</div>'+
                     '</a>'+

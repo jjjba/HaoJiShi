@@ -9,7 +9,7 @@ body{ background:#f7f7f7;}
   /*上开始*/
   .sbtopxxs{ border-bottom:1px dashed #ebebeb; display:box; display:-webkit-box; display:-moz-box; padding:0.3rem 0 1.2rem 0;}
      /*左开始*/
-	 .sblefs{ width:6.2rem;height:6.2rem;}
+	 .sblefs{ width:6.2rem;}
 	   .sblefs img{ width:100%; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
 	 /*左结束*/
 	 
@@ -198,20 +198,26 @@ body{ background:#f7f7f7;}
 /*弹出层结束*/
 
 
+.dcirzs{ padding-top:8px;}
+ .dcirzs a{ display:inline-block; background:#F2F2F2; border-radius:3.2rem; -moz-border-radius:3.2rem; -webkit-border-radius:3.2rem; font-size:1.2rem; color:#9E9E9E; padding:3px 12px 3px 12px;}
+
+.fbzhiuse{ position:relative;}
+  .fbzuysew{ display:block; position:absolute; right:0; top:1rem; border:0; background:#FF6118; border-radius:2px; -moz-border-radius:2px; -webkit-border-radius:2px; font-size:1.2rem; color:#FFFFFF; padding:5px 13px 5px 13px;}
+
+.ciniso{ display:inline-block; vertical-align:middle; text-align:right; padding-right:1rem;}
+
+.zcuyys0{ padding-top:1rem;}
 
 
 
+.bounone{ border:0;}
+
+
+.dlzces{ display:block; font-size:1.6rem; color:#404040; padding-top:1.8rem; font-weight:bold;}
 
 
 
-
-
-
-
-
-
-
-
+.yrziis a{ display:inline-block; background:#7ed321; border-radius:3.2rem; -moz-border-radius:3.2rem; -webkit-border-radius:3.2rem; font-size:1.2rem; color:#fff; padding:3px 12px 3px 12px;}
 
 
 

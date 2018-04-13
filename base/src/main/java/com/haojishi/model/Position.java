@@ -118,7 +118,7 @@ public class Position implements Serializable {
     private String welfare;
 
     /**
-     * 职位状态 1正常 2关闭职位 3冻结(审核失败)
+     * 1 审核中 2 下线 3 不通过  4 通过
      */
     private Integer state;
 
@@ -481,18 +481,18 @@ public class Position implements Serializable {
     }
 
     /**
-     * 获取职位状态 1正常 2关闭职位 3冻结(审核失败)
+     * 获取1 审核中 2 下线 3 不通过  4 通过
      *
-     * @return state - 职位状态 1正常 2关闭职位 3冻结(审核失败)
+     * @return state - 1 审核中 2 下线 3 不通过  4 通过
      */
     public Integer getState() {
         return state;
     }
 
     /**
-     * 设置职位状态 1正常 2关闭职位 3冻结(审核失败)
+     * 设置1 审核中 2 下线 3 不通过  4 通过
      *
-     * @param state 职位状态 1正常 2关闭职位 3冻结(审核失败)
+     * @param state 1 审核中 2 下线 3 不通过  4 通过
      */
     public void setState(Integer state) {
         this.state = state;

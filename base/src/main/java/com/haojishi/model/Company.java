@@ -81,20 +81,17 @@ public class Company implements Serializable {
     /**
      * 省
      */
-    @Column(name = "province")
     private String province;
 
     /**
      * 市
      */
-    @Column(name = "city")
     private String city;
 
     /**
      * 区
      */
-    @Column(name = "area")
-    private String Area;
+    private String area;
 
     /**
      * 店铺地址
@@ -145,7 +142,7 @@ public class Company implements Serializable {
     private String companyPhoto;
 
     /**
-     * 公司是否通过审核 1是 2否
+     * 未认证1 认证中2 认证通过3 认证未通过4
      */
     @Column(name = "matState")
     private Integer matstate;
@@ -459,7 +456,7 @@ public class Company implements Serializable {
     /**
      * 获取省
      *
-     * @return province_id - 省
+     * @return province - 省
      */
     public String getProvince() {
         return province;
@@ -471,13 +468,13 @@ public class Company implements Serializable {
      * @param province 省
      */
     public void setProvince(String province) {
-        this.province = province;
+        this.province = province == null ? null : province.trim();
     }
 
     /**
      * 获取市
      *
-     * @return city  市
+     * @return city - 市
      */
     public String getCity() {
         return city;
@@ -489,25 +486,25 @@ public class Company implements Serializable {
      * @param city 市
      */
     public void setCity(String city) {
-        this.city = city;
+        this.city = city == null ? null : city.trim();
     }
 
     /**
      * 获取区
      *
-     * @return company - 区
+     * @return area - 区
      */
     public String getArea() {
-        return Area;
+        return area;
     }
 
     /**
      * 设置区
      *
-     * @param companyArea 区
+     * @param area 区
      */
-    public void setArea(String companyArea) {
-        this.Area = Area;
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
     }
 
     /**
@@ -655,18 +652,18 @@ public class Company implements Serializable {
     }
 
     /**
-     * 获取公司是否通过审核 1是 2否
+     * 获取未认证1 认证中2 认证通过3 认证未通过4
      *
-     * @return matState - 公司是否通过审核 1是 2否
+     * @return matState - 未认证1 认证中2 认证通过3 认证未通过4
      */
     public Integer getMatstate() {
         return matstate;
     }
 
     /**
-     * 设置公司是否通过审核 1是 2否
+     * 设置未认证1 认证中2 认证通过3 认证未通过4
      *
-     * @param matstate 公司是否通过审核 1是 2否
+     * @param matstate 未认证1 认证中2 认证通过3 认证未通过4
      */
     public void setMatstate(Integer matstate) {
         this.matstate = matstate;
@@ -907,9 +904,9 @@ public class Company implements Serializable {
         sb.append(", companyScale=").append(companyScale);
         sb.append(", companySpecial=").append(companySpecial);
         sb.append(", companyCity=").append(companyCity);
-        sb.append(", provinceId=").append(province);
-        sb.append(", cityId=").append(city);
-        sb.append(", companyArea=").append(Area);
+        sb.append(", province=").append(province);
+        sb.append(", city=").append(city);
+        sb.append(", area=").append(area);
         sb.append(", companyAddr=").append(companyAddr);
         sb.append(", companyType=").append(companyType);
         sb.append(", iconPath=").append(iconPath);

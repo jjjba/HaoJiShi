@@ -71,10 +71,11 @@ function loadPositionData() {
             if (res.success) {
                 $('.positionList').empty();
                 var list = res.data;
-                var id, company_city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale;
+                var id, city, position_name,hot,money,experience,age,sex,icon_path,name,company_type,company_scale,area;
                 $.each(list, function (index, item) {
                     id = item.id;
-                    company_city = item.company_city;
+                    city = item.city;
+                    area = item.area;
                     position_name = item.position_name;
                     money = item.money;
                     experience = item.experience;
@@ -110,7 +111,7 @@ function loadPositionData() {
                         '          </div>\n' +
                         '          <div class="corpryous">\n' +
                         '            <h1>'+name+'</h1>\n' +
-                        '            <p>'+company_type+' | '+company_scale+' | '+company_city+'</p>\n' +
+                        '            <p>'+company_type+' | '+company_scale+' | '+city+'-'+area+'</p>\n' +
                         '          </div>\n' +
                         '        </div>\n' +
                         '     </a>\n' +

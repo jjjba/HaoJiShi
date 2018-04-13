@@ -225,8 +225,8 @@ public class CompanyService {
                 stringObjectHashMap.put("matstate",company.getMatstate());
                 stringObjectHashMap.put("accountState",user.getAccountState());
                 stringObjectHashMap.put("icon",company.getIconPath());
-                stringObjectHashMap.put("province_id",company.getProvinceId());
-                stringObjectHashMap.put("city_id",company.getCityId());
+//                stringObjectHashMap.put("province_id",company.getProvinceId());
+//                stringObjectHashMap.put("city_id",company.getCityId());
                /* stringObjectHashMap.put("area_id",company.getAreaId());*/
 //                stringObjectHashMap.put("company_id",companyList.get(0).getId());
 
@@ -292,8 +292,8 @@ public class CompanyService {
                 company.setName(company_name);
                 company.setCompanyScale(company_scale);
                 company.setCompanySpecial(company_special_str);
-                company.setProvinceId(province);
-                company.setCityId(city);
+//                company.setProvinceId(province);
+//                company.setCityId(city);
                 /*company.setAreaId(area);*/
                 company.setCompanyInfo(company_info);
                 company.setIconPath(iconName);
@@ -456,7 +456,7 @@ public class CompanyService {
         BusinessMessage businessMessage =new BusinessMessage();
         try {
             Company company =companyMapper.selectByPrimaryKey(id);
-            company.setMatstate(3);
+            company.setMatstate(4);
             companyMapper.updateByPrimaryKeySelective(company);
             Example example =new Example(Position.class);
             example.createCriteria().andEqualTo("companyId",company.getId());

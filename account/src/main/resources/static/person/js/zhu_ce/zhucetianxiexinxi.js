@@ -1,6 +1,7 @@
 var avatarPath;
 $(function () {
 
+
     var phone =$.cookie("phone");
     console.log("phone================="+phone)
     if(phone != null || phone != "" || phone != undefined) {
@@ -21,6 +22,7 @@ $(function () {
 
     }else {
         loadData();
+
     }
 });
 
@@ -84,7 +86,7 @@ function loadData() {
     if(qwxz == null || qwxz == ""){
         $('.qiwangxinzi').append('请选择期望薪资<img src="../../person/images/yjts.png" class="yjtiss" />')
     }else {
-            $('.qiwangxinzi').append(qwxz+'<img src="../../person/images/yjts.png" class="yjtiss" />')
+            $('.qiwangxinzi').append(qwxz)
     }
     if(hopeCity == null || hopeCity == ""){
         $('.avjahb').append('请选择意向城市<img src="../../person/images/yjts.png" class="yjtiss" />')
@@ -137,47 +139,14 @@ function loadData() {
         console.log("hopeCity======="+hopeCity)
         console.log("hopeJob======="+hopeJob)
         console.log("special======="+special)
-        if(special == "" || special == null || special == "请选择个人优势"){
-            $(".gerenyoushi").show()
-            setTimeout('$(".gerenyoushi").hide()',1000);
-        }
-        if(hopeJob == "" || hopeJob == null || hopeJob == "请选择求职岗位"){
-            $(".qiuzhizhegangwei").show()
-            setTimeout('$(".qiuzhizhegangwei").hide()',1000);
-        }
-        if(qwxz == "" || qwxz == null || qwxz == "请选择期望薪资"){
-            $(".qiwanginzi").show()
-            setTimeout('$(".qiwanginzi").hide()',1000);
-        }
-        if(gzjy == "" || gzjy == null || gzjy == "请选择工作经验"){
-            $(".gongzuojingyan").show()
-            setTimeout('$(".gongzuojingyan").hide()',1000);
+        if(name == "" || name == null || sex == "" || sex == null || sex == "请选择性别" || age == "" || age == null
+        || gzjy == "" || gzjy == null || gzjy == "请选择工作经验" || hopeJob == "" || hopeJob == null || hopeJob == "请选择求职岗位"
+        || qwxz == "" || qwxz == null || qwxz == "请选择期望薪资" || hopeCity == "" || hopeCity == null || hopeCity == "请选择意向城市"
+        || special == "" || special == null || special == "请选择个人优势" || state == "" || state == null || state == "请选择工作状态"){
+            $(".quanbuxinxi").show()
+            setTimeout('$(".quanbuxinxi").hide()',1000);
         }
 
-        if(name == "" || name == null){
-            $(".xingmingxinxi").show()
-            setTimeout('$(".xingmingxinxi").hide()',1000);
-        }
-
-        if(sex == "" || sex == null || sex == "请选择性别"){
-            $(".xingbiexinxi").show()
-            setTimeout('$(".xingbiexinxi").hide()',1000);
-        }
-
-        if(age == "" || age == null){
-            $(".nianlingxinxi").show()
-            setTimeout('$(".nianlingxinxi").hide()',1000);
-        }
-
-        if(hopeCity == "" || hopeCity == null || hopeCity == "请选择意向城市"){
-            $(".yixiangchenshi").show()
-            setTimeout('$(".yixiangchenshi").hide()',1000);
-        }
-
-        if(state == "" || state == null || state == "请选择工作状态"){
-            $(".gongzuozhuangtai").show()
-            setTimeout('$(".gongzuozhuangtai").hide()',1000);
-        }
         if(name != null && name != "" && sex != null && sex != "" && sex != "请选择性别" && age != null && age != "" &&
             gzjy != null && gzjy != ""&& gzjy != "请选择工作经验" && state != null && state != "" && state != "请选择工作状态"
             && hopeCity != null && hopeCity != "" && hopeCity != "请选择意向城市" && hopeJob != null && hopeJob != "" && hopeJob != "请选择求职岗位"
@@ -190,6 +159,7 @@ function loadData() {
                     $(".nianlingsuishu").show()
                     setTimeout('$(".nianlingsuishu").hide()',1000);
                 }else {
+                    $('.bcanius').attr("disabled","true");
                     $.ajax({
                         url:"/personal/perfectPersonalInfo",
                         type:"POST",
@@ -209,6 +179,7 @@ function loadData() {
                             window.location.href="/transition/transition_goMySelf";
                         },
                         error : function () {
+                            $('.bcanius').attr("disabled","false");
                             $(".baocunshibai").show()
                             setTimeout('$(".baocunshibai").hide()',1000);
 
