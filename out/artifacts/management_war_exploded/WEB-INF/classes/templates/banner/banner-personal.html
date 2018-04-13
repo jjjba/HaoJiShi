@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/layout-switch}">
+<head>
+    <title>个人端banner管理</title>
+
+    <!-- 当前页面自定义JS -->
+    <script src="/static/js/banner/personal_banner.js" th:src="@{/js/banner/personal_banner.js}"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="panel panel-default">
+            <div  class="panel-heading">
+                <div  class="btn btn-group">
+                    <button class="btn btn-default" data-toggle="modal" data-act="1" data-target="#addPersonalModal">
+                        添加
+                    </button>
+                    <button class="btn btn-default" data-toggle="modal" data-act="1" data-target="#editPersonalModal">
+                        修改
+                    </button>
+                    <button class="btn btn-default" onclick="deletePersonalBanner()">
+                        删除
+                    </button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th><input type="checkbox" id="checkAll"/></th>
+                        <th>序号</th>
+                        <th>图片</th>
+                        <th>跳转URL</th>
+                        <th>备注</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div id="pagination"></div>
+            </div>
+        </div>
+    </div>
+    <!-- [配置]添加模态框 -->
+    <div layout:replace="~{banner/banner-addPersonal}"/>
+    <!-- [配置]修改模态框 -->
+    <div layout:replace="~{banner/banner-editPersonal}"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <title>好技师·个人端</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/person/css/response.css"
+          th:href="@{/person/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/public.css"
+          th:href="@{/person/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/xiangying.css"
+          th:href="@{/person/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    <link type="text/css" href="/static/person/css/personal_index/lunbo.css"
+          th:href="@{/person/css/personal_index/lunbo.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/personal_index/index.css"
+          th:href="@{/person/css/personal_index/index.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/personal_index/bottom.css"
+          th:href="@{/person/css/personal_index/bottom.css}" rel="stylesheet" />
+    <!--轮播图开始-->
+    <link type="text/css" href="/static/person/css/personal_index/lunbo.css"
+          th:href="@{/person/css/personal_index/lunbo.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/person/js/jquery-3.2.1.js"
+            th:src="@{/person/js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" src="/static/person/js/personal_index/idangerous.swiper.min.js"
+            th:src="@{/person/js/personal_index/idangerous.swiper.min.js}"></script>
+    <link type="text/css" href="/static/person/css/personal_index/idangerous.swiper.css"
+          th:href="@{/person/css/personal_index/idangerous.swiper.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/person/js/personal_index/TouchSlide.1.1.js"
+            th:src="@{/person/js/personal_index/TouchSlide.1.1.js}"></script>
+    <script type="text/javascript" src="/static/person/js/personal_index/kxbdSuperMarquee.js"
+            th:src="@{/person/js/personal_index/kxbdSuperMarquee.js}"></script>
+    <!--轮播图结束-->
+    <script type="text/javascript" src="/static/person/js/personal_index/wzgd.js"
+            th:src="@{/person/js/personal_index/wzgd.js}"></script>
+    <script type="text/javascript" src="/static/person/js/personal_index/index.js"
+            th:src="@{/person/js/personal_index/index.js}"></script>
+    <script type="text/javascript" src="/static/person/js/personal_index/guanzhutishi.js"
+            th:src="@{/person/js/personal_index/guanzhutishi.js}"></script>
+    <script type="text/javascript" src="/static/person/js/personal_index/jquery.cookie.js"
+            th:src="@{/person/js/personal_index/jquery.cookie.js}"></script>
+</head>
+<body>
+<!--焦点图开始-->
+<!--<div class="w scroll">-->
+    <!--<div class="scroll-container swiper-container">-->
+        <!--<div class="swiper-wrapper">-->
+
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="pagination"></div>-->
+<!--</div>-->
+<script>
+    var mySwiper = new Swiper('.scroll-container',{
+        pagination: '.pagination',
+        autoplay:3000,
+        loop:true,
+        grabCursor: true,
+        paginationClickable: true,
+        cssHeight:false,
+        calculateHeight:true
+    });
+</script>
+<!--焦点图结束-->
+
+
+<!--通告开始-->
+<div class="nouents">
+    <!--左边开始-->
+    <div class="nouzuos">
+        <img src="/static/person/images/biao01.png" th:src="@{/person/images/biao01.png}"/>
+    </div>
+    <!--左边结束-->
+    <!--右边开始-->
+    <div class="notice_active">
+        <ul>
+            <li class="notice_active_ch"><a href="#">好技师新版本即将上线！</a></li>
+            <li class="notice_active_ch"><a href="#">好技师新版本即将上线！</a></li>
+        </ul>
+    </div>
+    <!--右边结束-->
+</div>
+<!--通告介绍-->
+
+<!--推荐职位开始-->
+<div class="recpion">
+    <!--标题开始-->
+    <div class="tjzw">推荐职位</div>
+    <!--标题结束-->
+    <!--一块开始-->
+    <div class="positionList">
+    </div>
+
+
+</div>
+<!--推荐职位结束-->
+
+<!--招人才开始-->
+<div class="rectents">
+    <a href="#"><img src="/static/person/images/zrcai.png" th:src="@{/person/images/zrcai.png}"/></a>
+</div>
+<!--招人才结束-->
+
+<!--最底部开始-->
+<div class="footers">
+    <ul>
+        <li>
+            <a href="#" onclick="goPosition()">
+                <i class="botmbg01"></i>
+                <p>职位</p>
+            </a>
+        </li>
+        <li class="actives">
+            <a href="#">
+                <i class="botmbg02"></i>
+                <p>首页</p>
+            </a>
+        </li>
+        <li>
+            <a href="#" onclick="goMySelf()">
+                <i class="botmbg03"></i>
+                <p>我的</p>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--最底部结束-->
+
+<!--弹出层开始-->
+<div class="popupus" style="display: none">
+    <!--里边开始-->
+    <div class="pupuinto">
+        <div class="lbyis">
+            <h1>温馨提示</h1>
+            <p>关注”好技狮”公众号，您可以及时掌握足疗养生行业最新求职、招聘信息，享受更多精彩服务！</p>
+            <ul>
+                <li class="wzkljgz01"><a href="#">我再看看</a></li>
+                <li class="wzkljgz02"><a href="#">立即关注</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--里边结束-->
+</div>
+<!--弹出层结束-->
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

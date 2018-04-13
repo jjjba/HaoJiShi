@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/layout-switch}">
+<head>
+    <title>企业注册审核</title>
+
+    <!-- 当前页面自定义JS -->
+    <script src="/static/js/company/companyAudit.js" th:src="@{/js/company/companyAudit.js}"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="navbar-form navbar-left" role="search">
+            <button class="btn btn-default" style="background: greenyellow" onclick="approvedExport()">通过审核</button>
+            <button class="btn btn-default" style="background: red" onclick="auditFailedExport()">未通过审核</button>
+            <div class="form-group">
+                <label>手机号：</label>
+                <input class="form-control" name="phone"/>
+            </div>
+            <div class="form-group">
+                <label>企业名称：</label>
+                <input class="form-control" name="name"/>
+            </div>
+            <button class="btn btn-default" onclick="search()"><span class="fa fa-search"></span>查询</button>
+        </div>
+    </div>
+
+    <div class="">
+        <div class="row">
+            <div class="panel panel-default">
+
+                <div class="panel-body" id="wrapper">
+                    <table class="table text-nowrap" id="sorter">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" id="checkAll"/></th>
+                            <th>id</th>
+                            <th>企业名称</th>
+                            <th><button class="btn btn-default" onclick="addTimeSort()">注册时间</button></th>
+                            <th>负责人姓名</th>
+                            <th>手机号</th>
+                            <th>营业执照</th>
+                            <th>最后上传时间</th>
+                            <th>审核结果</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <div id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- [配置]修改模态框 -->
+    <div layout:replace="~{company/company-edit}"/>
+</div>
+</body>
+</html>

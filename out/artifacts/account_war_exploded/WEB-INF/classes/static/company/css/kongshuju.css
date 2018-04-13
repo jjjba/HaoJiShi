@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:#fff;}
+ 
+ .ksjsis{font-size:1.4rem; color:#9E9E9E; text-align:center; padding-top:40%;}
+  .ksjsis h1,.ksjsis p{ font-size:1.4rem; text-align:center;}
+    .ksjsis h1{ padding-bottom:20px;}
+	 .ksjsis h1 img{ width:12.5rem;}

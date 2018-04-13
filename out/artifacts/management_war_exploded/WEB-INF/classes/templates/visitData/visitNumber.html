@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragment/layout-switch}">
+<head>
+    <title>用户访问量</title>
+
+    <!-- 当前页面自定义JS,css -->
+    <link href="/static/css/datetimepicker/font-awesome.css"
+          th:href="@{/css/datetimepicker/font-awesome.css}" rel="stylesheet">
+    <link href="/static/css/datetimepicker/daterangepicker.css"
+          th:href="@{/css/datetimepicker/daterangepicker.css}" rel="stylesheet">
+    <!--<script src="/static/js/datetimepicker/common.js"-->
+            <!--th:src="@{/js/datetimepicker/common.js}" type="text/javascript"></script>-->
+    <!--<script src="/static/js/datetimepicker/moment.js"-->
+            <!--th:src="@{/js/datetimepicker/moment.js}" type="text/javascript"></script>-->
+    <script src="/static/js/datetimepicker/daterangepicker.js"
+            th:src="@{/js/datetimepicker/daterangepicker.js}" type="text/javascript"></script>
+    <script src="/static/js/datetimepicker/daterangepicker.zh-CN.js"
+            th:src="@{/js/datetimepicker/daterangepicker.zh-CN.js}" type="text/javascript"></script>
+    <script src="/static/js/visitData/visit.js" th:src="@{/js/visitData/visit.js}"></script>
+
+</head>
+<body>
+<div layout:fragment="content">
+
+    <div class="row">
+        <div class="navbar-form navbar-left" role="search">
+
+            <div class="input-group" style="width: 240px; margin-left: -5px;">
+                <input class="form-control date-picker" id="dateTimeRange" type="text">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar bigger-110"></i>
+                    </span>
+                <input name="beginTime" id="beginTime" type="hidden">
+                <input name="endTime" id="endTime" type="hidden">
+            </div>
+            <a href="javascript:;" onclick="begin_end_time_clear();">清除</a>
+
+            <button class="btn btn-default" onclick="search()"><span class="fa fa-search"></span>查询</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body" id="wrapper">
+                <div class="table-responsive">
+                    <table class="table text-nowrap" id="sorter">
+                        <thead>
+                        </thead>
+                    </table>
+                </div>
+                <div id="pagination"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

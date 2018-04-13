@@ -1,0 +1,170 @@
+﻿<!doctype html>
+<html   xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>企业端-职位</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css"
+          th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/grbqs.css" th:href="@{/company/css/grbqs.css}" rel="stylesheet" />
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto" >
+     个人标签
+     <a href="#" class="zjtous" onclick="bjfh()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+     <a href="#" class="qudeds srhos" onclick="fuliOk()">确定</a>
+     <!--个人标签空白时开始-->
+      <a href="#" class="qudeds kbshis" style="display:none;">确定</a>
+     <!--个人标签空白时结束-->
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--上边开始-->
+ <div class="sibyous">
+   <!--有内容时开始-->
+   <div class="conthaves">
+     <ul class="clearfix">
+       <!--<li>包住 <img src="/static/company/images/hongscs.png"  th:src="@{/company/images/hongscs.png}" class="gbanius" /></li>
+       <li>老板好 <img src="/static/company/images/hongscs.png"th:src="@{/company/images/hongscs.png}" class="gbanius" /></li>
+       <li>报销车费 <img src="/static/company/images/hongscs.png" th:src="@{/company/images/hongscs.png}"class="gbanius" /></li>
+       <li>包吃 <img src="/static/company/images/hongscs.png"th:src="@{/company/images/hongscs.png}" class="gbanius" /></li>
+       <li>个性化管理 <img src="/static/company/images/hongscs.png"th:src="@{/company/images/hongscs.png}" class="gbanius" /></li>-->
+     </ul>
+   </div>
+   <!--有内容时结束-->
+   
+   <!--空白时开始-->
+   <div class="kbniyus" style="display:none;">
+     请在下方选择您的个人标签最多6个
+   </div>
+   <!--空白时结束-->
+ </div>
+ <!--上边结束-->
+ 
+ <!--下边开始-->
+ <div class="nrxbyuus">
+     <a href="#"onclick="clerAdd('五五分成','bc')">五五分成</a>
+   <a href="#"onclick="clerAdd('四六分成','bz')">四六分成</a>
+   <a href="#"onclick="clerAdd('三七分成','hsh')">三七分成</a>
+   <a href="#"onclick="clerAdd('长期保底','sshjh')">长期保底</a>
+   <a href="#"onclick="clerAdd('保底三个月','mfpx')">保底三个月</a>
+   <a href="#"onclick="clerAdd('保底两个月','qqj')">保底两个月</a>
+   <a href="#"onclick="clerAdd('保底一个月','wrhyj')">保底一个月</a>
+     <a href="#"onclick="clerAdd('工资日结','jxjj')">工资日结</a>
+     <a href="#"onclick="clerAdd('十天发工资','fzkjd')">十天发工资</a>
+     <a href="#"onclick="clerAdd('半月发工资','lbdf')">半月发工资</a>
+     <a href="#"onclick="clerAdd('准时发工资','gfz')">准时发工资</a>
+     <a href="#"onclick="clerAdd('不拖欠工资','ygly')">不拖欠工资</a>
+     <a href="#"onclick="clerAdd('不压工资','nzj')">不压工资</a>
+     <a href="#"onclick="clerAdd('无任何押金','hjh')">无任何押金</a>
+     <a href="#"onclick="clerAdd('晋升空间大','rxhgl')">晋升空间大</a>
+     <a href="#"onclick="clerAdd('包吃','klld')">包吃</a>
+     <a href="#"onclick="clerAdd('包住','bxcf')">包住</a>
+     <a href="#"onclick="clerAdd('房补','ssb')">房补</a>
+     <a href="#"onclick="clerAdd('月休四天','mvd')">月休四天</a>
+
+     <a href="#"onclick="clerAdd('不加班','bjb')">不加班</a>
+     <a href="#"onclick="clerAdd('弹性工作时间','txsj')">弹性工作时间</a>
+     <a href="#"onclick="clerAdd('报销车费','bxcf')">报销车费</a>
+     <a href="#"onclick="clerAdd('上社保','mvd')">上社保</a>
+     <a href="#"onclick="clerAdd('生日福利','srfl')">生日福利</a>
+     <a href="#"onclick="clerAdd('节日福利','jrfl')">节日福利</a>
+     <a href="#"onclick="clerAdd('补助多','bzd')">补助多</a>
+     <a href="#"onclick="clerAdd('就近分配','jjfp')">就近分配</a>
+     <a href="#"onclick="clerAdd('老板大方','lbdf1')">老板大方</a>
+     <a href="#"onclick="clerAdd('不用打扫卫生','bydsws')">不用打扫卫生</a>
+     <a href="#"onclick="clerAdd('工装漂亮','gzpl')">工装漂亮</a>
+     <a href="#"onclick="clerAdd('工装得体','gzdt')">工装得体</a>
+
+
+
+
+
+ </div>
+ <div class="toolbarframe NameBwk" style="display: none">不能重复选择</div>
+ <!--下边结束-->
+ <script type="text/javascript">
+     var num = 0;
+     var myArray = new Array();
+     function clerAdd(tj,tt) {
+         if(num<6){
+             var bj = 0;
+             for(var arr = 0; arr<myArray.length;arr++){
+                if(myArray[arr]==tj){
+                    bj =1;
+                }
+             }
+             if(bj ==0){
+                 num++;
+                 $(".clearfix").append("<li id='"+tt+"'>"+tj+"<img src='../../company/images/hongscs.png'  class='gbanius' onclick='distoy(&quot;"+tt+"&quot;)'/></li>");
+                 myArray.push(tj);
+             }else {
+                 $(".NameBwk").show();
+                 setTimeout('$(".NameBwk").hide()',600);
+             }
+         }else {
+             $(".kbniyus").show();
+         }
+     }
+     function distoy(tt) {
+         console.log(tt.toString());
+         $("#"+tt).remove();
+         num --;
+     }
+     function fuliOk() {
+         var sd = "";
+         $("li").each(function () {
+             sd+=$(this).text();
+             sd+=",";
+         })
+         sessionStorage.setItem("LLLLzwfl",sd);
+
+         bjfh();
+     }
+     function bjfh() {
+         var id= sessionStorage.getItem("positionid");
+         if(id == null || id == undefined || id=="" || id == ''){
+             window.location.href="/transition/bianji_zhiwei";
+         }else {
+             window.location.href="/transition/zhiweiguanlirenzhneg_bj";
+         }
+     }
+ </script>
+ 
+
+ 
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

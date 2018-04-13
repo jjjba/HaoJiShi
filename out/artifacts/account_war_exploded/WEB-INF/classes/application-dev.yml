@@ -1,0 +1,92 @@
+# 开启调试模式
+debug: true
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+spring:
+# AOP 配置
+  aop:
+    proxy-target-class: true
+# 数据源配置
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://118.190.133.194:3306/hjs?useSSL=false&characterEncoding=UTF-8
+      username: root
+      password: JSH@#0629SDJU
+      initial-size: 2
+      max-active: 30
+      min-idle: 2
+      max-wait: 1234
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 5
+      validation-query: select 'x'
+      validation-query-timeout: 1
+      test-on-borrow: true
+      test-while-idle: true
+      test-on-return: true
+      filters: stat, wall, slf4j
+      aop-patterns: com.haojishi.mapper.*
+#      stat-view-servlet:
+#        login-username: wangqiang
+#        login-password: 123456123
+
+# Thymeleaf
+  thymeleaf:
+    mode: HTML
+    cache: false
+#  http:
+    multipart:
+      max-file-size: 10MB
+
+# js添加版本
+  resources :
+      chain :
+        strategy :
+          fixed :
+            enabled: true
+            paths: /js/**,/v1.0.0/**
+            version: v1.0.0
+
+mybatis:
+    type-aliases-package: com.haojishi.model
+    mapper-locations: classpath:com/haojishi/mapper/*.xml
+
+mapper:
+    mappers:
+        - tk.mybatis.mapper.common.Mapper
+    not-empty: false
+    identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+# 日志配置
+logging:
+  level:
+    com.haojishi: debug
+    org.springframework: error
+
+api:
+  #图片和视频存放路径
+  fileImagePath: C:/HJS/smail/hjs-smail-java/web/target/classes/static/upload
+  ImageSrc: http://localhost:8075/web/upload
+
+  appid: wx3e2445e709ce5350
+  secret: 7493fbb97c3441ed803f2040b31fec37
+  #支付配置
+  mchUserId: 1417975802
+  mchUserKey: 230948roejdsieuoids9IO23QWS923kl
+  wechat-callback-url: https://www.haojishi.net/api/pay_callback/we-chat
+
+  #短信配置
+  smstplId: 26032
+  smsKey: dc322ebe4dc738c34b2f943e5b85de5e
+

@@ -1,0 +1,73 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:#fff;}
+
+/*最上边开始*/
+.zuitops{ padding:1rem 1.2rem 1rem 1.2rem;}
+  /*里边开始*/
+  .lbyhius{ width:100%; background:url(../images/bgiswp.png) no-repeat center; background-size:cover; -moz-background-size:cover; -webkit-background-size:cover; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px; padding:1.2rem 0 1.2rem 0; position:relative;}
+     
+	 .sycsss{ padding:1rem 0 1rem 0; width:20rem;}
+	 .sycsss h1{font-size:4rem; color:#FFFFFF; text-align:center;}
+	 .sycsss p{font-size:1.4rem; color:#FFFFFF; text-align:center; padding-top:0.5rem;}
+	 
+	 .wenhaos{ display:block; position:absolute; right:1rem; top:1rem;}
+	   .wenhaos img{ width:1.6rem;}
+	   
+	   .qxfeis{ display:block; position:absolute; right:1rem; bottom:1.5rem; padding:0.2rem 1rem 0.2rem 1rem; background:#FFF; border-radius:90px; -moz-border-radius:90px; -webkit-border-radius:90px; font-size:1.4rem; color:#FF5959; text-align:center;}
+	   
+  /*里边结束*/
+/*最上边结束*/
+
+/*记录开始*/
+  .yliuiss{ width:100%; display:box; display:-webkit-box; display:-moz-box; }
+    .yliuiss li{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; font-size:1.4rem; color:#9E9E9E; text-align:center;  border-bottom:1px solid #ebebeb; padding:1.3rem 0 1.3rem 0;}
+     .yliuiss li.borsbers{ border-bottom:1px solid #ff6118; color:#ff6118;}
+    
+	
+	/*内容开始*/
+	.fufeigl{ padding-left:1.2rem;}
+	  .abloycks{display:box; display:-webkit-box; display:-moz-box; border-bottom:1px solid #ebebeb; padding:1.5rem 1.2rem 1.5rem 0;}
+	  
+	  .zuouts{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; font-size:1.4rem; color:#404040; font-weight:bold;}
+	  
+	  .youbyus{ width:13rem;}
+	   .youbyus h2{font-size:1.4rem; color:#404040; text-align:right;}
+	   .youbyus p{font-size:1.2rem; color:#9E9E9E; text-align:right; padding-top:0.2rem;}
+	   
+	   .fufeigl{ display:none;}
+	/*内容结束*/
+	
+/*记录结束*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

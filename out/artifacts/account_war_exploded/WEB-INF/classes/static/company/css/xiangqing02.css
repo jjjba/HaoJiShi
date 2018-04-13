@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+body{ background:#fff; padding-bottom:4.5rem;}
+
+/*上边内容开始*/
+.sbnecont{ width:93%; margin:0 auto; background:#fff; padding:16px 0 16px 0; box-shadow: 0px 1px 28px #f3f3f3; -moz-box-shadow: 0px 1px 28px #f3f3f3; -webkit-box-shadow: 0px 1px 28px #f3f3f3; margin-top:16px; border-radius:6px; -moz-border-radius:6px; -webkit-border-radius:6px;}
+   
+   /*上开始*/
+   .sbontshs{ border-bottom:1px dashed #ebebeb;}
+   
+      /*职位开始*/
+	  .respise{ padding:0 1.2rem 0 1.2rem;}
+	    .reselefs{font-size:1.7rem; color:#404040; font-weight:bolder;}
+		.reseyous{ padding-top:1px;}
+		.reseyous span{ display:inline-block; border-radius:16px; -moz-border-radius:16px; -webkit-border-radius:16px; -ms-border-radius:16px; -o-border-radius:16px; font-size:1.1rem; padding:1px 6px 1px 6px; vertical-align:middle;}
+		.reseyous span.yse01{ background:#ffe9de; border:1px solid #ff6118; color:#ff6118;}
+		.reseyous span.yse02{ background:#ffecec; border:1px solid #ff3a3a; color:#ff3a3a; margin-left:3px;}
+	  /*职位结束*/
+      
+	  /*工资开始*/
+	  .gonzis{font-size:1.6rem; font-weight:bold; color:#FF6118; padding:0.5rem 1.2rem 1rem 1.2rem;}
+	  /*工资结束*/
+	  
+	  /*要求开始*/
+	  .yaoqius{font-size:1.4rem; color:#9E9E9E; padding:0.2rem 1.2rem 1rem 1.2rem;}
+	  /*要求结束*/
+	  
+	  /*待遇开始*/
+	  .daiyus{ padding:0.2rem 1.2rem 1rem 1.2rem;}
+	    .daiyus span{ display:inline-block; background:#f7f7f7; border-radius:3px; -moz-border-radius:3px; -webkit-border-radius:3px; font-size:1.2rem;
+color:#404040; padding:0.3rem 0.8rem 0.3rem 0.8rem; margin-right:3px;}
+	  /*待遇结束*/
+	  
+   /*上结束*/
+   
+	  /*公司名称地址开始*/
+	  .corpnames{display:box; display:-webkit-box; display:-moz-box; padding:1rem 1.2rem 0 1.2rem;}
+	     /*左边开始*/
+		 .corpzuos{width:5rem; position:relative;}
+		 .corpzuos img{ border:1px solid #e5e5e5; width:100%; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -ms-border-radius:5px; -o-border-radius:5px;}
+		 .yrzs{ position:absolute; width:100%; text-align:center; left:0; bottom:-0.68rem;}
+		 .yrzs img{ width:3.5rem; border:0;}
+		 /*左边结束*/
+		 /*右边开始*/
+		 .corpryous{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem; padding-top:5px; position:relative;}
+		   .corpryous h1{font-size:1.4rem; color:#404040;overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis; text-overflow:ellipsis;}
+		   .corpryous p{font-size:1.2rem; color:#9E9E9E; padding-top:5px;}
+		   .jtois{ width:0.7rem; position:absolute; right:0; top:2rem;}
+		 /*右边结束*/
+	  /*公司名称地址结束*/  
+      
+   
+/*上边内容结束*/
+
+/*职位详情开始*/
+.zwxqius{ padding:2.5rem 1.2rem 1.5rem 1.2rem;}
+  /*标题开始*/
+  .zwxtits{font-size:1.4rem; color:#404040; font-weight:bold;}
+  /*标题结束*/
+  
+  /*内容开始*/
+  .zwqxconts{ padding:1rem 0 0 0; font-size:14px; color:#9E9E9E;}
+  /*内容结束*/
+/*职位详情结束*/
+
+/*店铺地址开始*/
+.dpudzhis{padding:0 1.2rem 2.5rem 1.2rem;}
+  
+  .dpuzhids{display:box; display:-webkit-box; display:-moz-box; padding:1rem 0 0 0;}
+   .dzlefs{font-size:1.4rem; color:#9E9E9E; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; }
+   
+   .dzyous{ width:0.7rem;}
+   .dzyous img{ width:0.7rem;}
+/*店铺地址结束*/
+
+
+
+/*弹出层开始*/
+
+.popupus{ position:fixed; width:100%; height:100%; background:url(../images/tcbg.png); left:0; top:0; z-index:1000;}
+   
+   /*里边开始*/
+   .pupuinto{ width:100%; height:100%; position:relative;}
+     
+	 .lbyis{ position:absolute; width:70%; left:15%; top:25%; background:#fff; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
+	   
+	    .lbyis p{font-size:1.4rem; color:#404040; text-align:center; padding:1.8rem 1.2rem 1.5rem 1.2rem;}
+	   
+	   .lbyis ul{display:box; display:-webkit-box; display:-moz-box; border-top:1px solid #dbdbdb;}
+	   .lbyis ul li{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; font-size:1.6rem; color:#FF6118; text-align:center; padding:1rem 0 1rem 0;}
+	   .lbyis ul li a{ color:#FF6118;}
+	   
+	   .lbyis ul li.wzkljgz01{ border-right:1px solid #dbdbdb;}
+	   
+   /*里边结束*/
+   
+/*弹出层结束*/
+
+
+.toolbarframe{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.4rem; width:8rem; height:3rem; line-height:3rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-1.5rem; margin-left:-4rem;}
+
+
+.toolbarframe02{ position:fixed; top:20%; left:20%; z-index:1000; background:#333; color:#fff; color:#fff; font-size:1.4rem; width:8rem; height:3rem; line-height:3rem; text-align:center; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; left:50%; top:50%; margin-top:-1.5rem; margin-left:-4rem;}
+
+
+
+
+
+ /*最底部开始*/
+  .bcanius{ position:fixed; bottom:0; left:0; width:100%; height:4.1rem;}
+  
+  .bcnois{ width:100%; height:4.1rem; display:block; border:0; background: #FF6118; font-size:1.7rem; color:#FFFFFF; text-align:center; line-height:4.1rem;}
+ /*最底部结束*/
+
+
+
+
+/*分享页开始*/
+
+.bomxianss{ border-bottom:1px solid #ebebeb;}
+
+.tbxxssid{ background:url(../images/xqtops.png) no-repeat left top; background-size:100% auto; display:box; display:-webkit-box; display:-moz-box; padding:1rem 1.2rem 1rem 0;}
+  .tbzxzuo001{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; color:#fff; padding-left:8rem;}
+   .tbzxzuo001 h1{font-size:1.4rem; color:#FFFFFF; font-weight:normal;}
+   .tbzxzuo001 p{ font-size:1.2rem; color:#fff; padding:0.1rem 0 0.5rem 0;}
+   
+   .tbzxzuo002{ width:5.4rem;}
+     
+	 .tbzxzuo002 a{ display:block; background:#fff; border-radius:2px; -moz-border-radius:2px; -webkit-border-radius:2px; width:100%; text-align:center; padding:0.4rem 0 0.4rem 0;font-size:1.2rem; color:#FF6118;}
+
+
+.dressies{ background:#fff; border-bottom:1px solid #ededed; padding:1.3rem 1.2rem 1.3rem 1.2rem; display:box; display:-webkit-box; display:-moz-box;}
+.zuolefs{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; font-size:1.4rem;color:#9E9E9E; padding-right:1rem; }
+  
+  .yourights{ width:0.8rem;}
+    .yourights img{ width:100%;}
+	
+.zdbomtys{ width:100%; height:4.5rem; position:fixed; left:0; bottom:0; z-index:10; display:box; display:-webkit-box; display:-moz-box; border-top:1px solid #ebebeb;}
+  .zdbomtys a{ display:block; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; height:4.5rem; font-size:1.7rem; text-align:center; line-height:4.5rem;}
+  
+  a.ysbgui001{ background:#fff; color:#FF6118;}
+  a.ysbgui002{ background:#FF6118; color:#FFFFFF;}
+/*分享页结束*/
+
+
+

@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* CSS Document */
+body{ background:#f7f7f7; padding-bottom:5rem;}
+
+/*头像开始*/
+.txuyse{ background:#fff; padding:0.7rem 1.2rem 0.5rem 1.2rem; margin-top:1rem;}
+  .sbtopxxs{display:box; display:-webkit-box; display:-moz-box; padding:0.3rem 0 1.2rem 0;}
+     /*左开始*/
+	 .sblefs{ width:6.2rem;}
+	   .sblefs img{ width:100%; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
+	 /*左结束*/
+	 
+	 /*右开始*/
+	 .sbyours{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem; position:relative;}
+	 
+	 .lylyus,.lylyus02{font-size:1.6rem; color:#404040;}
+	  .lylyus span{ display:inline-block; vertical-align:middle; background:#e4f7ff; border:1px solid #00c1ff; color:#00c1ff; font-size:1.1rem; border-radius:3px; padding:0 3px 0 3px; font-weight:bold;}
+	  
+	  .lylyus02 span{ display:inline-block; vertical-align:middle; background:#ffebf2; border:1px solid #FF5592; color:#FF5592; font-size:1.1rem; border-radius:3px; padding:0 3px 0 3px; font-weight:bold;}
+	  
+	  .lylyus span img,.lylyus02 span img{ width:1.3rem; vertical-align:middle; font-weight:normal;}
+	  
+	  .grxhzls{font-size:14px; color:#9E9E9E; padding-top:13px;}
+	    
+		
+		
+		.ycjstts{ position:absolute; right:0; top:1.6rem;}
+		.ycjstts a{font-size:1.4rem; color:#9E9E9E;}
+		.ycjstts img{ width:0.7rem; vertical-align:middle; margin-left:0.5rem;}
+	 /*右结束*/
+
+/*头像结束*/
+
+/*自我介绍开始*/
+.zwjisss{ background:#fff; margin-top:1rem;}
+  /*上开始*/
+  .stopsis{ padding:1.3rem 1.2rem 1.3rem 1.2rem; border-bottom:1px solid #ebebeb; display:box; display:-webkit-box; display:-moz-box;}
+     
+	 .zuoius01{font-size:1.6rem; color:#404040; width:9rem; }
+	 
+	 .zuoius02{font-size:1.4rem; color:#9E9E9E; text-align:right; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;  padding-right:1rem; padding-top:0.2rem; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; }
+	 
+	 .zuoius03 { width:0.7rem; padding-top:0.35rem;}
+	 .zuoius03 img{ width:100%;}
+	 
+  /*上结束*/
+  
+  
+   img.yjtiss{ width:0.8rem; vertical-align:middle; margin-left:1rem;}
+  
+  /*下开始*/
+    .borxboms{ border-bottom:1px solid #ebebeb;}
+    .sryikuys{ padding:1.3rem 1.2rem 1.3rem 1.2rem;}
+	
+	/*左边开始*/
+	.zcsyks{font-size:1.6rem; color:#404040;}
+	/*左边结束*/
+	
+	/*右边开始*/
+	.youyss{ padding-top:0.2rem;}
+	/*右边结束*/
+	
+	/*下结束*/
+    
+/*自我介绍结束*/
+
+
+/*期望待遇开始*/
+
+.xzzwis{ display:inline-block; vertical-align:middle;}
+/*期望待遇结束*/
+
+
+.xzeyosx{ display:inline-block; vertical-align:middle;}
+
+
+
+/*意向城市开始*/
+.youkuiss{ font-size:1.4rem; color: #9E9E9E;}
+
+/*意向城市结束*/
+
+
+
+/*个人形象开始*/
+.grxxians{ background:#fff; padding:1rem 1.2rem 1rem 1.2rem; margin-top:1rem;}
+  
+  /*标题开始*/
+  .grxxtits{font-size:1.6rem; color:#404040;}
+    .fbits{font-size:1.2rem; color:#9E9E9E; padding-top:0.2rem;}
+  /*标题结束*/
+  
+
+/*个人形象结束*/
+
+
+/*保存按钮开始*/
+.zduioss{ position:fixed; width:100%; height:4rem; left:0; bottom:0;}
+  .bcanius{ display:block; width:100%; height:4rem; background:#FF6118; font-size:1.7rem; color:#FFFFFF; text-align:center; line-height:4rem; border:0;}
+/*保存按钮结束*/
+
+
+.wtxyss{color:#FF476F;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

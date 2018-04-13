@@ -1,0 +1,116 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>修改手机号</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css" th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css" th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css" th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+	<!-- 公用样式 结束 -->
+
+    <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/top.css" th:href="@{/company/css/wo_de_zhang_hao_she_zhi/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wo_de_zhang_hao_she_zhi/cjwts.css" th:href="@{/company/css/wo_de_zhang_hao_she_zhi/cjwts.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css" th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
+
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js" th:src="@{/company/js/jquery-3.2.1.js}"></script>
+    <script type="text/javascript" src="/static/person/js/zhanghaoshezhi/xiugaishoujihao.js" th:src="@{/person/js/zhanghaoshezhi/xiugaishoujihao.js}"></script>
+    <script type="text/javascript">
+        function fanhuizhanghaoshezhi() {
+            window.location.href="/transition/account_settings";
+        }
+    </script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     修改手机
+     <a href="#" class="zjtous" onclick="fanhuizhanghaoshezhi()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--内容开始-->
+  <div class="xgsjhoma">
+    <div class="sbyouis">
+      <div class="luyilf01">旧手机</div>
+      <div class="luyilf02 xinhiss" id="phoneNum"></div>
+    </div>
+    
+    <div class="botmxs clearfix">
+      <div class="zuoceso"><input type="text" id="yzmold" class="sjuyys" placeholder="验证码" /></div>
+      <div class="youbyois">
+        
+<input type="button" class="yzxis" value="获取验证码" onclick="sendCode(this)" />
+          <input type="text" id="yzmyc" style="display: none"/>
+          <input type="text" id="yzmyc2" style="display: none"/>
+        
+      </div>
+    </div>
+    
+  </div>
+ <!--内容结束-->
+ 
+ 
+ <!--内容开始-->
+  <div class="xgsjhoma">
+    <div class="sbyouis">
+      <div class="luyilf01">新手机</div>
+      <div class="luyilf02"><input type="text" class="sjuyys" id="newPhoneNum" placeholder="请输入新手机号" /></div>
+    </div>
+    
+    <div class="botmxs clearfix">
+      <div class="zuoceso"><input type="text" id="yzmnew" class="sjuyys" placeholder="验证码" /></div>
+      <div class="youbyois">
+        
+<input type="button" class="yzxis" value="获取验证码" onclick="sendCode1(this)" />
+          <!--验证码不正确提示开始-->
+          <div class="toolbarframe diyiciyanzhengma" style="display: none">旧手机验证码不正确</div>
+          <div class="toolbarframe dierciyanzhengma" style="display: none">新手机验证码不正确</div>
+          <div class="toolbarframe diyici" style="display: none">旧手机验证码不能为空</div>
+          <div class="toolbarframe dierci" style="display: none">新手机验证码不能为空</div>
+          <div class="toolbarframe zhengque" style="display: none">验证码已发送,请注意查收~</div>
+          <div class="toolbarframe huoqushibai" style="display: none">获取验证码失败,请重试!!</div>
+          <div class="toolbarframe shuruzhengqueshouji" style="display: none">请输入正确手机号码!!</div>
+          <div class="toolbarframe shurushouji" style="display: none">请输入手机号码!!</div>
+          <div class="toolbarframe Newshurushouji" style="display: none">请输入新手机号码!!</div>
+          <div class="toolbarframe updateok" style="display: none">修改手机号成功！！！</div>
+          <div class="toolbarframe updatefalse" style="display: none">修改手机号失败！！！</div>
+          <!--验证码不正确提示结束-->
+      </div>
+    </div>
+    
+  </div>
+ <!--内容结束-->
+ 
+ 
+  <!--确定修改开始-->
+ <div class="bcanius">
+   <a href="#" class="bcnois" onclick="updatePhone()">确定修改</a>
+ </div>
+ 
+  <!--确定修改结束-->
+ 
+ 
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

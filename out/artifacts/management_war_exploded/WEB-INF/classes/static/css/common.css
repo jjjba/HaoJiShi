@@ -1,0 +1,10 @@
+table img{
+    width: 60px;
+    height: 60px;
+
+}
+
+.td-div{
+    display: flex;
+    justify-content: flex-start;
+}

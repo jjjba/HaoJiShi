@@ -1,0 +1,129 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ background:#fff; padding-bottom:5rem;}
+ 
+/*最上边开始*/
+.ztiosps{ padding:1rem 1.2rem 1rem 1.2rem;}
+  
+  	  /*公司名称地址开始*/
+	  .corpnames{display:box; display:-webkit-box; display:-moz-box;}
+	     /*左边开始*/
+		 .corpzuos{width:5rem; position:relative;}
+		 .corpzuos img{ border:1px solid #e5e5e5; width:100%; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -ms-border-radius:5px; -o-border-radius:5px;}
+		 .yrzs{ position:absolute; width:100%; text-align:center; left:0; bottom:-0.68rem;}
+		 .yrzs img{ width:3.5rem; border:0;}
+		 /*左边结束*/
+		 /*右边开始*/
+		 .corpryous{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; padding-left:1rem; padding-top:5px; position:relative;}
+		   .corpryous h1{font-size:1.4rem; color:#404040;overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis; text-overflow:ellipsis;}
+		   .corpryous p{font-size:1.2rem; color:#9E9E9E; padding-top:5px;}
+		   .jtois{ width:0.7rem; position:absolute; right:0; top:2rem;}
+		 /*右边结束*/
+	  /*公司名称地址结束*/
+	  
+	  /*下边列表开始*/
+	  .xblbyos{ padding:1rem 0 1rem 0;}
+	    .xblbyos span{ display:inline-block; background:#F7F7F7; border-radius:2px; -moz-border-radius:2px; -webkit-border-radius:2px; font-size:12px; color:#404040; padding:5px 13px 5px 13px; margin:3px 3px 3px 0;}
+	  /*下边列表结束*/
+	  
+
+/*最上边结束*/
+
+/*展开全部开始*/
+.dpxqzks{ padding:0 1.2rem 0 1.2rem;}
+  
+  .wzquys{height:3rem; font-size:1.4rem; color:#404040; overflow:hidden;}
+  .wzquys.zhksi{ height:auto;}
+  
+  .zkbutns{ text-align:center; font-size:1.2rem; color:#404040; padding:1rem 0 1rem 0;}
+   .zkbutns a{color:#404040;}
+    .zkbutns a img{ width:2rem; vertical-align:middle;}
+/*展开全部结束*/
+
+
+
+/*图片展示开始*/
+.tupicig{ padding:0 1.2rem 1rem 1.2rem;}
+
+.made{background:#FFF; margin-top:1.2rem;}
+.madegame{width:100%;overflow:hidden;}
+#ho{position:relative !important;}
+#ho li{float:left;width:10rem;position:relative; margin-right:0.5rem;}
+#ho li img{ width:100%;}
+/*图片展示结束*/
+
+/*在招职位开始*/
+.zzwziuus{border-top:0.7rem solid #f7f7f7; padding:1.2rem 1.2rem 1.2rem 1.2rem; border-bottom:1px solid #ebebeb;}
+  .zzwziuus h2{font-size:1.7rem; color:#404040; text-align:center;}
+  .zzwziuus p{font-size:1.4rem; color:#9E9E9E; text-align:center; padding-top:0.2rem;}
+/*在招职位结束*/
+
+
+
+.kuisis{ display:block; padding-left:1.2rem;}
+  .libjyos{ border-bottom:1px solid #ebebeb; padding:1.2rem 1.2rem 1.2rem 0; display:box; display:-webkit-box; display:-moz-box;}
+    
+	.lzuliuys{width:10rem;}
+      .lzuliuys h2{font-size:1.6rem; color:#404040; font-weight:bold;}
+	  .lzuliuys p{font-size:1.5rem; color:#FF6118; font-weight:bold; padding-top:0.7rem;}
+	
+      .yomiyyys{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; position:relative; font-size:1.4rem; color:#9E9E9E; padding-top:2.65rem;}
+	  
+	  .jyousso{ display:block; position:absolute; right:0; top:50%; width:0.8rem; margin-top:-0.8rem;}
+
+
+
+
+/*分享店铺信息开始*/
+.fxdpxs{ height:4.5rem; width:100%; position:fixed; left:0; bottom:0;}
+  .fxlijise{ display:block; width:100%; height:4.5rem; background:#FF6118; font-size:1.7rem; color:#FFF; text-align:center; line-height:4.5rem;}
+
+/*分享店铺信息结束*/
+
+
+
+/*分享页开始*/
+
+.bomxianss{ border-bottom:1px solid #ebebeb;}
+
+.tbxxssid{ background:url(../images/xqtops.png) no-repeat left top; background-size:100% auto; display:box; display:-webkit-box; display:-moz-box; padding:1rem 1.2rem 1rem 0;}
+  .tbzxzuo001{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; color:#fff; padding-left:8rem;}
+   .tbzxzuo001 h1{font-size:1.4rem; color:#FFFFFF; font-weight:normal;}
+   .tbzxzuo001 p{ font-size:1.2rem; color:#fff; padding:0.1rem 0 0.5rem 0;}
+   
+   .tbzxzuo002{ width:5.4rem;}
+     
+	 .tbzxzuo002 a{ display:block; background:#fff; border-radius:2px; -moz-border-radius:2px; -webkit-border-radius:2px; width:100%; text-align:center; padding:0.4rem 0 0.4rem 0;font-size:1.2rem; color:#FF6118;}
+
+
+.dressies{ background:#fff; border-bottom:1px solid #ededed; padding:1.3rem 1.2rem 1.3rem 1.2rem; display:box; display:-webkit-box; display:-moz-box;}
+.zuolefs{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; font-size:1.4rem;color:#9E9E9E; padding-right:1rem; }
+  
+  .yourights{ width:0.8rem;}
+    .yourights img{ width:100%;}
+	
+.zdbomtys{ width:100%; height:4.5rem; position:fixed; left:0; bottom:0; z-index:10; display:box; display:-webkit-box; display:-moz-box; border-top:1px solid #ebebeb;}
+  .zdbomtys a{ display:block; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; height:4.5rem; font-size:1.7rem; text-align:center; line-height:4.5rem;}
+  
+  .ysbgui001{ background:#fff; color:#FF6118;}
+  .ysbgui002{ background:#FF6118; color:#FFFFFF;}
+/*分享页结束*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

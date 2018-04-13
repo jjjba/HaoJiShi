@@ -1,0 +1,101 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{ background:#f7f7f7; padding-bottom:4.5rem;}
+  
+ /*最上边开始*/
+ .zwgltops{background:#FFF0E9; padding:1.3rem 1.2rem 1.3rem 1.2rem; display:box; display:-webkit-box; display:-moz-box; }
+    
+	/*左边开始*/
+	.zwlfius01{ width:2.8rem;}
+	/*左边结束*/
+	
+	/*右边开始*/
+	.zwlfius02{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; font-size:1.2rem; color:#FF6118; padding-left:0.6rem;}
+	/*右边结束*/
+	
+ /*最上边结束*/ 
+ 
+ /*一块开始*/
+ .ykuissws{ background:#fff; margin-bottom:1rem; padding:1rem 1.2rem 1rem 1.2rem;}
+   /*上开始*/
+   .sbxxuys{ border-bottom:1px dashed #ebebeb;}
+     .dybuzs01{ padding:0.5rem 0 1rem 0;}
+       .sbtus01{font-size:1.7rem; color:#404040; padding-top:0.28rem;}
+	   .sbtus02{ font-size:1.3rem; color:#13d490; border:1px solid #13d490; background:#e5fff6; padding:3px 10px 3px 10px; border-radius:30px;}
+	 
+	 .dybuzs02{ display:box; display:-webkit-box; display:-moz-box; padding:0.3rem 0 1rem 0;}
+	   .dypui001{ width:12rem; font-size:1.5rem; color:#FF6118;}
+	   .dypui002{font-size:1.4rem; color:#9E9E9E; box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; overflow:hidden; white-space:nowrap; -o-text-overflow:ellipsis;	text-overflow:ellipsis; padding-top:0.1rem; text-align:right;}
+	   
+	 .dybuzs03{}
+	  .dybuzs03 ul{display:box; display:-webkit-box; display:-moz-box; padding:0.2rem 0 0.7rem 0;}
+	   .dybuzs03 ul li{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1;}
+	   .dybuzs03 ul li span,.dybuzs03 ul li b{ display:inline-block; font-size:1.2rem;}
+	   .dybuzs03 ul li span{color:#9E9E9E; padding-right:0.1rem;}
+	   .dybuzs03 ul li b{ font-weight:normal; color:#404040;}
+   /*上结束*/
+   
+   /*下开始*/
+   .xkasius{ text-align:right; padding:0.8rem 0 0.1rem 0;}
+     .xkasius a{ display:inline-block; font-size:1.4rem; color:#9E9E9E; vertical-align:middle; padding-left:2.6rem;}
+	 .xkasius a img{ width:1rem; vertical-align:middle; margin-right:0.2rem;}
+   /*下结束*/
+   
+ /*一块结束*/
+ 
+ 
+ .sbtus03{ font-size:1.3rem; color:#9e9e9e; border:1px solid #9e9e9e; padding:3px 10px 3px 10px; border-radius:30px;}
+ .sbtus04{ font-size:1.3rem; color:#ff5252; border:1px solid #ff5252; padding:3px 10px 3px 10px; border-radius:30px;}
+ 
+ 
+ /*添加新职位开始*/
+  .bcanius{ position:fixed; bottom:0; left:0; width:100%; height:4.1rem;}
+  
+  .bcnois{ width:100%; height:4.1rem; display:block; border:0; background: #FF6118; font-size:1.7rem; color:#FFFFFF; text-align:center; line-height:4.1rem;}
+ 
+ /*添加新职位结束*/
+ 
+ 
+ 
+ 
+ 
+ 
+/*弹出层开始*/
+
+.popupus{ position:fixed; width:100%; height:100%; background:url(../images/tcbg.png); left:0; top:0; z-index:1000;}
+   
+   /*里边开始*/
+   .pupuinto{ width:100%; height:100%; position:relative;}
+     
+	 .lbyis{ position:absolute; width:70%; left:15%; top:25%; background:#fff; border-radius:4px; -moz-border-radius:4px; -webkit-border-radius:4px;}
+	   
+	   .lbyis h1{font-size:1.6rem; color:#404040; text-align:center; font-weight:bold; padding:2rem 0 0.5rem 0;}
+	    .lbyis p{font-size:1.4rem; color:#404040; text-align:center; padding:1rem 1.2rem 1.5rem 1.2rem;}
+	   
+	   .lbyis ul{display:box; display:-webkit-box; display:-moz-box; border-top:1px solid #dbdbdb;}
+	   .lbyis ul li{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; font-size:1.6rem; color:#FF6118; text-align:center; padding:1rem 0 1rem 0;}
+	   .lbyis ul li a{ color:#FF6118;}
+	   
+	   .lbyis ul li.wzkljgz01{ border-right:1px solid #dbdbdb;}
+	   
+   /*里边结束*/
+   
+/*弹出层结束*/
+
+ 
+ 
+ /*分享样式开始*/
+ .fxinys{ position:fixed; width:100%; height:100%; background:url(../images/tcbg.png); z-index:100; left:0; top:0;}
+   .yctcis{ width:25.2rem; height:16.4rem; background:url(../images/fxyiss001.png) no-repeat; background-size:100% 100%; position:fixed; z-index:1000; right:1.3rem; top:1.3rem;}
+   .yctcis h2{ text-align:center; padding-top:3.8rem;}
+     .yctcis h2 img{ width:4rem;}
+	 .yctcis p{font-size:1.6rem; color:#404040; text-align:center; padding:1.3rem 2rem 0 2rem;}
+ /*分享样式结束*/
+ 
+ 
+ 
+ 
+ 
+ 
+ 
