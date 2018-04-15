@@ -17,6 +17,7 @@ function loadData() {
     var dpfl = sessionStorage.getItem("Dpfl");
     var poiaddress = sessionStorage.getItem("poiaddress");
     var poiname = sessionStorage.getItem("poiname");
+    var url = sessionStorage.getItem("url");
 
     var name = $(".xm").html();
     var mc = $(".mc").html();
@@ -49,6 +50,9 @@ function loadData() {
     if(dpfl != null){
         num++;
         $(".dpfl").html(dpfl.substring(0,15)+"..."+"<img src='../../company/images/yjts.png' class='yjtiss'/>");
+    }
+    if(url != null){
+        $(".license02").html("<img src='"+url +"' id='dynamicImage' />");
     }
 }
 function Address() {
@@ -181,8 +185,10 @@ function chooseImage() {
                         },
                         success: function (res) {
                             $('.license02').empty();
+
                             icon =res.data.imgUrl;
                             // $('#dynamicImage').hide();
+                            sessionStorage.setItem("url",icon);
                             $('.license02').append('<img src="'+icon+'" style="width: 4.6rem;height: 4.6rem"/>')
                         }
                     });

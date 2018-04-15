@@ -359,5 +359,18 @@ public class CompanyController {
     public BusinessMessage PDJyMy(HttpSession session,Integer id){
         return  companyService.PDJyMy(session,id);
     }
+
+    /**
+     * 提交查询 人才
+     * @param session
+     * @param zw
+     * @param sex
+     * @param age
+     * @return
+     */
+    @RequestMapping("tjcx")
+    public BusinessMessage tjcx(HttpSession session,String zw,Integer sex,Integer age){
+        return companyService.tjcx(session,zw,sex,age);
+    }
 }
 

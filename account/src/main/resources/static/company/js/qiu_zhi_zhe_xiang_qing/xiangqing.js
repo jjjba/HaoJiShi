@@ -41,9 +41,7 @@ function shoucang() {
         })
     }
 }
-
 //打电话
-
 function telPhone() {
     var kfsc = sessionStorage.getItem("kfsc");
     console.log(kfsc);
@@ -62,8 +60,10 @@ function telPhone() {
                 if(msg.data == 1){
                     //正常开通
                     if(msg.dataOne != null){
-                        $("#lianxiPhone").attr("href","tel:"+msg.dataOne);
-                        $("#lianxiPhone").click();
+                        console.log(msg.dataOne);
+                       /* $("#lianxiPhone").attr("href","tel:"+msg.dataOne.phone);
+                        $("#lianxiPhone").trigger("click");*/
+                       window.location.href="tel:"+msg.dataOne;
                     }
                 }
                 if(msg.data ==2){
@@ -293,6 +293,12 @@ function goBack() {
         window.location ="/account/companyIndex";
     }
     if(wher == "zc"){
+        window.location.href="/transition/go_qiu_zhi_zhe";
+    }
+    if(wher == "shoucang"){
+        window.location.href = "/transition/wo_de_ren_cai_shou_cang";
+    }
+    if(wher == "zuoce"){
         window.location.href="/transition/go_qiu_zhi_zhe";
     }
 }

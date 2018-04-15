@@ -32,6 +32,8 @@
     <!--下拉导航结束-->
     <script type="text/javascript" src="/static/company/js/qiu_zhi_zhe/qiuzhizhe.js"
             th:src="@{/company/js/qiu_zhi_zhe/qiuzhizhe.js}"></script>
+    <script type="text/javascript" src="/static/company/js/wo_de/jquery.cookie.js"
+            th:src="@{/company/js/wo_de/jquery.cookie.js}"></script>
 </head>
 <body>
 
@@ -67,58 +69,63 @@
           <!--左边结束-->
           <!--右边开始-->
             <div class="flriyous" id="jishi">
-                <a href="#" data="理疗师"><span>理疗师</span></a>
-                <a href="#" data="足疗师"><span>足疗师</span></a>
-                <a href="#" data="按摩师"><span>按摩师</span></a>
-                <a href="#" data="针灸师"><span>针灸师</span></a>
-                <a href="#" data="推拿师"><span>推拿师</span></a>
-                <a href="#" data="修脚师"><span>修脚师</span></a>
-                <a href="#" data="推油师"><span>推油师</span></a>
-                <a href="#" data="采耳师"><span>采耳师</span></a>
-                <a href="#" data="指压师"><span>指压师</span></a>
-                <a href="#" data="SPA师"><span>SPA师</span></a>
-                <a href="#" data="盲人按摩师"><span>盲人按摩师</span></a>
-                <a href="#" data="其他"><span>其他</span></a>
+                <a href="#" onclick="fenlei('jsqb')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('lls')"><span>理疗师</span></a>
+                <a href="#" onclick="fenlei('zls')"><span>足疗师</span></a>
+                <a href="#" onclick="fenlei('ams')"><span>按摩师</span></a>
+                <a href="#" onclick="fenlei('zjs')"><span>针灸师</span></a>
+                <a href="#" onclick="fenlei('tns')"><span>推拿师</span></a>
+                <a href="#" onclick="fenlei('xjs')"><span>修脚师</span></a>
+                <a href="#" onclick="fenlei('tys')"><span>推油师</span></a>
+                <a href="#" onclick="fenlei('crs')"><span>采耳师</span></a>
+                <a href="#" onclick="fenlei('zys')"><span>指压师</span></a>
+                <a href="#" onclick="fenlei('SPAs')"><span>SPA师</span></a>
+                <a href="#" onclick="fenlei('mrams')"><span>盲人按摩师</span></a>
+                <a href="#" onclick="fenlei('jsqt')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="guanli" style="display: none">
-                <a href="#" data="副总经理"><span>副总经理</span></a>
-                <a href="#" data="营运经理"><span>营运经理</span></a>
-                <a href="#" data="总经理"><span>总经理</span></a>
-                <a href="#" data="店长助理"><span>店长助理</span></a>
-                <a href="#" data="经理助理"><span>经理助理</span></a>
-                <a href="#" data="店长"><span>店长</span></a>
-                <a href="#" data="区域经理"><span>区域经理</span></a>
-                <a href="#" data="营销总监"><span>营销总监</span></a>
-                <a href="#" data="其他"><span>其他</span></a>
+                <a href="#" onclick="fenlei('glqb')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('fzjl')"><span>副总经理</span></a>
+                <a href="#" onclick="fenlei('yyjl')"><span>营运经理</span></a>
+                <a href="#" onclick="fenlei('zjl')"><span>总经理</span></a>
+                <a href="#" onclick="fenlei('dzzl')"><span>店长助理</span></a>
+                <a href="#" onclick="fenlei('jlzl')"><span>经理助理</span></a>
+                <a href="#" onclick="fenlei('dz')"><span>店长</span></a>
+                <a href="#" onclick="fenlei('qyjl')"><span>区域经理</span></a>
+                <a href="#" onclick="fenlei('yxzj')"><span>营销总监</span></a>
+                <a href="#" onclick="fenlei('glqt')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="qianting" style="display: none">
-                <a href="#" data="大堂经理/领班"><span>大堂经理/领班</span></a>
-                <a href="#" data="收银/吧员"><span>收银/吧员</span></a>
-                <a href="#" data="咨客/客服"><span>咨客/客服</span></a>
-                <a href="#" data="迎宾/接待"><span>迎宾/接待</span></a>
-                <a href="#" data="客户经理"><span>客户经理</span></a>
-                <a href="#" data="销售"><span>销售</span></a>
-                <a href="#" data="部长"><span>部长</span></a>
-                <a href="#" data="其他"><span>其他</span></a>
+                <a href="#" onclick="fenlei('qtqb')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('dtjllb')"><span>大堂经理/领班</span></a>
+                <a href="#" onclick="fenlei('syby')"><span>收银/吧员</span></a>
+                <a href="#" onclick="fenlei('zkkf')"><span>咨客/客服</span></a>
+                <a href="#" onclick="fenlei('ybjd')"><span>迎宾/接待</span></a>
+                <a href="#" onclick="fenlei('khjl')"><span>客户经理</span></a>
+                <a href="#" onclick="fenlei('xs')"><span>销售</span></a>
+                <a href="#" onclick="fenlei('bz')"><span>部长</span></a>
+                <a href="#" onclick="fenlei('qtqt')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="houqin" style="display: none">
-                <a href="#" data="皮鞋美容师"><span>皮鞋美容师</span></a>
-                <a href="#" data="储备干部"><span>储备干部</span></a>
-                <a href="#" data="文员"><span>文员</span></a>
-                <a href="#" data="服务员"><span>服务员</span></a>
-                <a href="#" data="采购"><span>采购</span></a>
-                <a href="#" data="保洁"><span>保洁</span></a>
-                <a href="#" data="厨师"><span>厨师</span></a>
-                <a href="#" data="保安"><span>保安</span></a>
-                <a href="#" data="司机"><span>司机</span></a>
-                <a href="#" data="其他"><span>其他</span></a>
+                <a href="#" onclick="fenlei('hqqb')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('pxmrs')"><span>皮鞋美容师</span></a>
+                <a href="#" onclick="fenlei('cbgb')"><span>储备干部</span></a>
+                <a href="#" onclick="fenlei('wy')"><span>文员</span></a>
+                <a href="#" onclick="fenlei('fwy')"><span>服务员</span></a>
+                <a href="#" onclick="fenlei('cg')"><span>采购</span></a>
+                <a href="#" onclick="fenlei('bj')"><span>保洁</span></a>
+                <a href="#" onclick="fenlei('cs')"><span>厨师</span></a>
+                <a href="#" onclick="fenlei('ba')"><span>保安</span></a>
+                <a href="#" onclick="fenlei('sj')"><span>司机</span></a>
+                <a href="#" onclick="fenlei('hqqt')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="peixun" style="display: none">
-                <a href="#" data="技术总监"><span>技术总监</span></a>
-                <a href="#" data="技术老师"><span>技术老师</span></a>
-                <a href="#" data="其他"><span>其他</span></a>
-                <a href="#" data="礼仪导师"><span>礼仪导师</span></a>
-                <a href="#" data="培训讲师"><span>培训讲师</span></a>
+                <a href="#" onclick="fenlei('pxqb')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('jszj')"><span>技术总监</span></a>
+                <a href="#" onclick="fenlei('jsls')"><span>技术老师</span></a>
+                <a href="#" onclick="fenlei('lyds')"><span>礼仪导师</span></a>
+                <a href="#" onclick="fenlei('pxjs')"><span>培训讲师</span></a>
+                <a href="#" onclick="fenlei('pxqt')"><span>其他</span></a>
             </div>
           <!--右边结束-->
         </div>
@@ -132,9 +139,9 @@
           <div class="xzdpgms" id="sex">
             <h2>性别要求</h2>
             <p>
-                <a href="#" class="cuiysy" data="">男女不限</a>
-                <a href="#" data="女">仅限女</a>
-                <a href="#" data="男">仅限男</a>
+                <a href="#" class="cuiysy" onclick="Xzsex('12')">男女不限</a>
+                <a href="#" data="女" onclick="Xzsex('2')">仅限女</a>
+                <a href="#" data="男" onclick="Xzsex('1')">仅限男</a>
             </p>
           </div>
           <!--性别要求结束-->
@@ -143,19 +150,19 @@
           <div class="xzdpgms" id="age">
             <h2>年龄要求</h2>
             <p>
-                <a href="#" class="cuiysy" data="">年龄不限</a>
-                <a href="#" data="30岁以下">30岁以下</a>
-                <a href="#" data="35岁以下">35岁以下</a>
-                <a href="#" data="38岁以下">38岁以下</a>
-                <a href="#" data="40岁以下">40岁以下</a>
-                <a href="#" data="45岁以下">45岁以下</a>
+                <a href="#" class="cuiysy" onclick="Xzage('0')">年龄不限</a>
+                <a href="#" data="30岁以下" onclick="Xzage('30')">30岁以下</a>
+                <a href="#" data="35岁以下" onclick="Xzage('35')">35岁以下</a>
+                <a href="#" data="38岁以下" onclick="Xzage('38')">38岁以下</a>
+                <a href="#" data="40岁以下" onclick="Xzage('40')">40岁以下</a>
+                <a href="#" data="45岁以下" onclick="Xzage('45')">45岁以下</a>
             </p>
           </div>
           <!--年龄要求结束-->
 
           <!--确定按钮开始-->
           <div class="qranius">
-            <a href="#" class="qdius">确定</a>
+            <a href="#" class="qdius" onclick="queding()">确定</a>
           </div>
           <!--确定按钮结束-->
         </div>

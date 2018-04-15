@@ -1,11 +1,8 @@
 // JavaScript Document
 
-var isRegist;//判断是否登陆
-var isKuaiZhao;//是否开通快招服务  1开通并且未到期 2开通已到期 3未开通
-var phone;  //求职者手机号
 $(document).ready(function() {
 
-    loadPersonal();
+    setTimeout(loadPersonal(),1);
    /* loadUserInfo();*/
 	$(".wzkljgz01").click(function(){
 		$(".popupus").hide();
@@ -49,8 +46,7 @@ function loadPersonal(){
         type:"POST",
         data:{phone:phone},
         success : function (res) {
-            console.log(res);
-            $('.personal').empty();
+            sessionStorage.setItem("com_id",res.dataOne);
             var list =res.data;
             var avatar,sex,cla;
             $.each(list, function (index, item) {
@@ -81,7 +77,7 @@ function loadPersonal(){
                     '<div class="recryous">'+
                     '<div class="clearfix rcvsise">'+
                     cla+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
-                    '<div class="fr ciiuss">'+item.expectMoney+'</div>'+
+                    '<div class="fr ciiuss">'+item.expect_money +'</div>'+
                     '</div>'+
                     '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
                     '</div>'+
@@ -92,24 +88,6 @@ function loadPersonal(){
                     '</div>'+
                     '</div>';
                 $('.personalList').append(personalList);
-                /*var die="";
-                if(item.mySelfInfo.recordSchool !=null){
-                    die+="最高学历：";
-                    die+=item.mySelfInfo.recordSchool;
-                    die+="<br>"
-                }
-                if(item.mySelfInfo.onceDo !=null){
-                    die+="曾经做过：";
-                    die+=item.mySelfInfo.onceDo;
-                    die+="<br>"
-                }
-                if(item.mySelfInfo.myHometown!=null){
-                    die+="他的家乡：";
-                    die+=item.mySelfInfo.myHometown;
-                }
-                if(diea != "" && diea !=''){
-
-                }*/
             });
         }
     })
@@ -128,62 +106,6 @@ function loadUserInfo() {
         }
     })
 }
-
-function tellPhone() {
-    if(isRegist == "2"){
-        $('#wanshan').show();
-        $("#zaikanwanshan").click(function(){
-            $("#wanshan").hide();
-        });
-        $("#likewanshan").click(function(){
-            $("#wanshan").hide();
-            window.location.href="/transition/go_zhu_ce_tian_xie_xin_xi";
-        });
-    }else if(isRegist == "3"){
-        $('#denglu').show();
-        $("#zaikandenglu").click(function(){
-            $("#denglu").hide();
-        });
-        $("#likedenglu").click(function(){
-            $("#denglu").hide();
-            window.location.href="/transition/go_zhu_ce";
-        });
-    }else {
-        if(isKuaiZhao == "1"){
-            $.ajax({
-                url:"/company/updatePhoneNum",
-                type:"POST",
-                success : function (res) {
-                    console.log("更改次数成功");
-                    window.location.href="tel:"+phone;
-                },
-                error : function (res) {
-                    console.log("更改次数失败");
-                    window.location.href="tel:"+phone;
-                }
-            });
-        }else if(isKuaiZhao == "2"){
-            $('.xianyin03').show();
-            $("#zaikanxufei").click(function(){
-                $('.xianyin03').hide();
-            });
-            $("#likexufei").click(function(){
-                $('.xianyin03').hide();
-                window.location.href="/transition/go_kuai_zhao";
-            });
-        }else if(isKuaiZhao == "3"){
-            $('.xianyin02').show();
-            $("#zaikankaitong").click(function(){
-                $("#xianyin02").hide();
-            });
-            $("#likekaitong").click(function(){
-                $("#xianyin02").hide();
-                window.location.href="/transition/go_kuai_zhao";
-            });
-        }
-    }
-}
-
 
 function loadPersonalInfoById(id) {
     console.log(id);
@@ -217,12 +139,34 @@ function gozixun() {
 }
 
 function puanduan(id) {
-    console.log(id);
-    var phone = $.cookie("phone");
-    var zt = $.cookie("zt");
-    if(phone !=null && zt == 1){
-
-    }else{
-
+    var com_id = sessionStorage.getItem("com_id");
+    console.log(com_id);
+    console.log("进来了");
+    if(com_id != null && com_id!='' && com_id!="" && com_id !=undefined && com_id>0){
+        $.ajax({
+            url: "/company/PDJyMy",
+            data:{id:id},
+            success: function (msg) {
+                if (msg.data == 1) {
+                    //正常开通
+                    if (msg.dataOne != null) {
+                        console.log(msg.dataOne);
+                        window.location.href = "tel:" + msg.dataOne;
+                    }
+                }
+                if (msg.data == 2) {
+                    //未开通
+                    $("#weikaitong").show();
+                }
+                if (msg.data == 3) {
+                    //已经过期了
+                    $("#yijingguoqi").show();
+                }
+            }
+        })
+    }else {
+        console.log("进来了");
+        $("#dengludianhua").show();
     }
+
 }

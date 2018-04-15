@@ -11,6 +11,7 @@ import com.haojishi.util.BusinessMessage;
 import com.haojishi.util.JuheSms;
 import com.haojishi.util.PhoneCheck;
 import com.haojishi.util.RemortIP;
+import io.swagger.models.auth.In;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -573,34 +574,7 @@ public class PersonalService {
         return businessMessage;
     }
 
-    /**
-     * 获取企业端推荐求职者数据
-     *
-     * @param request
-     * @param session
-     * @return
-     */
-    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session,String phone){
-        BusinessMessage businessMessage =new BusinessMessage();
 
-        try {
-            List<Map<String,Object>> personalList =new ArrayList();
-            List<Map<String,Object>> list = (List<Map<String, Object>>) getPersonal(request, session,phone).getData();
-            if(list.size() > 10){
-                for(int i = 0;i < 10;i++){
-                    personalList.add(list.get(i));
-                }
-                businessMessage.setData(personalList);
-            }else {
-                businessMessage.setData(list);
-            }
-            businessMessage.setMsg("获取企业端推荐求职者数据成功");
-            businessMessage.setSuccess(true);
-        }catch (Exception e){
-            log.error("获取企业首页推荐求职者数据失败");
-        }
-        return businessMessage;
-    }
 
     /**
      * 根据企业所在城市/省份获取企业端求职者信息
@@ -668,10 +642,9 @@ public class PersonalService {
      *
      * @return BusinessMessage - 求职者简历
      */
-    public BusinessMessage getPersonalInfoById(HttpSession session){
+    public BusinessMessage getPersonalInfoById(HttpSession session,Integer id){
         BusinessMessage businessMessage =new BusinessMessage();
-        int personalId = (int) session.getAttribute("personalId");
-        Personal personal =personalMapper.selectByPrimaryKey(personalId);
+        Personal personal =personalMapper.selectByPrimaryKey(id);
         if(personal != null){
             Map<String,Object> personalMap =new HashMap<>();
             personalMap.put("state",personal.getState());

@@ -40,7 +40,7 @@ public class PersonalController {
     @RequestMapping("perfectPersonalInfo")
     public BusinessMessage perfectPersonalInfo(HttpSession session,String name,String sex,Integer age,String gzjy,
                                                String special,String state,String phone,String avatar,String hopeJob,String hopeCity,String expectMoney){
-        return personalServicel.perfectPersonalInfo(session, name,sex,age,gzjy, special,state,phone,avatar,hopeJob,hopeCity);
+        return personalServicel.perfectPersonalInfo(session, name,sex,age,gzjy, special,state,phone,avatar,hopeJob,hopeCity,expectMoney);
     }
 
         /**
@@ -196,17 +196,6 @@ public class PersonalController {
         return personalServicel.showResumeState(session);
     }
 
-    /**
-     * 获取企业端推荐求职者数据
-     *
-     * @param request
-     * @param session
-     * @return
-     */
-    @RequestMapping("getIndexPersonal")
-    public BusinessMessage getIndexPersonal(HttpServletRequest request,HttpSession session,String phone){
-        return personalServicel.getIndexPersonal(request,session,phone);
-    }
 
     /**
      * 企业端获取求职者简历

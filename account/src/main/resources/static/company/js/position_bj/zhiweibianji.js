@@ -10,6 +10,19 @@ function zhiweimiaoshu() {
 function xuanzezhiwei() {
     window.location.href="/transition/dianpu_zhiweixuanze";
 }
+function fanhui() {
+    sessionStorage.setItem("positionid","");
+    sessionStorage.setItem("zwlx","");
+    sessionStorage.setItem("zwmc","");
+    sessionStorage.setItem("yx","");
+    sessionStorage.setItem("jyyq","");
+    sessionStorage.setItem("xbyq","");
+    sessionStorage.setItem("nlyq","");
+    sessionStorage.setItem("LLLLzwfl","");
+    sessionStorage.setItem("zwms","");
+    sessionStorage.setItem("positionid","");
+    window.location.href='/transition/zhiweiguanlirenzhneg';
+}
 $(document).ready(function() {
     var position_id = sessionStorage.getItem("position_id");
     if(position_id != null && position_id!=''&& position_id !=""){
@@ -73,6 +86,15 @@ function fabuZhiwei() {
         data:{zwlx:zwlx,zwmc:zwmc,yx:yx,jyyq:jyyq,xbyq:xbyq,nlyq:nlyq,zwfl:zwfl,zwms:zwms,id:positionId},
         success:function (msg) {
             console.log(msg);
+            sessionStorage.setItem("positionid","");
+            sessionStorage.setItem("zwlx","");
+            sessionStorage.setItem("zwmc","");
+            sessionStorage.setItem("yx","");
+            sessionStorage.setItem("jyyq","");
+            sessionStorage.setItem("xbyq","");
+            sessionStorage.setItem("nlyq","");
+            sessionStorage.setItem("LLLLzwfl","");
+            sessionStorage.setItem("zwms","");
             sessionStorage.setItem("positionid","");
             window.location.href="/transition/zhiweiguanlirenzhneg";
         }

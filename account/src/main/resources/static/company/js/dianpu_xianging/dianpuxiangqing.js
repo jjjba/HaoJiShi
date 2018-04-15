@@ -58,9 +58,8 @@ $(document).ready(function() {
     //图片
     var htm2 = "";
     if(xggstp != null){
-        var xggstp1 = xggstp.substring(0,xggstp.length-1);
         var att = new Array();
-        att = xggstp1.split(",");
+        att = xggstp.split(",");
         for(var i =0;i<att.length;i++){
             htm2+="<li data-src='";
             htm2+=att[i];

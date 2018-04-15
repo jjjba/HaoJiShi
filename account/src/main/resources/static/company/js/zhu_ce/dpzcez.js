@@ -1,7 +1,7 @@
 // JavaScript Document
 function shiqu() {
     var phoneNumber =$('#phoneNumber').val();
-    if(phoneNumber =="" || phoneNumber =='' || phoneNumber==undefined || phoneNumber.length >11){
+    if(phoneNumber =="" || phoneNumber =='' || phoneNumber==undefined || phoneNumber.length !=11){
         $('.alera').show();
         setTimeout('$(".alera").hide()',1000);
         $("#hqyzm").attr("class","");
@@ -73,8 +73,8 @@ function jinru() {
     console.log("查出来是"+zhuCeOrDl);
     if(mobileCode == code){
         if(zhuCeOrDl == 1){
-            $.cookie("zt",1);
-            $.cookie("phone",phoneNumber);
+            $.cookie("zt",1,{ expires:10});
+            $.cookie("phone",phoneNumber,{ expires:10});
             window.location.href="/transition/go_wo_de";
         }
         if(zhuCeOrDl ==2){

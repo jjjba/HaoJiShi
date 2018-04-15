@@ -66,16 +66,21 @@ public class CompanyService{
      */
     public BusinessMessage loadUserCompanyInfo(HttpSession session,String phone){
         BusinessMessage businessMessage =new BusinessMessage();
-        String sql = "SELECT c.* FROM USER u,company c WHERE 1= 1 AND  u.`id` = c.`user_id` AND u.`phone`='"+phone+"'";
-        List<Map<String, Object>> company = companyMapper.selectCompany(sql);
-        System.out.print(company);
-        if(company!= null){
-            //现在是有信息的
+        if(phone !=null && phone.length()>10){
+            String sql = "SELECT c.* FROM USER u,company c WHERE 1= 1 AND  u.`id` = c.`user_id` AND u.`phone`='"+phone+"'";
+            List<Map<String, Object>> company = companyMapper.selectCompany(sql);
+            System.out.print(company);
+            if(company!= null){
+                //现在是有信息的
                 businessMessage.setData(4); //完善过信息 可以收藏
                 session.setAttribute("companyyy_id",company.get(0).get("id")); //把company id 放进session 里
+            }else{
+                businessMessage.setData(2);//代表个人进入企业端  在company 没有信息
+            }
         }else{
-            businessMessage.setData(2);//代表个人进入企业端  在company 没有信息
+            businessMessage.setData(1);
         }
+
         return  businessMessage;
     }
 
@@ -191,29 +196,12 @@ public class CompanyService{
     public BusinessMessage getRenCaishoucang(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         Integer id = (Integer) session.getAttribute("userId");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
-        List<User> users =usersMapper.selectByExample(userExample);
-        if(users !=null && users.size()>0){
-            Example comExample =new Example(Company.class);
-            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(comExample);
-            if(companies != null && companies.size()>0){
-                Example collectExample = new Example(CollectPersonal.class);
-                collectExample.createCriteria().andEqualTo("companyId",companies.get(0).getUserId());
-                List<CollectPersonal> collectPersonals = collectPersonalMapper.selectByExample(collectExample);
-                if(collectPersonals !=null && collectPersonals.size()>0){
-                    List<Personal> personals = new ArrayList<Personal>();
-                    for(int i=0;i<collectPersonals.size();i++){
-                        Example personalExample = new Example(Personal.class);
-                        personalExample.createCriteria().andEqualTo("id",collectPersonals.get(i).getPersonalId());
-                        personals.add(personalMapper.selectByExample(personalExample).get(0));
-                    }
-                    businessMessage.setData(personals);
-                    businessMessage.setSuccess(true);
-                }
-            }
-        }
+        String sql = "SELECT p.* FROM company c,collect_personal cp, USER us , personal p WHERE c.`id` = cp.`company_id` AND us.`id` = c.`user_id` AND p.`id` = cp.`personal_id` AND us.`id` = '";
+        sql += id;
+        sql +="'";
+        List<Map<String,Object>> list = personalMapper.phoneNumber(sql);
+        businessMessage.setData(list);
+        businessMessage.setSuccess(true);
         return  businessMessage;
     }
 
@@ -479,7 +467,7 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setMatstate(1);
-        company.setCompanyScale(dwmj);
+        company.setCompanyScale(dwmj.substring(0,dwmj.length()-2));
         //增加省市区
         company.setProvince(sheng);
         company.setCity(shi);
@@ -532,7 +520,7 @@ public class CompanyService{
         company.setCompanyType(dplx);
         company.setZhiWu(zhiwei);
         company.setCompanyDpmj(dwmj);
-        company.setCompanyScale(dwmj);
+        company.setCompanyScale(dwmj.substring(0,dwmj.length()-2));
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         company.setModifyTime(new Date());
         company.setCompanyPhoto(xggstp);
@@ -890,39 +878,340 @@ public class CompanyService{
      * @return
      */
     public BusinessMessage getIndexPersonal(HttpSession session,String phone,HttpServletRequest request){
+        long startTime = System.currentTimeMillis();
         BusinessMessage businessMessage = new BusinessMessage();
         //先行判断 是登陆用户  还是 游客状态
         String city = null ;
-        if(phone == null){
+        int num = 0;
+        if(phone == null || phone.length()<5){
             RemortIP remortIP =new RemortIP();
             city =remortIP.getAddressByIP(request);
         }else{
-            List<Map<String, Object>> company= companyMapper.selectCompany("SELECT * FROM company c,USER u WHERE c.`user_id` = u.`id` AND  u.`phone` = "+phone);
+            List<Map<String, Object>> company= companyMapper.selectCompany("SELECT c.id,c.city FROM company c,USER u WHERE c.`user_id` = u.`id` AND  u.`phone` = '"+phone+"'");
             if(company != null ){
                 city = (String)company.get(0).get("city");
+                session.setAttribute("companyyy_id",company.get(0).get("id"));
+                businessMessage.setDataOne(company.get(0).get("id"));
             }
         }
+        StringBuffer sf = new StringBuffer();
+        sf.append( "SELECT  * FROM personal WHERE  1= 1 ");
+        sf.append("and  hope_city LIKE '%"+city+"%'");
+        session.setAttribute("city",city);
+        sf.append("ORDER BY create_time DESC limit 10");
+        List<Map<String, Object>>list = companyMapper.executeSql(sf.toString());
+        num = list.size();
+        if(num != 10){
+            List<Map<String, Object>> regionlist = regionMapper.executeSql("SELECT two.* FROM region ONE,region two WHERE two.`pId` = one.`pId` AND one.NAME = '"+city+"'");
+            StringBuffer sf1 = new StringBuffer();
+            sf1.append( "SELECT  * FROM personal WHERE  1= 1 ");
+            if(regionlist!= null){
+                for(int i =0;i<regionlist.size();i++){
+                    if(regionlist.get(i).get("name") != city){
+                        if(i!=0){
+                            sf1.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                        }else {
+                            sf1.append(" and  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                        }
+                    }
+                }
+                sf1.append("ORDER BY create_time DESC ");
+                sf1.append(" limit "+(10-list.size()));
+            }
+            List<Map<String, Object>>list1 = companyMapper.executeSql(sf1.toString());
+            list.addAll(list1);
+        }
+        businessMessage.setData(list);
+        businessMessage.setSuccess(true);
+        long endTime = System.currentTimeMillis();    //获取结束时间
+        System.out.println("程序运行时间：" + (endTime - startTime) + "ms");    //输出程序运行时间
+        return  businessMessage;
+    }
+
+    public BusinessMessage tjcx(HttpSession session,String zw,Integer sex,Integer age){
+        BusinessMessage businessMessage = new BusinessMessage();
+        String city = (String)session.getAttribute("city");
         List<Map<String, Object>> regionlist = regionMapper.executeSql("SELECT two.* FROM region ONE,region two WHERE two.`pId` = one.`pId` AND one.NAME = '"+city+"'");
         StringBuffer sf = new StringBuffer();
-        sf.append( "SELECT  distinct * FROM personal WHERE  1= 1 ");
+        sf.append( "SELECT  * FROM personal WHERE  1= 1 ");
         if(regionlist!= null){
             for(int i =0;i<regionlist.size();i++){
-                if(i!=0){
-                    sf.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
-                }else {
-                    sf.append(" and  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                if(regionlist.get(i).get("name") != city){
+                    if(i!=0){
+                        if(i ==  regionlist.size()-1 ){
+                            sf.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%')");
+                        }else {
+                            sf.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                        }
+                    }else {
+                        sf.append(" and  (hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                    }
                 }
             }
-            if(regionlist.size()>10){
-                sf.append(" limit 10");
+        }
+
+        /**
+         * 技师类
+         */
+        /**
+         * 技师类
+         */
+        /**
+         * 技师类
+         */
+        if(  "jsqb".equals(zw)){
+            //技师全部
+            sf.append(" AND (hope_job like '%理疗师%' or  hope_job like '%足疗师%' or  hope_job like '%按摩师%'" +
+                    " or  hope_job like '%按摩师%' or  hope_job like '%针灸师%' or  hope_job like '%推拿师%'" +
+                    " or  hope_job like '%修脚师%' or  hope_job like '%推油师%' or  hope_job like '%采耳师%'" +
+                    " or  hope_job like '%指压师%' or  hope_job like '%SPA师%' or  hope_job like '%盲人按摩师%'" +
+                    " or  hope_job like '%技师其他%')");
+        }
+        if(  "lls".equals(zw) ){
+            //理疗师
+            sf.append(" and (hope_job like '%理疗师%')");
+        }
+        if(  "zls".equals(zw) ){
+            //足疗师
+            sf.append(" and (hope_job like '%足疗师%')");
+        }
+        if(  "ams".equals(zw)){
+            //按摩师
+            sf.append(" and (hope_job like '%按摩师%')");
+        }
+        if(  "zjs".equals(zw)){
+            //针灸师
+            sf.append(" and (hope_job like '%针灸师%')");
+        }
+        if(  "tns".equals(zw)){
+            //推拿师
+            sf.append(" and (hope_job like '%推拿师%')");
+        }
+        if(  "xjs".equals(zw)){
+            //修脚师
+            sf.append(" and (hope_job like '%修脚师%')");
+        }
+        if(  "tys".equals(zw)){
+            //推油师
+            sf.append(" and (hope_job like '%推油师%')");
+        }
+        if(  "crs".equals(zw)){
+            //采耳师
+            sf.append(" and (hope_job like '%采耳师%')");
+        }
+        if(  "zys".equals(zw)){
+            //指压师
+            sf.append(" and (hope_job like '%指压师%')");
+        }
+        if(  "SPAs".equals(zw)){
+            //SPA师
+            sf.append(" and (hope_job like '%SPA师%')");
+        }
+        if(  "mrams".equals(zw)){
+            //盲人按摩师
+            sf.append(" and (hope_job like '%盲人按摩师%')");
+        }
+        if(  "jspt".equals(zw)){
+            //技师其他
+            sf.append(" and (hope_job like '%技师其他%')");
+        }
+        /**
+         * 管理类
+         */
+        if(  "glqb".equals(zw)){
+            //管理类全部
+            sf.append(" (and hope_job like '%副总经理%' or  hope_job like '%营运经理%' or  hope_job like '%总经理%'" +
+                    " or  hope_job like '%店长助理%' or  hope_job like '%经理助理%' or  hope_job like '%店长%'" +
+                    " or  hope_job like '%区域经理%' or  hope_job like '%营销总监%' or  hope_job like '%管理类其他%')" );
+        }
+        if(  "fzjl".equals(zw) ){
+            //副总经理
+            sf.append(" and (hope_job like '%副总经理%')");
+        }if(  "yyjl".equals(zw)){
+            //营运经理
+            sf.append(" and (hope_job like '%营运经理%')");
+        }
+        if(  "zjl".equals(zw)){
+            //总经理
+            sf.append(" and (hope_job like '%总经理%')");
+        }
+        if(  "dzzl".equals(zw)){
+            //店长助理
+            sf.append(" and (hope_job like '%店长助理%')");
+        }if(  "jlzl".equals(zw)){
+            //经理助理
+            sf.append(" and (hope_job like '%经理助理%')");
+        }if(  "dz".equals(zw)){
+            //店长
+            sf.append(" and (hope_job like '%店长%')");
+        }
+        if(  "qyjl".equals(zw)){
+            //区域经理
+            sf.append(" and (hope_job like '%区域经理%')");
+        }
+        if(  "yxzj".equals(zw)){
+            //营销总监
+            sf.append(" and (hope_job like '%营销总监%')");
+        }
+        if(  "glqt".equals(zw) ){
+            //管理类其他
+            sf.append(" and (hope_job like '%管理类其他%')");
+        }
+
+        /**
+         * 前厅类
+         */
+        if(  "qtqb".equals(zw)){
+            //前厅类全部
+            sf.append(" and (hope_job like '%大堂经理/领班%' or  hope_job like '%收银/吧员%' or  hope_job like '%咨客/客服%'" +
+                    " or  hope_job like '%迎宾/接待%' or  hope_job like '%客户经理%' or  hope_job like '%销售%'" +
+                    " or  hope_job like '%部长%' or  hope_job like '%前厅其他%')");
+        }
+        if( "dtjllb".equals(zw) ){
+            //大堂经理/领班
+            sf.append(" and (hope_job like '%大堂经理/领班%')");
+        }
+        if(  "syby".equals(zw)){
+            //收银/吧员
+            sf.append(" and (hope_job like '%收银/吧员%')");
+        }
+        if(  "zkkf".equals(zw)){
+            //咨客/客服
+            sf.append(" and (hope_job like '%咨客/客服%')");
+        }if(  "ybjd".equals(zw)){
+            //迎宾/接待
+            sf.append(" and (hope_job like '%迎宾/接待%')");
+        }
+        if(  "khjl".equals(zw)){
+            //客户经理
+            sf.append(" and (hope_job like '%客户经理%')");
+        }
+        if( "xs".equals(zw)){
+            //销售
+            sf.append(" and (hope_job like '%销售%')");
+        }
+        if( "bz".equals(zw)){
+            //部长
+            sf.append(" and (hope_job like '%部长%')");
+        }
+        if(  "qtqt".equals(zw)){
+            //前厅其他
+            sf.append(" and (hope_job like '%前厅其他%')");
+        }
+
+        /**
+         * 后勤类
+         */
+        if(  "hqqb".equals(zw)){
+            //后勤类全部
+            sf.append(" and (hope_job like '%皮鞋美容师%' or  hope_job like '%储备干部%' or  hope_job like '%文员%'" +
+                    " or  hope_job like '%服务员%' or  hope_job like '%采购%' or  hope_job like '%保洁%'" +
+                    " or  hope_job like '%厨师%' or  hope_job like '%保安%' or  hope_job like '%司机%'" +
+                    " or  hope_job like '%后勤其他%')");
+        }
+        if(  "pxmrs".equals(zw)){
+            //皮鞋美容师
+            sf.append(" and (hope_job like '%皮鞋美容师%')");
+        }
+        if( "cbgb".equals(zw)){
+            //储备干部
+            sf.append(" and (hope_job like '%储备干部%')");
+        }
+        if( "wy".equals(zw)){
+            //文员
+            sf.append(" and (hope_job like '%文员%')");
+        }
+        if( "fwy".equals(zw)){
+            //服务员
+            sf.append(" and (hope_job like '%服务员%')");
+        }
+        if( "cg".equals(zw)){
+            //采购
+            sf.append(" and (hope_job like '%采购%')");
+        }
+        if( "bj".equals(zw)){
+            //保洁
+            sf.append(" and (hope_job like '%保洁%')");
+        }
+        if(  "cs".equals(zw)){
+            //厨师
+            sf.append(" and (hope_job like '%厨师%')");
+        }
+        if(  "ba".equals(zw)){
+            //保安
+            sf.append(" and (hope_job like '%保安%')");
+        }
+        if( "sj".equals(zw)){
+            //司机
+            sf.append(" and (hope_job like '%司机%')");
+        }
+        if( "hqqt".equals(zw)){
+            //后勤其他
+            sf.append(" and (hope_job like '%后勤其他%')");
+        }
+        /**
+         * 培训类其他
+         */
+        if( "pxqb".equals(zw)){
+            //培训全部
+            sf.append(" and (hope_job like '%技术总监%' or  hope_job like '%技术老师%' or  hope_job like '%礼仪导师%'" +
+                    " or  hope_job like '%培训讲师%' or  hope_job like '%培训其他%')");
+        }
+        if( "jszj".equals(zw)){
+            //技术总监
+            sf.append(" and (hope_job like '%技术总监%')");
+        }
+        if( "jsls".equals(zw)){
+            //技术老师
+            sf.append(" and (hope_job like '%技术总监%')");
+        }
+        if( "lyds".equals(zw)){
+            //礼仪导师
+            sf.append(" and (hope_job like '%技术总监%')");
+        }
+        if( "pxjs".equals(zw)){
+            //培训讲师
+            sf.append(" and (hope_job like '%技术总监%')");
+        }
+        if("pxqt".equals(zw)){
+            //培训其他
+            sf.append(" and (hope_job like '%培训其他%')");
+        }
+
+
+        /**
+         * 性别要求
+         */
+        if(sex != null){
+            if(1==sex){
+                sf.append(" and (sex =  '男')");
+            }
+            if(2==sex){
+                sf.append(" and (sex =  '女')");
+            }
+            if(12==sex){
+                sf.append(" and (sex =  '女' or sex =  '男')  ");
+            }
+        }
+
+        /**
+         * 年龄要求
+         */
+        if(age != null){
+            if(age >0){
+                sf.append(" and (age < "+ age+")");
             }
         }
         log.error(sf.toString());
-        List<Map<String, Object>>list = companyMapper.executeSql(sf.toString());
+        List<Map<String, Object>>list = personalMapper.phoneNumber(sf.toString());
+
+
+
+
+
+
         businessMessage.setData(list);
         businessMessage.setSuccess(true);
-
-
         return  businessMessage;
     }
 
@@ -995,31 +1284,36 @@ public class CompanyService{
     public BusinessMessage PDJyMy(HttpSession session,Integer id){
         BusinessMessage businessMessage = new BusinessMessage();
         Integer com_id = (Integer) session.getAttribute("companyyy_id");
-        String sql= "SELECT * FROM entrust WHERE company_id = '";
-        sql+=com_id;
-        sql+="' ORDER BY end_date DESC";
-        List<Map<String,Object>> list  = entrustMapper.CompanyJy(sql);
-        System.out.print(list);
-        if(list != null && list.size()>0){
-            Date date = (Date) list.get(0).get("end_date");
-            Date date1 = new Date();
-            int i = date1.compareTo(date);
-            if( i < 0){
-                System.out.print("这个是true  表示还没有过期");
-                String phoneSQL = "SELECT * FROM personal WHERE id  = '"+id+"'";
+        if(com_id != null && com_id>0){
+            String sql= "SELECT * FROM entrust WHERE company_id = '";
+            sql+=com_id;
+            sql+="' ORDER BY end_date DESC";
+            List<Map<String,Object>> list  = entrustMapper.CompanyJy(sql);
+            System.out.print(list);
+            if(list != null && list.size()>0){
+                Date date = (Date) list.get(0).get("end_date");
+                Date date1 = new Date();
+                int i = date1.compareTo(date);
+                if( i < 0){
+                    System.out.print("这个是true  表示还没有过期");
+                    String phoneSQL = "SELECT * FROM personal WHERE id  = '"+id+"'";
 
-                List<Map<String,Object>> phoneNumber = personalMapper.phoneNumber(phoneSQL);
-                System.out.print(phoneNumber);
-                businessMessage.setDataOne(phoneNumber.get(0).get("phone"));
-                businessMessage.setData(1);
-                System.out.print("这个是true  表示还没有过期");
+                    List<Map<String,Object>> phoneNumber = personalMapper.phoneNumber(phoneSQL);
+                    System.out.print(phoneNumber);
+                    businessMessage.setDataOne(phoneNumber.get(0).get("phone"));
+                    businessMessage.setData(1);
+                    System.out.print("这个是true  表示还没有过期");
+                }else {
+                    System.out.print("这个是false  表示已经过期");
+                    businessMessage.setData(3);
+                }
             }else {
-                System.out.print("这个是false  表示已经过期");
-                businessMessage.setData(3);
+                businessMessage.setData(2);//2代表没有支付过 开通过业务
             }
         }else {
-            businessMessage.setData(2);//2代表没有支付过 开通过业务
+            businessMessage.setData(4);
         }
+
         businessMessage.setSuccess(true);
         return  businessMessage;
     }

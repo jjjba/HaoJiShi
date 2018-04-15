@@ -17,8 +17,12 @@ $(document).ready(function() {
 function fanhui() {
     window.location.href="/transition/go_wo_de";
 }
-
-
+function xiugaimima() {
+    window.location.href="/transition/wo_de_xiu_gai_mi_ma";
+}
+function xiugaishoujihao() {
+    window.location.href="/transition/wo_de_xiu_gai_shou_ji_hao";
+}
 function shezhimima() {
     window.location.href="/transition/wo_de_she_zhi_mi_ma";
 }

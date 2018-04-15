@@ -199,64 +199,64 @@
 
 
    <!--电话弹层开始-->
-   <!--弹出层开始-->
-   <div class="popupus" id="denglu" style="display: none">
-       <!--里边开始-->
-       <div class="pupuinto">
-           <div class="lbyis">
-               <p class="patopss">登录后才可以拨打人才电话哦~</p>
-               <ul>
-                   <li class="wzkljgz01" id="zaikandenglu"><a href="#">我再看看</a></li>
-                   <li class="wzkljgz02" id="likedenglu"><a href="#">立刻登录</a></li>
-               </ul>
-           </div>
-       </div>
-       <!--里边结束-->
-   </div>
-   <!--弹出层结束-->
-   <div class="popupus" id="wanshan" style="display: none">
-       <!--里边开始-->
-       <div class="pupuinto">
-           <div class="lbyis">
-               <p class="patopss">完善信息才可以拨打电话哦~</p>
-               <ul>
-                   <li class="wzkljgz01" id="zaikanwanshan"><a href="#">我再看看</a></li>
-                   <li class="wzkljgz02" id="likewanshan"><a href="#">立刻完善</a></li>
-               </ul>
-           </div>
-       </div>
-       <!--里边结束-->
-   </div>
-   <!--电话弹出层开始-->
-   <div class="popupus xianyin02" style="display: none">
-       <!--里边开始-->
-       <div class="pupuinto">
-           <div class="lbyis">
-               <p class="patopss">开通好技师快招服务后才可以电话直接联系人才哦~</p>
-               <ul>
-                   <li class="wzkljgz01" id="zaikankaitong"><a href="#">我再看看</a></li>
-                   <li class="wzkljgz02" id="likekaitong"><a href="#">立刻开通</a></li>
-               </ul>
-           </div>
-       </div>
-       <!--里边结束-->
-   </div>
+    <div class="popupus xianyin01" id="dengludianhua" style="display: none">
+        <!--里边开始-->
+        <div class="pupuinto">
+            <div class="lbyis">
+                <p class="patopss">登录后才可以联系人才哦~</p>
+                <ul>
+                    <li class="wzkljgz01" id="zaikandengludianua" onclick="$('#dengludianhua').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likedengludianhua" onclick="window.location.href='/transition/go_zhu_ce';"><a href="#">立刻登录</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--里边结束-->
+    </div>
 
-   <div class="popupus xianyin03" style="display: none">
-       <!--里边开始-->
-       <div class="pupuinto">
-           <div class="lbyis">
-               <p class="patopss">您的好技师服务已到期,请续费,才可以电话直接联系人才哦~</p>
-               <ul>
-                   <li class="wzkljgz01" id="zaikanxufei"><a href="#">我再看看</a></li>
-                   <li class="wzkljgz02" id="likexufei"><a href="#">立刻续费</a></li>
-               </ul>
-           </div>
-       </div>
-       <!--里边结束-->
-   </div>
+    <div class="popupus xianyin01" id="wanshandianhua" style="display: none">
+        <!--里边开始-->
+        <div class="pupuinto">
+            <div class="lbyis">
+                <p class="patopss">完善信息才可以联系人才哦~</p>
+                <ul>
+                    <li class="wzkljgz01" id="zaikanwanshandianhua" onclick="$('#wanshandianhua').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likewanshandianhua"  onclick="window.location.href = '/transition/bianji_dianpuxinxi';"><a href="#">立刻完善</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--里边结束-->
+    </div>
 
-   <!--电话弹层结束-->
+
+    <!--电话弹出层开始-->
+    <div class="popupus xianyin02" id="weikaitong" style="display: none">
+        <!--里边开始-->
+        <div class="pupuinto">
+            <div class="lbyis">
+                <p class="patopss">开通好技师快招服务后才可以电话直接联系人才</p>
+                <ul>
+                    <li class="wzkljgz01" id="zaikankaitong" onclick="$('#weikaitong').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likekaitong" onclick="window.location.href ='/transition/kuaizhao'"><a href="#">立刻开通</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--里边结束-->
+    </div>
+
+    <div class="popupus xianyin03" id ="yijingguoqi" style="display: none">
+        <!--里边开始-->
+        <div class="pupuinto">
+            <div class="lbyis">
+                <p class="patopss">您的好技师服务已到期,请续费,才可以电话直接联系人才</p>
+                <ul>
+                    <li class="wzkljgz01" id="zaikanxufei"  onclick="$('#yijingguoqi').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likexufei" onclick="window.location.href ='/transition/kuaizhao'"><a href="#">立刻续费</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--里边结束-->
+    </div>
+    <!--电话弹出层结束-->
 
 
 </body>
