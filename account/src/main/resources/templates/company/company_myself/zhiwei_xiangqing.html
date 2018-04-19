@@ -24,15 +24,33 @@
     <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
             th:src="@{/company/js/jquery-3.2.1.js}" ></script>
     <script type="text/javascript" src="/static/company/js/zwglu.js" th:src="@{/company/js/zwglu.js}" ></script>
-    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
     <script>
+        //通过config接口注入权限验证配置
+        wx.config({
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: "", // 必填，公众号的唯一标识
+            timestamp: "", // 必填，生成签名的时间戳
+            nonceStr: "", // 必填，生成签名的随机串
+            signature: "",// 必填，签名，见附录1
+            jsApiList: [
+                "checkJsApi",
+                "onMenuShareTimeline",
+                "onMenuShareAppMessage"
+            ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+        //通过ready接口处理成功验证
+        wx.ready(function(){
+                // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，
+                // config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，
+                // 则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，
+                // 则可以直接调用，不需要放在ready函数中。
+        });
+        //通过error接口处理失败验证
+
         $(document).ready(function() {
-          /* //生成access_token
-            $.getJSON("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential" +
-                "&appid=wx987bf4ddff238028&secret=4f796ae819127a27abd8864bc22c14e3",
-                function(aaa){
-                    console.log(aaa);
-                });*/
+
         var position_id = sessionStorage.getItem("position_id");
             $.ajax({
                 url:"/company/getCompanyAndgetZhiwei",

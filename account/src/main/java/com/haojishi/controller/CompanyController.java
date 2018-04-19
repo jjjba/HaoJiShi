@@ -2,13 +2,11 @@ package com.haojishi.controller;
 
 import com.haojishi.service.CompanyService;
 import com.haojishi.util.BusinessMessage;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -372,5 +370,29 @@ public class CompanyController {
     public BusinessMessage tjcx(HttpSession session,String zw,Integer sex,Integer age){
         return companyService.tjcx(session,zw,sex,age);
     }
+
+    /**
+     * 根据姓名检索
+     * @param session
+     * @param name
+     * @return
+     */
+    @RequestMapping("getPersonalName")
+    public BusinessMessage getPersonalName(HttpSession session,String name){
+        return companyService.getPersonalName(session,name);
+    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("getTan")
+    public BusinessMessage getTan(HttpSession session){
+        BusinessMessage businessMessage = new BusinessMessage();
+        businessMessage.setData(session.getAttribute("finalpack"));
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
 }
 

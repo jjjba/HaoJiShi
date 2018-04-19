@@ -24,11 +24,9 @@
             th:src="@{/company/js/jquery-3.2.1.js}" ></script>
     <script type="text/javascript" src="/static/company/js/kuai_zhao/kzfwus.js"
             th:src="@{/company/js/kuai_zhao/kzfwus.js}" ></script>
-    <script type="text/javascript">
-        function getBack() {
-            window.location.href="/transition/go_wei_tuo_zhao_pin";
-        }
-    </script>
+    <script type="text/javascript" src="/static/company/js/kuai_zhao/weituo.js"
+            th:src="@{/company/js/kuai_zhao/weituo.js}" ></script>
+
 
 </head>
 <body>
@@ -50,21 +48,21 @@
 <div class="acsjfiws">
    <ul>
    <!--标题开始-->
-     <p class="bortombs actiuys">体验版(半年)</p>
+     <p class="bortombs actiuys">体验版</p>
    <!--标题结束-->
  
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="updat('半年')">
      <!--里边开始-->
       <div class="publkinto">
         <!--左开始-->
         <div class="botezuob">
-          <p class="ztiysns">180天不限次免费电话联系求职者</p>
+          <p class="ztiysns">自开通之日享受6个月委托招聘服务</p>
         </div>
         <!--左结束-->
         <!--右开始-->
         <div class="btoyousc xiyuuse">
-          1880元
+            2980元
         </div>
         <!--右结束-->
       </div>
@@ -75,21 +73,21 @@
    
 
    <!--标题开始-->
-     <p class="bortombs actiuys">完整版(全年)</p>
+     <p class="bortombs actiuys">全年版</p>
    <!--标题结束-->
 
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="updat('全年')">
      <!--里边开始-->
       <div class="publkinto">
         <!--左开始-->
         <div class="botezuob">
-          <p class="ztiysns">365天不限次免费电话联系求职者</p>
+          <p class="ztiysns">自开通之日享受12个月委托招聘服务</p>
         </div>
         <!--左结束-->
         <!--右开始-->
         <div class="btoyousc xiyuuse">
-          3880元
+            5980元
         </div>
         <!--右结束-->
       </div>
@@ -108,11 +106,10 @@
 
 <!--立即支付开始-->
 <div class="ljzfius">
-  <a href="#" class="ljfzys">立即支付</a>
+  <a href="#" class="ljfzys" onclick="ljzfwt()">立即支付</a>
 </div>
 <!--立即支付结束-->
- 
- 
+ <input type="text" style="display: none" id="disylyInput"/>
   <!--弹出层开始-->
   <div class="popupus">
     <!--里边开始-->

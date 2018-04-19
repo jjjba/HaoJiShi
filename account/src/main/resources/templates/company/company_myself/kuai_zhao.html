@@ -27,9 +27,9 @@
             th:src="@{/company/js/jquery-3.2.1.js}" ></script>
     <script type="text/javascript" src="/static/company/js/kuai_zhao/kzfwus.js"
             th:src="@{/company/js/kuai_zhao/kzfwus.js}" ></script>
-    
-
-
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="/static/company/js/zhifu/zhifu.js"
+            th:src="@{/company/js/zhifu/zhifu.js}"></script>
 </head>
 <body>
  
@@ -71,7 +71,7 @@
    <!--标题结束-->
  
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="hqDd('150次急速拨打电话卡','按次数计费')">
      <!--里边开始-->
       <div class="bortombs publkinto">
         <!--左开始-->
@@ -89,9 +89,9 @@
      <!--里边结束-->
    </li>
    <!--一块结束-->
-   
+
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="hqDd('200次急速拨打电话卡','按次数计费')">
      <!--里边开始-->
       <div class="bortombs publkinto">
         <!--左开始-->
@@ -102,7 +102,7 @@
         <!--左结束-->
         <!--右开始-->
         <div class="btoyousc">
-          398元
+          498元
         </div>
         <!--右结束-->
       </div>
@@ -112,7 +112,7 @@
    
    
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="hqDd('300次急速拨打电话卡','按次数计费')">
      <!--里边开始-->
       <div class="publkinto">
         <!--左开始-->
@@ -123,7 +123,7 @@
         <!--左结束-->
         <!--右开始-->
         <div class="btoyousc">
-          398元
+          598元
         </div>
         <!--右结束-->
       </div>
@@ -135,27 +135,27 @@
    <!--标题结束-->
    
    <!--一块开始-->
-   <li class="publblk">
-     <!--里边开始-->
+   <!--<li class="publblk" onclick="$('#input_hide').val('季度卡')">
+     &lt;!&ndash;里边开始&ndash;&gt;
       <div class="bortombs publkinto">
-        <!--左开始-->
+        &lt;!&ndash;左开始&ndash;&gt;
         <div class="botezuob">
           <h2>季度卡</h2>
           <p>购买后电话联系人才不限量(自购买起90天内)</p>
         </div>
-        <!--左结束-->
-        <!--右开始-->
+        &lt;!&ndash;左结束&ndash;&gt;
+        &lt;!&ndash;右开始&ndash;&gt;
         <div class="btoyousc">
           398元
         </div>
-        <!--右结束-->
+        &lt;!&ndash;右结束&ndash;&gt;
       </div>
-     <!--里边结束-->
-   </li>
+     &lt;!&ndash;里边结束&ndash;&gt;
+   </li>-->
    <!--一块结束-->
    
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="hqDd('半年卡','按时间计费')">
      <!--里边开始-->
       <div class="bortombs publkinto">
         <!--左开始-->
@@ -166,7 +166,7 @@
         <!--左结束-->
         <!--右开始-->
         <div class="btoyousc">
-          398元
+          998元
         </div>
         <!--右结束-->
       </div>
@@ -176,7 +176,7 @@
    
    
    <!--一块开始-->
-   <li class="publblk">
+   <li class="publblk" onclick="hqDd('全年卡','按时间计费')">
      <!--里边开始-->
       <div class="publkinto">
         <!--左开始-->
@@ -187,7 +187,7 @@
         <!--左结束-->
         <!--右开始-->
         <div class="btoyousc">
-          398元
+          1698元
         </div>
         <!--右结束-->
       </div>
@@ -201,13 +201,15 @@
 
 <!--立即支付开始-->
 <div class="ljzfius">
-  <a href="#" class="ljfzys">立即支付</a>
+    <input type="text" id="input_hide" style="display: none"/>
+    <input type="text" id="input_hid" style="display: none"/>
+  <a href="#"  onclick="Ljzhifu()" class="ljfzys">立即支付开始</a>
 </div>
 <!--立即支付结束-->
  
  
   <!--弹出层开始-->
-  <div class="popupus">
+  <div class="popupus" id="maiguoshijian">
     <!--里边开始-->
     <div class="pupuinto">
       <div class="lbyis">
@@ -221,6 +223,22 @@
     <!--里边结束-->
   </div>
   <!--弹出层结束-->
+
+ <!--弹出层开始-->
+ <div class="popupus" id="maiguocishu">
+     <!--里边开始-->
+     <div class="pupuinto">
+         <div class="lbyis">
+             <h1>温馨提示</h1>
+             <p>您已经购买好技狮按时间计费卡，在剩余时间内，您不能购买按次数计费卡。</p>
+             <ul>
+                 <li class="wzkljgz02"><a href="#">我知道了</a></li>
+             </ul>
+         </div>
+     </div>
+     <!--里边结束-->
+ </div>
+ <!--弹出层结束-->
  
 </body>
 </html>

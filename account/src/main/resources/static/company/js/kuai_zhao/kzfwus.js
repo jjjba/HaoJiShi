@@ -13,9 +13,6 @@ $(document).ready(function() {
 	});
 	
 	$(".popupus").hide();
-	$(".ljzfius").click(function(){
-		$(".popupus").show();
-		});
 	$(".wzkljgz02").click(function(){
 		
 		$(".popupus").hide();
@@ -25,9 +22,6 @@ $(document).ready(function() {
 	
 });
 
-function goBack() {
-	window.location.href="/transition/go_wo_de"
-}
 
 
 

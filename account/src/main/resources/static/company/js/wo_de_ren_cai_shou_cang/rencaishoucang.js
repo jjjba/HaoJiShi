@@ -20,7 +20,13 @@ $(document).ready(function () {
                         htm+="../../company/images/tupian02.png";
                     }
                 }
-                htm+="'/></div><div class='recryous'><div class='clearfix rcvsise'><div class='fl rminsii'>";
+                htm+="'/></div><div class='recryous'><div class='clearfix rcvsise'>";
+                if(msg.data[i].sex  == "男"){
+                    htm+="<div class='fl rminsii'>";
+                }
+                if(msg.data[i].sex  == "女"){
+                    htm+="<div class='fl rminsii02'>";
+                }
                 htm+=msg.data[i].name;
                 htm+="<span>";
                 if(msg.data[i].sex  == "男"){

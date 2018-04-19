@@ -24,10 +24,12 @@ public class Entrust implements Serializable {
     @Column(name = "create_time")
     private Date createTime;
 
+    @Column(name = "order_id")
+    private String OrderId;
     /**
      * 交易金额
      */
-    private Integer money;
+    private String money;
 
     /**
      * 套餐类型 1半年版 2全年版
@@ -58,6 +60,9 @@ public class Entrust implements Serializable {
      */
     public void setId(Integer id) {
         this.id = id;
+    }
+    public void setOrderId(String orderId) {
+        this.OrderId = orderId;
     }
 
     /**
@@ -96,12 +101,17 @@ public class Entrust implements Serializable {
         this.createTime = createTime;
     }
 
+
+    public String getOrderId(){
+        return OrderId;
+    }
+
     /**
      * 获取交易金额
      *
      * @return money - 交易金额
      */
-    public Integer getMoney() {
+    public String getMoney() {
         return money;
     }
 
@@ -110,7 +120,7 @@ public class Entrust implements Serializable {
      *
      * @param money 交易金额
      */
-    public void setMoney(Integer money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
@@ -162,6 +172,7 @@ public class Entrust implements Serializable {
         sb.append(", money=").append(money);
         sb.append(", type=").append(type);
         sb.append(", endDate=").append(endDate);
+        sb.append(", OrderId=").append(OrderId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

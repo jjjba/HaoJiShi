@@ -8,10 +8,7 @@ import com.haojishi.util.RemortIP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import tk.mybatis.mapper.entity.Example;
-
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
@@ -84,77 +81,6 @@ public class CompanyService{
         return  businessMessage;
     }
 
-  /*  *//**
-     * 判断用户是否是企业用户以及是否符合打电话以及是否收藏
-     * @param session
-     * @return
-     *//*
-    public BusinessMessage loadUserCompanyInfo(HttpSession session){
-        BusinessMessage businessMessage =new BusinessMessage();
-        try {
-            List<Map<String,Object>> list =new ArrayList<>();
-            String openid = (String) session.getAttribute("openid");
-            Example userExample =new Example(User.class);
-            userExample.createCriteria().andEqualTo("openid",openid);
-            List<User> users =usersMapper.selectByExample(userExample);
-            if(users != null && users.size() > 0){
-                Example comExample =new Example(Company.class);
-                comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-                List<Company> companies =companyMapper.selectByExample(comExample);
-                //如果企业不为空 说明是企业用户并且完善完信息
-                if(companies != null && companies.size() > 0){
-                    Example colExample =new Example(CollectPersonal.class);
-                    colExample.createCriteria().andEqualTo("companyId",companies.get(0).getId()).andEqualTo("personalId",session.getAttribute("personalId"));
-                    List<CollectPersonal> collectPersonals =collectPersonalMapper.selectByExample(colExample);
-                    Map<String,Object> map =new HashMap<>();
-                    if(collectPersonals != null && collectPersonals.size() > 0){
-                        map.put("isCollect","1");
-                    }
-                    Example serviceExample =new Example(Services.class);
-                    serviceExample.createCriteria().andEqualTo("comid",companies.get(0).getId());
-                    List<Services> services =servicesMapper.selectByExample(serviceExample);
-                    if(services != null &&services.size() > 0){
-                        if(services.get(0).getType() .equals("1") ){
-                            if(services.get(0).getSurplusnumber() > 0){
-                                map.put("isKuaiZhao","1");
-                            }else {
-                                map.put("isKuaiZhao","2");
-                            }
-                        }else if(services.get(0).getType() .equals("2") ){
-                            if(services.get(0).getEndtime().getTime() > new Date().getTime()){
-                                map.put("isKuaiZhao","1");
-                            }else {
-                                map.put("isKuaiZhao","2");
-                            }
-                        }
-                    }else {
-                        map.put("isKuaiZhao","3");
-                    }
-                    list.add(map);
-                    businessMessage.setSuccess(true);
-                    businessMessage.setData(list);
-                }else {
-                    //如果企业为空 说明该用户是游客或者注册但是未完善信息
-                    String phone =users.get(0).getPhone();
-                    Map<String,Object> map =new HashMap<>();
-                    //如果手机号存在 说明已经注册 但是未完善信息
-                    if(phone != null && phone != ""){
-                        map.put("isRegist","2");
-                    }else {
-                        map.put("isregist","3");
-                    }
-                    list.add(map);
-                    businessMessage.setData(list);
-                    businessMessage.setSuccess(true);
-                }
-            }else {
-                log.error("未获取到用户信息");
-            }
-        }catch (Exception e){
-            log.error("获取企业用户信息失败",e);
-        }
-        return  businessMessage;
-    }*/
 
     /**
      * 更新企业快招服务打电话次数
@@ -314,29 +240,10 @@ public class CompanyService{
     public BusinessMessage getJianli(HttpSession session){
         BusinessMessage businessMessage =new BusinessMessage();
         Integer id = (Integer) session.getAttribute("userId");
-        Example userExample =new Example(User.class);
-        userExample.createCriteria().andEqualTo("id",id);
-        List<User> users =usersMapper.selectByExample(userExample);
-        if (users !=null && users.size()>0){
-            Example comExample =new Example(Company.class);
-            comExample.createCriteria().andEqualTo("userId",users.get(0).getId());
-            List<Company> companies =companyMapper.selectByExample(comExample);
-            if (companies!=null && companies.size()>0){
-                Example resumeExample =new Example(Resume.class);
-                resumeExample.createCriteria().andEqualTo("companyId",companies.get(0).getId());
-                List<Resume> resuses = resumeMapper.selectByExample(resumeExample);
-                if(resuses !=null && resuses.size()>0){
-                    List<Personal> personals = new ArrayList<Personal>();
-                    for(int i=0;i<resuses.size();i++){
-                        Example personalExample = new Example(Personal.class);
-                        personalExample.createCriteria().andEqualTo("id",resuses.get(i).getPersonalId());
-                        personals.add(personalMapper.selectByExample(personalExample).get(0));
-                    }
-                    businessMessage.setData(personals);
-                    businessMessage.setSuccess(true);
-                }
-            }
-        }
+        String sql = "SELECT * FROM USER u,company c,RESUME r,personal p WHERE u.`id`=c.`user_id` AND c.`id` = r.`company_id` AND r.`personal_id` = p.`id` AND u.`id` = '"+id +"'";
+        List<Map<String,Object>> list = personalMapper.phoneNumber(sql);
+        businessMessage.setData(list);
+        businessMessage.setSuccess(true);
         return businessMessage;
     }
 
@@ -899,6 +806,7 @@ public class CompanyService{
         sf.append("and  hope_city LIKE '%"+city+"%'");
         session.setAttribute("city",city);
         sf.append("ORDER BY create_time DESC limit 10");
+        System.out.println(sf.toString());
         List<Map<String, Object>>list = companyMapper.executeSql(sf.toString());
         num = list.size();
         if(num != 10){
@@ -1202,7 +1110,6 @@ public class CompanyService{
                 sf.append(" and (age < "+ age+")");
             }
         }
-        log.error(sf.toString());
         List<Map<String, Object>>list = personalMapper.phoneNumber(sf.toString());
 
 
@@ -1317,5 +1224,39 @@ public class CompanyService{
         businessMessage.setSuccess(true);
         return  businessMessage;
     }
+
+    /**
+     * 通过姓名检索
+     * @return
+     */
+    public BusinessMessage getPersonalName(HttpSession session,String name){
+        BusinessMessage businessMessage = new BusinessMessage();
+        String city = (String)session.getAttribute("city");
+        List<Map<String, Object>> regionlist = regionMapper.executeSql("SELECT two.* FROM region ONE,region two WHERE two.`pId` = one.`pId` AND one.NAME = '"+city+"'");
+        StringBuffer sf = new StringBuffer();
+        sf.append( "SELECT  * FROM personal WHERE  1= 1 ");
+        if(regionlist!= null){
+            for(int i =0;i<regionlist.size();i++){
+                if(regionlist.get(i).get("name") != city){
+                    if(i!=0){
+                        if(i ==  regionlist.size()-1 ){
+                            sf.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%')");
+                        }else {
+                            sf.append(" or  hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                        }
+                    }else {
+                        sf.append(" and  (hope_city LIKE " +"'%"+regionlist.get(i).get("name")+"%'");
+                    }
+                }
+            }
+        }
+       sf.append(" and (name like '%"+name+"%')");
+
+        List<Map<String, Object>>list = personalMapper.phoneNumber(sf.toString());
+        businessMessage.setData(list);
+        businessMessage.setSuccess(true);
+        return businessMessage;
+    }
+
 
 }

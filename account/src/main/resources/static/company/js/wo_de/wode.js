@@ -182,7 +182,19 @@ function RenZheng() {
         window.location.href="/transition/RenZheng";
 }
 function kuaizhao() {
-    window.location.href="/transition/kuaizhao";
+    $.ajax({
+        url:"/wxpayall/getFfjl",
+        type:"POST",
+        success:function (msg) {
+            if(msg.data != null && msg.data.length>0 && msg.dataOne == "未过期"){
+                sessionStorage.setItem("jiemian","wode");
+                window.location.href="/transition/kuaizhao_fufeijilu";
+            }else {
+                sessionStorage.setItem("kuaizhao","wode")
+                window.location.href="/wx/userAuth?lx=快招";
+            }
+        }
+    })
 }
 function wanshanCompany() {
     $.ajax({

@@ -40,7 +40,7 @@
     <!--搜索框开始-->
      <div class="searchis">
        <div class="zubiis"><input type="text" placeholder="人才" class="zhiwiis" /></div>
-       <div class="youcss"><input name="" type="button" class="aniusss"></div>
+       <div class="youcss" onclick="rencaiSousuo();"><input name="" type="button" class="aniusss"></div>
      </div>
     <!--搜索框结束-->
 
@@ -69,63 +69,63 @@
           <!--左边结束-->
           <!--右边开始-->
             <div class="flriyous" id="jishi">
-                <a href="#" onclick="fenlei('jsqb')"><span>全部</span></a>
-                <a href="#" onclick="fenlei('lls')"><span>理疗师</span></a>
-                <a href="#" onclick="fenlei('zls')"><span>足疗师</span></a>
-                <a href="#" onclick="fenlei('ams')"><span>按摩师</span></a>
-                <a href="#" onclick="fenlei('zjs')"><span>针灸师</span></a>
-                <a href="#" onclick="fenlei('tns')"><span>推拿师</span></a>
-                <a href="#" onclick="fenlei('xjs')"><span>修脚师</span></a>
-                <a href="#" onclick="fenlei('tys')"><span>推油师</span></a>
-                <a href="#" onclick="fenlei('crs')"><span>采耳师</span></a>
-                <a href="#" onclick="fenlei('zys')"><span>指压师</span></a>
-                <a href="#" onclick="fenlei('SPAs')"><span>SPA师</span></a>
-                <a href="#" onclick="fenlei('mrams')"><span>盲人按摩师</span></a>
-                <a href="#" onclick="fenlei('jsqt')"><span>其他</span></a>
+                <a href="#" onclick="fenlei('jsqb','技师类全部')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('lls','理疗师')"><span>理疗师</span></a>
+                <a href="#" onclick="fenlei('zls','足疗师')"><span>足疗师</span></a>
+                <a href="#" onclick="fenlei('ams','按摩师')"><span>按摩师</span></a>
+                <a href="#" onclick="fenlei('zjs','针灸师')"><span>针灸师</span></a>
+                <a href="#" onclick="fenlei('tns','推拿师')"><span>推拿师</span></a>
+                <a href="#" onclick="fenlei('xjs','修脚师')"><span>修脚师</span></a>
+                <a href="#" onclick="fenlei('tys','推油师')"><span>推油师</span></a>
+                <a href="#" onclick="fenlei('crs','采耳师')"><span>采耳师</span></a>
+                <a href="#" onclick="fenlei('zys','指压师')"><span>指压师</span></a>
+                <a href="#" onclick="fenlei('SPAs','SPA师')"><span>SPA师</span></a>
+                <a href="#" onclick="fenlei('mrams','盲人按摩师')"><span>盲人按摩师</span></a>
+                <a href="#" onclick="fenlei('jsqt','技师类其他')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="guanli" style="display: none">
-                <a href="#" onclick="fenlei('glqb')"><span>全部</span></a>
-                <a href="#" onclick="fenlei('fzjl')"><span>副总经理</span></a>
-                <a href="#" onclick="fenlei('yyjl')"><span>营运经理</span></a>
-                <a href="#" onclick="fenlei('zjl')"><span>总经理</span></a>
-                <a href="#" onclick="fenlei('dzzl')"><span>店长助理</span></a>
-                <a href="#" onclick="fenlei('jlzl')"><span>经理助理</span></a>
-                <a href="#" onclick="fenlei('dz')"><span>店长</span></a>
-                <a href="#" onclick="fenlei('qyjl')"><span>区域经理</span></a>
-                <a href="#" onclick="fenlei('yxzj')"><span>营销总监</span></a>
-                <a href="#" onclick="fenlei('glqt')"><span>其他</span></a>
+                <a href="#" onclick="fenlei('glqb','管理类全部')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('fzjl','副总经理')"><span>副总经理</span></a>
+                <a href="#" onclick="fenlei('yyjl','营运经理')"><span>营运经理</span></a>
+                <a href="#" onclick="fenlei('zjl','总经理')"><span>总经理</span></a>
+                <a href="#" onclick="fenlei('dzzl','店长助理')"><span>店长助理</span></a>
+                <a href="#" onclick="fenlei('jlzl','经理助理')"><span>经理助理</span></a>
+                <a href="#" onclick="fenlei('dz','店长')"><span>店长</span></a>
+                <a href="#" onclick="fenlei('qyjl','区域经理')"><span>区域经理</span></a>
+                <a href="#" onclick="fenlei('yxzj','营销总监')"><span>营销总监</span></a>
+                <a href="#" onclick="fenlei('glqt','管理类其他')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="qianting" style="display: none">
-                <a href="#" onclick="fenlei('qtqb')"><span>全部</span></a>
-                <a href="#" onclick="fenlei('dtjllb')"><span>大堂经理/领班</span></a>
-                <a href="#" onclick="fenlei('syby')"><span>收银/吧员</span></a>
-                <a href="#" onclick="fenlei('zkkf')"><span>咨客/客服</span></a>
-                <a href="#" onclick="fenlei('ybjd')"><span>迎宾/接待</span></a>
-                <a href="#" onclick="fenlei('khjl')"><span>客户经理</span></a>
-                <a href="#" onclick="fenlei('xs')"><span>销售</span></a>
-                <a href="#" onclick="fenlei('bz')"><span>部长</span></a>
-                <a href="#" onclick="fenlei('qtqt')"><span>其他</span></a>
+                <a href="#" onclick="fenlei('qtqb','前厅类全部')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('dtjllb','大堂经理/领班')"><span>大堂经理/领班</span></a>
+                <a href="#" onclick="fenlei('syby','收银/吧员')"><span>收银/吧员</span></a>
+                <a href="#" onclick="fenlei('zkkf','咨客/客服')"><span>咨客/客服</span></a>
+                <a href="#" onclick="fenlei('ybjd','迎宾/接待')"><span>迎宾/接待</span></a>
+                <a href="#" onclick="fenlei('khjl','客户经理')"><span>客户经理</span></a>
+                <a href="#" onclick="fenlei('xs','销售')"><span>销售</span></a>
+                <a href="#" onclick="fenlei('bz','部长')"><span>部长</span></a>
+                <a href="#" onclick="fenlei('qtqt','前厅类其他')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="houqin" style="display: none">
-                <a href="#" onclick="fenlei('hqqb')"><span>全部</span></a>
-                <a href="#" onclick="fenlei('pxmrs')"><span>皮鞋美容师</span></a>
-                <a href="#" onclick="fenlei('cbgb')"><span>储备干部</span></a>
-                <a href="#" onclick="fenlei('wy')"><span>文员</span></a>
-                <a href="#" onclick="fenlei('fwy')"><span>服务员</span></a>
-                <a href="#" onclick="fenlei('cg')"><span>采购</span></a>
-                <a href="#" onclick="fenlei('bj')"><span>保洁</span></a>
-                <a href="#" onclick="fenlei('cs')"><span>厨师</span></a>
-                <a href="#" onclick="fenlei('ba')"><span>保安</span></a>
-                <a href="#" onclick="fenlei('sj')"><span>司机</span></a>
-                <a href="#" onclick="fenlei('hqqt')"><span>其他</span></a>
+                <a href="#" onclick="fenlei('hqqb','后勤类全部')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('pxmrs','皮鞋美容师')"><span>皮鞋美容师</span></a>
+                <a href="#" onclick="fenlei('cbgb','储备干部')"><span>储备干部</span></a>
+                <a href="#" onclick="fenlei('wy','文员')"><span>文员</span></a>
+                <a href="#" onclick="fenlei('fwy','服务员')"><span>服务员</span></a>
+                <a href="#" onclick="fenlei('cg','采购')"><span>采购</span></a>
+                <a href="#" onclick="fenlei('bj','保洁')"><span>保洁</span></a>
+                <a href="#" onclick="fenlei('cs','厨师')"><span>厨师</span></a>
+                <a href="#" onclick="fenlei('ba','保安')"><span>保安</span></a>
+                <a href="#" onclick="fenlei('sj','司机')"><span>司机</span></a>
+                <a href="#" onclick="fenlei('hqqt','后勤类其他')"><span>其他</span></a>
             </div>
             <div class="flriyous" id="peixun" style="display: none">
-                <a href="#" onclick="fenlei('pxqb')"><span>全部</span></a>
-                <a href="#" onclick="fenlei('jszj')"><span>技术总监</span></a>
-                <a href="#" onclick="fenlei('jsls')"><span>技术老师</span></a>
-                <a href="#" onclick="fenlei('lyds')"><span>礼仪导师</span></a>
-                <a href="#" onclick="fenlei('pxjs')"><span>培训讲师</span></a>
-                <a href="#" onclick="fenlei('pxqt')"><span>其他</span></a>
+                <a href="#" onclick="fenlei('pxqb','培训类全部')"><span>全部</span></a>
+                <a href="#" onclick="fenlei('jszj','技术总监')"><span>技术总监</span></a>
+                <a href="#" onclick="fenlei('jsls','技术老师')"><span>技术老师</span></a>
+                <a href="#" onclick="fenlei('lyds','礼仪导师')"><span>礼仪导师</span></a>
+                <a href="#" onclick="fenlei('pxjs','培训讲师')"><span>培训讲师</span></a>
+                <a href="#" onclick="fenlei('pxqt','培训类其他')"><span>其他</span></a>
             </div>
           <!--右边结束-->
         </div>
@@ -202,58 +202,58 @@
   <!--最底部结束-->
   
   <!--电话弹层开始-->
-  
-  <!--弹出层开始-->
-  <div class="popupus" id="denglu" style="display: none">
-    <!--里边开始-->
-    <div class="pupuinto">
-      <div class="lbyis">
-        <p class="patopss">登录后才可以拨打人才电话哦~</p>
-        <ul>
-          <li class="wzkljgz01" id="zaikandenglu"><a href="#">我再看看</a></li>
-          <li class="wzkljgz02" id="likedenglu"><a href="#">立刻登录</a></li>
-        </ul>
-      </div>
-    </div>
-    <!--里边结束-->
-  </div>
-  <!--弹出层结束-->
-    <div class="popupus" id="wanshan" style="display: none">
+    <div class="popupus xianyin01" id="dengludianhua" style="display: none">
         <!--里边开始-->
         <div class="pupuinto">
             <div class="lbyis">
-                <p class="patopss">完善信息才可以拨打电话哦~</p>
+                <p class="patopss">登录后才可以联系人才哦~</p>
                 <ul>
-                    <li class="wzkljgz01" id="zaikanwanshan"><a href="#">我再看看</a></li>
-                    <li class="wzkljgz02" id="likewanshan"><a href="#">立刻完善</a></li>
-                </ul>
-            </div>
-        </div>
-        <!--里边结束-->
-    </div>
-    <!--电话弹出层开始-->
-    <div class="popupus xianyin02" style="display: none">
-        <!--里边开始-->
-        <div class="pupuinto">
-            <div class="lbyis">
-                <p class="patopss">开通好技师快招服务后才可以电话直接联系人才哦~</p>
-                <ul>
-                    <li class="wzkljgz01" id="zaikankaitong"><a href="#">我再看看</a></li>
-                    <li class="wzkljgz02" id="likekaitong"><a href="#">立刻开通</a></li>
+                    <li class="wzkljgz01" id="zaikandengludianua" onclick="$('#dengludianhua').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likedengludianhua" onclick="window.location.href='/transition/go_zhu_ce';"><a href="#">立刻登录</a></li>
                 </ul>
             </div>
         </div>
         <!--里边结束-->
     </div>
 
-    <div class="popupus xianyin03" style="display: none">
+    <div class="popupus xianyin01" id="wanshandianhua" style="display: none">
         <!--里边开始-->
         <div class="pupuinto">
             <div class="lbyis">
-                <p class="patopss">您的好技师服务已到期,请续费,才可以电话直接联系人才哦~</p>
+                <p class="patopss">完善信息才可以联系人才哦~</p>
                 <ul>
-                    <li class="wzkljgz01" id="zaikanxufei"><a href="#">我再看看</a></li>
-                    <li class="wzkljgz02" id="likexufei"><a href="#">立刻续费</a></li>
+                    <li class="wzkljgz01" id="zaikanwanshandianhua" onclick="$('#wanshandianhua').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likewanshandianhua"  onclick="window.location.href = '/transition/bianji_dianpuxinxi';"><a href="#">立刻完善</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--里边结束-->
+    </div>
+
+
+    <!--电话弹出层开始-->
+    <div class="popupus xianyin02" id="weikaitong" style="display: none">
+        <!--里边开始-->
+        <div class="pupuinto">
+            <div class="lbyis">
+                <p class="patopss">开通好技师快招服务后才可以电话直接联系人才</p>
+                <ul>
+                    <li class="wzkljgz01" id="zaikankaitong" onclick="$('#weikaitong').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likekaitong" onclick="window.location.href ='/transition/kuaizhao'"><a href="#">立刻开通</a></li>
+                </ul>
+            </div>
+        </div>
+        <!--里边结束-->
+    </div>
+
+    <div class="popupus xianyin03" id ="yijingguoqi" style="display: none">
+        <!--里边开始-->
+        <div class="pupuinto">
+            <div class="lbyis">
+                <p class="patopss">您的好技师服务已到期,请续费,才可以电话直接联系人才</p>
+                <ul>
+                    <li class="wzkljgz01" id="zaikanxufei"  onclick="$('#yijingguoqi').hide();"><a href="#">我再看看</a></li>
+                    <li class="wzkljgz02" id="likexufei" onclick="window.location.href ='/transition/kuaizhao'"><a href="#">立刻续费</a></li>
                 </ul>
             </div>
         </div>

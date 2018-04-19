@@ -3,6 +3,7 @@ $(document).ready(function() {
         type:"post",
         url:"/company/getJianli",
         success:function (msg) {
+            console.log(msg);
             var lists = msg.data;
             var htm = "";
             if(lists !=null && lists !='' && lists!=""){

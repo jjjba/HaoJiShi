@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import tk.mybatis.mapper.entity.Example;
 
 import javax.servlet.http.HttpServletRequest;
@@ -566,7 +567,7 @@ public class TransitionController {
      * @return
      */
     @RequestMapping("kuaizhao")
-    public String kuaizhao(){
+    public String kuaizhao(HttpServletRequest request){
         return"company/company_myself/kuai_zhao";
     }
 
@@ -817,5 +818,18 @@ public class TransitionController {
     @RequestMapping("dianpuYl")
     public String dianpuYl(){return  "company/company_myself/bianji_dianpuxinxi/dianpu_xiangqing";}
 
-
+    /**
+     * 人才搜索界面
+     * @return
+     */
+    @RequestMapping("rencaiSousuo")
+    public String rencaiSousuo(){
+        return  "company/company_per/rencai_sousuo";
+    }
+    @RequestMapping("kuaizhao_fufeijilu")
+    public String kuaizhao_fufeijilu(){return "company/company_myself/kuaizhao_fufeijilu";}
+    @RequestMapping("test")
+    public String test(){
+        return "company/company_myself/position_bj/test";
+    }
 }

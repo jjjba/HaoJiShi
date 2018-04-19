@@ -22,7 +22,7 @@ public class Services implements Serializable {
     /**
      * 付费金额
      */
-    private Integer money;
+    private String money;
 
     /**
      * 付款时间
@@ -80,7 +80,7 @@ public class Services implements Serializable {
      * 订单号
      */
     @Column(name = "order_id")
-    private Integer orderId;
+    private String orderId;
 
     private static final long serialVersionUID = 1L;
 
@@ -125,7 +125,7 @@ public class Services implements Serializable {
      *
      * @return money - 付费金额
      */
-    public Integer getMoney() {
+    public String getMoney() {
         return money;
     }
 
@@ -134,7 +134,7 @@ public class Services implements Serializable {
      *
      * @param money 付费金额
      */
-    public void setMoney(Integer money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
@@ -305,7 +305,7 @@ public class Services implements Serializable {
      *
      * @return order_id - 订单号
      */
-    public Integer getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
@@ -314,7 +314,7 @@ public class Services implements Serializable {
      *
      * @param orderId 订单号
      */
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

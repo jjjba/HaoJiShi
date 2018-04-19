@@ -1,0 +1,327 @@
+﻿<!doctype html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>店铺端-人才-搜索</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+    <script type="text/javascript" src="/static/person/js/personal_index/jquery.cookie.js"
+            th:src="@{/person/js/personal_index/jquery.cookie.js}"></script>
+    <link type="text/css" href="/static/company/css/wo_de/top.css"
+          th:href="@{/company/css/wo_de/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/person/css/common_problem/cjwts.css"
+          th:href="@{/person/css/common_problem/cjwts.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/zhu_ce/denglu.css" th:href="@{/company/css/zhu_ce/denglu.css}" rel="stylesheet" />
+  <link type="text/css" href="/static/company/css/qiu_zhi_zhe/sousuo.css"
+          th:href="@{/company/css/qiu_zhi_zhe/sousuo.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/qiu_zhi_zhe_xiang_qing/xiangqing.css"
+          th:href="@{/company/css/qiu_zhi_zhe_xiang_qing/xiangqing.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="topbus">
+    <div class="tbusinto">
+        人才搜索
+        <a href="#" class="zjtous" onclick="fanhi()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+        <a href="#" class="qudeds srhos" onclick="onBluer()">搜索</a>
+    </div>
+</div>
+<!--头部结束-->
+  <!--搜索框开始-->
+  <div class="sskuis">
+    <div class="zukiiuss">
+      <div class="srii001"><input type="text" class="yupois" placeholder="请输入关键词搜索"/></div>
+      <div class="youckiis"><a href="#"><img src="/static/company/images/gaunbi.png" th:src="@{/company/images/gaunbi.png}" onclick="qingkong();" /></a></div>
+    </div>
+    <!--<div class="quxiaoys"><a href="#" id="quxiaoAnNiu" onclick="window.location.href='/transition/go_qiu_zhi_zhe';">取消</a></div>-->
+  </div>
+  <!--搜索框结束--> 
+  <script>
+      $(function() {
+          var num1 = $.cookie("numOne");
+          var num2 = $.cookie("numTwo");
+          if(num1 == null && num2 ==null){
+              $(".listbks").hide();
+          }else {
+              $("#liOne").html(num1);
+              $("#litwo").html(num2);
+          }
+          var jiansuo1 = sessionStorage.getItem("jiansuo1");
+          if(jiansuo1 != null && jiansuo1!= undefined && jiansuo1 != ""){
+              $(".yupois").val(jiansuo1);
+              $.ajax({
+                  url:"/company/getPersonalName",
+                  data:{name:jiansuo1},
+                  success:function (res) {
+                      console.log(res);
+                      $("#neirong").empty();
+                      var list =res.data;
+                      var avatar,sex,cla;
+                      $.each(list, function (index, item) {
+                          avatar =item.avatar;
+                          phone =item.phone;
+                          if(avatar == null || avatar == ""){
+                              if(item.sex == "男"){
+
+                                  avatar ="../../company/images/tupian01.png"
+                              }else {
+                                  avatar ="../../company/images/tupian02.png"
+                              }
+                          }
+                          sex =item.sex;
+                          if(sex == "男"){
+                              sex ="../../company/images/biao05.png"
+                              cla = "<div class=\"fl rminsii\">";
+                          }else {
+                              sex ="../../company/images/biao06.png"
+                              cla = "<div class=\"fl rminsii02\">";
+                          }
+                          var personalList ='<a href="#" onclick="loadPersonalInfoById(&quot;'+item.id+'&quot;)" >'+
+                              '<div class="rcxinxis">'+
+                              '<div class="rcktops">'+
+                              '<div class="reclefs">'+
+                              '<img src="'+avatar+'" />'+
+                              '</div>'+
+                              '<div class="recryous">'+
+                              '<div class="clearfix rcvsise">'+
+                              cla+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
+                              '<div class="fr ciiuss">'+item.expect_money +'</div>'+
+                              '</div>'+
+                              '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
+                              '</div>'+
+                              '</div></a>'+
+                              '<div class="pxbiuss">'+
+                              '<div class="pxlefts">'+item.hope_job+'</div>'+
+                              '<div class="pxyouls"><img src="./../company/images/biao07.png" onclick="puanduan(&quot;'+item.id+'&quot;)"/></div>'+
+                              '</div>'+
+                              '</div>';
+                          console.log(personalList);
+                          $(".listbks").hide();
+                          $("#neirong").append(personalList);
+                      });
+
+                  }
+              })
+          }
+      })
+      function fanhi() {
+          sessionStorage.setItem("jiansuo","");
+          sessionStorage.setItem("jiansuo1","");
+          window.location.href="/transition/go_qiu_zhi_zhe";
+      }
+      function onBluer() {
+        var inp = $(".yupois").val();
+          if (inp != null && inp!=''){
+              var num1 = $.cookie("numOne");
+              $.cookie("numTwo",num1);
+              $.cookie("numOne",inp);
+              sessionStorage.setItem("jiansuo",inp);
+              $.ajax({
+                  url:"/company/getPersonalName",
+                  data:{name:inp},
+                  success:function (res) {
+                      console.log(res);
+                      $("#neirong").empty();
+                      var list =res.data;
+                      if(list != null && list.length>0){
+                          $(".listbks").hide();
+                          var avatar,sex,cla;
+                          $.each(list, function (index, item) {
+                              avatar =item.avatar;
+                              phone =item.phone;
+                              if(avatar == null || avatar == ""){
+                                  if(item.sex == "男"){
+
+                                      avatar ="../../company/images/tupian01.png"
+                                  }else {
+                                      avatar ="../../company/images/tupian02.png"
+                                  }
+                              }
+                              sex =item.sex;
+                              if(sex == "男"){
+                                  sex ="../../company/images/biao05.png"
+                                  cla = "<div class=\"fl rminsii\">";
+                              }else {
+                                  sex ="../../company/images/biao06.png"
+                                  cla = "<div class=\"fl rminsii02\">";
+                              }
+                              var personalList ='<a href="#" onclick="loadPersonalInfoById(&quot;'+item.id+'&quot;)" >'+
+                                  '<div class="rcxinxis">'+
+                                  '<div class="rcktops">'+
+                                  '<div class="reclefs">'+
+                                  '<img src="'+avatar+'" />'+
+                                  '</div>'+
+                                  '<div class="recryous">'+
+                                  '<div class="clearfix rcvsise">'+
+                                  cla+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
+                                  '<div class="fr ciiuss">'+item.expect_money +'</div>'+
+                                  '</div>'+
+                                  '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
+                                  '</div>'+
+                                  '</div></a>'+
+                                  '<div class="pxbiuss">'+
+                                  '<div class="pxlefts">'+item.hope_job+'</div>'+
+                                  '<div class="pxyouls"><img src="./../company/images/biao07.png" onclick="puanduan(&quot;'+item.id+'&quot;)"/></div>'+
+                                  '</div>'+
+                                  '</div>';
+                              $("#neirong").append(personalList);
+                          });
+                      }else {
+                          $(".listbks").hide();
+                      }
+                  }
+              })
+          } else {
+              $('.bunengweikong').show();
+              setTimeout('$(".bunengweikong").hide()',1000);
+          }
+      }
+      function qingkong() {
+          $(".yupois").val("");
+      }
+      function CookiOne(suc) {
+          var inp;
+          if(suc =="one"){
+             inp =  $.cookie("numOne");
+          }
+          if(suc =="two"){
+             inp =  $.cookie("numtwo");
+          }
+          sessionStorage.setItem("jiansuo",inp);
+          $.ajax({
+              url:"/company/getPersonalName",
+              data:{name:inp},
+              success:function (res) {
+                  console.log(res);
+                  $("#neirong").empty();
+                  var list =res.data;
+                  if(list != null && list.length>0){
+                      $(".listbks").hide();
+                      var avatar,sex,cla;
+                      $.each(list, function (index, item) {
+                          avatar =item.avatar;
+                          phone =item.phone;
+                          if(avatar == null || avatar == ""){
+                              if(item.sex == "男"){
+
+                                  avatar ="../../company/images/tupian01.png"
+                              }else {
+                                  avatar ="../../company/images/tupian02.png"
+                              }
+                          }
+                          sex =item.sex;
+                          if(sex == "男"){
+                              sex ="../../company/images/biao05.png"
+                              cla = "<div class=\"fl rminsii\">";
+                          }else {
+                              sex ="../../company/images/biao06.png"
+                              cla = "<div class=\"fl rminsii02\">";
+                          }
+                          var personalList ='<a href="#" onclick="loadPersonalInfoById(&quot;'+item.id+'&quot;)" >'+
+                              '<div class="rcxinxis">'+
+                              '<div class="rcktops">'+
+                              '<div class="reclefs">'+
+                              '<img src="'+avatar+'" />'+
+                              '</div>'+
+                              '<div class="recryous">'+
+                              '<div class="clearfix rcvsise">'+
+                              cla+item.name+' <span><img src="'+sex+'">'+item.age+'</span></div>'+
+                              '<div class="fr ciiuss">'+item.expect_money +'</div>'+
+                              '</div>'+
+                              '<div class="xnxyusie"> '+item.job_experience+' | '+item.state+' | '+item.address+' </div>'+
+                              '</div>'+
+                              '</div></a>'+
+                              '<div class="pxbiuss">'+
+                              '<div class="pxlefts">'+item.hope_job+'</div>'+
+                              '<div class="pxyouls"><img src="./../company/images/biao07.png" onclick="puanduan(&quot;'+item.id+'&quot;)"/></div>'+
+                              '</div>'+
+                              '</div>';
+                          $("#neirong").append(personalList);
+                      });
+                  }else {
+                      $(".listbks").hide();
+                  }
+              }
+          })
+      }
+  </script>
+  <!--列表框开始-->
+  <ul class="listbks" >
+    <li onclick="CookiOne('one');" id="liOne"></li>
+    <li onclick="CookiOne('two');" id="litwo"></li>
+  </ul>
+  <!--列表框结束-->
+  
+  <!--清空历史开始-->
+  <!--<a href="#" class="qklishs">清空搜索历史</a>-->
+  <!--清空历史结束-->
+<div class="toolbarframe bunengweikong" style="display: none">不能为空！</div>
+<div id="neirong">
+
+</div>
+<script>
+    function puanduan(id) {
+        var com_id = sessionStorage.getItem("com_id");
+        console.log(com_id);
+        console.log("进来了");
+        if(com_id != null && com_id!='' && com_id!="" && com_id !=undefined && com_id>0){
+            $.ajax({
+                url: "/company/PDJyMy",
+                data:{id:id},
+                success: function (msg) {
+                    if (msg.data == 1) {
+                        //正常开通
+                        if (msg.dataOne != null) {
+                            console.log(msg.dataOne);
+                            window.location.href = "tel:" + msg.dataOne;
+                        }
+                    }
+                    if (msg.data == 2) {
+                        //未开通
+                        $("#weikaitong").show();
+                    }
+                    if (msg.data == 3) {
+                        //已经过期了
+                        $("#yijingguoqi").show();
+                    }
+                }
+            })
+        }else {
+            console.log("进来了");
+            $("#dengludianhua").show();
+        }
+
+    }
+    function loadPersonalInfoById(id) {
+        console.log(id);
+        sessionStorage.setItem("where","sousuo");
+        sessionStorage.setItem("po_id",id);
+        window.location.href="/transition/go_qiu_zhi_zhe_xiang_qing";
+    }
+
+</script>
+ 
+
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

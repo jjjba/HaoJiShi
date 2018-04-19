@@ -1,0 +1,178 @@
+﻿<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>店铺端-我的快招聘-付费记录</title>
+
+    <!-- 公用样式 开始 -->
+    <link type="text/css" href="/static/company/css/response.css"
+          th:href="@{/company/css/response.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/public.css"
+          th:href="@{/company/css/public.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/xiangying.css"
+          th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
+    <!-- 公用样式 结束 -->
+    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
+            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
+
+    <link type="text/css" href="/static/person/css/wan_shan_xin_xi/top.css"
+          th:href="@{/person/css/wan_shan_xin_xi/top.css}" rel="stylesheet" />
+    <link type="text/css" href="/static/company/css/wodekuaizhao.css"
+          th:href="@{/company/css/wodekuaizhao.css}" rel="stylesheet" />
+     <script type="text/javascript" src="/static/company/js/wodekuaizhao.js"
+             th:src="@{/company/js/wodekuaizhao.js}"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url:"/wxpayall/getFfjl",
+                type:"POST",
+                success:function (msg) {
+                    if(msg.data != null && msg.data.length>0){
+                        if(msg.dataOne == "未过期"){
+                            if(msg.data[0].type == "按次数计费"){
+                                $("#shengyuTianShuORCiShu").text(msg.data[0].surplusNumber);
+                                $("#shengyuTianShuORCiShuBt").text("剩余次数");
+                            }
+                            if(msg.data[0].type == "按时间计费"){
+                                $("#shengyuTianShuORCiShu").text(msg.dataTwo);
+                                $("#shengyuTianShuORCiShuBt").text("剩余天数");
+                            }
+                            var htm = "";
+                            for(var i=0;i<msg.data.length;i++){
+                                htm+="<div class='abloycks'><div class='zuouts'>购买";
+                                htm+=msg.data[i].name;
+                                htm+="</div><div class='youbyus'><h2>";
+                                htm+=msg.data[i].money;
+                                htm+="元</h2><p>";
+                                htm+=msg.data[i].createDate;
+                                htm+="</p></div> </div>";
+                            }
+                            $("#fukuanshuliang").text("付费记录("+msg.data.length+")");
+                            $("#fufeiList").append(htm);
+                        }
+                        if(msg.DataOne == "过期了"){
+                            window.location.href="/wx/userAuth";
+                        }
+                    }else {
+                        window.location.href="/wx/userAuth";
+                    }
+
+                }
+            })
+        })
+        function fanhui() {
+            var jiemian = sessionStorage.getItem("jiemian");
+            if(jiemian == "wode"){
+                sessionStorage.setItem("jiemian","");
+                window.location.href= "/transition/go_wo_de";
+            }
+            if(jiemian == "fukuan"){
+                sessionStorage.setItem("jiemian","");
+                window.location.href= "/wx/userAuth";
+            }
+        }
+        function quxufei() {
+            sessionStorage.setItem("kuaizhao","fukuanjilu");
+            window.location.href='/wx/userAuth?lx=快招';
+        }
+    </script>
+
+</head>
+<body>
+ 
+ <!--头部开始-->
+ <div class="topbus">
+   <!--里边开始-->
+   <div class="tbusinto">
+     我的快招
+     <a href="#" class="zjtous" onclick="fanhui()"><img src="/static/person/images/biao04.png" th:src="@{/person/images/biao04.png}" /></a>
+   </div>
+   <!--里边结束-->
+ </div>
+ <!--头部结束-->
+ 
+ <!--最上边开始-->
+   <div class="zuitops">
+     
+     <!--里边开始-->
+     <div class="lbyhius">
+       <!--剩余次数开始-->
+       <div class="sycsss">
+         <h1 id="shengyuTianShuORCiShu">105</h1>
+         <p id="shengyuTianShuORCiShuBt">剩余次数</p>
+       </div>
+       <!--剩余次数结束-->
+       
+       <!--问号开始-->
+       <a href="#" class="wenhaos"><img src="/static/company/images/wenhao.png" th:src="@{/company/images/wenhao.png}"/></a>
+       <!--问号结束-->
+       <!--去续费开始-->
+       <a href="#" class="qxfeis" onclick="quxufei()">去续费</a>
+       <!--去续费结束-->
+       
+     </div>
+     <!--里边结束-->
+     
+   </div>
+ <!--最上边结束-->
+ 
+ <!--记录开始-->
+   <ul class="yliuiss">
+     <li class="borsbers" id="fukuanshuliang">付费记录(2)</li>
+     <li>服务记录(暂未开发)</li>
+   </ul>
+ <!--记录结束-->
+ 
+ <!--付费记录开始-->
+  <div class="fufeigl" id="fufeiList" style="display:block;">
+    <!--一块开始-->
+
+    <!--一块结束-->
+  </div>
+ <!--付费记录结束-->
+ 
+ <!--服务记录开始-->
+  <div class="fufeigl">
+    <!--一块开始-->
+    <div class="abloycks">
+      <!--左边开始-->
+      <div class="zuouts">暂未开发</div>
+      <!--左边结束-->
+      <!--右边开始-->
+      <div class="youbyus">
+        <h2>2018.03.15  20:38:25</h2>
+      </div>
+      <!--右边结束-->
+    </div>
+    <!--一块结束-->
+    <!--一块开始-->
+    <div class="abloycks">
+      <!--左边开始-->
+      <div class="zuouts">暂未开发</div>
+      <!--左边结束-->
+      <!--右边开始-->
+      <div class="youbyus">
+        <h2>2018.03.15  20:38:25</h2>
+      </div>
+      <!--右边结束-->
+    </div>
+    <!--一块结束-->
+  </div>
+ <!--服务记录结束-->
+
+ 
+ 
+</body>
+</html>
+
+
+
+
+
+
+
+

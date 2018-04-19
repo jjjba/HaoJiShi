@@ -1,12 +1,12 @@
-﻿<!doctype html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta content="telephone=no" name="format-detection" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>委托招聘</title>
+    <title>店铺端-委托招聘</title>
 
     <!-- 公用样式 开始 -->
     <link type="text/css" href="/static/company/css/response.css"
@@ -16,84 +16,381 @@
     <link type="text/css" href="/static/company/css/xiangying.css"
           th:href="@{/company/css/xiangying.css}" rel="stylesheet" />
     <!-- 公用样式 结束 -->
-    
+
     <link type="text/css" href="/static/company/css/wei_tuo_zhao_pin/top.css"
           th:href="@{/company/css/wei_tuo_zhao_pin/top.css}" rel="stylesheet" />
-    <link type="text/css" href="/static/company/css/wei_tuo_zhao_pin/zxxqin.css"
-          th:href="@{/company/css/wei_tuo_zhao_pin/zxxqin.css}" rel="stylesheet" />
-    <script type="text/javascript" src="/static/company/js/jquery-3.2.1.js"
-            th:src="@{/company/js/jquery-3.2.1.js}" ></script>
-    <script type="text/javascript">
-        function goBack() {
-            window.location.href="/transition/go_company_index"
-        }
-        function goKaiTongWeiTuo() {
-            window.location.href="/transition/go_kai_tong_wei_tuo"
-        }
-    </script>
-    
+
+    <link type="text/css" href="/static/company/css/wtzps.css"
+          th:href="@{/company/css/wtzps.css}"  rel="stylesheet" />
+
+
 
 </head>
 <body>
- 
- <!--头部开始-->
- <div class="topbus">
-   <!--里边开始-->
-   <div class="tbusinto">
-     人才招聘顾问
-     <a href="#" class="zjtous" onclick="goBack()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
-   </div>
-   <!--里边结束-->
- </div>
- <!--头部结束-->
- 
- <!--大标题开始-->
- <div class="dbtutits">
-  保健须知：SPA好处多，做SPA之前您需要了解的知识？
- </div>
- <!--大标题结束-->
- 
- <!--大图开始-->
- <div class="dtupss">
-   <img src="images/tupyis02.png" />
- </div>
- <!--大图结束-->
- 
- 
 
-   <h1 class="clsiius01">1.什么是SPA？</h1>
-   <p class="clsiius02">
-           如果在几年前，国人中几乎没有谁知道它为何物。即便是有人曾经听说过，但也只是似懂非懂，不知所以然。而现在你只要看看街上如雨后春笋般开起来的 SPA馆以及美容院广告里打出的招牌项目全是SPA，它的热度一浪高过一浪，即便你不懂，难道不想去尝试尝试吗？记者曾对二十多位热衷于美容保养的海口女性做过调查，调查显示，仅有六位做过SPA，其他人对它的了解知之甚少，但却有强烈了解并尝试的愿望。为此，记者对SPA这种最新最热的美容方式进行了一番全面的调查，力图让你能够全方位的了解它。
-   </p>
-   
-   <h1 class="clsiius01">2.目前最受欢迎的SPA有哪些？</h1>
-   <p class="clsiius02">
-    目前SPA有好几种，有度假式SPA、酒店式SPA和都会SPA等，而最方便又最受欢迎的莫过于都会SPA了。设在城市中的都会SPA，能够以数小时的时间，快速达到呵护肌肤、身材和舒适身心的效果，满足都市人美疗减压的渴望。目前海口大多的SPA馆也是都市型的。
-   </p>
-   <p class="clsiius02">
-    目前SPA有好几种，有度假式SPA、酒店式SPA和都会SPA等，而最方便又最受欢迎的莫过于都会SPA了。设在城市中的都会SPA，能够以数小时的时间，快速达到呵护肌肤、身材和舒适身心的效果，满足都市人美疗减压的渴望。目前海口大多的SPA馆也是都市型的。
-   </p>
+<!--头部开始-->
+<div class="topbus">
+    <!--里边开始-->
+    <div class="tbusinto">
+        人才招聘顾问
+        <a href="#" class="zjtous" onclick="goBack()"><img src="/static/company/images/biao04.png" th:src="@{/company/images/biao04.png}"/></a>
+    </div>
+    <!--里边结束-->
+</div>
+<!--头部结束-->
 
-  
-   <h1 class="clsiius01">3.做SPA要注意什么？</h1>
-   <p class="clsiius02">
-     要想得到正规完美的SPA疗程，你首先要考虑选择一家专业性强的美容机构。据业内人士介绍，一家美容院提供SPA服务所必备的常规仪器及设备主要有可瘦身瘦脸的美体雕塑仪和能量共振仪、排毒美白及促进血液循环的海藻敷体机与太空舱、利用热效应活化身体组织的远近红外线美体仪等。
-   </p>
-   
-   
-   <!--最底部开始-->
-   <div class="zdiuoys"><img src="/static/company/images/wan.png" th:src="@{/company/images/wan.png}"/></div>
-   
-   <!--最底部结束-->
-  
- <!--最底部开始-->
- <div class="zdbomtys">
-   <a href="tel:15558026165" class="ysbgui001 lskfuus"><img src="/static/company/images/lxkfs.png" th:src="@{/company/images/lxkfs.png}"/>联系客服</a>
-   <a href="#" class="ysbgui002" onclick="goKaiTongWeiTuo()">立即开通</a>
- </div>
- <!--最底部结束-->
- 
- 
+<!--委托招聘开始-->
+<!--大标题开始-->
+<h1 class="wtzpius">委托招聘</h1>
+<h2 class="wtzpius02">一站式招聘解决方案，招人才So Easy！</h2>
+<!--大标题结束-->
+
+<!--委托招聘服务介绍开始-->
+<div class="wtzpjss">
+    <!--里边开始-->
+    <div class="wtpintos">
+        <!--标题开始-->
+        <h3>委托招聘服务介绍</h3>
+        <!--标题结束-->
+        <!--内容开始-->
+        <p>
+            委托招聘是好技狮推出的一站式招聘解决方案，开通好技狮委托招聘后，我们将协助招聘店铺进行招聘信息发布、宣传、推广、人才初选、人才推荐等招聘相关的一系列工作,店铺仅需负责面试终选，其他招聘相关工作由好技狮进行。大幅减少店铺在招聘方面的人力物力投入。合作委托招聘服务后，我们将为店铺提供海量招聘曝光，提升店铺招聘形象；同步利用自身人才数据库及多方合作渠道为店铺搜寻所需人才。
+        </p>
+        <!--内容结束-->
+
+    </div>
+    <!--里边结束-->
+
+</div>
+<!--委托招聘服务介绍结束-->
+
+
+<!--委托招聘5大核心服务开始-->
+<div class="wdhxjsf">
+    <!--里边开始-->
+    <div class="wdhxintos">
+        <!--标题开始-->
+        <h3>委托招聘 <img src="/static/company/images/wtzp003.png" th:src="@{/company/images/wtzp003.png}"/> 大核心服务</h3>
+        <!--标题结束-->
+        <!--列表开始-->
+        <ul>
+            <li>
+                <!--上开始-->
+                <div class="toptits">优化店铺招聘形象</div>
+                <!--上结束-->
+                <!--下开始-->
+                <div class="bomnriis">
+                    <!--左开始-->
+                    <div class="bomlefts">
+                        根据店铺招聘要求，编写并代为发布招聘信息，协助撰写店铺简介、店铺优势，提升店铺形象。
+                    </div>
+                    <!--左结束-->
+                    <!--右开始-->
+                    <div class="youces">
+                        <img src="/static/company/images/wtzp004.png" th:src="@{/company/images/wtzp004.png}"/>
+                    </div>
+                    <!--右结束-->
+                </div>
+                <!--下结束-->
+            </li>
+            <li>
+                <!--上开始-->
+                <div class="toptits">重点招聘信息置顶</div>
+                <!--上结束-->
+                <!--下开始-->
+                <div class="bomnriis">
+                    <!--左开始-->
+                    <div class="bomlefts">
+                        在好技狮平台对店铺重点招聘岗位置顶展现，海量曝光，极速提升招聘效果！
+                    </div>
+                    <!--左结束-->
+                    <!--右开始-->
+                    <div class="youces">
+                        <img src="/static/company/images/wtzp005.png" th:src="@{/company/images/wtzp005.png}"/>
+                    </div>
+                    <!--右结束-->
+                </div>
+                <!--下结束-->
+            </li>
+            <li>
+                <!--上开始-->
+                <div class="toptits">多渠道全方位专题推广</div>
+                <!--上结束-->
+                <!--下开始-->
+                <div class="bomnriis">
+                    <!--左开始-->
+                    <div class="bomlefts">
+                        在好技狮及合作渠道公众号专刊推广、客服矩阵朋友圈进行专题推广，覆盖30多万行业受众，全面宣传店铺招聘信息，提升店铺形象。
+                    </div>
+                    <!--左结束-->
+                    <!--右开始-->
+                    <div class="youces">
+                        <img src="/static/company/images/wtzp006.png" th:src="@{/company/images/wtzp006.png}"/>
+                    </div>
+                    <!--右结束-->
+                </div>
+                <!--下结束-->
+            </li>
+            <li>
+                <!--上开始-->
+                <div class="toptits">好技狮快招服务</div>
+                <!--上结束-->
+                <!--下开始-->
+                <div class="bomnriis">
+                    <!--左开始-->
+                    <div class="bomlefts">
+                        合作期间内免费自动享受好技狮快招服务待遇，可主动出击联系全网人才。
+                    </div>
+                    <!--左结束-->
+                    <!--右开始-->
+                    <div class="youces">
+                        <img src="/static/company/images/wtzp007.png" th:src="@{/company/images/wtzp007.png}"/>
+                    </div>
+                    <!--右结束-->
+                </div>
+                <!--下结束-->
+            </li>
+            <li>
+                <!--上开始-->
+                <div class="toptits">专属招聘顾问服务</div>
+                <!--上结束-->
+                <!--下开始-->
+                <div class="bomnriis">
+                    <!--左开始-->
+                    <div class="bomlefts">
+                        专属一对一招聘顾问，负责协助店铺接洽最新求职信息，同时会利用自身好技狮丰富简历库，第一时间筛选优质人才进行洽谈，达成基本合作意向的推给店铺进行后续接洽。
+                    </div>
+                    <!--左结束-->
+                    <!--右开始-->
+                    <div class="youces">
+                        <img src="/static/company/images/wtzp008.png" th:src="@{/company/images/wtzp008.png}"/>
+                    </div>
+                    <!--右结束-->
+                </div>
+                <!--下结束-->
+            </li>
+        </ul>
+        <!--列表结束-->
+        <!--底部开始-->
+        <div class="dbbdgxs">
+            更多服务不断拓展中……
+        </div>
+        <!--底部结束-->
+    </div>
+    <!--里边结束-->
+</div>
+<!--委托招聘5大核心服务结束-->
+
+<!--好技狮委托招聘能解决哪些问题开始-->
+
+<div class="wdhxjsf">
+    <!--里边开始-->
+    <div class="wdhxintos">
+        <!--标题开始-->
+        <h3>好技狮委托招聘能解决哪些问题？</h3>
+        <!--标题结束-->
+        <!--内容开始-->
+        <h5 class="wpromcons">急速招人</h5>
+        <p class="nroiyys">
+            1.根据合作店铺的招聘要求，我们将在好技狮全国养生人才库中匹配，上万条信息海量匹配招人才更快速！<br>
+            2.每日最新求职信息，招聘顾问在第一时间获取，并抢先一步与人才初步接洽，招人速度更快。<br>
+            3.专职招聘顾问，只做招聘这件事，拥有丰富经验，懂得如何和人才进行洽谈，招聘成功概率更高！<br>
+            海量人才信息匹配+最新人才优先接洽+专职专业的招聘顾问包装洽谈=高效快速的招聘体验。
+        </p>
+
+        <h5 class="wpromcons">节省成本，大幅减轻店铺招聘投入</h5>
+        <p class="nroiyys">
+            招聘工作占用店铺管理层大量精力和时间，对于店铺而言付出较大隐形成本，间接影响店铺经营，有的店铺聘用了专职人员，每月少则三千四多则四五千元的开销也是一笔不菲的开支。<br>
+            合作好技狮委托招聘后，招聘顾问将负责店铺招聘形象包装、招聘信息宣传、人才初步接洽等工作，店铺仅需符合后续约面试及后续工作，节省店铺管理层大量时间，大幅减低管理层在招聘工作上投入的时间和精力。
+        </p>
+
+        <h5 class="wpromcons">提升店铺竞争力</h5>
+        <p class="nroiyys">
+            我们为合作的委托招聘的企业，提供了海量的宣传曝光计划，包括好技狮平台、好技狮公众号、好技狮的合作渠道（包含足疗行业10余家知名媒体）将会为招聘企业带来覆盖数十万人群的海量曝光，满足店铺的招聘的同时也大大提升了店铺品牌形象。
+        </p>
+
+        <!--内容结束-->
+    </div>
+    <!--里边结束-->
+</div>
+
+<!--好技狮委托招聘能解决哪些问题结束-->
+
+<!--委托招聘服务明细和费用介绍开始-->
+<div class="wtpnjjs">
+    <!--标题开始-->
+    <h3>委托招聘服务明细和费用介绍</h3>
+    <!--标题结束-->
+    <!--列表开始-->
+    <ul>
+        <li>
+            <b>服务项目</b>
+        </li>
+        <li>
+            <b>委托招聘(半年版)</b>
+        </li>
+        <li>
+            <b>委托招聘(全年版)</b>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            优化店铺<br>
+            招聘形象
+        </li>
+        <li>
+            不限次数<br>
+            <span>价值100元</span>
+        </li>
+        <li>
+            不限次数<br>
+            <span>价值100元</span>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            重点招聘<br>
+            信息置顶
+        </li>
+        <li>
+            1个重点岗位<br>
+            置顶28天(任选4周)<br>
+            <span>价值400元</span>
+        </li>
+        <li>
+            2个重点岗位<br>
+            置顶56天(任选8周)<br>
+            <span>价值1600元</span>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            多渠道全方<br>
+            位专题推广
+        </li>
+        <li>
+            好技狮或合作渠道<br>
+            公众号专题推广3次<br>
+            客服矩阵朋友圈推广<br>
+            每月1次<br>
+            <span>价值1800元</span>
+        </li>
+        <li>
+            好技狮或合作渠道<br>
+            公众号专题推广6次<br>
+            客服矩阵朋友圈推广<br>
+            每月1次<br>
+            <span>价值3600元</span>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            好技狮<br>
+            快招服务
+        </li>
+        <li>
+            享受180天<br>
+            快招服务<br>
+            <span>价值598元</span>
+        </li>
+        <li>
+            享受365天<br>
+            快招服务<br>
+            <span>价值998元</span>
+        </li>
+    </ul>
+
+
+    <ul>
+        <li>
+            专属招聘<br>
+            顾问服务
+        </li>
+        <li>
+            专属招聘<br>
+            顾问服务6个月<br>
+            <span>价值3000元</span>
+        </li>
+        <li>
+            专属招聘<br>
+            顾问服务12个月<br>
+            <span>价值6000元</span>
+        </li>
+    </ul>
+
+    <ul>
+        <li>
+            <b>合计</b>
+        </li>
+        <li>
+            <b>价值5798元</b><br>
+            <span>打包合作仅需2980元</span>
+        </li>
+        <li>
+            <b>价值12298元</b><br>
+            <span>打包合作仅需5980元</span>
+        </li>
+    </ul>
+    <!--列表结束-->
+</div>
+<!--委托招聘服务明细和费用介绍结束-->
+
+<!--委托招聘常见问题开始-->
+<div class="wdhxjsf">
+    <!--里边开始-->
+    <div class="wdhxintos">
+        <!--标题开始-->
+        <h3>委托招聘常见问题</h3>
+        <!--标题结束-->
+        <!--内容开始-->
+        <h5 class="wpromcons">1.合作好技狮委托招聘后，可以招到多少人？</h5>
+        <p class="nroiyys">
+            答：因为不同地区，不同店铺、不同岗位客观情况，招聘效果也有所区别，我们会给合作店铺提供海量的招聘宣传曝光、覆盖行业数十万从业人群，根据我们的过往的数据来看，东部沿海一二线城市的中大型店铺招聘效果非常不错，半年版保守估计招聘3-4人，全年版预计招聘8-10人。
+        </p>
+
+        <h5 class="wpromcons">2.如果合作委托招聘没有招到人怎么办？</h5>
+        <p class="nroiyys">
+            答：的确存在这个可能，因为能否招聘到人员，能招聘到多少人员，取决于平台和店铺两方面，我们对所有合作委托招聘的店铺付出的精力和投入的资源是相同的，能够给到的店铺的是一套综合的服务体系，您所在担心的这个问题确实存在，所以我们在这里收取的也仅仅是基础服务费用。
+        </p>
+
+        <h5 class="wpromcons">3.可以试用一下在某城市的招聘效果怎么样吗？</h5>
+        <p class="nroiyys">
+            答：因为不同区域和店铺情况以及招聘需求会影响招聘效果，在合作前请您先和我们电话咨询，我们会根据您的实际情况给出合作建议，对于部分偏远地区或一部分店铺我们会建议您暂不合作。委托招聘工作因为涉及多个工作板块，是一套综合的系统服务，无法简单试用，您前期可以详细了解清楚后再决定是否合作。
+        </p>
+
+        <!--内容结束-->
+    </div>
+    <!--里边结束-->
+</div>
+
+<!--委托招聘常见问题结束-->
+
+
+
+<!--委托招聘结束-->
+
+
+
+<!--最底部开始-->
+<div class="zdbomtys">
+    <a href="tel:15558026165" class="ysbgui001 lskfuus"><img src="/static/company/images/lxkfs.png" th:src="@{/company/images/lxkfs.png}"/>联系客服</a>
+    <a href="#" class="ysbgui002" onclick="goKaiTongWeiTuo()">立即开通</a>
+</div>
+<script type="text/javascript">
+    function goBack() {
+        window.location.href="/transition/go_company_index"
+    }
+    function goKaiTongWeiTuo() {
+        window.location.href="/wx/userAuth?lx=委托"
+    }
+</script>
+<!--最底部结束-->
+
+
 </body>
 </html>
 

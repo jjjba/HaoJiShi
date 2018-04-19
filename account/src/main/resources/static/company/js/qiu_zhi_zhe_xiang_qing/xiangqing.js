@@ -146,9 +146,12 @@ function loadPersonalInfo() {
                     avatar = "../../company/images/tupian02.png"
                 }
 			}
+			var tupian ;
 			if(sex == "男"){
 				sex = "../../company/images/biao05.png"
+                tupian = "<div class='lylyus'>";
 			}else {
+                tupian = "<div class='lylyus02'>";
 				sex = "../../company/images/biao06.png"
 			}
 			if(list.special != null){
@@ -162,7 +165,7 @@ function loadPersonalInfo() {
             }
 			var grzlyuis='<div class="sbuiys">'+
 				'<div class="sbxtlfs">'+
-                '<div class="lylyus02">'+list.name+' <span><img src="'+sex+'">'+list.age+'</span></div>'+
+                tupian+list.name+' <span><img src="'+sex+'">'+list.age+'</span></div>'+
                 '<div class="grxhzls">'+list.job_experience+' | '+list.state+'<br />'+list.address+'</div>'+
                 '</div>'+
                 '<div class="ycxctxs">'+
@@ -299,10 +302,19 @@ function goBack() {
         window.location.href = "/transition/wo_de_ren_cai_shou_cang";
     }
     if(wher == "zuoce"){
-        window.location.href="/transition/go_qiu_zhi_zhe";
+        if(sessionStorage.getItem("tj") != null || sessionStorage.getItem("sex")!=null || sessionStorage.getItem("age")!=null){
+            history.back(-1);
+        }else {
+            window.location.href="/transition/go_qiu_zhi_zhe";
+        }
+
+    }
+    if(wher =="sousuo"){
+        sessionStorage.setItem("jiansuo1",sessionStorage.getItem("jiansuo"));
+        window.location.href="/transition/rencaiSousuo";
     }
 }
-	  
+
 
 
 

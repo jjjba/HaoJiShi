@@ -1,6 +1,9 @@
 
 $(function () {
     loadPersonal();
+    sessionStorage.setItem("tj","");
+    sessionStorage.setItem("sex","");
+    sessionStorage.setItem("age","");
 });
 
 function loadPersonal(){
@@ -111,7 +114,8 @@ function gowode() {
 }
 
 
-function fenlei(tj) {
+function fenlei(tj,mc) {
+    $(".dhxlfs01").text(mc);
     sessionStorage.setItem("tj",tj);
     sousuo();
 }
@@ -236,4 +240,9 @@ function tjcx() {
             });
         }
     })
+}
+
+
+function rencaiSousuo() {
+    window.location.href="/transition/rencaiSousuo"
 }
